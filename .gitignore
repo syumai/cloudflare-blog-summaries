@@ -1,0 +1,6 @@
+tmp/
+.DS_Store
+slides/node_modules/
+slides/dist/
+node_modules/
+site/
