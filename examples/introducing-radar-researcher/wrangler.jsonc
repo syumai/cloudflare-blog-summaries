@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "example-introducing-radar-researcher",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-16",
+  "ai": {
+    "binding": "AI"
+  },
+  "observability": {
+    "enabled": true
+  }
+  // RADAR_API_TOKEN は secret として別途設定する（任意。README参照）。
+}

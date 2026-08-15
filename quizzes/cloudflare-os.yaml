@@ -1,0 +1,100 @@
+title: Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム
+slug: cloudflare-os
+sourceUrl: https://blog.cloudflare.com/ja-jp/cloudflare-os/
+wiki: ../docs/articles/2026-08-05-cloudflare-os.md
+questions:
+  - q: Cloudflare OSを構成する3つの要素として正しい組み合わせはどれですか。
+    choices:
+      - エージェントワークスペース、セキュリティ・ガバナンス基盤、個人向けアプリのプラットフォーム
+      - チャットUI、課金システム、ログ収集基盤
+      - MCPサーバー、AI Gateway、Cloudflare Access
+      - Worker、Durable Object、KVストア
+    answer: 0
+    explanation: Wikiの「発表内容 / アーキテクチャ」冒頭にある通り、Cloudflare OSは「エージェントワークスペース」「新しいセキュリティ・ガバナンス基盤」「個人向けアプリのプラットフォーム」の3要素からなります。
+
+  - q: 最初のバージョンのCloudflare OSが抱えていたセキュリティ上の課題は何でしたか。
+    choices:
+      - パスワード認証しかサポートしていなかったこと
+      - MCPで「どのツールを使えるか」は分かっても、「実際にどの情報を見たか」までは管理できなかったこと
+      - すべてのユーザーが管理者権限を持っていたこと
+      - 暗号化通信に対応していなかったこと
+    answer: 1
+    explanation: Wikiの「背景・課題」で述べられている通り、MCPサーバーへのアクセス制御だけでは「エージェントが実際にどの情報・データを参照したか」までは管理できず、共有時に権限のない情報が誤って見える可能性がありました。
+
+  - q: Cloudflare OS内部で、エージェントやアプリが起動した直後に持っているアクセス権はどれですか。
+    choices:
+      - 管理者と同等のフルアクセス権
+      - 組織のデフォルトポリシーに基づく標準アクセス権
+      - どのアクセス権も持たない状態
+      - 前回のセッションから引き継いだアクセス権
+    answer: 2
+    explanation: Wikiの「Gatekeeperがリソースと操作を管理する」節にある通り、Cloudflare OS内部ではすべてのエージェント・アプリは最初はどのアクセス権も持たない状態から始まり、必要なリソースへのアクセスを個別に要求します。
+
+  - q: Gatekeeperの役割を最もよく表しているのはどれですか。
+    choices:
+      - AIモデルの推論速度を高速化するキャッシュ層
+      - Cloudflare OSと外部サービスの間に立ち、APIやリソース、実行可能な操作を理解した上でアクセスを仲介・制御するサービス
+      - ユーザーインターフェースのデザインテンプレート
+      - スライド・ドキュメントを自動生成するテンプレートエンジン
+    answer: 1
+    explanation: Wikiの「Gatekeeperがリソースと操作を管理する」節にある通り、Gatekeeperはサービス専用のWorkerとして、単一リポジトリのみの許可やフィールドマスキング、レート制限、マージ前承認要求など細かな権限制御を行います。
+
+  - q: 以下のコードは、記事内で示されているリソースアクセスの例です。このコードについて正しい説明はどれですか。
+    code: |
+      const issues = await env.PROJECT.listIssues({
+        teamId: "ENG",
+        state: "open",
+      });
+    codeLang: typescript
+    choices:
+      - env.PROJECT は生のAPIキーを直接保持したオブジェクトである
+      - env.PROJECT は、Gatekeeperが管理する特定ポリシー下でのリソース利用権限（capability）を表すオブジェクトであり、資格情報そのものはエージェントから分離されている
+      - このコードはブラウザ側のクライアントコードでしか実行できない
+      - listIssues はCloudflare Accessの認証トークンを発行するメソッドである
+    answer: 1
+    explanation: Wikiの「エージェントはどのアクセス権も持たない状態から始まります」節で解説されている通り、env.PROJECT は特定のポリシーのもとで特定リソースを扱う権限（capability）を表し、資格情報自体はエージェントや生成コードから完全に分離されています。
+
+  - q: サーバー側の生成コードが実行される環境として本記事が説明しているものはどれですか。
+    choices:
+      - 通常のNode.jsサーバープロセス
+      - 外部へのネットワーク通信が無効化されたDynamic Worker
+      - 管理者専用の隔離されたLinuxコンテナ
+      - ブラウザのメインスレッド
+    answer: 1
+    explanation: Wikiの「エージェントはどのアクセス権も持たない状態から始まります」節にある通り、サーバー側のコードは外部ネットワーク通信が無効化されたDynamic Worker上で実行されます。
+
+  - q: Cloudflare OSで作成される「アプリ」の技術的な実行の仕組みとして正しいものはどれですか。
+    choices:
+      - すべて単一の巨大なDurable Objectの中で共有実行される
+      - Dynamic Worker上のDurable Object Facetとして実行され、各アプリが専用のSQLiteデータベースを持つ
+      - 常時起動しているフルスペックのLinuxコンテナ上で実行される
+      - 外部クラウドプロバイダーにデプロイされる
+    answer: 1
+    explanation: Wikiの「すべてのアプリはWorkerとして動作する」節にある通り、サーバー側はDynamic Worker上のDurable Object Facetとして実行され、各アプリが専用のSQLiteデータベースを持ちます。
+
+  - q: 「アプリ自体を共有する」ことと「ブループリントを共有する」ことの違いとして正しいものはどれですか。
+    choices:
+      - 両者に違いはなく、名前が異なるだけである
+      - アプリ自体の共有は状態をリアルタイムで共同利用するのに対し、ブループリントの共有はコードのみを引き継いだ複製を作る（データや資格情報は引き継がれない）
+      - ブループリントの共有は課金が発生するが、アプリ自体の共有は無料である
+      - アプリ自体の共有は社外のユーザーにのみ許可される
+    answer: 1
+    explanation: Wikiの「アプリそのものを共有することも、アプリの設計を共有することも可能」節で説明されている通り、ブループリントから作られたアプリはコードのみを引き継ぎ、SQLiteデータベースの内容・会話履歴・資格情報・接続済みリソースは引き継ぎません。
+
+  - q: Cloudflare OSにおいて、すべてのAIモデルへの推論リクエストが経由する仕組みは何ですか。
+    choices:
+      - Cloudflare AI Gateway
+      - Secure Web Gatewayのみ
+      - 各アプリが直接AIプロバイダーのAPIを呼び出す
+      - Cloudflare DNS
+    answer: 0
+    explanation: Wikiの「あらゆるAIモデルを利用でき、コストも管理できる」節にある通り、すべての推論リクエストはCloudflare AI Gatewayを経由し、モデル利用の一元管理やコスト集計、予算・レート制限の設定に使われます。
+
+  - q: Cloudflare OSがオープンソースとして公開したリポジトリの組み合わせとして正しいものはどれですか。
+    choices:
+      - cloudflare-os（コア）と cloudflare-os-starter（サンプルデプロイメント）
+      - cloudflare-computer と cloudflare-os
+      - cloudflare-os-ui と cloudflare-os-api
+      - capnweb と cloudflare-os
+    answer: 0
+    explanation: Wikiの「オープンソース公開・カスタマイズ」節にある通り、コアの `cloudflare-os` と、Cloudflare社内運用構成をベースにしたサンプルデプロイメント `cloudflare-os-starter` の2つが公開されました。

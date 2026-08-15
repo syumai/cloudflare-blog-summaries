@@ -5,6 +5,7 @@
 // 使い方:
 //   npm run build                              # BASE_PATH=/ でローカル向けビルド
 //   BASE_PATH=/cloudflare-blog-summaries/ npm run build   # GitHub Pages 向けビルド
+//   SKIP_SLIDES=1 npm run build                # Slidev ビルドをスキップ（docs・クイズのみ検証したい場合）
 
 import {
   existsSync,
@@ -19,6 +20,8 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { marked } from "marked";
+import { parse as parseYaml } from "yaml";
+import { renderQuizPage } from "../quizzes/template/render.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -28,6 +31,10 @@ const ARTICLES_DIR = path.join(DOCS_DIR, "articles");
 const SLIDES_DIR = path.join(ROOT, "slides");
 const QUIZZES_DIR = path.join(ROOT, "quizzes");
 const SITE_DIR = path.join(ROOT, "site");
+
+// SKIP_SLIDES=1 が指定された場合は Slidev ビルドをスキップする。
+// slides/ が別途並行作業中でビルド不能な場合に、docs・クイズ生成だけを検証したいときに使う。
+const SKIP_SLIDES = process.env.SKIP_SLIDES === "1";
 
 /**
  * BASE_PATH は先頭・末尾ともに "/" が付いた形に正規化する。
@@ -107,6 +114,12 @@ function rewriteHref(href) {
   const quizMatch = href.match(/^\.\.\/quizzes\/([^/]+\.html)$/);
   if (quizMatch) {
     return `${BASE_PATH}quizzes/${quizMatch[1]}`;
+  }
+
+  // examples/ はサイトには含まれないため、GitHub リポジトリへのリンクに変換する
+  const examplesMatch = href.match(/^(?:\.\.\/)+examples\/([^/]+)\/?$/);
+  if (examplesMatch) {
+    return `https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/${examplesMatch[1]}`;
   }
 
   const mdMatch = href.match(/^([^#]+)\.md(#.*)?$/);
@@ -297,26 +310,31 @@ function buildDocsMarkdown() {
 }
 
 /**
- * quizzes/*.html 内の href 属性を書き換える。
- * ソースのクイズ HTML はリポジトリ内で有効な相対 ".md" リンク（例:
- * ../docs/articles/2026-08-05-cloudflare-computer.md）を持つ想定で、
- * サイト用コピー時にそれを ".html" へ変換する（docs 側の rewriteHref と同じロジック）。
+ * quiz.wiki（例: "../docs/articles/2026-08-05-cloudflare-computer.md"）を
+ * サイト内で有効な Wiki ページへの絶対リンク（BASE_PATH 込み）に変換する。
  */
-function rewriteQuizHtmlLinks(html) {
-  return html.replace(/href="([^"]+)"/g, (whole, href) => {
-    return `href="${rewriteHref(href)}"`;
-  });
+function resolveWikiHref(wikiRelativePath) {
+  const base = path.basename(wikiRelativePath).replace(/\.md$/, ".html");
+  return `${BASE_PATH}docs/articles/${base}`;
 }
 
-function copyQuizzes() {
+/**
+ * quizzes/*.yaml をパースし、共通テンプレート（quizzes/template/render.mjs）を適用して
+ * site/quizzes/<slug>.html を生成する。
+ */
+function buildQuizzes() {
   const outQuizzesDir = path.join(SITE_DIR, "quizzes");
   ensureDir(outQuizzesDir);
-  const files = listFiles(QUIZZES_DIR, ".html");
+  const files = listFiles(QUIZZES_DIR, ".yaml");
   for (const file of files) {
-    const content = readFileSync(path.join(QUIZZES_DIR, file), "utf8");
-    writeFileSync(path.join(outQuizzesDir, file), rewriteQuizHtmlLinks(content));
+    const raw = readFileSync(path.join(QUIZZES_DIR, file), "utf8");
+    const quiz = parseYaml(raw);
+    const slug = quiz.slug ?? file.replace(/\.yaml$/, "");
+    const wikiHref = resolveWikiHref(quiz.wiki);
+    const html = renderQuizPage(quiz, { wikiHref });
+    writeFileSync(path.join(outQuizzesDir, `${slug}.html`), html);
   }
-  log(`quizzes/*.html を site/quizzes/ へコピーしました (${files.length} ファイル、相対 .md リンクは .html へ書き換え)`);
+  log(`quizzes/*.yaml から site/quizzes/*.html を生成しました (${files.length} ファイル)`);
   return files;
 }
 
@@ -332,6 +350,11 @@ function discoverSlideDecks() {
 function buildSlides(decks) {
   const outSlidesRoot = path.join(SITE_DIR, "slides");
   ensureDir(outSlidesRoot);
+
+  if (SKIP_SLIDES) {
+    log("SKIP_SLIDES=1 が指定されたため、Slidev ビルドをスキップします");
+    return;
+  }
 
   if (decks.length === 0) {
     log("スライドデッキが見つかりませんでした（slides/<slug>/slides.md）");
@@ -377,7 +400,7 @@ function collectArticleMeta() {
 
     const wikiHtmlFile = file.replace(/\.md$/, ".html");
     const hasSlides = existsSync(path.join(SLIDES_DIR, slug, "slides.md"));
-    const hasQuiz = existsSync(path.join(QUIZZES_DIR, `${slug}.html`));
+    const hasQuiz = existsSync(path.join(QUIZZES_DIR, `${slug}.yaml`));
 
     articles.push({
       slug,
@@ -473,7 +496,7 @@ ${bodyHtml}
 function main() {
   cleanSite();
   buildDocsMarkdown();
-  copyQuizzes();
+  buildQuizzes();
 
   const decks = discoverSlideDecks();
   buildSlides(decks);

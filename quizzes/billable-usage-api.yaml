@@ -1,0 +1,113 @@
+title: Billable Usage APIを提供開始：Cloudflareの課金情報をプログラムから取得可能に
+slug: billable-usage-api
+sourceUrl: https://blog.cloudflare.com/ja-jp/billable-usage-api/
+wiki: ../docs/articles/2026-08-03-billable-usage-api.md
+questions:
+  - q: Billable Usage APIが解決しようとしている、記事内で述べられている最大の課題は何か。
+    choices:
+      - ダッシュボードのデザインが古いこと
+      - コスト情報がダッシュボード（人間向けUI）中心で、自動化システムやスクリプトから利用しづらいこと
+      - APIのレスポンス速度が遅いこと
+      - 課金情報が一切公開されていなかったこと
+    answer: 1
+    explanation: 記事では、ダッシュボードは人間向けであり自動化システムには不適切であるとし、月単位ではなく日単位・製品単位でプログラムから利用できる形式でコストを把握する必要があると述べられている（Wiki「背景・課題」参照）。
+
+  - q: Billable Usage APIのレスポンスに含まれるフィールドとして、記事に挙げられていないものはどれか。
+    choices:
+      - ServiceName / ServiceFamilyName
+      - ChargePeriodStart / ChargePeriodEnd
+      - ContractedCost
+      - UserPasswordHash
+    answer: 3
+    explanation: 記事に挙げられているフィールドは ServiceName/ServiceFamilyName、ChargePeriodStart/ChargePeriodEnd、PricingQuantity/ConsumedUnit、ContractedCost、CumulatedPricingQuantity/CumulatedContractedCost、ZoneId/ZoneName であり、UserPasswordHashのような認証情報は含まれない。
+
+  - q: Billable Usage APIの多くの項目名が対応させてある業界標準の仕様は何か。
+    choices:
+      - OpenAPI Specification
+      - FinOps Open Cost and Usage Specification（FOCUS）
+      - CloudEvents
+      - OAuth 2.0
+    answer: 1
+    explanation: 記事では、多くの項目名が「FinOps Open Cost and Usage Specification（FOCUS）」の列名に対応していると説明されている。
+
+  - q: FOCUS対応について、記事の説明として正しいものはどれか。
+    choices:
+      - すでに完全準拠を達成しており、追加対応の予定はない
+      - 一部の必須項目がまだレスポンスに含まれておらず、完全準拠ではないが今後のロードマップで対応予定
+      - FOCUSとは一切関係のない独自仕様である
+      - FOCUSはCloudflareが独自に策定した仕様である
+    answer: 1
+    explanation: 記事では、FOCUS仕様で必須とされる一部の項目が現在のレスポンスにはまだ含まれていないため完全準拠を主張しておらず、今後のロードマップで対応する予定であると説明されている。
+
+  - q: Cloudflareが今回ネイティブ連携を発表したインフラコスト管理プラットフォームはどれか。
+    choices:
+      - Datadog
+      - Vantage
+      - Grafana
+      - New Relic
+    answer: 1
+    explanation: 記事では、インフラコスト管理プラットフォームであるVantageとのネイティブ連携が発表されている。
+
+  - q: Vantageとの連携において、Cloudflareへの接続に使われる認証情報として記事に説明されているものはどれか。
+    choices:
+      - フルアクセス権限を持つグローバルAPIキー
+      - Billing Read権限を持つ読み取り専用APIトークン
+      - パスワードとワンタイムパスコード
+      - SSH秘密鍵
+    answer: 1
+    explanation: 記事では、VantageはBilling Read権限を持つ読み取り専用APIトークンを使用してCloudflareに接続すると説明されている。
+
+  - q: |
+      次のリクエストについて、記事の説明に基づき正しい理解はどれか。
+    code: |
+      curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage?from=2026-02-01&to=2026-02-15" \
+        -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
+    codeLang: bash
+    choices:
+      - クエリパラメータ from / to により、任意の期間の利用状況を取得できる
+      - このリクエストはアカウントの課金情報を削除する
+      - Authorization ヘッダーは省略可能である
+      - このエンドポイントはWebSocket専用であり、curlでは呼び出せない
+    answer: 0
+    explanation: 記事では、from / to のクエリパラメータで日付範囲を指定してBillable Usage APIを呼び出せる例が示されており、Bearerトークンによる認証ヘッダーが必要であると説明されている。
+
+  - q: |
+      次のAPIレスポンス例について、記事の説明に基づき CumulatedContractedCost フィールドが表す内容として最も適切なものはどれか。
+    code: |
+      {
+        "result": [
+          {
+            "ServiceName": "Workers Standard",
+            "ChargePeriodStart": "2025-02-01T00:00:00Z",
+            "ChargePeriodEnd": "2025-02-28T23:59:59Z",
+            "ContractedCost": 0.75,
+            "CumulatedContractedCost": 2.25
+          }
+        ]
+      }
+    codeLang: json
+    choices:
+      - そのレコード単体の課金期間中の利用料金
+      - 請求期間（billing period）全体での累計の利用料金
+      - APIの呼び出し回数
+      - サービスのバージョン番号
+    answer: 1
+    explanation: 記事の説明によれば、ContractedCostが該当課金期間中の利用料金であるのに対し、CumulatedPricingQuantity / CumulatedContractedCostは請求期間中の累計を表す。
+
+  - q: Vantage連携で実現できるワークフローとして、記事に挙げられていないものはどれか。
+    choices:
+      - Virtual Tagsを使ったクラウドサービスをまたいだコスト配分
+      - 通常パターンからの変化をSlackやメールで通知する異常検出
+      - FinOpsエージェントやMCP経由でのコスト問い合わせ
+      - Cloudflareのソースコードを自動生成する機能
+    answer: 3
+    explanation: 記事に挙げられているVantage連携のワークフローは、クラウド横断のコスト配分、異常検出（Cost Alerts）、FinOpsエージェント/MCP経由の問い合わせの3つであり、ソースコード自動生成は含まれない。
+
+  - q: Billable Usage APIの初回リリース時点での提供範囲と、今後のロードマップについて、記事の説明として正しいものはどれか。
+    choices:
+      - 初回リリースからEnterprise契約にも完全対応しており、追加のロードマップはない
+      - 初回リリースはセルフサービスアカウントのみが対象で、Enterprise契約への対応やより細かい時間粒度でのデータ提供、コスト予測機能が今後のロードマップに含まれる
+      - 初回リリースの対象はEnterprise契約のみで、セルフサービスアカウントは非対応
+      - 課金データの提供は将来的に廃止される予定である
+    answer: 1
+    explanation: 記事では、初回リリースはセルフサービスアカウントのみが対象であり、Enterprise契約への対応、より細かい時間単位での利用状況提供、コスト予測機能が今後の展開として挙げられている。

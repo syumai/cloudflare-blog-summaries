@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "python-workers-rpc-py-example",
+  "main": "src/entry.py",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["python_workers"],
+  "services": [
+    {
+      "binding": "RPC",
+      "service": "python-workers-rpc-ts-example",
+      "entrypoint": "RpcService"
+    }
+  ]
+}

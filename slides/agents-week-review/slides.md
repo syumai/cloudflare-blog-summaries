@@ -8,6 +8,8 @@ drawings:
   persist: false
 transition: slide-left
 mdc: true
+themeConfig:
+  primary: '#f6821f'
 ---
 
 # Agents Week 2026で行った発表内容の全て
@@ -66,20 +68,36 @@ Cloudflare の主張:
 </div>
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJG900.png
----
 
-# 月曜日: 実行環境とインフラ (1/2)
+# 月曜日: 実行環境とインフラ (1/3)
 
 エージェントが実際に「動く」ための土台
 
-- **@cloudflare/computer**
-  タスクに応じてアイソレート実行とコンテナ実行を切り替えられる新しい実行環境
-- **Workers RPC が Python ⇄ JavaScript 間で利用可能に**
-  多言語エージェントコンポーネントを直接連携
-- **Kimi / GLM を大規模に実行**
-  オープンウェイトモデルを「より小さく、速く、安全に」提供
+<v-click>
+
+<div class="pb-3">
+
+**@cloudflare/computer**<br>
+<span class="text-sm opacity-60">『AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介』</span><br>
+エージェントのタスクに応じてアイソレート実行とコンテナ実行を切り替えられる、新しい実行環境<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Workers RPC が Python ⇄ JavaScript 間で利用可能に**<br>
+<span class="text-sm opacity-60">『Workers RPC が Python と JavaScript 間で利用可能に』</span><br>
+多言語エージェントコンポーネントを直接連携できるようになった<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/python-workers-rpc/)</span> ・ <span class="text-xs">▶ <a href="../python-workers-rpc/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 <div class="text-xs opacity-60 pt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/
@@ -87,14 +105,52 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 
 ---
 
-# 月曜日: 実行環境とインフラ (2/2)
+# 月曜日: 実行環境とインフラ (2/3)
 
-- **Billable Usage API**
-  エージェント自身が使用量・コストをプログラムから取得できる API
-- **インバウンド TCP / gRPC サポート**（Workers・Containers）
-  リアルタイム音声エージェントなど低レイテンシ通信が必要なユースケースに対応
+<v-click>
 
-<div class="pt-8">
+<div class="pb-3">
+
+**Kimi / GLM を大規模に実行**<br>
+<span class="text-sm opacity-60">『より小さく、より速く、より安全に：Kimi と GLM を大規模に実行』</span><br>
+オープンウェイトモデルを「より小さく、速く、安全に」提供する取り組み<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/smaller-faster-safer-models/)</span> ・ <span class="text-xs">▶ <a href="../smaller-faster-safer-models/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Billable Usage API**<br>
+<span class="text-sm opacity-60">『Billable Usage API を提供開始』</span><br>
+エージェント自身が使用量・コストをプログラムから取得できる API<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/)</span> ・ <span class="text-xs">▶ <a href="../billable-usage-api/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+---
+
+# 月曜日: 実行環境とインフラ (3/3)
+
+<v-click>
+
+<div class="pb-3">
+
+**インバウンド TCP / gRPC サポート**（Workers・Containers）<br>
+<span class="text-sm opacity-60">『Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート』</span><br>
+リアルタイム音声エージェントなど低レイテンシ通信が必要なユースケースに対応<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/grpc-workers/)</span> ・ <span class="text-xs">▶ <a href="../grpc-workers/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<div class="pt-6">
 
 具体的に何ができるようになるか:
 
@@ -106,30 +162,99 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 
 ---
 
-# 火曜日: エージェント開発ライフサイクル (1/3)
+# 火曜日: エージェント開発ライフサイクル (1/4)
 
 ## ADLC (Agent Development Lifecycle) の提案
 
-- 従来の **SDLC**（Software Development Lifecycle）に代わる概念として提示
-- エージェントは「試作 → 本番」の間に、通常のソフトウェアとは異なる検証・承認・トレースが必要
+エージェントは「試作 → 本番」の間に、通常のソフトウェアとは異なる検証・承認・トレースが必要
 
 <v-click>
 
-- **Cloudflare Agents**: トレース・再実行・承認機能で本番運用を管理
-- **ローカルトレースによる Workers デバッグ**: 分散トレーシングをデプロイ前の問題検出に活用
+<div class="pb-3">
+
+**ADLC 提案**<br>
+<span class="text-sm opacity-60">『Cloudflare にエージェント開発ライフサイクルの時代が到来』</span><br>
+従来の SDLC（Software Development Lifecycle）に代わる概念として ADLC を提案<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)</span> ・ <span class="text-xs">▶ <a href="../agent-development-lifecycle/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Cloudflare Agents**<br>
+<span class="text-sm opacity-60">『Cloudflare Agents の紹介』</span><br>
+トレース・再実行・承認機能で本番運用を管理できるフレームワーク<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/agents-on-cloudflare/)</span> ・ <span class="text-xs">▶ <a href="../agents-on-cloudflare/" target="_blank">解説スライド</a></span>
+
+</div>
 
 </v-click>
 
 ---
 
-# 火曜日: エージェント開発ライフサイクル (2/3)
+# 火曜日: エージェント開発ライフサイクル (2/4)
 
-- **Cloudflare Wallets**
-  エージェントが「エージェント経済」の参加者として安全に取引を行うためのウォレット
-- **数百万リポジトリで CI/CD を実行**
-  パイプラインをコードベースから記述し、失敗時にエージェントが自律的に修復を試行
+<v-click>
 
-<div class="pt-6 text-sm opacity-70">
+<div class="pb-3">
+
+**ローカルトレースによる Workers デバッグ**<br>
+<span class="text-sm opacity-60">『エージェントがローカルトレースで Workers をデバッグ可能に』</span><br>
+分散トレーシングをデプロイ前の問題検出に活用する仕組み<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/local-tracing/)</span> ・ <span class="text-xs">▶ <a href="../local-tracing/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Cloudflare Wallets**<br>
+<span class="text-sm opacity-60">『Cloudflare Wallets を発表』</span><br>
+エージェントが「エージェント経済」の参加者として安全に取引を行うためのウォレット<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/)</span> ・ <span class="text-xs">▶ <a href="../wallets/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+---
+
+# 火曜日: エージェント開発ライフサイクル (3/4)
+
+<v-click>
+
+<div class="pb-3">
+
+**数百万リポジトリで CI/CD を実行**<br>
+<span class="text-sm opacity-60">『数百万のリポジトリで CI/CD を実行』</span><br>
+パイプラインをコードベースから記述し、失敗時にエージェントが自律的に修復を試行<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ci-workflows/)</span> ・ <span class="text-xs">▶ <a href="../ci-workflows/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**AI によるエンジニアリング標準の徹底**<br>
+<span class="text-sm opacity-60">『Cloudflare が AI を活用してエンジニアリング標準を徹底する方法』</span><br>
+開発ワークフロー全体に AI を組み込み、規約遵守を自動チェック<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/engineering-standards-enforcement/)</span> ・ <span class="text-xs">▶ <a href="../engineering-standards-enforcement/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<div class="pt-2 text-sm opacity-70">
 
 これらは「エージェントを信頼して本番に任せる」ための土台となる機能群
 
@@ -137,12 +262,20 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 
 ---
 
-# 火曜日: エージェント開発ライフサイクル (3/3)
+# 火曜日: エージェント開発ライフサイクル (4/4)
 
-- **AI によるエンジニアリング標準の徹底**
-  開発ワークフロー全体にAIを組み込み、規約遵守を自動チェック
-- **Astro の GitHub Issue をゼロにするソフトウェアファクトリー**
-  Issue の自動分類・トリアージで OSS 保守コストを削減
+<v-click>
+
+<div class="pb-3">
+
+**Astro の GitHub Issue をゼロにするソフトウェアファクトリー**<br>
+<span class="text-sm opacity-60">『Astro の GitHub Issue をゼロにするソフトウェアファクトリーを構築した方法』</span><br>
+Issue の自動分類・トリアージで OSS 保守コストを削減<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/astro-issue-triage/)</span> ・ <span class="text-xs">▶ <a href="../astro-issue-triage/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 <div class="pt-8">
 
@@ -155,30 +288,88 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 
 ---
 
-# 水曜日: Zero Trust とセキュリティ (1/2)
+# 水曜日: Zero Trust とセキュリティ (1/3)
 
 エージェントが安全にリソースへアクセスするための仕組み
 
-- **Agent Access Model**
-  エージェントが人間・サービスに代わって安全にリソースへアクセスするアクセス制御フレームワーク
-- **Cloudflare OS**
-  社内業務にAIエージェントを組み込みつつ、オープンプラットフォームとして他チームにも提供
-  （効率性と人間の監督の両立が狙い）
+<v-click>
+
+<div class="pb-3">
+
+**Agent Access Model**<br>
+<span class="text-sm opacity-60">『エージェントアクセスモデル（Agent Access Model）』</span><br>
+エージェントが人間・サービスに代わって安全にリソースへアクセスするアクセス制御フレームワーク<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/the-agent-access-model/)</span> ・ <span class="text-xs">▶ <a href="../the-agent-access-model/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Cloudflare OS で働き方を見直す**<br>
+<span class="text-sm opacity-60">『Cloudflare OS で Cloudflare の働き方を見直す』</span><br>
+社内業務に AI エージェントを組み込みつつ、効率性と人間の監督を両立<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../how-we-use-ai-with-cloudflare-os/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 ---
 
-# 水曜日: Zero Trust とセキュリティ (2/2)
+# 水曜日: Zero Trust とセキュリティ (2/3)
 
-- **ID情報ベースの分析**
-  エージェントのトラフィックを実ユーザーのID情報と関連付け、不正利用を検出
-- **WriteGuard**
-  MCP サーバー経由のリスクの高い書き込み操作をきめ細かく制御
+<v-click>
 
-<div class="pt-8">
+<div class="pb-3">
+
+**Cloudflare OS（オープンプラットフォーム）**<br>
+<span class="text-sm opacity-60">『Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム』</span><br>
+社内向けに構築した Cloudflare OS を、オープンなプラットフォームとして他チームにも提供<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-os/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**ID情報ベースの分析**<br>
+<span class="text-sm opacity-60">『ID 情報に基づく分析で、不正な AI の利用を検出』</span><br>
+エージェントのトラフィックを実ユーザーの ID 情報と関連付け、不正利用を検出<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/)</span> ・ <span class="text-xs">▶ <a href="../identity-aware-ai-gateway/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+---
+
+# 水曜日: Zero Trust とセキュリティ (3/3)
+
+<v-click>
+
+<div class="pb-3">
+
+**WriteGuard**<br>
+<span class="text-sm opacity-60">『WriteGuard：MCP サーバーをきめ細かく制御』</span><br>
+MCP サーバー経由のリスクの高い書き込み操作をきめ細かく制御<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/)</span> ・ <span class="text-xs">▶ <a href="../mcp-portal-writeguard-private-beta/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<div class="pt-6">
 
 具体的に何ができるようになるか:
 
-- エージェントに**「何を・どこまで」許可するか**を細かく制御できる
+- エージェントに<strong>「何を・どこまで」許可するか</strong>を細かく制御できる
 - 「エージェントが勝手にデータを書き換えた」といった事故を**未然に防止**できる
 
 </div>
@@ -189,68 +380,175 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 
 ---
 
-# 木曜日: エージェント型インターネット (1/3)
+# 木曜日: エージェント型インターネット (1/4)
 
 ## オープンなエージェンティックインターネットの構築
 
-- 読み取り・発見・呼び出し・決済までを、パブリッシャーが管理権を維持したまま実現
-- **WebMCP**: あらゆる Web サイトにエージェント向けの MCP インターフェースを付与
+<v-click>
+
+<div class="pb-3">
+
+**オープンなエージェンティックインターネットの構築**<br>
+<span class="text-sm opacity-60">『読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築』</span><br>
+読み取り・発見・呼び出し・決済までを、パブリッシャーが管理権を維持したまま実現する全体構想<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/the-agentic-internet/)</span> ・ <span class="text-xs">▶ <a href="../the-agentic-internet/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**WebMCP**<br>
+<span class="text-sm opacity-60">『あらゆる Web サイトに WebMCP インターフェースを提供』</span><br>
+あらゆる Web サイトにエージェント向けの MCP インターフェースを付与<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/webmcp/)</span> ・ <span class="text-xs">▶ <a href="../webmcp/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 ---
 
-# 木曜日: エージェント型インターネット (2/3)
+# 木曜日: エージェント型インターネット (2/4)
 
-- **AEO (Answer Engine Optimization)**
-  SEO（検索エンジン最適化）から、AI エージェントに「推奨」されるための最適化へ
-- **Kitesurf**
-  メモリ・CPU使用量を抑えた、エージェント専用の軽量ブラウザ
+<v-click>
+
+<div class="pb-3">
+
+**AEO (Answer Engine Optimization)**<br>
+<span class="text-sm opacity-60">『ランク付けから推奨へ：AI エージェント時代でサイトを成功に導く準備を整える』</span><br>
+SEO（検索エンジン最適化）から、AI エージェントに「推奨」されるための最適化へ<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/aeo/)</span> ・ <span class="text-xs">▶ <a href="../aeo/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Kitesurf**<br>
+<span class="text-sm opacity-60">『Kitesurf のご紹介』</span><br>
+メモリ・CPU使用量を抑えた、エージェント専用の軽量ブラウザ<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/kitesurf/)</span> ・ <span class="text-xs">▶ <a href="../kitesurf/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 ---
 
-# 木曜日: エージェント型インターネット (3/3)
+# 木曜日: エージェント型インターネット (3/4)
 
-- **MCPv2**
-  MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化
-- **Cloudflare AI Search**
-  ファイル・Web サイトを変換し、エージェント向け検索エンジンとして提供
+<v-click>
 
-<div class="pt-8">
+<div class="pb-3">
+
+**MCPv2**<br>
+<span class="text-sm opacity-60">『MCP の次世代バージョン（MCPv2）』</span><br>
+MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-v2/)</span> ・ <span class="text-xs">▶ <a href="../mcp-v2/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Cloudflare AI Search**<br>
+<span class="text-sm opacity-60">『Cloudflare AI Search』</span><br>
+ファイル・Web サイトを変換し、エージェント向け検索エンジンとして提供<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ai-search-easier/)</span> ・ <span class="text-xs">▶ <a href="../ai-search-easier/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+---
+
+# 木曜日: エージェント型インターネット (4/4)
 
 具体的に何ができるようになるか:
 
 - サイト運営者は**エージェントに読まれる前提**でコンテンツを最適化できる（AEO・WebMCP）
 - エージェントは**軽量なブラウザ**で Web を探索し、必要な情報だけを取得できる
 
-</div>
-
 ---
 
-# 金曜日: 実装と現実 (1/2)
+# 金曜日: 実装と現実 (1/3)
 
 エージェントが実際にインターネット上で動く際の「現実」への対応
 
-- **良い振る舞い / 悪い振る舞いの見極め**
-  従来の bot 対策を、継続的な信頼評価（continuous trust evaluation）へ転換
-- **Workers AI と AI Gateway の統合**
-  統一されたバインディング・ウォレット・ダッシュボードでモデル呼び出しを一元管理
+<v-click>
+
+<div class="pb-3">
+
+**良い振る舞い / 悪い振る舞いの見極め**<br>
+<span class="text-sm opacity-60">『エージェントが動くインターネットで、「良い振る舞い」と「悪い振る舞い」を見極める』</span><br>
+従来の bot 対策を、継続的な信頼評価（continuous trust evaluation）へ転換<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/)</span> ・ <span class="text-xs">▶ <a href="../good-and-bad-agentic-behaviors/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Workers AI と AI Gateway の統合**<br>
+<span class="text-sm opacity-60">『Workers AI と AI Gateway を単一の AI コントロールプレーンに統合』</span><br>
+統一されたバインディング・ウォレット・ダッシュボードでモデル呼び出しを一元管理<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/workers-ai-gateway-unification/)</span> ・ <span class="text-xs">▶ <a href="../workers-ai-gateway-unification/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
 
 ---
 
-# 金曜日: 実装と現実 (2/2)
+# 金曜日: 実装と現実 (2/3)
 
-- **Cloudflare Ambassadors / Community Engineers**
-  コミュニティリーダー・OSSメンテナー向けの新プログラム。今後2年間で OSS に追加100万ドルを提供
-- **Radar Researcher**
-  自然言語での問いかけでインターネットデータを分析できる AI ツール
+<v-click>
 
-<div class="pt-8">
+<div class="pb-3">
+
+**Cloudflare Ambassadors / Community Engineers**<br>
+<span class="text-sm opacity-60">『Cloudflare Ambassadors と Community Engineers を発表』</span><br>
+コミュニティリーダー・OSSメンテナー向けの新プログラム。今後2年間で OSS に追加100万ドルを提供<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/community-program-refresh/)</span> ・ <span class="text-xs">▶ <a href="../community-program-refresh/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="pb-3">
+
+**Radar Researcher**<br>
+<span class="text-sm opacity-60">『Radar Researcher のご紹介』</span><br>
+自然言語での問いかけでインターネットデータを分析できる AI ツール<br>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/introducing-radar-researcher/)</span> ・ <span class="text-xs">▶ <a href="../introducing-radar-researcher/" target="_blank">解説スライド</a></span>
+
+</div>
+
+</v-click>
+
+---
+
+# 金曜日: 実装と現実 (3/3)
 
 具体的に何ができるようになるか:
 
 - プラットフォーム側は**エージェントの振る舞いを継続的に評価**し、悪意ある挙動を判別できる
 - OSS エコシステムを支える**人とコミュニティ**にも投資が続けられる
-
-</div>
 
 ---
 
@@ -266,7 +564,7 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZX2BFZ7V9FZT5F9N1CJ
 詳細は別デッキ・別 Wiki ページで解説:
 
 - Wiki: `docs/articles/2026-08-05-cloudflare-computer.md`
-- スライド: `slides/cloudflare-computer/slides.md`
+- スライド: ▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a>（`slides/cloudflare-computer/slides.md`）
 
 </div>
 

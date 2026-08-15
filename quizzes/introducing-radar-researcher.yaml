@@ -1,0 +1,117 @@
+title: "平易な言葉でインターネットデータを探索するAIツール「Radar Researcher」のご紹介"
+slug: introducing-radar-researcher
+sourceUrl: https://blog.cloudflare.com/introducing-radar-researcher/
+wiki: ../docs/articles/2026-08-07-introducing-radar-researcher.md
+questions:
+  - q: >-
+      記事における「Cloudflare Radar」の説明として<strong>正しいもの</strong>はどれか。
+    choices:
+      - 2020年に立ち上げられた、Cloudflareのネットワークを流れるトラフィックをもとにインターネット動向を可視化する無償公開サービス
+      - 企業向けの有料インターネット品質監視SaaS
+      - Cloudflare Workersのデバッグ専用ツール
+      - 2026年に新規公開されたAPIゲートウェイ製品
+    answer: 0
+    explanation: >-
+      記事冒頭で、Radarは2020年の立ち上げ以来、グローバルなインターネットトラフィックの洞察を提供してきたと説明されている。人権活動家、ジャーナリスト、研究者、ネットワーク運用者など多様なユーザーがこのオープンデータを活用している。Wikiの「背景・課題」セクション参照。
+
+  - q: >-
+      Radar Researcherは何を土台にして構築されているか。
+    choices:
+      - Radar API
+      - サードパーティの汎用チャットボットプラットフォーム
+      - Cloudflare Workersのログ解析基盤のみ
+      - 人手で作成されたFAQデータベース
+    answer: 0
+    explanation: >-
+      記事では「このツールはRadar APIを完全に活用して構築されており、自然言語でのデータアクセスを実現する」と説明されている。Wikiの「発表内容 / アーキテクチャ」内「Radar Researcherとは何か」を参照。
+
+  - q: >-
+      Radar Researcherの主な機能として記事に<strong>記載されていないもの</strong>はどれか。
+    choices:
+      - 平文の回答と実データに基づくインタラクティブなチャートの提示
+      - 回答の深さ（簡潔な要約 / 詳細なレポート）の選択
+      - ユーザーごとの課金プランの自動アップグレード提案
+      - LLMの推論プロセスを後から監査できる機能
+    answer: 2
+    explanation: >-
+      記事に挙げられている主な機能は、平文回答＋インタラクティブなチャート、回答の深さ選択、関連質問の提案、検索・共有可能な会話履歴、推論プロセスの監査の5つである。課金プランのアップグレード提案についての記載はない。Wikiの「Radar Researcherとは何か」参照。
+
+  - q: >-
+      「Explain with AI」機能でチャートから会話を始める際、モデルに同時に渡される情報として<strong>正しい組み合わせ</strong>はどれか。
+    choices:
+      - チャートのスクリーンショット / APIから取得した生データ / 現在表示中のビューのパラメータ
+      - ユーザーのアカウント情報 / 課金履歴 / IPアドレス
+      - 過去1年分の全チャット履歴のみ
+      - チャートのCSVエクスポートファイルのみ
+    answer: 0
+    explanation: >-
+      記事では「チャートのスクリーンショット、API取得の生データ、現在のビューパラメータの3つの要素を同時に処理する」と説明されている。Wikiの「既存のチャートを会話に変える（Explain with AI）」参照。
+
+  - q: >-
+      Radar Researcherが会話履歴を保存するために使っている仕組みはどれか。
+    choices:
+      - Durable ObjectsによりSQLiteへ保存する
+      - ブラウザのlocalStorageのみに保存する
+      - すべての会話をR2に生ログとして直接保存する
+      - 外部のPostgreSQLデータベースを使用する
+    answer: 0
+    explanation: >-
+      記事の「How we built it」セクションで「ステートフル管理：Durable Objectで会話履歴をSQLiteに保存」と説明されている。Wikiの「内部アーキテクチャ（How we built it）」参照。なお、R2は会話の共有機能の保存先として使われる別の用途である。
+
+  - q: >-
+      データへのアクセス（適切なAPIエンドポイントの選択）について、記事の説明として<strong>正しいもの</strong>はどれか。
+    choices:
+      - Cloudflare MCP serverとCode Modeを使い、Radar APIのOpenAPI仕様から適切なエンドポイントを自動検索する
+      - 開発者があらかじめ全質問パターンをハードコードしたルーティングテーブルを用意している
+      - すべての質問に対して常に全APIエンドポイントを総当たりで呼び出す
+      - ユーザーが手動でAPIエンドポイントのURLを入力する必要がある
+    answer: 0
+    explanation: >-
+      記事では「データへのアクセスはCloudflare MCP serverとCode Modeを使用し、OpenAPI仕様から適切なエンドポイントを自動検索する」と説明されている。Wikiの「内部アーキテクチャ（How we built it）」参照。
+
+  - q: >-
+      （コード読解）以下は、Radar Researcherがユーザーへの応答内で発行する「チャート仕様」のJSONの例である。この仕組みの目的として<strong>最も適切なもの</strong>はどれか。
+    code: |
+      { "type": "speedFlower", "title": "Internet speed quality — Portugal", "dataFrom": "/radar/quality/speed/summary?location=PT" }
+    codeLang: json
+    choices:
+      - モデルに数値を直接生成させず、dataFromのAPIパスから実データを取得して描画させることで、ハルシネーションを避け常に最新の値を反映する
+      - チャートの種類（type）をランダムに選ばせ、見た目のバリエーションを増やすための仕組み
+      - dataFromはキャッシュを削除するための内部コマンドであり、チャートの表示とは無関係
+      - このブロックはユーザーには一切表示されない、開発者専用のデバッグ情報である
+    answer: 0
+    explanation: >-
+      Wikiの「コード例」セクションで解説している通り、モデルは数値そのものを本文に埋め込まず、Radar APIのパスを参照する<code>radar-chart</code>ブロックを発行する。フロントエンドがこれを検出すると<code>dataFrom</code>のパスへ実際にリクエストを送り、インタラクティブなチャートとして描画する。これにより数値のハルシネーションを避け、常に最新のデータが反映される。
+
+  - q: >-
+      WebMCP対応の目的として、記事の説明に最も近いものはどれか。
+    choices:
+      - ブラウザエージェントがRadarを直接操作できるようにするため、命令的API（JavaScriptでのツール登録）と宣言的API（HTML構造の解釈）の両方に対応した
+      - Radarのページ表示速度を高速化するための最適化技術
+      - 有料プラン専用の課金APIを追加するための仕組み
+      - モバイルアプリ専用のプッシュ通知機能を追加するための仕組み
+    answer: 0
+    explanation: >-
+      記事の「Powered by agents — and ready for them」セクションで、WebMCP標準への対応として命令的API・宣言的APIの両方を提供し、ブラウザエージェントがRadarと直接やり取りできるようにしていると説明されている。Wikiの「エージェント時代を見据えた対応」参照。
+
+  - q: >-
+      Radar Researcherがモデルに数値を直接生成させず、APIパス参照によるチャート仕様を発行させる設計を採用している<strong>最大の理由</strong>として、記事の説明に最も近いものはどれか。
+    choices:
+      - APIリクエストの回数を減らしてコストを削減するため
+      - モデルが数値を記憶や推測で誤って書き出す（ハルシネーションする）ことを避け、常に実データに基づく最新の値をチャートに反映するため
+      - モデルの応答速度を最大化するため、一切の計算をモデルに行わせないようにするため
+      - チャートの種類をユーザーが選べないよう制限するため
+    answer: 1
+    explanation: >-
+      Wikiの「コード例」セクションで述べている通り、この設計の意図は数値を実データから取得することでハルシネーションを避け、常に最新の値を反映させる点にある。<code>type</code>や<code>title</code>はモデルが文脈に応じて選ぶが、データ自体はAPI呼び出しに委ねられる。
+
+  - q: >-
+      Radar Researcherが「専門知識の壁」という課題に対して採用したアプローチとして、記事の趣旨に<strong>最も近いもの</strong>はどれか。
+    choices:
+      - 専門知識を持つユーザーのみに機能を限定し、非専門家のアクセスをさらに制限する
+      - 自然言語での問い合わせを受け付け、AIが適切なAPI選択とデータ取得を代行することで、専門知識がなくてもRadarのデータへアクセスできるようにする
+      - すべてのAPIエンドポイントを廃止し、固定のダッシュボードのみを提供する
+      - データの公開範囲を有料会員限定に変更する
+    answer: 1
+    explanation: >-
+      記事は、AIツールが専門知識の障壁を引き下げ、専門家をゲートキーパーから協力者に変えうるという視点を示している。Radar Researcherはこの発想を、自然言語での問い合わせとAIによるAPI選択・データ取得の自動化として実装したもの。Wikiの「背景・課題」および「発表内容 / アーキテクチャ」参照。

@@ -1,0 +1,108 @@
+title: 数百万のリポジトリのCI/CDを、あなたのプラットフォーム上でCloudflareが動かす
+slug: ci-workflows
+sourceUrl: https://blog.cloudflare.com/ci-workflows/
+wiki: ../docs/articles/2026-08-04-ci-workflows.md
+questions:
+  - q: 記事が主張する「CI/CDパイプライン」の本質として最も適切なものはどれか。
+    choices:
+      - GitHub Actions専用の特殊な仕組み
+      - 決まった順序でステップを実行し、失敗したら止める、単なるWorkflow
+      - YAMLでしか表現できない設定言語
+      - 人間の承認が不要な自動デプロイの別名
+    answer: 1
+    explanation: 「発表内容 / アーキテクチャ」の「CI/CDパイプラインは、ただのWorkflowである」に記載の通り、CI/CDパイプラインは決まった順序でステップを実行し、失敗したら止める処理であり、本質的には単なるWorkflowだと説明されている。
+  - q: 新しいCI SDKで、CIパイプラインをYAMLの代わりに何で記述するか。
+    choices:
+      - Python
+      - TypeScript
+      - Rust
+      - HCL
+    answer: 1
+    explanation: 記事の通り、CI/CDパイプラインはYAMLではなくTypeScriptで記述でき、各ステップはWorkflowの `step.do()` に対応する。
+  - q: wrangler設定ファイルに追加する、CIをトリガーするための新しいフィールド名はどれか。
+    choices:
+      - triggers.cron
+      - events
+      - hooks
+      - pipelines
+    answer: 1
+    explanation: 「独自のCI Workflowを書く」に記載の通り、`triggers` フィールド内に新設された `events` フィールドで、Artifactsのpushイベントなどをトリガーに指定できる。
+  - q: CI/CDパイプラインの実行に必須のCloudflareプリミティブの組み合わせとして、記事内で明記されているものはどれか。
+    choices:
+      - D1とVectorize
+      - Workflows と Sandbox SDK
+      - Pages FunctionsとKV
+      - Durable ObjectsとImages
+    answer: 1
+    explanation: 「発表内容 / アーキテクチャ」に記載の通り、CI SDKの各ステップはWorkflowsとSandbox SDKの上に直接構築された安全な隔離環境で実行される。
+  - q: installステップの依存関係キャッシュに使われるストレージはどれか。
+    choices:
+      - KV
+      - R2バケット（サンドボックスのスナップショット保存先）
+      - D1データベース
+      - Durable Objectのストレージのみ
+    answer: 1
+    explanation: 「独自のCI Workflowを書く」に記載の通り、依存関係はサンドボックスのスナップショットとしてキャッシュされ、そのスナップショットはアカウント上のR2バケットに保存される。
+  - q: wrangler設定の `events` で `repoName` を省略した場合の挙動として正しいものはどれか。
+    choices:
+      - イベント自体が無効になる
+      - namespace内のすべてのリポジトリへのpushで同じWorkflowが実行される
+      - namespaceのデフォルトリポジトリにのみ適用される
+      - エラーになりデプロイが失敗する
+    answer: 1
+    explanation: 「独自のCI Workflowを書く」に記載の通り、`repoName` を省略すると、そのnamespace内のどのリポジトリへのpushでも同じWorkflowが実行される。プラットフォーム事業者が全顧客リポジトリに同一CIを適用する用途に向いている。
+  - q: 自己修復（self-healing）CIにおいて、`Healer` クラスが継承するクラスはどれか。
+    choices:
+      - CIWorkflow
+      - HealingAgent
+      - Think
+      - WorkspaceProxy
+    answer: 1
+    explanation: 「自己修復するCI実行」に記載の通り、`Healer` は `HealingAgent` クラスを継承し、`getModel()` で使用するモデルを指定するだけで、失敗時に呼び出せる `heal` メソッドを持つエージェントになる。
+  - q: |
+      次のコード例は、自己修復CIの失敗検知部分の抜粋である。`isCiRunnerFailure(failure)` が `false` を返した場合、このコードはどう動作するか。
+    code: |
+      } catch (failure) {
+        if (!isCiRunnerFailure(failure)) {
+          throw failure;
+        }
+        // ...heal処理へ続く
+      }
+    codeLang: ts
+    choices:
+      - healエージェントを呼び出して修正を試みる
+      - 元のエラーをそのまま再スローし、healエージェントは呼ばれない
+      - 何もせず処理を継続する
+      - CI実行全体を成功扱いにする
+    answer: 1
+    explanation: 「コード例」の解説にある通り、`isCiRunnerFailure()` はrunnerが報告した失敗かどうかを判定し、それ以外の通常のWorkflowエラーはheal処理をせずそのまま再スローする設計になっている。
+  - q: |
+      次のコード例で、`healer.heal()` の呼び出し結果を使って最終的にスローされるのはどれか。
+    code: |
+      const healed = await step.do('heal', { retries: { limit: 0, delay: 0 }, timeout: '5 hours' }, async () => {
+        const healer = await getAgentByName(this.env.HEALER, event.instanceId);
+        using result = await healer.heal({
+          failure: enrichFailure({ failure, event, baseBranch }),
+          prompt: 'Fix every observed failure without weakening validation.',
+        });
+        const { branch, commit, steps } = result;
+        return { branch, commit, steps };
+      });
+
+      throw new CiRunFailedWithFix(failure, healed);
+    codeLang: ts
+    choices:
+      - 何もスローされず、CI実行は成功扱いになる
+      - 元の失敗（failure）と修正結果（healed）を合わせた `CiRunFailedWithFix`
+      - healed オブジェクトのみを含む例外
+      - "`deploy` ステップの実行結果"
+    answer: 1
+    explanation: 「コード例」の解説にある通り、元の実行は失敗のまま記録するために、元の失敗と修正結果（ブランチ・コミット・ステップ数）を合わせた `CiRunFailedWithFix` がスローされ、検証済みの修正は別ブランチに残る設計になっている。
+  - q: Workflow上でCIを実行することの利点として、記事内で挙げられていないものはどれか。
+    choices:
+      - ステップ単位でのリトライ・タイムアウトのカスタマイズ
+      - 特定のステップだけを再開できる
+      - Workflowsダッシュボードでの入出力・実行時間の可視化
+      - 人間の承認を完全に排除した無審査デプロイ
+    answer: 3
+    explanation: 「Workflow上で動かすメリット」に挙げられているのはレジリエントなリトライ・オブザーバビリティ・コードとしての柔軟性であり、記事はむしろ自己修復の修正結果を別ブランチに残し人間がマージすると説明しており、無審査デプロイは記載されていない。

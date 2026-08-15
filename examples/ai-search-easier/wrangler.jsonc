@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "example-ai-search-easier",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-16",
+  "ai_search_namespaces": [
+    {
+      "binding": "AI_SEARCH",
+      // "wrangler ai-search create ... --namespace example-ai-search" で
+      // 事前にこの名前空間を作成しておく必要がある（README参照）。
+      "namespace": "example-ai-search"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

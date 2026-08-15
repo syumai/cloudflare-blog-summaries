@@ -11,6 +11,8 @@ drawings:
 transition: slide-left
 mdc: true
 lineNumbers: true
+themeConfig:
+  primary: '#f6821f'
 ---
 
 # AIエージェントに必要なのは
@@ -145,6 +147,7 @@ Cloudflareは Workers（約10年前）、Durable Objects（約6年前）の頃�
 ---
 layout: image-right
 image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGJWE4D64HEZPZ1PMCAN.png
+backgroundSize: contain
 ---
 
 # 垂直スケール vs 水平スケール
@@ -157,14 +160,16 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGJWE4D64HEZPZ1P
 </footer>
 
 ---
-class: text-center
----
+
+<div class="text-center">
 
 # `@cloudflare/computer` を発表
 
 <div class="pt-8">
 
 AIエージェント向けの実行環境（エージェントランタイム）
+
+</div>
 
 </div>
 
@@ -347,7 +352,7 @@ code, make a focused fix when it is safe, and run verification.`;
 
 # コード例② コンテナバックエンドの追加
 
-```ts {1-7|9|11-22|all}
+```ts {1-7|9|11-22|all} {maxHeight:'440px'}
 import { Think } from "@cloudflare/think";
 import { Workspace, WorkspaceProxy } from "@cloudflare/computer";
 import {
@@ -397,7 +402,7 @@ export class Agent extends withWorkspaceContainer(Think) {
 
 # コード例③ 標準ツール＋独自ツールの統合
 
-```ts {1-3|9-25|all}
+```ts {1-3|9-25|all} {maxHeight:'440px'}
 import { createAITools } from "@cloudflare/computer/tools";
 import type { ToolSet } from "ai";
 import { replyToIssue } from "./tools/github";
@@ -448,7 +453,7 @@ export class Agent extends withWorkspaceContainer(Think) {
 
 # コード例④ Workspace APIの直接利用
 
-```ts {1-4|6-11|13-15|17-30|all}
+```ts {1-4|6-11|13-15|17-30|all} {maxHeight:'440px'}
 export class Agent extends withWorkspaceContainer(Think) {
   override workspaceBash = false;
 
@@ -626,16 +631,19 @@ npm install @cloudflare/computer
 </v-clicks>
 
 ---
-class: text-center
----
+
+<div class="text-center">
 
 # 参考リンク
+
+</div>
 
 - 原文: [AIエージェントに必要なのはコンテナではなくコンピューター](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)
 - 英語版: [The Computer, not the Container](https://blog.cloudflare.com/cloudflare-computer/)
 - リポジトリ: [github.com/cloudflare/computer](https://github.com/cloudflare/computer)
 - チュートリアル: [examples/tutorial](https://github.com/cloudflare/computer/tree/main/examples/tutorial)
 - [just-bash](https://justbash.dev/)
+- Workers サンプル: [examples/cloudflare-computer/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/cloudflare-computer)
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-05-cloudflare-computer.md

@@ -1,0 +1,114 @@
+title: "Cloudflare Ambassadors、Community Engineers を発表"
+slug: community-program-refresh
+sourceUrl: https://blog.cloudflare.com/community-program-refresh/
+wiki: ../docs/articles/2026-08-07-community-program-refresh.md
+questions:
+  - q: >-
+      本記事で発表された新しいコミュニティプログラムは、大きく2つのトラックに分かれています。正しい組み合わせはどれですか。
+    choices:
+      - Cloudflare Ambassadors と Cloudflare Community Engineers
+      - Cloudflare MVP と Cloudflare Champions
+      - Cloudflare Ambassadors と Cloudflare Partners
+      - Cloudflare Community Engineers と Cloudflare Fellows
+    answer: 0
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」で説明されている通り、プログラムは「自身のコミュニティにCloudflareを広める人」向けの Cloudflare Ambassadors と、「オープンソースプロジェクトの貢献者」向けの Cloudflare Community Engineers の2トラックで構成されています。
+
+  - q: >-
+      Cloudflare Ambassadors の任期として正しいものはどれですか。
+    choices:
+      - 最大1年間
+      - 最大2年間
+      - 最大3年間
+      - 上限は設けられていない
+    answer: 1
+    explanation: >-
+      Wikiの「Cloudflare Ambassadors」の項に記載の通り、Ambassadorは年1回の応募プロセスで選出され、任期は最大2年間です。なお「上限なし」はCommunity Engineersの特徴であり、Ambassadorsとは異なります。
+
+  - q: >-
+      Cloudflare Ambassadorsの応募締切として、記事内で案内されている日付はどれですか。
+    choices:
+      - 8月7日
+      - 8月31日
+      - 9月6日
+      - 10月5日
+    answer: 2
+    explanation: >-
+      Wikiの「Ambassadors応募スケジュール」に記載の通り、応募締切は9月6日です。10月5日は選出結果の通知日であり、締切と混同しないよう注意が必要です。
+
+  - q: >-
+      Community Engineersトラックの支援対象として、記事内で例示されているオープンソースプロジェクトに<u>含まれないもの</u>はどれですか。
+    choices:
+      - Astro
+      - Hono
+      - Agents SDK
+      - Kubernetes
+    answer: 3
+    explanation: >-
+      Wikiの「Cloudflare Community Engineers」に記載の通り、初期フォーカスとして挙げられているのは Astro、Agents SDK、EmDash、Hono、Vinext など、Cloudflareのオープンソースの活動範囲にあるプロジェクトです。Kubernetesは記事内で言及されていません。
+
+  - q: >-
+      記事内でOSSスポンサーシップの先行事例として言及されているプロジェクトはどれですか。
+    choices:
+      - React
+      - TanStack
+      - Vue.js
+      - Svelte
+    answer: 1
+    explanation: >-
+      Wikiの「背景・課題」および「Cloudflare Community Engineers」で触れられている通り、先行事例として、Tanner Linsley氏がCEOを務めるTanStackへのスポンサーシップが挙げられています。
+
+  - q: >-
+      Cloudflareの公式Discordサーバーについて、記事内で述べられている参加ユーザー規模として正しいものはどれですか。
+    choices:
+      - 約1万人
+      - 約10万人
+      - 約100万人
+      - 約1000万人
+    answer: 1
+    explanation: >-
+      Wikiの「Discordコミュニティの改善」に記載の通り、2020年の開設以来、Cloudflareの公式Discordサーバーには約10万人のユーザーが参加する規模に成長しています。
+
+  - q: >-
+      本記事が公開されたのは、Agents Week 2026のどの曜日・テーマの一環としてですか。
+    choices:
+      - 月曜日「実行環境とインフラ」
+      - 火曜日「エージェント開発ライフサイクル」
+      - 木曜日「エージェント型インターネット」
+      - 金曜日「実装と現実」
+    answer: 3
+    explanation: >-
+      Wikiの「コード例について」で説明されている通り、本記事はAgents Week 2026最終日である金曜日（テーマ「実装と現実」）に発表された4本の記事の1つです。技術寄りの発表が多い週の中で、コミュニティ・人への投資という文脈に位置づけられています。
+
+  - q: >-
+      Community Engineersトラック向けに新たに追加投資されると発表された金額と期間の組み合わせとして正しいものはどれですか。
+    choices:
+      - 2年間で50万ドル
+      - 2年間で100万ドル
+      - 1年間で100万ドル
+      - 5年間で500万ドル
+    answer: 1
+    explanation: >-
+      Wikiの「Community Engineersへの投資」で説明されている通り、Cloudflareは今後2年間でオープンソースプロジェクト支援に新たに100万ドルを追加投資すると表明しました。これはVoidZero買収に伴う既存のVite向け100万ドルとは別枠です。
+
+  - q: >-
+      Community Engineersトラックで、Ambassadorsトラックとは異なり「最大在任期間の上限が設けられていない」理由として、記事の内容から最も適切に読み取れるものはどれですか。
+    choices:
+      - Community Engineersの人数を意図的に増やしたくないため
+      - オープンソース活動が定期的とは限らない、不規則な貢献サイクルを持つため
+      - 予算の都合上、任期を管理する余裕がないため
+      - Ambassadorsトラックへの統合を将来的に予定しているため
+    answer: 1
+    explanation: >-
+      Wikiの「Cloudflare Community Engineers」で述べられている通り、この設計はオープンソース活動特有の、定期的とは限らない不規則な貢献サイクルに合わせたものです。OSSメンテナーの活動には波があることを踏まえた制度設計といえます。
+
+  - q: >-
+      新設される「Discord委員会」の役割について、記事の説明として最も適切なものはどれですか。
+    choices:
+      - スパムや悪質リンクの検出・削除といったモデレーション業務そのものを人手で行う
+      - モデレーション業務は自動化ツールに任せ、コンテンツのキュレーションや機会の提供、社内チームとの橋渡しに重点を置く
+      - Discordサーバーを段階的に廃止し、別プラットフォームへ移行する準備を行う
+      - 有料会員向けの専用チャンネルを新設し、収益化を図る
+    answer: 1
+    explanation: >-
+      Wikiの「Discordコミュニティの改善」に記載の通り、スパム・悪質リンクへの防御は自動化ツールで対応する一方、Discord委員会（Ambassadors＋スタッフ）はコンテンツのキュレーション・機会の提供・社内チームとの橋渡しに重点を置きます。これらの防御ツールは将来的にオープンソース化する計画もあります。

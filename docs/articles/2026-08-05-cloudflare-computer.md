@@ -275,6 +275,8 @@ npm install @cloudflare/computer
 - ファイルシステムをSQLiteで仮想化し、アイソレートとコンテナの双方から同じ実体に対してFUSE等でアクセスさせる構成は、「環境をまたいでも状態が破綻しない」ことを保証する仕組みとして興味深い。
 - コード例が「バグトリアージエージェント」という一貫したシナリオで積み上げ式に示されているため、実際にプロダクトへ組み込む際の設計の流れ（最小構成→コンテナ追加→ツール統合→外部トリガーとの連携）がそのまま参考になる。
 
+> **Workers サンプル**: [examples/cloudflare-computer/](../../examples/cloudflare-computer/) — Durable Object上でWorkspace（SQLiteバックエンドの仮想ファイルシステム）だけを使い、ノートの書き込み・一覧取得を体験できる最小サンプル（実行バックエンド・AIモデル呼び出しは含まず）。
+
 ## 関連リンク
 
 - [@cloudflare/computer リポジトリ（GitHub）](https://github.com/cloudflare/computer)

@@ -1,0 +1,156 @@
+title: "次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol"
+slug: mcp-v2
+sourceUrl: https://blog.cloudflare.com/mcp-v2/
+wiki: ../docs/articles/2026-08-06-mcp-v2.md
+questions:
+  - q: >-
+      MCP 2026-07-28仕様における最も本質的な変化は何か。
+    choices:
+      - プロトコルがバイナリ形式からJSON-RPCへ変更された
+      - プロトコルがステートフルからステートレスへ変更され、セッション管理が不要になった
+      - MCPがREST APIに置き換えられた
+      - クライアントとサーバーの通信がすべて暗号化必須になった
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」および「TL;DR」で説明されている通り、新仕様の核心は
+      <code>initialize</code>/<code>initialized</code>ハンドシェイクと<code>Mcp-Session-Id</code>ヘッダーの廃止による
+      ステートレス化である。JSON-RPC自体は従来から使われており、REST APIへの置き換えでも暗号化必須化でもない。
+
+  - q: >-
+      新仕様でMCPリクエストから不要になったものはどれか。
+    choices:
+      - <code>Mcp-Method</code>ヘッダー
+      - <code>Mcp-Session-Id</code>ヘッダーと<code>initialize</code>/<code>initialized</code>ハンドシェイク
+      - JSON-RPC形式のメッセージ
+      - HTTP POSTメソッド
+    answer: 1
+    explanation: >-
+      Wikiの「MCPはステートレスになった」節にある通り、新しい仕様では必須だったハンドシェイクと
+      <code>Mcp-Session-Id</code>ヘッダーがコアのリクエストパスから取り除かれた。<code>Mcp-Method</code>ヘッダーは
+      逆に新しく追加されたものであり、混同しないよう注意。
+
+  - q: >-
+      新仕様によって、MCPサーバーをDurable Object（<code>McpAgent</code>）なしで動かせるようになった理由として
+      最も適切なものはどれか。
+    choices:
+      - Durable Objectsのサービス自体が廃止されたから
+      - プロトコルセッションという概念がなくなり、各リクエストが単独で完結するようになったから
+      - MCPがWebSocketを使わなくなったから
+      - Cloudflare Workersの実行時間制限が撤廃されたから
+    answer: 1
+    explanation: >-
+      Wikiの「MCPはステートレスになった」節で説明されている通り、保存すべきプロトコルセッションが
+      存在しなくなったため、MCPサーバーは「リクエストを受け取り、結果を返す」という単純なモデルで
+      動作できるようになった。これによりアプリケーション自体が状態を必要としない限り、
+      通常のCloudflare Workers（リクエストスコープのインフラ）上で動作可能になった。
+
+  - q: >-
+      elicitation（サーバーがユーザーに追加情報を求める仕組み）の新方式である「MRTR」の説明として
+      正しいものはどれか。
+    choices:
+      - サーバーが常時WebSocketを開いたままクライアントの入力を待ち続ける方式
+      - サーバーが<code>input_required</code>結果を返し、クライアントが入力を添えて元の操作をリトライする方式
+      - サーバーがクライアントにメールで確認を送る方式
+      - elicitation機能自体を完全に廃止する方式
+    answer: 1
+    explanation: >-
+      Wikiの「elicitationはオープンストリームを必要としなくなった」節にある通り、
+      Multi Round-Trip Requests（MRTR）では、サーバーが必要な情報を記述した<code>input_required</code>
+      という結果を返し、クライアントが回答を集めてその入力を添えて元の操作をリトライすることで
+      完了する。これはオープンストリームに依存する従来方式からの破壊的変更である。
+
+  - q: >-
+      新仕様でStreamable HTTPリクエストに追加が求められるヘッダーはどれか。
+    choices:
+      - <code>Mcp-Session-Id</code>
+      - <code>Mcp-Method</code>と<code>Mcp-Name</code>
+      - <code>Authorization-Legacy</code>
+      - <code>X-MCP-Cache-Control</code>
+    answer: 1
+    explanation: >-
+      Wikiの「HTTPインフラがMCPを理解できるようになった」節で説明されている通り、
+      新仕様は<code>Mcp-Method</code>と<code>Mcp-Name</code>ヘッダーをリクエストに含めることを求める。
+      これによりゲートウェイやWAFがJSON本文をパースせずにルーティングやレート制限の判断ができるようになる。
+
+  - q: >-
+      MCPのクライアント登録における新しい優先順位として、記事の説明として正しいものはどれか。
+    choices:
+      - DCR（Dynamic Client Registration）が最優先で、CIMDはフォールバック
+      - 事前登録済みクライアントが最優先、次にCIMD、DCRはフォールバック（新規実装では非推奨）
+      - すべてのクライアントは毎回DCRで動的登録しなければならない
+      - CIMDとDCRは廃止され、静的な設定ファイルのみが使われる
+    answer: 1
+    explanation: >-
+      Wikiの「認可（Authorization）のさらなる進化」節にある通り、サーバーとクライアントに既存の関係が
+      あれば事前登録済みクライアントを優先し、動的な登録にはClient ID Metadata Documents（CIMD）を使い、
+      Dynamic Client Registration（DCR）はフォールバックという優先順位になった。DCRは新規実装で非推奨となり、
+      2027年夏以降に廃止が予定されている。
+
+  - q: >-
+      MCP 2026-07-28で導入された機能ライフサイクルポリシーについて、正しい説明はどれか。
+    choices:
+      - 非推奨（Deprecated）となった機能は即座に削除される
+      - 非推奨化された機能は削除されるまで最低12か月間は利用可能であり続けなければならない
+      - すべての機能は永久にActiveのままで、Deprecatedという分類は存在しない
+      - ライフサイクルポリシーはクライアント側にのみ適用され、サーバー側には適用されない
+    answer: 1
+    explanation: >-
+      Wikiの「成熟した標準のためのライフサイクル」節で説明されている通り、機能はActive・Deprecated・Removed
+      に分類され、非推奨化された機能は削除されるまで最低12か月間は利用可能であり続けなければならない。
+      このリリースではRoots・Sampling・Logging・DCR・レガシーHTTP+SSEトランスポートが非推奨となった。
+
+  - q: >-
+      Agents SDKの<code>createMcpHandler</code>について、記事の説明として正しいものはどれか。
+    choices:
+      - このリリースで新しく発表され、まだ実験段階にある
+      - 2025年11月にAgents SDKへ導入されていたが、今回のリリースで公式MCP TypeScript SDKに正式採用された
+      - Durable Objectを使わないと動作しない
+      - Cloudflare Workers専用であり、他のJavaScriptランタイムでは使えない
+    answer: 1
+    explanation: >-
+      Wikiの「新しいSDK群」節にある通り、<code>createMcpHandler</code>は2025年11月にAgents SDKへ実験的に
+      導入されていたが、今回のリリースで公式のMCP TypeScript SDKに正式採用（graduate）された。
+      またMCP TypeScript SDK自体もNode.jsからWeb Standardsへ再プラットフォーム化され、
+      Bun・Deno・Cloudflare Workersなど複数のランタイムで動作するようになっている。
+
+  - q: >-
+      （コード読解）以下は、公式MCP TypeScript SDKとCloudflare Agents SDKを組み合わせた
+      最小構成のMCPサーバーのコードである。このコードの<code>export default</code>部分について、
+      最も適切な説明はどれか。
+    code: |
+      export default {
+        fetch(request, env, ctx) {
+          return createMcpHandler(createServer)(request, env, ctx);
+        },
+      }
+    codeLang: ts
+    choices:
+      - Durable Objectのクラスをエクスポートしており、MCPAgentの継承が必須である
+      - 通常のCloudflare Workersの<code>fetch</code>ハンドラーとして、<code>createMcpHandler(createServer)</code>が
+        返す関数をそのまま呼び出しており、Durable Objectは一切登場しない
+      - WebSocketサーバーを起動するためのエントリーポイントである
+      - このコードはクライアント側（MCPクライアント）の実装例である
+    answer: 1
+    explanation: >-
+      Wikiの「コード例」セクションの「例3」で解説されている通り、この<code>export default</code>は
+      通常のWorkersの<code>fetch</code>ハンドラーそのものであり、<code>createMcpHandler(createServer)</code>が
+      <code>fetch(request, env, ctx)</code>を返す関数を生成している。以前の<code>McpAgent</code>は
+      Durable Objectのクラスとして実装する必要があったが、この例ではDurable Objectも<code>Agent</code>クラスの
+      継承も一切登場せず、素のWorkersハンドラーとしてMCPサーバーが完結している。
+
+  - q: >-
+      記事内で紹介されているCloudflare自身の実運用事例（Code Mode MCP Server）について、
+      正しい説明はどれか。
+    choices:
+      - まだベータ版で、本番トラフィックは受けていない
+      - Cloudflare API全体をラップしたMCPサーバーで、毎秒数千リクエスト・
+        累計数十億回のツール呼び出しの規模で実運用されている
+      - Durable Objectのみで構築されており、ステートレスモードは使っていない
+      - Sentryが構築し、Cloudflareに寄贈したサーバーである
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」の「新しいSDK群」節および「ユースケース」の
+      「大規模トラフィックを捌くAPIラッパー型MCPサーバー」で説明されている通り、
+      Cloudflareは2月にCloudflare API全体を対象としたCode Mode MCP Serverを、
+      非公式のステートレスモードと<code>WebStandardsStreamableHTTPServerTransport</code>を使ってリリースし、
+      毎秒数千リクエスト・累計数十億回のツール呼び出しの規模まで実運用してきた。

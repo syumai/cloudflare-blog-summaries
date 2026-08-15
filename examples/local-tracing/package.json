@@ -1,0 +1,15 @@
+{
+  "name": "local-tracing-example",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run",
+    "migrate:local": "wrangler d1 migrations apply local-tracing-example-db --local"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260815.1",
+    "wrangler": "4.123.0"
+  }
+}

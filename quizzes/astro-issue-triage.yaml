@@ -1,0 +1,93 @@
+title: AstroのGitHub Issue数をゼロへ導くソフトウェアファクトリーを構築した方法
+slug: astro-issue-triage
+sourceUrl: https://blog.cloudflare.com/astro-issue-triage/
+wiki: ../docs/articles/2026-08-04-astro-issue-triage.md
+questions:
+  - q: Astroリポジトリのオープンissue数は、自動トリアージパイプラインの運用によりどう変化したか。
+    choices:
+      - 30件超から200件へ増加した
+      - 200件超から約30件まで減少した
+      - 変化はほとんどなかった
+      - 一時的に0件になったが再び増加した
+    answer: 1
+    explanation: 「TL;DR」「背景・課題」に記載の通り、オープンなIssue数は200件超から約30件まで減少し、数か月以内にゼロを達成する見込みだと説明されている。
+  - q: この自動トリアージの仕組みの中核エンジンが発展してできた、オープンなフレームワークの名称はどれか。
+    choices:
+      - Astro Bot
+      - Flue
+      - Triagent
+      - OpenTriage
+    answer: 1
+    explanation: 「TL;DR」「トリアージからフレームワークへ」に記載の通り、自動化の中核エンジンは「Flue」というプラットフォームに依存しないオープンなフレームワークへと発展した。
+  - q: Astroチームが成果を出すために「行わなかった」ことはどれか。
+    choices:
+      - issue bankruptcy（Issueの一括破棄）を宣言すること
+      - 隔離されたAIサブエージェントのチームを使うこと
+      - GitHub Actions上でパイプラインを動かすこと
+      - バグ報告をサンドボックスで再現すること
+    answer: 0
+    explanation: 「背景・課題」に記載の通り、この成果は「issue bankruptcy」の宣言や、反応の止まったチケットの自動クローズ、報告の無視によってではなく、隔離されたAIサブエージェントのチームによる自動化によって達成された。
+  - q: トリアージスキルの4フェーズの正しい順序はどれか。
+    choices:
+      - Diagnose → Reproduce → Fix → Verify
+      - Reproduce → Diagnose → Verify → Fix
+      - Verify → Fix → Reproduce → Diagnose
+      - Fix → Verify → Diagnose → Reproduce
+    answer: 1
+    explanation: 「エージェントスキルから始める」に記載の通り、トリアージスキルはReproduce（再現）→ Diagnose（診断）→ Verify（検証）→ Fix（修正）の順で手作業のIssue解決を模している。
+  - q: 各フェーズを隔離されたサブエージェントで実行する主な目的として正しいものはどれか。
+    choices:
+      - 処理速度を最大化するため
+      - バグが実際には存在しなくても解決策を無理やり作り出そうとするLLMのバイアスを防ぐため
+      - コストを削減するため
+      - GitHub APIのレート制限を回避するため
+    answer: 1
+    explanation: 「エージェントスキルから始める」に記載の通り、各フェーズを隔離されたサブエージェントに担当させることで、LLMにありがちな「バグが無くても解決策を無理やり作り出そうとするバイアス」を防いでいる。
+  - q: このトリアージパイプラインの本質的な仕組みとして記事が説明しているものはどれか。
+    choices:
+      - 常時稼働するステートフルなサーバープロセス
+      - Issueラベルの遷移によって駆動されるステートマシン
+      - 人間の承認を都度必要とする対話型システム
+      - リポジトリのコミット履歴のみを参照する仕組み
+    answer: 1
+    explanation: 「スキルを自動化へ発展させる」に記載の通り、パイプライン全体は実質的にIssueラベルによって駆動されるステートマシンであり、それ以外の状態は持たず、Issueの既存コメントを読み返して現在地を判断する。
+  - q: エージェントがIssueの解決に失敗した場合、記事が挙げる3つの原因カテゴリに含まれないものはどれか。
+    choices:
+      - 不透明な抽象化（Opaque Abstractions）
+      - ドキュメント不足（Missing Documentation）
+      - テスト不足（Insufficient Testing）
+      - モデルのパラメータ数不足（Insufficient Model Size）
+    answer: 3
+    explanation: 「エージェント自動化がもたらした効果」に記載の通り、失敗の原因として挙げられているのは不透明な抽象化・ドキュメント不足・テスト不足の3つであり、モデルサイズの不足は挙げられていない。
+  - q: HMR（Hot Module Replacement）バグの事例で、ボットが誤った修正を繰り返さなくなった直接のきっかけは何か。
+    choices:
+      - 該当箇所のコードを完全に書き換えたこと
+      - 該当する `if` 条件の正確なロジックを説明する記述的なコメントを追加したこと
+      - トリアージ機能自体を一時的に無効化したこと
+      - 該当ファイルへのアクセス権限を制限したこと
+    answer: 1
+    explanation: 「エージェント自動化がもたらした効果」に記載の通り、該当条件の正確なロジックを説明するコメントを追加したところ、ボットはそれに適応し誤った修正を試みなくなった。
+  - q: |
+      次のYAMLは `triagebot-action` をGitHub Actionsから呼び出すコード例の抜粋である。`triage-model` と `verification-model` に別々のモデルが指定されている理由として最も適切な説明はどれか。
+    code: |
+      - uses: withastro/triagebot-action@v1
+        with:
+          triage-model: cloudflare-workers-ai/@cf/moonshotai/kimi-k2.7-code
+          verification-model: cloudflare-workers-ai/@cf/moonshotai/kimi-k2.6
+          triage-skill: .agents/skills/triage
+    codeLang: yaml
+    choices:
+      - コストを完全にゼロにするため、同じモデルを名前だけ変えて指定している
+      - トリアージ（再現・診断・修正）フェーズと確認フェーズで、それぞれの用途に適したモデルを使い分けている
+      - 片方のモデルは廃止予定であり、互換性のためだけに残されている
+      - GitHubの仕様上、2つの異なるモデル名を指定しないとActionが起動しない
+    answer: 1
+    explanation: 「コード例」の解説にある通り、`triage-model` にはコード生成に強いモデル、`verification-model` には別のモデルを指定しており、フェーズごとに適したモデルを使い分けている。
+  - q: なぜこのトリアージの仕組みが「GitHubに固有ではない、単なるワークフローだ」と気づくに至ったのか。
+    choices:
+      - GitHub Actionsの利用料金が高すぎたため
+      - イベントへの反応・隔離サブエージェントの実行・推論とアクションの分離という構造が、Slackメッセージやcronジョブなど他の起点でも同様に成立するため
+      - GitHub自体がこの機能のサポートを終了したため
+      - Astroチームが別のIssue管理システムへ移行することを決定したため
+    answer: 1
+    explanation: 「トリアージからフレームワークへ」に記載の通り、イベントに反応し隔離されたサブエージェントを実行して推論とアクションを分離するという構造はGitHubに固有のものではなく、Slackメッセージ・cronジョブ・Webhookなど他の起点からでも同様に機能しうると気づいたことが、プラットフォームに依存しないFlueへの一般化につながった。

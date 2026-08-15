@@ -1,0 +1,120 @@
+title: "Kitesurfのご紹介 — Cloudflare Workers上で動く、エージェントファーストのブラウザ"
+slug: kitesurf
+sourceUrl: https://blog.cloudflare.com/kitesurf/
+wiki: ../docs/articles/2026-08-06-kitesurf.md
+questions:
+  - q: >-
+      Kitesurfについて、記事の説明として<strong>正しいもの</strong>はどれか。
+    choices:
+      - Chromiumを内部で軽量化して動かす新しいブラウザである
+      - Cloudflare Workers上で完全に動作する、AIエージェント専用に設計された新しいブラウザである
+      - 人間の利用者向けのタブ・拡張機能・同期機能を強化したブラウザである
+      - Cloudflare Containers上でのみ動作するブラウザである
+    answer: 1
+    explanation: >-
+      Wikiの「TL;DR」「発表内容 / アーキテクチャ」にある通り、KitesurfはChromiumなどの既存ブラウザエンジンを使わず、Cloudflare Workers上で完全に動作する、AIエージェント専用に設計されたブラウザである。
+
+  - q: >-
+      記事がKitesurf開発の出発点として挙げている、人間向けブラウザとAIエージェント向けブラウザの違いに関する説明として<strong>誤っているもの</strong>はどれか。
+    choices:
+      - AIエージェントはトークン数・コンテキストウィンドウ・スケーラビリティ・コストを重視する
+      - AIエージェントにとっては60fpsの滑らかなスクロールよりも構造化された機械可読なコンテンツの方が重要
+      - AIエージェント向けブラウザでは人間向けと同じ脅威モデルがそのまま当てはまる
+      - タブ・テーマ・拡張機能・デバイス間同期はAIエージェントには不要な機能である
+    answer: 2
+    explanation: >-
+      Wikiの「背景・課題」で述べられている通り、AIエージェントがブラウザを使う際の脅威モデルは人間の利用とは異なり、プロンプトインジェクションやツールの安全性が最優先の検討事項になるとされている。「同じ脅威モデルがそのまま当てはまる」という記述は誤り。
+
+  - q: >-
+      Kitesurfの開発初期のインスピレーション元として記事で言及されているプロジェクトはどれか。
+    choices:
+      - Chromium
+      - obscura（Rust製の"no Chrome, no Node.js, no dependencies"を掲げるヘッドレスエンジン）
+      - Puppeteer
+      - Blitz
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」＞「開発の経緯」にある通り、Kitesurfは"no Chrome, no Node.js, no dependencies"を掲げるRust製ヘッドレスエンジンobscuraからインスピレーションを得て開発が始まった。
+
+  - q: >-
+      Kitesurfの4つの主要コンポーネントのうち、<strong>外部に公開される唯一のコンポーネント</strong>で、CDP（Chrome DevTools Protocol）を処理しセッション状態を保持するのはどれか。
+    choices:
+      - SandboxOutbound
+      - PageScript
+      - Engine
+      - PageRenderer
+    answer: 2
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」＞「リクエストのライフサイクルと4つのコンポーネント」で説明されている通り、EngineがKitesurfで唯一外部に公開されるコンポーネントであり、CDPのWebSocket/HTTP REST APIを処理し、各セッションの状態を保持する（他のコンポーネントはすべてステートレス）。
+
+  - q: >-
+      PageScriptにおける<code>eval</code>への対応について、記事の説明として正しいものはどれか。
+    choices:
+      - Workersのネイティブeval機能をそのまま利用している
+      - Rust製のECMAScriptエンジンであるBoa JSをコンパイルしてWorkers上で動かし、その上でevalを実行している
+      - eval呼び出しはすべてエラーとして無視している
+      - 別のアイソレートを新規に起動してevalだけを実行している
+    answer: 1
+    explanation: >-
+      Wikiの「PageScript（DOMとJavaScriptの実行）」で述べられている通り、Workersはセキュリティ上の理由でネイティブevalをまだサポートしておらず、別アイソレートを起動してもglobalThisにアクセスできないため、Rust製ECMAScriptエンジンのBoa JSをコンパイルしてWorkers上で動かす「ランタイムの上でランタイムを動かす」方式で対応している。
+
+  - q: >-
+      EngineとPageRendererの連携について、記事の説明として正しいものはどれか。
+    choices:
+      - HTTPポーリングでフレームの完成を待ち合わせている
+      - Cloudflare Workersの組み込みRPC機構を使い、renderFrame()を1回のRPC呼び出しで叩いてPNGを受け取る
+      - 共有メモリ（SharedArrayBuffer）を使って直接ピクセルをやり取りしている
+      - PageRendererが独自にセッション状態を保持し、Engineの再起動を待つ必要がある
+    answer: 1
+    explanation: >-
+      Wikiの「Workers組み込みRPCによる連携」で説明されている通り、EngineとPageRendererはCloudflare Workersの組み込みRPC機構で通信し、Engineはrender Frame()を1回のRPC呼び出しで叩いてPNGを受け取る。PageRendererは状態を持たないため、Engineは失敗時にいつでも安全に再起動できる。
+
+  - q: >-
+      Chromiumとの性能比較ベンチマークについて、記事の内容として<strong>正しいもの</strong>はどれか。
+    choices:
+      - CPU・メモリ・壁時計時間のすべてでKitesurfがChromiumを上回っている
+      - 壁時計時間ではChromiumが優位だが、CPU・メモリではKitesurfがChromiumの3〜7倍効率的である
+      - CPU・メモリではChromiumが優位だが、壁時計時間ではKitesurfが優位である
+      - すべての指標でChromiumがKitesurfを上回っている
+    answer: 1
+    explanation: >-
+      Wikiの「WPTテストと性能ベンチマーク」の表にある通り、壁時計時間（スクリーンショット1.8倍・HTML抽出1.7倍）はChromiumの方が速いが、CPU（3.1〜3.8倍）・メモリ（4.7〜7.0倍）ではKitesurfの方が効率的であるとまとめられている。
+
+  - q: >-
+      記事でKitesurfが<strong>まだ対応していない</strong>とされている領域として<strong>誤っているもの</strong>はどれか。
+    choices:
+      - 動画再生
+      - WebGLレンダリング
+      - スクリーンショット・HTML抽出などの一発完結タスク
+      - 実TLSフィンガープリントを使ったボットチャレンジの突破
+    answer: 2
+    explanation: >-
+      Wikiの「ユースケース」＞「（現時点では非対応）動画再生・WebGL・ボット対策突破・長時間の認証セッション」で述べられている通り、Kitesurfが現時点で対応していない領域は動画再生・WebGLレンダリング・実TLSフィンガープリントによるボット対策突破・長時間の認証済みセッションである。スクリーンショット・HTML抽出などの一発完結タスクは、むしろKitesurfが得意とするユースケースとして挙げられている。
+
+  - q: >-
+      （コード読解）以下はKitesurfをBrowser Run経由でMCPクライアントから利用するための設定例の一部である。この設定について<strong>最も適切な説明</strong>はどれか。
+    code: |
+      {
+        "mcp": {
+          "kitesurf": {
+            "type": "local",
+            "command": [
+              "npx",
+              "-y",
+              "chrome-devtools-mcp@latest",
+              "--wsEndpoint=wss://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/browser-run/devtools/browser?browser=kitesurf",
+              "--wsHeaders={\"Authorization\":\"Bearer <API_TOKEN>\"}"
+            ],
+            "enabled": true
+          }
+        }
+      }
+    codeLang: json
+    choices:
+      - 新しいCDPクライアントを自作しないと、この設定だけではKitesurfに接続できない
+      - "wsEndpointのクエリパラメータ browser=kitesurf を指定するだけで、既存のCDP対応MCPクライアント（chrome-devtools-mcp）の接続先をKitesurfに切り替えている"
+      - この設定はPageRendererのRPC呼び出しを直接記述したものである
+      - wsHeadersに指定したBearerトークンは、SandboxOutboundのCORSポリシーを変更するためのものである
+    answer: 1
+    explanation: >-
+      Wikiの「コード例」＞「例1: MCPクライアントからKitesurfへ接続する（CDP）」で解説されている通り、この設定は既存の chrome-devtools-mcp をローカルコマンドとして登録し、--wsEndpoint のクエリパラメータに browser=kitesurf を付けるだけで、通常はChromiumに接続するCDPクライアントの接続先をKitesurfに切り替えるものである。認証は --wsHeaders の Authorization: Bearer <API_TOKEN> ヘッダーで行われ、CORSポリシーとは無関係。

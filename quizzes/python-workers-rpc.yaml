@@ -1,0 +1,107 @@
+title: Workers RPC が Python と JavaScript 間で利用可能に
+slug: python-workers-rpc
+sourceUrl: https://blog.cloudflare.com/python-workers-rpc/
+wiki: ../docs/articles/2026-08-03-python-workers-rpc.md
+questions:
+  - q: Python Workers が当初から動作している基盤技術は何か。
+    choices:
+      - V8 isolate 単体
+      - Pyodide（CPython を WebAssembly にコンパイルしたもの）
+      - Node.js ランタイム
+      - Deno ランタイム
+    answer: 1
+    explanation: 記事では、Python Workers は登場当初から Pyodide（CPython を WebAssembly にコンパイルしたもの）の上で動作しており、JavaScript とやり取りするための堅牢な Foreign Function Interface（FFI）を備えていたと説明されている（Wiki「背景・課題」参照）。
+
+  - q: 今回の発表で Workers RPC に新たに追加された機能は何か。
+    choices:
+      - HTTP/1.1 のみのサポート
+      - Python Workers と JavaScript Workers 間のクロス言語 RPC 呼び出し
+      - WebSocket 専用の通信機構
+      - protobuf による強制的なシリアライゼーション
+    answer: 1
+    explanation: 記事の主題は、Cap'n Proto RPC を基盤とする Workers RPC が、Python Workers と JavaScript Workers の間でのクロス言語呼び出しに対応したことである。
+
+  - q: クロス言語 RPC 呼び出しにおいて、JavaScript/TypeScript 側と Python 側それぞれが受け取る戻り値の型として正しい組み合わせはどれか。
+    choices:
+      - JavaScript は Callback、Python は Generator
+      - JavaScript は Promise、Python は Future
+      - JavaScript は Stream、Python は Coroutine
+      - JavaScript は Observable、Python は Iterator
+    answer: 1
+    explanation: 記事では、クロス言語 RPC 呼び出しは通常の関数呼び出しのように振る舞い、JavaScript/TypeScript では Promise、Python では Future を返し、例外は呼び出し元に伝播すると説明されている。
+
+  - q: Pyodide FFI による型変換の対応関係として、記事の記述と異なるものはどれか。
+    choices:
+      - Python の int / float は JavaScript の Number になる
+      - Python の bool は JavaScript の Boolean になる
+      - Python の dict は JavaScript の Object になる
+      - Python の list は JavaScript の Set になる
+    answer: 3
+    explanation: 記事に示された対応表では、Python の list は JavaScript の Array に対応する。Set への変換は記事に記載がなく誤り。
+
+  - q: Pyodide FFI が直接変換できない Python の独自クラスや関数を JavaScript 側に渡す場合、どのように扱われるか。
+    choices:
+      - エラーになり呼び出しが失敗する
+      - JSON文字列にシリアライズされる
+      - Proxy オブジェクトが生成され、属性アクセスやメソッド呼び出しが転送される
+      - 自動的に無視され undefined になる
+    answer: 2
+    explanation: 記事では、直接変換できない独自クラスや関数について、Pyodide が Proxy オブジェクトを生成し、属性アクセスやメソッド呼び出しを転送すると説明されている。
+
+  - q: Request・Response・Blob・File のような Web API オブジェクトを RPC でやり取りする際に生じる問題と、その解決のために導入されたものは何か。
+    choices:
+      - 問題はなく、特別な対応は不要
+      - Pyodide FFI がこれらを自動理解できず実装詳細が漏れるため、Python パッケージ workers-runtime-sdk が導入された
+      - protobuf スキーマを手動定義する必要がある
+      - JavaScript 側でこれらのオブジェクトの使用が禁止される
+    answer: 1
+    explanation: 記事では、Pyodide FFI は Request/Response/Blob/File などの Web API オブジェクトを自動理解できず、デフォルトでは単なる JavaScript の Proxy になって実装詳細が Python 側に漏れてしまうため、workers-runtime-sdk という Python パッケージを導入してRPCスタブをラップし、言語境界を越えるオブジェクトを適切な形に変換すると説明されている。
+
+  - q: |
+      次のコードは、JavaScript Worker から Python Worker のメソッドを呼び出す例である。この呼び出しに対応する Python 側の実装（highlight_code メソッド）の戻り値の型として、記事に基づき最も適切なものはどれか。
+    code: |
+      export default {
+          async fetch(request, env) {
+              const rpc = env.PYTHON_RPC;
+              const result = await rpc.highlight_code('print(42)', 'python');
+              return Response.json(result);
+          }
+      }
+    codeLang: js
+    choices:
+      - 文字列（HTML文字列のみ）
+      - "{'html': highlighted_html, 'css': css} という辞書（dict）"
+      - バイト列（bytes）
+      - Promise オブジェクトそのもの
+    answer: 1
+    explanation: |
+      記事のコード例では、Python 側の highlight_code メソッドは {"html": highlighted_html, "css": css} という dict を返している。この dict は自動的に JavaScript の Object に変換され、呼び出し元でそのまま Response.json(result) としてレスポンスに詰められる。
+
+  - q: |
+      サービスバインディングの設定で `"entrypoint": "RpcService"` のように呼び出し先のクラス名を明示しているのは、記事内のどの言語間の呼び出しの例か。
+    choices:
+      - JavaScript Worker が Python Worker の highlight_code を呼ぶ例
+      - Python Worker が TypeScript Worker の RpcService.add を呼ぶ例
+      - TypeScript Worker 同士の呼び出し例
+      - Python Worker 同士の呼び出し例
+    answer: 1
+    explanation: |
+      記事のコード例2では、TypeScript 側で WorkerEntrypoint を継承した RpcService クラスに add メソッドを定義し、Python 側からサービスバインディング設定で entrypoint: "RpcService" を指定して self.env.RPC 経由で呼び出している。
+
+  - q: 記事が Pygments の例（JavaScript から Python の highlight_code を呼ぶ）を通じて強調しているクロス言語 RPC の価値は何か。
+    choices:
+      - JavaScript の実行速度が Python より常に速いこと
+      - Python にしかない、あるいは Python の方が成熟しているライブラリを、JavaScript 側で書き直さずに利用できること
+      - Python コードを自動的に JavaScript に変換できること
+      - RPC 呼び出しがネットワーク越しに常に発生し、独立したスケーリングができること
+    answer: 1
+    explanation: 記事は、Pygments のような Python エコシステムのライブラリを JavaScript Worker から書き直しなしで呼び出せる点を、クロス言語 RPC の実践的な価値として提示している。
+
+  - q: 同一スレッド内で動作する Worker 同士の RPC 呼び出しについて、記事の説明として正しいものはどれか。
+    choices:
+      - 必ずネットワーク経由になり、数百ミリ秒のレイテンシが発生する
+      - ほぼゼロに近いオーバーヘッドで実行される
+      - JavaScriptからPythonへの呼び出しのみサポートされ、逆方向はサポートされない
+      - 呼び出しごとに新しいプロセスが起動される
+    answer: 1
+    explanation: 記事では、別の Worker への RPC は多くの場合同一スレッド内で実行されるため、パフォーマンスオーバーヘッドはほぼゼロに近いと説明されている。

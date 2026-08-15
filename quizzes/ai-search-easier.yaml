@@ -1,0 +1,134 @@
+title: "Cloudflare AI Search: エージェントにあなたのデータのための検索エンジンを"
+slug: ai-search-easier
+sourceUrl: https://blog.cloudflare.com/ai-search-easier/
+wiki: ../docs/articles/2026-08-06-ai-search-easier.md
+questions:
+  - q: >-
+      記事における今回のCloudflare AI Searchのアップデートが解決しようとしている課題として、<strong>最も適切なもの</strong>はどれか。
+    choices:
+      - Workers AIの推論速度が遅いこと
+      - Workers AI・AI Gateway・Vectorize・R2・Browser Renderingなどのプリミティブを個別に組み合わせて検索/RAGパイプラインを自作する手間
+      - Cloudflare Workersの無料枠が少ないこと
+      - R2のストレージ容量に上限があること
+    answer: 1
+    explanation: >-
+      Wikiの「背景・課題」に説明されている通り、これまではWorkers AI（埋め込み生成）・AI Gateway（モデル呼び出し管理）・Vectorize（ベクトル検索）・R2（データ保管）・Browser Rendering（クロール）を個別に組み合わせる必要があった。記事のリード文も「AI Search makes search easier than ever, with no Cloudflare primitives to stitch together.」とこの点を要約している。
+
+  - q: >-
+      サイトマップが存在しないサイトでもクロールしてページを自動発見できる、AI Searchの新機能の名称は何か。
+    choices:
+      - Hybrid Search
+      - Discover
+      - Reranking
+      - Access
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」の「新機能の全体像」で説明されている「サイトマップ不要の"Discover"パース」機能。コード例①でも <code>--parse-type discover</code> フラグとして登場する。
+
+  - q: >-
+      複数のAI Searchインスタンスを横断検索できる、記事で紹介されている単一のパブリックエンドポイントの組み合わせはどれか。
+    choices:
+      - <code>/index</code> と <code>/crawl</code>
+      - <code>/search</code> と <code>/mcp</code>
+      - <code>/embed</code> と <code>/rerank</code>
+      - <code>/access</code> と <code>/domain</code>
+    answer: 1
+    explanation: >-
+      Wikiの「新機能の全体像」に「複数インスタンスを横断する公開エンドポイント: <code>/search</code>と<code>/mcp</code>という単一のパブリックエンドポイントから、複数のAI Searchインスタンスをまとめて検索できる」と説明されている。
+
+  - q: >-
+      記事で紹介されている実例「Cloudflare Dev Stack MCP」の構築手順として<strong>正しい順番</strong>はどれか。
+    choices:
+      - ブランディングと保護 → 各サーフェスのインデックス化 → 複数インスタンスの統合検索
+      - 各サーフェスのインデックス化 → 複数インスタンスの統合検索 → ブランディングと保護
+      - 複数インスタンスの統合検索 → ブランディングと保護 → 各サーフェスのインデックス化
+      - 各サーフェスのインデックス化 → ブランディングと保護 → 複数インスタンスの統合検索
+    answer: 1
+    explanation: >-
+      Wikiの「実例: Cloudflare Dev Stack MCP」に3ステップとして「1. 各サーフェスのインデックス化」「2. 複数インスタンスの統合検索」「3. ブランディングと保護」の順で説明されている。
+
+  - q: >-
+      ステップ2「複数インスタンスの統合検索」で紹介されている2つの方法のうち、<strong>コードを書かずに実現できる方法</strong>はどれか。
+    choices:
+      - Worker上でリモートMCPサーバーを自前で実装する方法
+      - パブリックURL（<code>/search</code>・<code>/mcp</code>）を有効化する方法
+      - Cloudflare Accessでポリシーを設定する方法
+      - カスタムドメインを設定する方法
+    answer: 1
+    explanation: >-
+      Wikiの「実例: Cloudflare Dev Stack MCP」ステップ2に「1つはWorker上でリモートMCPサーバーを自前で実装する方法、もう1つはコードを書かずにパブリックURL（<code>/search</code>・<code>/mcp</code>）を有効化するだけで済ませる方法」とあり、記事内では "Option B: flip on public endpoints (no code)" と呼ばれている。
+
+  - q: >-
+      （コード読解）以下は記事に掲載されているMCPツールの実装例である。<code>ai_search_options.instance_ids</code>に複数のIDを配列で渡すことで実現されている挙動として<strong>最も適切なもの</strong>はどれか。
+    code: |
+      context.registerTool(
+        'search_dev_stack',
+        {
+          description: 'Search current docs across the Cloudflare stack.',
+          inputSchema: z.object({ query: z.string() }),
+        },
+        async ({ query }) => {
+          const res = await context.env.AI_SEARCH.search({
+            query,
+            ai_search_options: {
+              instance_ids: ['developers-cloudflare-com', 'astro', /* ...every surface */],
+              retrieval: { max_num_results: 10 },
+              reranking: { enabled: true },
+            },
+          })
+          return { content: [{ type: 'text', text: format(res.chunks) }] }
+        }
+      )
+    codeLang: ts
+    choices:
+      - 指定した1つのインスタンスだけを対象に検索する
+      - 複数のAI Searchインスタンスを1回のクエリでまとめて横断検索する
+      - インスタンスを新規作成する
+      - インスタンスを削除する
+    answer: 1
+    explanation: >-
+      Wikiの「コード例」③「複数インスタンスを横断検索するツールの実装」で解説されている通り、<code>instance_ids</code>に複数のインスタンスID（DocsやAstroなど、各サーフェス）を配列で渡すことで、1回のクエリで複数のAI Searchインスタンスを横断検索できる。<code>retrieval.max_num_results</code>や<code>reranking.enabled</code>は取得件数・再ランキングの制御用パラメータ。
+
+  - q: >-
+      Cloudflareブログ自身の検索が採用している検索方式として、記事で説明されているものはどれか。
+    choices:
+      - キーワード検索のみ
+      - セマンティック検索のみ
+      - セマンティック検索とキーワード検索を1クエリで同時に実行するハイブリッド検索
+      - 全文検索を無効化し、AIによる要約のみを提供する方式
+    answer: 2
+    explanation: >-
+      Wikiの「ブログ・Developer Docs・Cloudflare.comでの実運用」に「検索方式にはハイブリッド検索（セマンティック検索とキーワード検索を1回のクエリで同時に実行する方式）が採用されており、"uses hybrid search, semantic and keyword together in one query"」と説明されている。
+
+  - q: >-
+      AI Searchによるクロールのボットポリシーに関する記事の説明として<strong>正しいもの</strong>はどれか。
+    choices:
+      - どのbotとしてアクセスしているか公開せず、ランダムなUser-Agentを使う
+      - robots.txtを無視して全ページをクロールする
+      - <code>Cloudflare-AI-Search</code>という固有のbot識別子を名乗り、robots.txtに従い、変更されない公開のUser-Agentで自己を識別する
+      - クロール機能はBrowser Renderingを一切使わず独自実装されている
+    answer: 2
+    explanation: >-
+      Wikiの「ボットポリシーの遵守」に「<code>Cloudflare-AI-Search</code>という固有のbot識別子を名乗り、"follows robots.txt, identifies itself with an immutable, public user agent"」とあり、裏側ではBrowser Renderingの<code>/crawl</code>機能を利用していると説明されている。
+
+  - q: >-
+      新しい価格プレビューにおいて、デフォルトのWorkers AIモデルを使う場合に<strong>無料</strong>となる項目はどれか。
+    choices:
+      - データ取り込み（Ingestion）
+      - ストレージ（Stored data）
+      - 埋め込みと再ランキング（Embedding and reranking）
+      - フルテキスト検索（Full-text search）
+    answer: 2
+    explanation: >-
+      Wikiの「価格プレビュー: 予測しやすい料金体系」の表に「埋め込み・再ランキング: デフォルトのWorkers AIモデルを使う場合は無料」とある。データ取り込み・ストレージ・フルテキスト検索はいずれも従量課金の対象。
+
+  - q: >-
+      記事内の価格試算例（20,000ドキュメント・月30,000セマンティッククエリ）について、初月と翌月以降の費用感の違いに関する説明として<strong>最も適切なもの</strong>はどれか。
+    choices:
+      - 初月・翌月ともに費用は変わらず常に約$35である
+      - 初月は約$35だが、インデックス作成がほぼ一度きりのコストのため翌月以降はクエリ課金が中心となり約$21に近づく
+      - 初月は無料で、翌月から約$35が発生する
+      - インデックス作成は毎月発生する継続コストであり、翌月以降も費用は増加し続ける
+    answer: 1
+    explanation: >-
+      Wikiの「価格試算例」に「初月: 概算で約$35」「翌月以降: インデックス作成はほぼ一度きりのコストのため、クエリ課金が中心となり約$21に近づく」とあり、記事本文でも "Indexing is largely a one-time cost, so later months are mostly queries, closer to $21." と述べられている。

@@ -1,0 +1,95 @@
+title: Cloudflare Agentsの紹介
+slug: agents-on-cloudflare
+sourceUrl: https://blog.cloudflare.com/agents-on-cloudflare/
+wiki: ../docs/articles/2026-08-04-agents-on-cloudflare.md
+questions:
+  - q: 記事が指摘する「エージェント特有の失敗モード」を端的に表す表現はどれか。
+    choices:
+      - 常にHTTP 500エラーを返す
+      - HTTP 200を返しながら実際には失敗していることがある
+      - デプロイに失敗して起動しない
+      - モデルのAPIキーが無効になる
+    answer: 1
+    explanation: 「背景・課題」に記載の通り、エージェントは「HTTP 200を返しながら実際には失敗している」ことがあり、誤ったツール選択やリトライループでのトークン浪費などが例として挙げられている。
+  - q: Cloudflare Agentsが基盤として活用している既存インフラの組み合わせとして正しいものはどれか。
+    choices:
+      - AI Gateway・Durable Objects・Workflows・R2
+      - MySQL・Redis・Nginx・Docker
+      - GitHub Actions・Terraform・Kubernetes
+      - Google Cloud Functions・BigQuery・Pub/Sub
+    answer: 0
+    explanation: 「発表内容 / アーキテクチャ」に記載の通り、モデルアクセスはAI Gateway、永続的なランタイムはDurable Objects、オーケストレーションはWorkflows、永続ストレージはR2という既存インフラの上にCloudflare Agentsは成り立っている。
+  - q: Cloudflare Agentsの第一弾機能として発表されたものは何か。
+    choices:
+      - エージェント間の決済機能
+      - エージェントトレーシング
+      - エージェント向けブラウザ
+      - コード生成モデルの提供
+    answer: 1
+    explanation: TL;DRおよび「発表内容 / アーキテクチャ」に記載の通り、第一弾機能はエージェントの挙動を可視化するエージェントトレーシングである。
+  - q: エージェントトレーシングが現時点で対応しているOpenTelemetry互換ハーネス（フレームワーク）はどれか。
+    choices:
+      - Django / Flask / FastAPI
+      - Think / Flue / AI SDK
+      - LangChain / LlamaIndex / AutoGPT
+      - React / Vue / Svelte
+    answer: 1
+    explanation: 記事に記載の通り、Think・Flue・AI SDKに対応しており、今後さらに多くのフレームワークへの対応が予定されている。
+  - q: Messagesタブでの「セッションの再生（リプレイ）」について正しい説明はどれか。
+    choices:
+      - エージェントを実際にもう一度実行し直す機能である
+      - 記録済みデータを表示するものであり、エージェントの再実行ではない
+      - リプレイ機能では料金が発生しない代わりにトークン数は表示されない
+      - リプレイはTracesタブでのみ利用できる
+    answer: 1
+    explanation: Wikiに明記されている通り、「これは記録済みデータの再生であり、エージェントの再実行ではない」と説明されている。
+  - q: Tracesタブに表示されるウォーターフォールの例（TravelPlanner → itinerary_builder）で、`execute_tool record_itinerary_builder_execution` の下にネストされて表示されるインフラ操作はどれか。
+    choices:
+      - cloudflare-r2 put
+      - cloudflare-d1 run d1_run
+      - cloudflare-queue send
+      - cloudflare-workers-ai run
+    answer: 1
+    explanation: 記事のトレース例では、`execute_tool record_itinerary_builder_execution`（104ミリ秒）の下に、同じく104ミリ秒の `cloudflare-d1 run d1_run` がそのツールから発生したD1クエリとしてネストされている。
+  - q: |
+      次の設定を `wrangler.jsonc` に追加した場合の効果として正しいものはどれか。
+    code: |
+      {
+        "observability": {
+          "traces": {
+            "enabled": true
+          }
+        }
+      }
+    codeLang: json
+    choices:
+      - Workerのトレース計測（OpenTelemetry互換）が有効になる
+      - Workerのデプロイが自動的にロールバックされるようになる
+      - エージェントのモデルがGPUで実行されるようになる
+      - Workerのソースコードが自動的に難読化される
+    answer: 0
+    explanation: Wiki「コード例」に記載の通り、`observability.traces.enabled` を `true` にすることでWorkerの実行に対してOpenTelemetry互換のトレース計測が有効になる。その上にThink/Flue/AI SDKなどの統合を追加することでエージェント固有のスパンが加わる。
+  - q: 個人情報やシークレットなど機微なデータがエージェントのやり取りに含まれる場合、記録を無効化するために使う設定はどれか。
+    choices:
+      - "`disableTracing`"
+      - "`storeMessages` / `storeTools`"
+      - "`secureMode`"
+      - "`redactPII`"
+    answer: 1
+    explanation: 記事に記載の通り、Think・Flue・AI SDKでは `storeMessages` と `storeTools` によってメッセージやツールのペイロード記録を制御でき、機微なデータが含まれる場合はこれを無効化できる。
+  - q: 2026年10月1日以降のエージェントトレーシングの料金体系について正しい説明はどれか。
+    choices:
+      - 永久に無料のまま提供される
+      - 既存のWorkers Observability料金体系に統合される
+      - トレーシング専用の新しい有料プランが別途新設される
+      - 従量課金は廃止され定額制のみになる
+    answer: 1
+    explanation: 記事の「料金」セクションに記載の通り、ベータ期間中は無料だが、2026年10月1日から既存のWorkers Observability料金体系（Free/Paidプランのイベント数・保持期間）に統合される。
+  - q: Workersトレーシングとエージェントトレーシングの関係について、記事の説明として最も適切なものはどれか。
+    choices:
+      - 両者は完全に別々のダッシュボードで管理され、統合されていない
+      - エージェントトレーシングはWorkersトレーシングを置き換える新機能であり、旧機能は廃止される
+      - Workersトレーシング（fetch・KV・D1など）とエージェントトレーシング（モデル呼び出し・ツール実行など）が同じウォーターフォール上に統合表示される
+      - エージェントトレーシングはWorkersトレーシングとは異なるアカウントが必要
+    answer: 2
+    explanation: 「既存のWorkersトレーシングとの統合」に記載の通り、ツールが利用したCloudflareインフラ（KV・D1など）は、それを呼び出したエージェントの操作の下に自動的にネストされ、1つのウォーターフォールとして表示される。

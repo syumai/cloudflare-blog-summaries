@@ -4,3 +4,5 @@ slides/node_modules/
 slides/dist/
 node_modules/
 site/
+examples/**/node_modules/
+examples/**/.wrangler/

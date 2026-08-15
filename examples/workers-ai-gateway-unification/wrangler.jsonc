@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "example-workers-ai-gateway-unification",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-16",
+  "ai": {
+    "binding": "AI"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

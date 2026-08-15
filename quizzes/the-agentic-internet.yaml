@@ -1,0 +1,102 @@
+title: 読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築
+slug: the-agentic-internet
+sourceUrl: https://blog.cloudflare.com/ja-jp/the-agentic-internet/
+wiki: ../docs/articles/2026-08-06-the-agentic-internet.md
+questions:
+  - q: 記事の冒頭でCloudflareのデータから指摘されている問題は何か。
+    choices:
+      - 悪意あるボットによるDDoS攻撃が急増している
+      - 良性ボットの大量トラフィックの多くが、変更されていないページを再取得しており、成果を生んでいない
+      - 人間のユーザーがWebサイトへのアクセスを減らしている
+      - すべてのボットトラフィックが違法である
+    answer: 1
+    explanation: Wikiの「背景・課題」に記載の通り、Cloudflareの観測データでは良性ボットの大量リクエストの多くが前回のクロール以降変わっていないページの再取得に費やされており、配信側・取得側双方の計算資源が成果を生まないまま無駄になっている。
+  - q: 記事における「エージェント」の位置づけとして正しいものはどれか。
+    choices:
+      - 新種のソフトウェアである
+      - 新種のWebサイト訪問者である
+      - 従来の人間ユーザーと区別する必要のない存在である
+      - Web上には存在しない仮想的な概念である
+    answer: 1
+    explanation: Wikiの「発表内容 / アーキテクチャ」の「エージェントという新しい訪問者」で述べている通り、記事はエージェントを新種のソフトウェアではなく新種のサイト訪問者として位置づけている。
+  - q: 記事が提案する、Webサイトが備えるべき4つの性質（プリミティブ）の組み合わせとして正しいものはどれか。
+    choices:
+      - Readable / Discoverable / Callable / Payable
+      - Fast / Secure / Scalable / Reliable
+      - Public / Private / Encrypted / Open
+      - Indexed / Cached / Compressed / Streamed
+    answer: 0
+    explanation: Wikiの「発表内容 / アーキテクチャ」にまとめた通り、記事の中核は「読み取り可能（Readable）」「発見可能（Discoverable）」「呼び出し可能（Callable）」「決済可能（Payable）」という4つのプリミティブの整理である。
+  - q: 「読み取り可能（Readable）」を実現する技術として記事で紹介されている、Workers上で動作する軽量ブラウザの名称は何か。
+    choices:
+      - Kitesurf
+      - AI Search
+      - Wallets
+      - WebMCP
+    answer: 0
+    explanation: Wikiの「1. 読み取り可能（Readable）」節に記載の通り、Kitesurfはリクエストごとに起動・破棄できる軽量ブラウザで、人間向け表示機能を持たずエージェントに必要な機能のみを提供する。
+  - q: 「発見可能（Discoverable）」に関連して、コンテンツやAPIがエージェントからどの程度「見えている」かを測定する考え方として記事で紹介されている用語はどれか。
+    choices:
+      - SEO（Search Engine Optimization）
+      - AEO（Agent Engine Optimization）
+      - CDN（Content Delivery Network）
+      - CDN Optimization
+    answer: 1
+    explanation: Wikiの「2. 発見可能（Discoverable）」節にある通り、AEO（Agent Engine Optimization）はコンテンツクリエイターやAPI所有者が自分たちのコンテンツのエージェントからの可視性を測定する考え方として紹介されている。
+  - q: 以下は、Wikiの「コード例」で引用されているWebMCPによるツール登録のJavaScriptコードである。このコードが行っていることとして最も適切な説明はどれか。
+    code: |
+      document.modelContext.registerTool({
+        name: "add-todo",
+        description: "Add a new item to the user's active todo list",
+        inputSchema: {
+          type: "object",
+          properties: {
+            text: { type: "string", description: "The todo item text" }
+          },
+          required: ["text"]
+        },
+        async execute({ text }) {
+          await addTodoItemToCollection(text);
+          return { content: [{ type: "text", text: `Added: "${text}"` }] };
+        }
+      });
+    codeLang: js
+    choices:
+      - HTMLをスクレイピングしてTodoリストのボタン位置を推測している
+      - ページ自身が「Todoを追加する」という操作を、明示的なツールとしてエージェントに公開している
+      - ユーザーのブラウザ履歴を外部サーバーに送信している
+      - サーバーサイドでMarkdownへの変換処理を行っている
+    answer: 1
+    explanation: Wikiの「コード例」で解説している通り、document.modelContext.registerTool()はページ側が自らの操作をエージェント向けの明示的なツール契約として宣言するAPIであり、HTML解析やクリック操作の推測を必要としない。
+  - q: 「決済可能（Payable）」の文脈で、従来の広告モデルがエージェントに対して機能しにくい理由として記事が挙げているものはどれか。
+    choices:
+      - エージェントは広告を見たりクリックしたりしないため
+      - 広告配信の技術的コストが高すぎるため
+      - エージェントは決済手段を一切持てないため
+      - 広告主がエージェント向け広告を禁止しているため
+    answer: 0
+    explanation: Wikiの「4. 決済可能（Payable）」節に記載の通り、エージェントは広告を見ない・クリックしないため、広告ベースの収益モデルは機能しないと記事は指摘している。
+  - q: WebMCPが従来のDOM操作ベースの自動化と比べて優れている点として、Wikiの「発表内容 / アーキテクチャ」（呼び出し可能）で挙げられていないものはどれか。
+    choices:
+      - HTML解析が不要になる
+      - フォームフィールドの推測が不要になる
+      - ユーザーの既存セッションや状態を再利用できる
+      - サーバー側の計算資源を完全にゼロにできる
+    answer: 3
+    explanation: Wikiの「3. 呼び出し可能（Callable）」節では、WebMCPの利点として明示的なツール契約・HTML解析不要・フォームフィールド推測不要・既存セッション再利用が挙げられているが、「サーバー側の計算資源を完全にゼロにする」とは述べられていない。
+  - q: 記事が「決済可能」な未来像の具体例として挙げている、地方紙に関する記述として正しいものはどれか。
+    choices:
+      - 長期のライセンス契約やログインなしで、記事閲覧のたびに一時ライセンスを許諾できる可能性
+      - すべての記事を完全無料で公開する方針に転換する
+      - 広告収益のみに依存する体制を強化する
+      - エージェントからのアクセスをすべて禁止する
+    answer: 0
+    explanation: Wikiの「4. 決済可能（Payable）」節に記載の通り、地方紙の例として、長期契約やログインを求めずに記事閲覧の都度その場で一時的なライセンスを許諾できる可能性が挙げられている。
+  - q: 記事の結論部分で述べられている、オープンなエージェンティックインターネットを維持するために不可欠な条件は何か。
+    choices:
+      - 単一の巨大プラットフォームがすべての標準を策定すること
+      - 供給側（パブリッシャー）と需要側（エージェント）双方の多様性が保たれること
+      - すべてのWebサイトが同一のCMSを採用すること
+      - エージェントからのアクセスを完全に禁止すること
+    answer: 1
+    explanation: Wikiの「所感・ポイント」および原文の結論部分で述べられている通り、需要側（エージェント）が少数に収束すれば供給側がオープンであっても意味を失うため、供給・需要双方の多様性が維持されることがオープン性の条件とされている。

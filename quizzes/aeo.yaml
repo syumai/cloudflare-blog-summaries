@@ -1,0 +1,114 @@
+title: "ランク付けから推奨へ：AIエージェント時代でサイトを成功に導く準備を整える"
+slug: aeo
+sourceUrl: https://blog.cloudflare.com/ja-jp/aeo/
+wiki: ../docs/articles/2026-08-06-aeo.md
+questions:
+  - q: >-
+      Cloudflareの集計によると、HTMLページへの<strong>人間による</strong>リクエストの割合について、記事の記述として正しいものはどれか。
+    choices:
+      - すでに9割以上を占めている
+      - すでに半数未満になっている
+      - ちょうど半々で推移している
+      - 統計が取られておらず不明である
+    answer: 1
+    explanation: >-
+      Wikiの「背景・課題」で述べたとおり、記事では「HTMLページへの人間によるリクエストはすでに半数未満となっています」と明記されている。クエストの半分以上が人ではなく機械から送られている、という現状認識が記事全体の出発点になっている。
+
+  - q: >-
+      記事における<strong>Answer Engine Optimization（AEO）</strong>の位置づけとして、最も正しい説明はどれか。
+    choices:
+      - AIエージェントがサイトを読み取れるかどうかの技術的な可読性を診断する機能
+      - AIアシスタントが誰かの質問への回答として、あなたのサイトをどの程度おすすめしているかを測定する機能
+      - サイトの検索エンジン順位（SEOスコア）を算出する機能
+      - サイトの表示速度やCore Web Vitalsを計測する機能
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」のAEOセクションで解説したとおり、AEOはDiagnostics（読み取りやすさの診断）の次の段階として、「AIアシスタントが誰かの質問への回答としてあなたのサイトをどの程度おすすめしているか」を測定するものである。Aの読み取り可能性の診断はDiagnosticsの役割。
+
+  - q: >-
+      Diagnosticsの総合評価はどのようなスケールで表示されるか。
+    choices:
+      - 「Not Ready（未対応）」から「fully agent-native（エージェントに完全対応）」までの単一評価
+      - A〜Fのアルファベット評価
+      - 0〜100点のスコア
+      - 星1〜5つの評価
+    answer: 0
+    explanation: >-
+      Wikiの「Diagnostics: 自分のサイトのエージェント対応状況を診断する」で述べたとおり、記事では「『Not Ready（未対応）』から『fully agent-native（エージェントに完全対応）』までの単一のAgent Readiness評価として表示されます」と説明されている。
+
+  - q: >-
+      Diagnosticsにおいて、個々のチェック項目の判定に使われる3つの区分はどれか。
+    choices:
+      - Good / Bad / Unknown
+      - High / Medium / Low
+      - Pass / Fail / Neutral
+      - Ready / Partial / Blocked
+    answer: 2
+    explanation: >-
+      Wikiに記載のとおり、「各チェックはPass（合格）、Fail（不合格）、Neutral（及第点）で判定され、それぞれについて重要な理由の説明と、実際に確認したリクエストおよびレスポンスの内容を示すエビデンスが表示されます」と記事に明記されている。
+
+  - q: >-
+      Diagnosticsのチェック項目のうち、<strong>Quick wins</strong>に分類される項目はどれか。
+    choices:
+      - クローラーが読み取れるrobots.txt、XMLサイトマップ、AIクローラー向けルール
+      - OAuth Discovery、MCP／A2Aのエージェントカード、Skills Index
+      - x402、ACP、UCP、AP2などの決済標準
+      - Content Signals、APIカタログ、Linkヘッダー
+    answer: 0
+    explanation: >-
+      Wikiの「Diagnostics」セクションの4段階分類で解説したとおり、Quick winsは「多くのサイトで不足している一方で、対策すれば効果の大きい基本項目」として、robots.txt、XMLサイトマップ、AIクローラー向けルール、クリーンなMarkdown配信設定が挙げられている。BはAdvanced integration、CはCommerce、DはTechnical groundworkに分類される項目。
+
+  - q: >-
+      AEOの4指標のうち、「情報源として引用されたかどうかは問わず、AIアシスタントが回答の中で自社のブランド名に言及した割合」を示す指標はどれか。
+    choices:
+      - Citation Rate
+      - Prominence
+      - Mention Rate
+      - Share of Voice
+    answer: 2
+    explanation: >-
+      Wikiの「AEOの4つの指標」で解説したとおり、Mention Rate（言及率）は「AIアシスタントが回答の中であなたのブランド名に言及した割合」であり、「cloudflare.comが情報源として引用されているかどうかは問いません」と説明されている。Citation Rateは情報源として引用された割合であり、この2つは似て非なる指標である点がポイント。
+
+  - q: >-
+      記事の説明によれば、<strong>Mention Rateが Citation Rateを大幅に上回っている</strong>場合、どのような状態を意味するか。
+    choices:
+      - AIには全く認知されておらず、改善の余地がない
+      - AIには認知されているものの、情報源としてはまだ十分に引用されていない
+      - すでに競合を圧倒しており、これ以上の改善は不要
+      - 計測エラーが発生しており、再スキャンが必要
+    answer: 1
+    explanation: >-
+      Wikiに記載のとおり、記事では「ブランド名への言及が引用数より大幅に多い場合は、AIには認知されているものの、情報源としてはまだ十分に引用されていないことを意味します。これは、改善すべきポイントを明確に示す指標です」と説明されている。Citation RateとMention Rateを併せて見ることの意義がここにある。
+
+  - q: >-
+      AEOがカテゴリ単位でベンチマークを<strong>事前に一度だけ計算し、全アカウントで共有</strong>する仕組みについて、記事で述べられている利点として<strong>正しくないもの</strong>はどれか。
+    choices:
+      - 保存済みスナップショットから即座に結果を表示でき、遅延がない
+      - カテゴリ単位で問い合わせをまとめることで計算コストを削減できる
+      - 共通ベンチマークデータからIndustry Fitスコアを算出できる
+      - 各サイト専用のプロンプトをリアルタイムで無制限に生成できる
+    answer: 3
+    explanation: >-
+      Wikiの「ベンチマーク」に関する記述のとおり、事前計算の利点は「遅延がない」「計算コストを削減」「Industry Fitスコアを算出できる」の3つである。むしろベンチマークは「サイト所有者がスキャンを実行するたびにAIモデルへ問い合わせるのではなく」事前計算する仕組みであり、Dのような「リアルタイムでの無制限生成」は記事の趣旨と逆であり誤り。
+
+  - q: >-
+      AEOの評価プロセスにおいて、記事の説明として正しいものはどれか。
+    choices:
+      - すべての評価をモデル自身に自己採点させている
+      - 人間に近い判断が必要な部分はCloudflareのWorkers AIが自社インフラ上で処理し、厳密なテキスト解析も組み合わせている
+      - 評価はすべて人手によるレビューのみで行われている
+      - Cloudflare AI Gatewayが評価そのものを行い、Workers AIは使われていない
+    answer: 1
+    explanation: >-
+      Wikiに記載のとおり、記事では「人間に近い判断が必要な部分は、CloudflareのWorkers AIが自社インフラ上で処理し、各回答を読み取って引用や言及のされ方を評価します。また、モデル自身に自分の回答を採点させるのではなく、厳密なテキスト解析も組み合わせています」と説明されている。Cloudflare AI Gatewayは複数モデルへの問い合わせを抽象化する役割であり、評価そのものはWorkers AIとテキスト解析が担う、という役割分担がポイント。
+
+  - q: >-
+      AI Operator Activityにおいて、記事が特に注意すべきと指摘しているのはどのような事業者か。
+    choices:
+      - サイトを一切クロールしていない事業者
+      - 数千ページをクロールしているにもかかわらず、訪問者をまったく送り返していない事業者
+      - 404エラーのみを発生させる事業者
+      - OAuth Discoveryに対応していない事業者
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」のAI Operator Activityに関する記述のとおり、記事では「特に注目すべきなのは、数千ページをクロールしているにもかかわらず、訪問者をまったく送り返していないAI事業者です。これは、あなたのコンテンツを利用している一方で、顧客をサイトへ還元していないことを意味します」と述べられている。

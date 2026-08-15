@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "example-kitesurf",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-16",
+  "observability": {
+    "enabled": true
+  }
+  // CF_ACCOUNT_ID / CF_API_TOKEN は secret として別途設定する（README参照）。
+  // 例: npx wrangler secret put CF_API_TOKEN
+}

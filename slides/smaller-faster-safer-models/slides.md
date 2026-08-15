@@ -1,0 +1,280 @@
+---
+theme: default
+themeConfig:
+  primary: '#f6821f'
+title: より小さく、より速く、より安全に：Kimi と GLM を大規模に実行
+info: |
+  Cloudflare Blog記事「より小さく、より速く、より安全に：Kimi と GLM を大規模に実行」の解説スライド。
+  原文: https://blog.cloudflare.com/smaller-faster-safer-models/
+class: text-center
+highlighter: shiki
+drawings:
+  persist: false
+transition: slide-left
+mdc: true
+---
+
+# より小さく、より速く、より安全に
+
+Kimi と GLM を大規模に実行
+
+<div class="pt-4 text-sm opacity-70">
+原文: https://blog.cloudflare.com/smaller-faster-safer-models/<br>
+公開日: 2026-08-03
+</div>
+
+---
+
+# アジェンダ
+
+<v-clicks>
+
+- 背景: 大規模・長コンテキスト・MoEモデルのメモリ課題
+- 3つの最適化手法
+- ① KVキャッシュの量子化
+- ② モデル重みの圧縮
+- ③ 共有KVキャッシュの整合性保護
+- まとめ・今後の展開
+
+</v-clicks>
+
+---
+
+# 背景: Kimi と GLM が抱えるメモリ課題
+
+<v-clicks>
+
+- Workers AI は、データセンターに分散配置された GPU 上でオープンウェイトモデルの推論を提供
+- 対象: Moonshot の **Kimi K シリーズ**、Z.ai の **GLM**
+- 共通の特徴: **大規模・長コンテキスト・Mixture-of-Experts（MoE）**
+- 長コンテキスト → KVキャッシュが肥大化 / MoE → 重み全体をGPUメモリに保持が必要
+
+</v-clicks>
+
+<v-click>
+
+多数の顧客・多様なワークロードを単一GPUフリートで捌く以上、
+**同時実行数がコストと応答性に直結**する
+
+</v-click>
+
+---
+
+# 3つの最適化手法
+
+<v-clicks>
+
+1. **KVキャッシュの量子化**（BF16 → FP8）
+2. **モデル重みの圧縮**（FP8 → INT4）
+3. **共有KVキャッシュの整合性保護**
+
+</v-clicks>
+
+<v-click>
+
+すべての実験は オープンソース推論フレームワーク **SGLang** 上で実施
+
+</v-click>
+
+---
+class: text-center
+---
+
+# ① KVキャッシュの量子化
+
+---
+
+# KVキャッシュとは
+
+<v-clicks>
+
+- テキスト生成時、モデルは処理済みトークンの Attention 情報を **KVキャッシュ**として保持
+- 会話が長くなってもコンテキスト全体を再計算せずに済む
+- デフォルトは16bit精度（**BF16**）→ メモリを大きく占有
+- **FP8（e4m3, 8bit）**に切り替えるとキャッシュサイズを**半減**できる
+
+</v-clicks>
+
+---
+
+# 効果: コンテキスト長とスループット
+
+<v-clicks>
+
+- Kimi K2.6: 対応コンテキスト長が **約68.6万 → 137万トークン**に倍増
+- FP8変換自体のトークンあたり計算オーバーヘッドはわずか
+- 真のメリットは**同時実行数のキャパシティ**
+
+</v-clicks>
+
+<div class="pt-4">
+
+| 精度 | 同時実行数1 | 上限 | ピーク性能 |
+|---|---|---|---|
+| BF16 | 137 tok/s | 32でメモリ上限 | — |
+| FP8 | — | 64まで動作 | 2,192 tok/s（+約41%、コスト約-30%） |
+
+</div>
+
+---
+
+# Prefill / Decode 分離での使い分け
+
+<v-clicks>
+
+- **Prefill**（プロンプト全体を処理）: 計算律速 → **BF16** を維持
+- **Decode**（トークンを1つずつ生成）: メモリ律速 → **FP8** を活用
+- 複数ベンチマークで両フォーマット間の精度差は無視できるレベル
+
+</v-clicks>
+
+---
+class: text-center
+---
+
+# ② モデル重みの圧縮
+
+---
+
+# GLM 5.2: FP8 → INT4
+
+<v-clicks>
+
+- 重み圧縮: FP8（8bit浮動小数点） → **INT4**（4bit整数）
+- チェックポイントサイズ: 705GB → **421GB**（**40%削減**）
+- GPUあたりメモリ消費（8-way テンソル並列）: 約88GB → 約52GB
+- 同じハードウェアで約**118万トークン**分のKVキャッシュを格納可能に
+
+</v-clicks>
+
+---
+
+# Decode / Prefill での挙動の違い
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### Decode（生成）
+- GPUメモリから重みをストリーミング
+- データ量削減が直接性能向上に
+- 同時実行数1で **+55%**
+- 高同時実行数でも **+21%〜+27%**
+
+</div>
+
+<div>
+
+### Prefill（処理）
+- INT4の重みは計算前に**展開**が必要
+- むしろ**遅くなる**
+- INT4: 約8,660 tok/s
+- FP8: 約10,160 tok/s
+
+</div>
+
+</div>
+
+<v-click>
+
+ここでも disaggregated 設計: **Decode に INT4、Prefill に FP8**
+
+</v-click>
+
+---
+
+# 精度への影響
+
+<v-click>
+
+> テストされたすべてのデータセットで、INT4の精度は
+> FP8モデルと比べて **0.8ポイント以内**に収まる
+
+</v-click>
+
+---
+class: text-center
+---
+
+# ③ 共有KVキャッシュの整合性保護
+
+---
+
+# 新たなリスク: 共有ページの競合
+
+<v-clicks>
+
+- 量子化・圧縮で同時実行数が大幅向上
+  → 数百リクエストが**同じ物理KVキャッシュページ**を同時に読み書き
+- Paged Attention・Continuous Batching・キャッシュ再利用は精密な帳簿管理が必要
+- Cloudflareの規模では、統計的に稀なエラーも**日常的に顕在化**
+
+</v-clicks>
+
+---
+
+# 整合性チェックの仕組み
+
+<v-clicks>
+
+- 各物理キャッシュページに、再割り当てのたびに更新される**タグ**を付与
+- サーバーはリクエストごとに「期待されるページ／タグの対応」を記録
+- デコード処理前にマッピングを検証
+- 不一致を検出したら、誤ったデータを返さず**リクエストを中断（abort）**
+
+</v-clicks>
+
+---
+
+# オーバーヘッドの実測値
+
+<v-clicks>
+
+- 条件: 中規模の本番モデル / 入力8,192トークン / 出力1,000トークン
+- スループット変化: **−0.38%〜−0.79%**
+- p95レイテンシ増加: **1%未満**
+- GPUカーネル融合は避け、独立したバッチチェックとして検証（競合状態を回避）
+- 整合性チェックが不要な場合はデフォルトで **no-opトラッカー**（オーバーヘッド計測不能）
+
+</v-clicks>
+
+---
+
+# まとめ
+
+<v-clicks>
+
+- **KVキャッシュ量子化**（BF16→FP8）: コンテキスト長倍増・同時実行数向上・コスト約30%減
+- **重み圧縮**（FP8→INT4）: チェックポイント40%削減・Decodeスループット最大+55%
+- 両手法とも **Prefill/Decode の特性差**に応じてフォーマットを使い分けるのが鍵
+- **整合性保護**: 高同時実行化のリスクをタグベースの軽量チェックで1%未満のオーバーヘッドで解消
+- 精度低下はいずれの手法でも僅少（0.8ポイント以内、無視できるレベル）
+
+</v-clicks>
+
+---
+
+# 今後の展開
+
+<v-clicks>
+
+- **FP8 KVキャッシュ**をさらに多くのフリートに展開
+- **NVFP4** 重みフォーマットを Blackwell GPU 上で検証
+- 整合性チェックのオーバーヘッドを**さらに無視できるレベル**へ改善
+
+</v-clicks>
+
+---
+
+<div class="text-center">
+
+# 参考リンク
+
+</div>
+
+- 原文: [Smaller, faster, safer: running Kimi and GLM at scale](https://blog.cloudflare.com/smaller-faster-safer-models/)
+- [SGLang（オープンソース推論フレームワーク）](https://github.com/sgl-project/sglang)
+
+<div class="pt-8 text-sm opacity-50">
+Wiki: docs/articles/2026-08-03-smaller-faster-safer-models.md
+</div>

@@ -1,0 +1,127 @@
+title: "Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合"
+slug: workers-ai-gateway-unification
+sourceUrl: https://blog.cloudflare.com/workers-ai-gateway-unification/
+wiki: ../docs/articles/2026-08-07-workers-ai-gateway-unification.md
+questions:
+  - q: >-
+      今回の発表で、AI GatewayとWorkers AIが共通して通るようになったものは<strong>何</strong>か。
+    choices:
+      - それぞれ専用の別々のバインディングとAPIエンドポイント
+      - 共通のWorkersバインディングとREST APIエンドポイント
+      - Workers AI専用のGraphQL API
+      - AI Gateway専用のWebSocket接続
+    answer: 1
+    explanation: >-
+      Wikiの「発表内容 / アーキテクチャ」（バインディングとAPIの統合）にある通り、WorkersバインディングとREST APIの両方が共通の経路を通るように統合され、「AI Gateway用」「Workers AI用」というバインディングの区別は廃止された。
+
+  - q: >-
+      Workers AIの呼び出しでゲートウェイIDに<code>default</code>を指定すると、どうなるか。
+    choices:
+      - エラーになり、事前にゲートウェイを手動作成しないとリクエストが失敗する
+      - 初回の認証済みリクエスト時に、ゲートウェイが自動的に作成される
+      - キャッシュが無効化され、常に最新のレスポンスが返る
+      - 課金が二重に発生するようになる
+    answer: 1
+    explanation: >-
+      Wikiの「`default` ゲートウェイによる自動可観測性」で説明されている通り、ゲートウェイIDに<code>default</code>を指定するだけで、初回の認証済みリクエスト時に自動的にゲートウェイが作成され、事前セットアップなしでログやコスト帰属を得られるようになる。
+
+  - q: >-
+      AI Gatewayのクレジット（ウォレット課金）について、今回の統合による変更点として<strong>正しいもの</strong>はどれか。
+    choices:
+      - クレジットが使えるプロバイダーがOpenAIのみに制限された
+      - Workers AIにもクレジットのウォレット残高を充当できるようになった
+      - クレジット機能自体が廃止された
+      - クレジットはWorkers AIでのみ使えるようになり、外部プロバイダーでは使えなくなった
+    answer: 1
+    explanation: >-
+      Wikiの「AI Gatewayクレジットの統合課金」にある通り、これまで外部プロバイダー向けだったクレジットがWorkers AIにも使えるようになり、外部プロバイダーとWorkers AIをまたいだ一元的なコスト管理が可能になった。統合課金を使うとWorkers AIモデルのレート制限も緩和される。
+
+  - q: >-
+      「モデルファーストルーティング」（Coming soon）で、開発者がリクエスト時に指定するのは主に<strong>何</strong>か。
+    choices:
+      - 利用したいプロバイダー名（OpenAI、Anthropicなど）
+      - モデル名のみで、どのプロバイダーがホストしているかは意識しない
+      - GPUのリージョンと台数
+      - キャッシュのTTL秒数
+    answer: 1
+    explanation: >-
+      Wikiの「近日公開: モデルファーストルーティング」で述べられている通り、開発者はモデル名（例:<code>kimi-k2.7-code</code>）だけを指定すればよく、それがWorkers AI由来か外部プロバイダー由来かを意識する必要がなくなる。Workers AIに空きがあればそちらへ、逼迫していれば別の検証済みプロバイダーへゲートウェイ側が透過的に負荷分散する。
+
+  - q: >-
+      「スマートルーティング」（Next）の仕組みについて、記事の説明として正しいものはどれか。
+    choices:
+      - 開発者が事前に登録したルールに厳密に従ってモデルを選ぶ固定ルーティング
+      - Workers AI上で動くクラシファイアがプロンプトを解析し、タスク種別や複雑さを推定してモデルを選ぶ
+      - ランダムに選んだモデルの中から一番安いものを機械的に選ぶ
+      - ユーザーの過去の課金額に応じてモデルを自動的に変更する
+    answer: 1
+    explanation: >-
+      Wikiの「次のステップ: スマートルーティング」にある通り、Workers AI上で動くクラシファイアがプロンプトを解析してタスク種別・複雑さ・必要なコンテキスト量を推定し、ヒューリスティックなスコアラーが最適なモデルへマッピングする。現時点では社内パイロット段階とされている。
+
+  - q: >-
+      統合前、Workers AIを単体で使っていた開発者が可観測性（ログやコストの内訳）を得るのが難しかった<strong>理由</strong>として、Wikiが挙げているものは何か。
+    choices:
+      - Workers AIにはそもそもログを保存する機能が技術的に存在しなかったから
+      - 可観測性を得るには事前にAI Gatewayを手動で作成し、呼び出しを紐づける必要があったから
+      - Workers AIは無料枠でしか使えず、課金情報自体が存在しなかったから
+      - 可観測性はEnterpriseプランの顧客にしか提供されていなかったから
+    answer: 1
+    explanation: >-
+      Wikiの「背景・課題」にある通り、これまでWorkers AIの呼び出しを可視化するには、事前にダッシュボード上でAI Gatewayを手動作成しておく必要があり、これが新規ユーザーにとってのセットアップの摩擦になっていた。
+
+  - q: >-
+      統合前の設計における「プロバイダー依存の脆さ」とは、具体的にどのような問題を指すか。
+    choices:
+      - モデルの推論精度がプロバイダーごとに大きく異なり、一貫した結果が得られない問題
+      - 特定のプロバイダーで障害やレート制限が発生すると、アプリケーションがそのまま止まってしまう問題
+      - プロバイダーごとに課金通貨が異なり、為替変動の影響を受ける問題
+      - プロバイダーを切り替えるたびにリポジトリ全体を作り直す必要がある問題
+    answer: 1
+    explanation: >-
+      Wikiの「背景・課題」で説明されている通り、開発者は常にどのプロバイダーがモデルをホストしているかを意識する必要があり、そのプロバイダーで障害やレート制限が起きるとアプリケーションが止まってしまう構造的な脆さがあった。これがモデルファーストルーティングの導入動機になっている。
+
+  - q: >-
+      以下は「統合前」と「統合後」のWorkers AI呼び出しのコード例である。統合後のコードで<strong>追加された変更点</strong>として最も適切なものはどれか。
+    code: |
+      // 統合前
+      const response = await env.AI.run('@cf/zai-org/glm-5.2', {
+        messages: [{ role: 'user', content: 'Hello!' }],
+      });
+
+      // 統合後
+      const response = await env.AI.run(
+        '@cf/zai-org/glm-5.2',
+        { messages: [{ role: 'user', content: 'Hello!' }] },
+        { gateway: { id: 'default' } } // Auto-creates the gateway on first use
+      );
+    codeLang: javascript
+    choices:
+      - モデル名を <code>@cf/zai-org/glm-5.2</code> から別のモデルへ変更した
+      - "<code>env.AI.run()</code> の第3引数に <code>gateway: { id: 'default' }</code> を追加し、AI Gatewayによる観測を有効にした"
+      - <code>messages</code> 配列の役割を <code>user</code> から <code>system</code> に変更した
+      - バインディング名を <code>env.AI</code> から <code>env.GATEWAY</code> に変更した
+    answer: 1
+    explanation: >-
+      Wikiの「コード例」（Before / After比較）で示されている通り、差分は <code>env.AI.run()</code> の第3引数として <code>gateway: { id: 'default' }</code> を追加しただけである。これにより初回リクエスト時に<code>default</code>ゲートウェイが自動作成され、既存コードへの侵襲性を最小限に抑えたままAI Gatewayの観測対象になる。
+
+  - q: >-
+      統合課金（AI Gatewayクレジット）でWorkers AIモデルを利用する場合に得られる特典として、Wikiが挙げているものはどれか。
+    choices:
+      - Workers AIモデルのレスポンスが常にストリーミング形式になる
+      - Workers AIモデルのレート制限が緩和される
+      - Workers AIモデルの推論結果が自動的に日本語へ翻訳される
+      - Workers AIモデルの利用が完全無料になる
+    answer: 1
+    explanation: >-
+      Wikiの「AI Gatewayクレジットの統合課金」にある通り、統合課金でWorkers AIモデルを利用する場合には、レート制限が緩和される特典が用意されている。
+
+  - q: >-
+      記事全体を通じて、今回の統合の設計思想として<strong>最も適切なもの</strong>はどれか。
+    choices:
+      - 既存のWorkers AI/AI Gatewayの利用者に大規模なコード書き換えを要求し、新しいSDKへの全面移行を促す
+      - オプション引数の追加程度の小さな変更で既存コードと互換性を保ちながら、可観測性・課金・ルーティングを段階的に統合していく
+      - Workers AIを廃止し、AI Gatewayのみに機能を一本化する
+      - AI Gatewayを廃止し、Workers AIのみに機能を一本化する
+    answer: 1
+    explanation: >-
+      Wikiの「所感・ポイント」でも述べている通り、<code>gateway: { id: 'default' }</code> のようなオプション引数1つの追加で既存コードがそのまま観測対象になる点や、統合課金・モデルファーストルーティング・スマートルーティングが段階的（Coming soon / Next）に導入される構成から、既存利用者への影響を最小化しながら段階的に統合を進める設計思想が読み取れる。

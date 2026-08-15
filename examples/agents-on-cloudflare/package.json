@@ -1,0 +1,14 @@
+{
+  "name": "agents-on-cloudflare-example",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260815.1",
+    "wrangler": "4.123.0"
+  }
+}

@@ -1,0 +1,95 @@
+title: CloudflareがAIを使ってエンジニアリング標準を徹底する方法
+slug: engineering-standards-enforcement
+sourceUrl: https://blog.cloudflare.com/engineering-standards-enforcement/
+wiki: ../docs/articles/2026-08-04-engineering-standards-enforcement.md
+questions:
+  - q: Cloudflareのエンジニアリング標準を統治する、記事の中心となる仕組みの名称はどれか。
+    choices:
+      - Cloudflare Codex
+      - Cloudflare RFC Engine
+      - Cloudflare Standards Hub
+      - Cloudflare Policy Gateway
+    answer: 0
+    explanation: 「背景・課題」に記載の通り、散らばっていたガイダンスを再構築したものが「Cloudflare Codex」であり、人とエージェントの両方が参照できる統治されたエンジニアリング標準の集合体である。
+  - q: Codexの標準を記述する形式・要求レベルの表現として正しいものはどれか。
+    choices:
+      - JSON Schemaでバリデーションルールを直接記述する
+      - RFC形式で記述し、RFC 2119の `SHOULD`/`MUST` キーワードで要求レベルを表す
+      - 自然言語のみで曖昧な優先度を表現する
+      - すべての標準をYAMLファイルとして管理する
+    answer: 1
+    explanation: 「Codexの組織構成とワークフロー」に記載の通り、CodexはRFC形式を採用し、要求事項にはRFC 2119で定義された `SHOULD` と `MUST` キーワードを用いる。
+  - q: RFCが「approved（承認済み）」の段階にあるとき、Codex違反はどう扱われるか。
+    choices:
+      - 即座にマージがブロックされる
+      - 非ブロッキングの指摘として表示されるだけで、マージはブロックされない
+      - 何も検出されず無視される
+      - 自動的にコードが修正される
+    answer: 1
+    explanation: 「Codexの組織構成とワークフロー」に記載の通り、approved状態のRFCへの違反はエージェントがすぐに検出できるが、実際にマージなどをブロックするのはenforcedへ昇格した後のみである。
+  - q: RFC全体をそのままLLMに渡さず、専用エージェントが行っている処理として正しいものはどれか。
+    choices:
+      - RFCを画像化してVLMに渡す
+      - SHOULD/MUSTの文をJSON構造へ自動抽出・圧縮し、メタデータを付与する
+      - RFCを英語から日本語へ機械翻訳する
+      - RFCの内容を完全に削除し要約のみ残す
+    answer: 1
+    explanation: 「Codexの組織構成とワークフロー」に記載の通り、60件を超えるRFCをそのまま渡すとコンテキストウィンドウへの負荷が大きいため、専用エージェントがSHOULD/MUST文をJSON構造へ抽出・圧縮し、lazy discoveryなどをサポートするメタデータを付与している。
+  - q: |
+      次のJSONはCodexステートメントの抜粋である。`slug` フィールドの役割として最も適切な説明はどれか。
+    code: |
+      {
+        "slug": "api-schemas-must-be-documented-in-openapi-spec",
+        "section": ["Proposal", "API Gateway"],
+        "level": "MUST",
+        "text": "API request and response schemas MUST be documented using an OpenAPI spec",
+        "href": "/rfcs/014-control-plane-services/#api-gateway"
+      }
+    codeLang: json
+    choices:
+      - ステートメントが所属するドメイン名を表す
+      - RFCが更新されても変わらない安定識別子で、同じ要求事項を時間をまたいで追跡するために使う
+      - ステートメントの深刻度を数値で表す
+      - RFCの公開日を表す
+    answer: 1
+    explanation: 「コード例」の解説にある通り、`slug` は抽出処理中にRFCが更新されても変わらない安定識別子であり、モニタリング・分析・例外処理のために同じステートメントを時間をまたいで追跡する目的で使われる。
+  - q: AIコードレビュアーがマージリクエストへの応答を決める際、何をもとに非ブロッキングかブロッキングかを判断するか。
+    choices:
+      - コードの行数のみ
+      - "`SHOULD`/`MUST` の区別と、そのRFCが approved か enforced か"
+      - レビュー対象のプログラミング言語
+      - マージリクエストの作成者の役職
+    answer: 1
+    explanation: 「AIコードレビュアー」に記載の通り、SHOULDとMUSTの区別、そしてRFCのステータス（approved/enforced）の組み合わせが、非ブロッキングの推奨事項にするかマージブロックにするかを決める。
+  - q: エンジニアから寄せられたAIコードレビュアーの待ち時間への不満に対応するため、記事で紹介されている2つの代替手段はどれか。
+    choices:
+      - レビューの頻度を減らすことと、レビュー対象ファイルを制限すること
+      - 言語固有のカスタムlinterパッケージと、CI不要でローカル実行できるCLI
+      - レビュアーの数を倍に増やすことと、レビュー結果を非公開にすること
+      - AIレビューを完全に廃止し人間レビューのみに戻すこと
+    answer: 1
+    explanation: 「コードレビューの代替手段」に記載の通り、機械的に検証可能な要件向けのカスタムlinter設定パッケージ（TypeScriptはoxlint採用）と、CIを介さずローカルで実行できるCLIの2つが追加された。
+  - q: spec reviewerが動作する基盤として記事に明記されているものはどれか。
+    choices:
+      - オンプレミスのJenkinsサーバー
+      - Cloudflare Worker + D1 + AI Gateway + Cron Trigger
+      - GitHub Actions単体
+      - 外部SaaSのレビューツール
+    answer: 1
+    explanation: 「spec reviewer」に記載の通り、spec reviewerはDeveloper Platform上のCloudflare Workerとして動作し、結果と状態をD1に保存し、モデルへのリクエストはAI Gateway経由、スキャン開始はCron Triggerで行う。
+  - q: spec reviewerの指摘の深刻度分布として記事で示されている割合の組み合わせはどれか。
+    choices:
+      - critical 65% / major 29% / minor 6%
+      - major 65% / minor 29% / critical 6%
+      - minor 65% / critical 29% / major 6%
+      - major 50% / minor 50% / critical 0%
+    answer: 1
+    explanation: 「spec reviewer」に記載の通り、指摘の深刻度は major（重大）65%、minor（軽微）29%、critical（致命的）6% という分布だった。
+  - q: incident report reviewerによる評価対象のインシデントレポートのうち、記事で「低影響・社内限定・予防的宣言」に該当すると説明されている割合はどれか。
+    choices:
+      - 約6%
+      - 約29%
+      - 約65%
+      - 約93%
+    answer: 3
+    explanation: 「incident report reviewer」に記載の通り、評価された200件超のレポートのうち93%が、影響が小さい・社内限定・予防的に宣言されたインシデントを対象としたものだった。

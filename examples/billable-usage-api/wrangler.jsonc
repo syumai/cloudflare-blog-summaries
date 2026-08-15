@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "billable-usage-api-example",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "vars": {
+    "CLOUDFLARE_ACCOUNT_ID": "your-account-id",
+    "COST_ALERT_THRESHOLD_USD": "100"
+  },
+  "triggers": {
+    "crons": ["0 6 * * *"]
+  }
+}

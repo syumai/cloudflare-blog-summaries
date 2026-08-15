@@ -1,0 +1,103 @@
+title: "Agents Week 2026で行った発表内容の全て"
+slug: agents-week-review
+sourceUrl: https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/
+wiki: ../docs/articles/2026-08-13-agents-week-review.md
+questions:
+  - q: >-
+      Agents Week 2026 が開催された期間はどれですか。
+    choices:
+      - 2026年8月1日〜5日
+      - 2026年8月3日〜7日
+      - 2026年8月10日〜14日
+      - 2026年8月13日の1日のみ
+    answer: 1
+    explanation: >-
+      Agents Week 2026 は2026年8月3日（月）〜8月7日（金）の5日間開催され、その振り返り記事が8月13日に公開されました。記事冒頭のイントロで期間が示されています。
+
+  - q: >-
+      月曜日（8月3日）のテーマとして正しいものはどれですか。
+    choices:
+      - 実行環境とインフラ
+      - エージェント開発ライフサイクル（ADLC）
+      - Zero Trust とセキュリティ
+      - エージェント型インターネット
+    answer: 0
+    explanation: >-
+      月曜日のテーマは「実行環境とインフラ」です。<code>@cloudflare/computer</code>、Workers RPC の Python 対応、Kimi/GLM の大規模実行、Billable Usage API、TCP・gRPC 対応が発表されました。ADLC は火曜、Zero Trust は水曜、エージェント型インターネットは木曜のテーマです。
+
+  - q: >-
+      「Cloudflare Wallets」が発表されたのは何曜日ですか。
+    choices:
+      - 月曜日
+      - 水曜日
+      - 火曜日
+      - 木曜日
+    answer: 2
+    explanation: >-
+      Cloudflare Wallets は火曜日（エージェント開発ライフサイクルの日）に、Cloudflare Agents・ローカルトレース・CI/CD などと共に発表されました。エージェントが「エージェント経済」の参加者として安全に取引を行うための機能です。
+
+  - q: >-
+      次のうち、水曜日（Zero Trust とセキュリティ）に発表されたものはどれですか。
+    choices:
+      - WebMCP
+      - Radar Researcher
+      - Billable Usage API
+      - WriteGuard
+    answer: 3
+    explanation: >-
+      WriteGuard は水曜日に発表された、MCPサーバー経由のリスクの高い書き込み呼び出しをきめ細かく制御する機能です。WebMCP と AI Search は木曜、Radar Researcher は金曜、Billable Usage API は月曜の発表です。
+
+  - q: >-
+      記事全体を通じて Cloudflare が主張している、「エージェント経済」の課題として <u>正しくないもの</u> はどれですか。
+    choices:
+      - アイデンティティ（ID）管理
+      - GPU の絶対的な演算性能不足のみ
+      - オーケストレーションやメモリ・オブザーバビリティ
+      - エージェント間・エージェント-サービス間の通信
+    answer: 1
+    explanation: >-
+      記事の「背景・課題」では、課題は「モデル自体にとどまらず、アイデンティティ、通信、オーケストレーション、メモリ、オブザーバビリティ、セキュリティにまで広がっている」と述べられています。単純な GPU 演算性能の不足だけが課題だとは主張していません。
+
+  - q: >-
+      火曜日に提唱された ADLC（Agent Development Lifecycle）の説明として最も適切なものはどれですか。
+    choices:
+      - 従来の SDLC に代わる概念として提示された、エージェントの試作から本番運用までを支えるライフサイクル
+      - エージェントの学習データを管理するためのバージョン管理システム
+      - Cloudflare Workers のデプロイ専用 CLI ツールの名称
+      - AEO と同じ意味で使われる、SEO の後継概念
+    answer: 0
+    explanation: >-
+      ADLC は、通常のソフトウェア開発における SDLC（Software Development Lifecycle）に代わる概念として提示されたもので、Cloudflare Agents のトレース・再実行・承認機能や、ローカルトレースによるデバッグ、CI/CD での自律修復など、火曜日の複数の発表がこの概念を具体化しています。SDLC との違いは、エージェント固有の検証・承認・トレースの仕組みが組み込まれている点です。
+
+  - q: >-
+      Agent Access Model（水曜日発表）の主な目的として最も適切なものはどれですか。
+    choices:
+      - エージェントのレスポンス速度を高速化すること
+      - エージェントが利用するモデルの推論コストを削減すること
+      - エージェントが人間やサービスに代わって、安全にリソース・サービスへアクセスできるようにするアクセス制御の枠組みを提供すること
+      - Web サイトの検索順位を AI エージェント向けに最適化すること
+    answer: 2
+    explanation: >-
+      Agent Access Model は、エージェントが人間やサービスの代理として動作する際に、安全にリソースやサービスへアクセスできるようにするためのアクセス制御フレームワークです。同じ水曜日の ID 情報ベースの分析や WriteGuard と合わせて、「エージェントに何をどこまで許可するか」を細かく制御する Zero Trust 拡張の一環です。D の選択肢は木曜日発表の AEO の説明です。
+
+  - q: >-
+      木曜日に発表された AEO（Answer Engine Optimization）とは何ですか。
+    choices:
+      - エージェント同士が互いに認証し合うための暗号プロトコル
+      - MCP サーバーの応答速度を最適化する技術
+      - エージェントの実行コストを最小化するスケジューリング手法
+      - 従来の検索エンジン最適化（SEO）に代わる、AI エージェントに推奨されるためのサイト最適化の考え方
+    answer: 3
+    explanation: >-
+      AEO は「ランク付けから推奨へ」という発表タイトルが示す通り、従来の SEO（検索結果でのランク付け最適化）から、AI エージェント時代に「推奨される」ための最適化へと考え方を転換したものです。WebMCP や MCPv2 と並んで、木曜日の「エージェント型インターネット」のテーマを構成する発表の一つです。
+
+  - q: >-
+      金曜日の発表「良い振る舞い・悪い振る舞いの見極め」が示す、bot 対策に関する考え方の転換として最も適切なものはどれですか。
+    choices:
+      - すべての自動化トラフィックを一律にブロックする方針への転換
+      - 一度きりの判定ではなく、エージェントの振る舞いを継続的に評価する信頼評価（continuous trust evaluation）への転換
+      - CAPTCHA をすべての Web サイトで必須化する方針への転換
+      - bot 対策を完全に廃止し、すべてのエージェントを無条件に許可する方針への転換
+    answer: 1
+    explanation: >-
+      金曜日の発表は、従来の一律的な bot 対策の考え方を、エージェントの振る舞いを継続的に観察・評価する「continuous trust evaluation」へと転換するものです。エージェント型インターネットが普及する中で、単純なブロック／許可ではなく、振る舞いに基づいた柔軟な信頼評価が必要になるという問題意識に基づいています。

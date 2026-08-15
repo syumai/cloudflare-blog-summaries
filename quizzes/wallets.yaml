@@ -1,0 +1,94 @@
+title: Cloudflare Walletsを発表：エージェント型インターネットのためのプログラム可能なウォレット
+slug: wallets
+sourceUrl: https://blog.cloudflare.com/ja-jp/wallets/
+wiki: ../docs/articles/2026-08-04-wallets.md
+questions:
+  - q: 記事が指摘する、AIエージェントが新しいAPIを試す際の2つの課題は何か。
+    choices:
+      - 通信速度の遅さとサーバーの不安定さ
+      - 安定したIDを持たないことと、ネイティブな決済手段を持たないこと
+      - プログラミング言語の互換性がないこと
+      - APIドキュメントが英語でしか提供されていないこと
+    answer: 1
+    explanation: 「背景・課題」に記載の通り、エージェントはAPIを利用開始するための安定した識別情報（ID）と、利用料金を支払うためのネイティブな決済手段の両方を持っていないことが課題として挙げられている。
+  - q: Cloudflare Walletsでユーザーが一意のハンドルを取得できるドメインはどれか。
+    choices:
+      - cloudflare.com
+      - cloudflare.pay
+      - wallet.cloudflare.com
+      - pay.cloudflare.net
+    answer: 1
+    explanation: 記事に記載の通り、ユーザーは `cloudflare.pay` でハンドルを取得でき、これがマーチャントとのやり取りで使える一意のユーザー名として機能する。
+  - q: Cloudflare Walletsが利用しているマイクロペイメント用のプロトコルはどれか。
+    choices:
+      - OAuth 2.0
+      - x402プロトコル
+      - WebRTC
+      - JWT
+    answer: 1
+    explanation: 記事に記載の通り、先月発表されたMonetization Gatewayは、HTTPリクエストに決済情報を付加できるx402プロトコルを利用したマイクロペイメントに対応している。
+  - q: Account WalletとVirtual Walletの関係について正しい説明はどれか。
+    choices:
+      - Virtual Walletの方が上位にあり、Account Walletの上限を自由に超えて支出できる
+      - Account Walletは人間向け、Virtual Walletはエージェント向けで、Virtual Walletの利用可能額にはAccount Wallet所有者が設定した上限が適用される
+      - Account WalletとVirtual Walletは互いに独立しており、資金のやり取りはできない
+      - Virtual Walletは人間が直接操作する専用の画面からのみ利用できる
+    answer: 1
+    explanation: 「発表内容 / アーキテクチャ」に記載の通り、Account Walletは人間向け、Virtual Walletはエージェント向け（APIキーで操作）であり、Virtual Walletが利用できる金額にはAccount Walletの所有者が設定した上限が適用され、それを超えて支出することはできない。
+  - q: Virtual Walletに設定できる利用条件として、記事で挙げられていないものはどれか。
+    choices:
+      - 利用可能な予算
+      - 利用を許可する販売先のリスト
+      - 1回あたりの最大利用金額
+      - エージェントが使用できるプログラミング言語の制限
+    answer: 3
+    explanation: 記事で挙げられているVirtual Walletの利用条件は「利用可能な予算」「利用を許可する販売先のリスト」「1回あたりの最大利用金額」の3つであり、プログラミング言語の制限については言及されていない。
+  - q: |
+      次はWiki内で示された、Virtual Walletの権限設定の考え方を整理した図である。この図が表している内容として正しいものはどれか。
+    code: |
+      Account Wallet（人間の所有者）
+        └─ 残高: 週次で補充される予算（例: 週100ドル）
+            └─ Virtual Wallet（エージェント用、APIキーで操作）
+                 - 利用可能な予算: Account Walletの上限内
+                 - 許可する販売先のリスト
+                 - 1回あたりの最大利用金額
+    codeLang: text
+    choices:
+      - Virtual WalletがAccount Walletより優先され、上限を無視して支出できる
+      - Account Walletの資金を親として、その上限内でVirtual Walletが予算・許可先・上限額を持つ階層構造
+      - Account WalletとVirtual Walletは同じAPIキーを共有する
+      - この図はエージェントのコード実行環境の構造を示している
+    answer: 1
+    explanation: 記事の説明を整理したこの図は、Account Wallet（人間の資金プール）を親として、その上限内でVirtual Wallet（エージェント用）が予算・許可販売先・1回あたりの上限額という条件を持つ階層構造を表している。
+  - q: エージェントが `research.example.cloudflare.pay` のような識別子を持つことで得られる利点は何か。
+    choices:
+      - エージェントの処理速度が向上する
+      - マーチャントがそのエージェントが特定の組織に属することを確認できる
+      - APIの利用料金が自動的に割引される
+      - エージェントのソースコードが自動公開される
+    answer: 1
+    explanation: 記事に記載の通り、cloudflare.payによる識別子を通じてエージェントは自身のIDを提示でき、マーチャントはそのエージェントが特定の組織に属するエージェントであることを確認できる。
+  - q: 記事内で、エージェント識別子（Cloudflare Walletに紐付くID）の性質を説明するために使われている比喩はどれか。
+    choices:
+      - 銀行の口座番号とパスワードの関係
+      - DNSにおけるURLとIPアドレスの関係
+      - 電話番号と国際電話の関係
+      - パスポートとビザの関係
+    answer: 1
+    explanation: 記事に記載の通り、Cloudflare Walletに紐付けられたIDは、Web Bot Authの鍵ペアを人間が理解しやすい形式で表現するものであり、「DNSにおけるURLとIPアドレスの関係」に似ていると説明されている。
+  - q: エージェントが自身のIDを公開するかどうかについて、記事はどのように説明しているか。
+    choices:
+      - すべてのエージェントに義務付けられている
+      - 完全に任意であり、既知のエージェントとの取引を優先するかは各企業が判断する
+      - Cloudflareが一律に決定する
+      - IDの公開は将来的に廃止される予定である
+    answer: 1
+    explanation: 記事に明記されている通り、「エージェントが自身のIDを公開するかどうかは完全に任意です。また、既知のエージェントとの取引を優先するかどうかは、各企業が判断できます」とされている。
+  - q: 記事が示す「エージェントコマースの未来」を支える3つの構成要素の組み合わせとして正しいものはどれか。
+    choices:
+      - Monetization Gateway・Wallets・Identity
+      - Workers・Pages・R2
+      - AI Gateway・Durable Objects・Workflows
+      - Turnstile・WAF・DDoS対策
+    answer: 0
+    explanation: 「エージェントコマースの未来」に記載の通り、販売者が対価を受け取るMonetization Gateway、購入者が支払うWallets、身元確認を可能にするIdentityの3要素が組み合わさることで、ヘッドレスマーケットプレイスの実現が目指されている。

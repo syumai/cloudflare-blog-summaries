@@ -1,0 +1,117 @@
+title: Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート
+slug: grpc-workers
+sourceUrl: https://blog.cloudflare.com/grpc-workers/
+wiki: ../docs/articles/2026-08-03-grpc-workers.md
+questions:
+  - q: 記事の導入部で、低レイテンシな通信が特に重要とされているユースケースとして挙げられているものはどれか。
+    choices:
+      - バッチ処理によるログ集計
+      - リアルタイムの音声AIアシスタント
+      - 静的サイトのホスティング
+      - メールの配信
+    answer: 1
+    explanation: 記事は「AIが人とコンピューターのやり取りを変えつつあり、音声（voice）の重要性が増している」という文脈から始まり、リアルタイム音声アシスタントには低レイテンシな通信が不可欠であると述べている（Wiki「背景・課題」参照）。
+
+  - q: これまでの Cloudflare Workers が対応していなかったものとして、記事が指摘しているものはどれか。
+    choices:
+      - アウトバウンドのTCP接続
+      - インバウンドのTCP接続
+      - HTTPリクエストの処理
+      - JavaScriptの実行
+    answer: 1
+    explanation: 記事では、Workersはこれまでアウトバウンドの TCP 接続には対応していたが、外部からのインバウンドの TCP 接続を直接受け付ける手段を持っていなかったと説明されている。
+
+  - q: 今回の発表でWorkerがインバウンドのTCPソケットを受け付けられるようになった新しいランタイムハンドラーは何か。
+    choices:
+      - fetch(request)
+      - connect(socket)
+      - subscribe(topic)
+      - listen(port)
+    answer: 1
+    explanation: 記事の3つの主要発表の1つ目は、Spectrum経由でインバウンドのTCPソケットを受け付けられる新しいランタイムハンドラー connect(socket) である。
+
+  - q: インバウンドのTCP接続をWorkerに届ける経路として、記事に説明されているCloudflareのプロキシは何か。
+    choices:
+      - Spectrum
+      - Argo Tunnel
+      - Magic Transit専用ルーター
+      - WARP
+    answer: 0
+    explanation: 記事では、connect(socket)ハンドラーはSpectrum（Cloudflareの非HTTPトラフィック用プロキシ）経由でインバウンドのTCPソケットを受け付けると説明されている。
+
+  - q: gRPCがブラウザから直接利用できず、gRPC-webという変換が必要になる理由として、記事が説明しているものはどれか。
+    choices:
+      - gRPCはHTTP/1.0のみに対応しているため
+      - Webブラウザーが、gRPCが必要とする低レベルのHTTP/2機能を公開していないため
+      - gRPCはUDPしかサポートしていないため
+      - ブラウザのセキュリティポリシーでTCPそのものが禁止されているため
+    answer: 1
+    explanation: 記事では「Webブラウザーは、gRPCが必要とする低レベルのHTTP/2機能を公開していない」ためgRPC-webが必要になると説明されている。
+
+  - q: |
+      次のコードについて、記事の説明に基づき正しい理解はどれか。
+    code: |
+      export class SocketContainer extends DurableObject<Env> {
+        constructor(ctx: DurableObjectState, env: Env) {
+          super(ctx, env);
+          this.ctx.container!.start();
+        }
+
+        async connect(socket: Socket): Promise<void> {
+          const containerSocket = this.ctx.container!
+            .getTcpPort(8080)
+            .connect("10.0.0.1:8080");
+
+          await containerSocket.opened;
+
+          await Promise.all([
+            socket.readable.pipeTo(containerSocket.writable),
+            containerSocket.readable.pipeTo(socket.writable),
+          ]);
+        }
+      }
+    codeLang: ts
+    choices:
+      - 外部からのソケットとContainerのポート8080への接続を、双方向にパイプして中継している
+      - HTTPリクエストをWebSocketに変換している
+      - Containerを常時起動せず、リクエストごとに新規作成している
+      - このコードはgRPC-web変換のためのものであり、TCPソケットは扱わない
+    answer: 0
+    explanation: このDurable Objectはコンストラクタでcontainerを起動し、connectメソッドでContainerのポート8080へのTCPソケット（containerSocket）を開いたうえで、外部から受け取ったsocketとcontainerSocketをsocket.readable.pipeTo(containerSocket.writable)およびcontainerSocket.readable.pipeTo(socket.writable)により双方向に中継している。
+
+  - q: 記事に掲載されているGoによるgRPCサーバーの実装（ByteStream.Chatメソッド）について、正しい説明はどれか。
+    choices:
+      - クライアントからの接続ごとに新しいTCPポートで待ち受ける
+      - "まず \"connected\\n\" を送信し、以降は stream.Recv() でメッセージを受信するたびに \"echo: \" というプレフィックスを付けて送り返し、io.EOF を検出すると \"goodbye\\n\" を送って終了する"
+      - 受信したメッセージをそのまま無視し、常に固定文字列のみを返す
+      - Cloudflare独自のRPCライブラリを使用している
+    answer: 1
+    explanation: |
+      記事のGoコード例では、Chatメソッドはまず "connected\n" を送信し、ループで stream.Recv() により受信したメッセージに "echo: " というプレフィックスを付けて送り返し、io.EOF を検出すると "goodbye\n" を送って終了する。標準の google.golang.org/grpc パッケージを使った一般的な実装であり、Cloudflare固有のコードは含まれない。
+
+  - q: WorkerをそのままgRPCサーバーにする例（`@connectrpc/connect` を使う例）について、記事の説明として正しいものはどれか。
+    choices:
+      - この方法ではContainerのデプロイが必須である
+      - Containerを使わず、通常のfetchハンドラー内でgRPCサービスを実装でき、プラットフォームがgRPC-web変換を行う
+      - この方法はgRPCの単項（unary）呼び出しには対応していない
+      - この方法はGoで書かれたサーバーでのみ利用できる
+    answer: 1
+    explanation: 記事では、@connectrpc/connectを使うことでContainerをデプロイせずに通常のfetchハンドラー内でgRPCサービスを実装でき、プラットフォームがgRPCとgRPC-webの変換を自動的に行うことでネイティブなgRPCクライアントからも直接アクセスできると説明されている。
+
+  - q: 記事で紹介されている、Workerからの外部gRPCサーバー呼び出し（クライアント側）の実装で使われているライブラリ／関数の組み合わせとして正しいものはどれか。
+    choices:
+      - createClient と createGrpcWebTransport（@connectrpc/connect, @connectrpc/connect-web）
+      - axios と XMLHttpRequest
+      - WebSocket と Server-Sent Events
+      - node:net の Socket クラス
+    answer: 0
+    explanation: 記事のコード例では、@connectrpc/connectのcreateClientと@connectrpc/connect-webのcreateGrpcWebTransportを組み合わせ、baseUrlに外部gRPCサーバーを指定してWorkerからクライアントとして呼び出す実装が示されている。
+
+  - q: 記事全体を通じて、Cloudflareが今回の一連の機能（connect(socket)・Containerからの双方向gRPC・gRPC-web変換）で重視している設計方針として最も適切なものはどれか。
+    choices:
+      - すべての通信をCloudflare独自のプロトコルに置き換えることを開発者に強制する
+      - 内部ではCap'n Protoを使いつつ、外部には任意の言語・既存のgRPCエコシステムをそのまま持ち込めるようにする
+      - gRPCのサポートはWeb版のみに限定し、モバイルアプリからのアクセスは対象外とする
+      - Containerの利用を禁止し、すべてWorker内で完結させることを必須とする
+    answer: 1
+    explanation: 記事のGoサーバー例が標準のgrpcパッケージをそのまま使っている点や、Worker側もConnect RPCという標準的なライブラリを使ってgRPC-web変換を行っている点から、内部実装（Cap'n Proto）を隠しつつ外部には既存のgRPCエコシステム・言語をそのまま提供する設計方針が読み取れる。

@@ -1,0 +1,103 @@
+/*
+ * Cloudflare 風配色テーマ（全デッキ共通）
+ * 各デッキの style.css から `@import '../theme/cloudflare.css';` で読み込む。
+ */
+:root {
+  --cf-orange: #f6821f;
+  --cf-orange-light: #fbad41;
+  --cf-navy: #0b1b33;
+  --cf-navy-2: #16305a;
+  --cf-charcoal: #1d1f20;
+  --cf-blue: #0051c3;
+  --cf-bg: #fdfaf5;
+}
+
+/* 通常スライド: 温白背景 + チャコール文字 */
+.slidev-layout {
+  background: var(--cf-bg);
+  color: var(--cf-charcoal);
+}
+
+/* 見出し: h1 の下にオレンジのアクセントバー */
+.slidev-layout h1 {
+  color: var(--cf-charcoal);
+}
+.slidev-layout h1::after {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.4rem;
+  background: linear-gradient(90deg, var(--cf-orange), var(--cf-orange-light));
+  border-radius: 2px;
+}
+/* text-center な見出しでは、アクセントバーも中央揃えにする */
+.text-center h1::after,
+.slidev-layout.text-center h1::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--cf-navy);
+}
+
+.slidev-layout a {
+  color: var(--cf-blue);
+}
+
+.slidev-layout blockquote {
+  border-left: 4px solid var(--cf-orange);
+}
+
+.slidev-layout table th {
+  background: rgba(246, 130, 31, 0.12);
+}
+
+/* 表紙・セクション区切り: ネイビーのグラデーション + 白文字 */
+.slidev-layout.cover,
+.slidev-layout.intro,
+.slidev-layout.section {
+  background: linear-gradient(135deg, var(--cf-navy) 0%, var(--cf-navy-2) 60%, #23407a 100%);
+  color: #ffffff;
+}
+.slidev-layout.cover h1,
+.slidev-layout.intro h1,
+.slidev-layout.section h1,
+.slidev-layout.cover h2,
+.slidev-layout.intro h2,
+.slidev-layout.section h2 {
+  color: #ffffff;
+}
+.slidev-layout.cover a,
+.slidev-layout.intro a,
+.slidev-layout.section a {
+  color: var(--cf-orange-light);
+}
+
+/*
+ * 下部ナビゲーションバー: 常時表示を無効化し、ホバー時のみ表示する。
+ * Slidev はウィンドウが縦長寄り（isScreenVertical）と判定すると、
+ * ナビバーに `!opacity-100`（!important 付き）を付与して常時表示に固定する。
+ * ここではより詳細度の高いセレクタ（ID を含む）に !important を重ねて上書きし、
+ * 「通常は非表示・ホバー時のみ表示」を強制する。キーボード操作には影響しない。
+ */
+#page-root #slide-container > .absolute.bottom-0.left-0 {
+  opacity: 0 !important;
+  transition: opacity 0.3s;
+}
+#page-root #slide-container > .absolute.bottom-0.left-0:hover {
+  opacity: 1 !important;
+}
+
+/*
+ * Goto ダイアログ（スライド一覧）の常時表示バグ対策。
+ * Slidev 同梱の fuse.js 7.5.0 は空文字クエリで全件マッチを返すため、
+ * ダイアログを閉じていても検索結果（全スライド一覧）が画面右側に
+ * 表示され続けてしまう。フォーカスが無い間は非表示にすることで回避する。
+ * 「g」キーでダイアログを開くと入力欄にフォーカスが当たり、通常どおり表示される。
+ */
+#slidev-goto-dialog:not(:focus-within) {
+  opacity: 0;
+  pointer-events: none;
+}

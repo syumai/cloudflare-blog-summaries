@@ -1,0 +1,5 @@
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  cart_id TEXT NOT NULL,
+  items_json TEXT NOT NULL
+);

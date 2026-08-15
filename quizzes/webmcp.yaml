@@ -1,0 +1,104 @@
+title: あらゆるWebサイトにWebMCPインターフェースを付与する
+slug: webmcp
+sourceUrl: https://blog.cloudflare.com/webmcp/
+wiki: ../docs/articles/2026-08-06-webmcp.md
+questions:
+  - q: WebMCPとは何か。記事の説明として最も正確なものはどれか。
+    choices:
+      - Chrome 146で実験的に搭載される新しいブラウザ標準で、ページ上に document.modelContext としてサイトのツール群をエージェントに公開する仕組み
+      - Cloudflare独自のスクレイピング防止機能で、AIエージェントのアクセスを完全にブロックする仕組み
+      - MCPサーバーをCloudflare Workers上にホストするためのデプロイツール
+      - サイトのHTMLを人間向けに最適化するためのレンダリングエンジン
+    answer: 0
+    explanation: Wikiの「発表内容 / アーキテクチャ」内「WebMCPという新しいブラウザ標準」で、WebMCPはChrome 146で実験的に搭載され document.modelContext としてページ上に現れる新しいブラウザ標準であると説明されている。
+  - q: Cloudflareが今回のWebMCP developer previewで採用した実装方針として、記事が強調している特徴はどれか。
+    choices:
+      - サイト運営者はサーバーサイドのコードを書き換え、独自のMCPサーバーを新規に構築する必要がある
+      - オリジン側のコードは一切変更せず、エッジでHTMLに1行のスクリプトタグを注入するだけで有効化できる
+      - すべてのツールはCloudflareのサーバー上で実行され、訪問者のブラウザでは何も実行されない
+      - 有効化にはサイト全体の再デプロイと数日間のダウンタイムが必要になる
+    answer: 1
+    explanation: Wikiの「背景・課題」および「発表内容 / アーキテクチャ」冒頭で "no code and nothing changed at your origin" という設計思想が紹介されており、HTMLRewriterによるエッジでの1行注入だけで有効化できる点が特徴として説明されている。
+  - q: 記事で紹介されている「ツールパック（tool pack）」という概念の説明として正しいものはどれか。
+    choices:
+      - 単一のツールを指す専門用語で、パックという単位は複数形の意味しか持たない
+      - 関連するツール群をひとまとめにした単位で、ダッシュボードで有効化するだけで機能拡張でき、再デプロイは不要
+      - サイト運営者が自らTypeScriptで実装しなければならないプラグインの集合
+      - C2PA認証のみを扱う唯一のツールカテゴリの名称
+    answer: 1
+    explanation: Wikiの「発表内容 / アーキテクチャ」の「Cloudflareの実装戦略：ツールパック」で、ツールパックは関連ツール群をまとめた単位であり、ダッシュボード操作だけで有効化・拡張でき再デプロイが不要であると説明されている。
+  - q: developer previewに含まれる2つのツールパックの組み合わせとして正しいものはどれか。
+    choices:
+      - Content Credentials パックと Site MCP Server パック
+      - Sitemap Summarizer パックと AI Search Index パック
+      - Radar Analytics パックと BrowserRun パック
+      - Zero Trust パックと Workers AI パック
+    answer: 0
+    explanation: Wikiの「発表内容 / アーキテクチャ」に記載の通り、今回のプレビューには「Content Credentials パック」と「Site MCP Server パック」の2つが含まれる。
+  - q: 次のコードはWikiの「コード例」に引用されているエッジ注入スクリプトである。data-packs属性の役割として正しいものはどれか。
+    code: |
+      <script type="module"
+              src="/.webmcp/bridge.js"
+              data-packs="c2pa,mcp-server-client"
+              data-mcp-url="/mcp"></script>
+    codeLang: html
+    choices:
+      - サイトのMCPサーバーのエンドポイントURLを指定する属性である
+      - 有効化するツールパック名をカンマ区切りで指定する属性である
+      - ブリッジスクリプトのバージョン番号を指定する属性である
+      - エージェントの認証トークンを埋め込むための属性である
+    answer: 1
+    explanation: Wikiの「コード例」の「エッジでの注入スクリプト（HTML）」解説にある通り、data-packs属性は有効化するツールパック名をカンマ区切りで指定するものであり、エンドポイントの指定は別の data-mcp-url 属性が担う。
+  - q: 「静的パック」と「動的パック」の違いについて、記事の説明として正しいものはどれか。
+    choices:
+      - 静的パックはページ読み込み後に非同期でツールを追加し、動的パックはページ読み込み前に同期的にツールを追加する
+      - 静的パックはあらかじめ定義済みのツールをそのまま宣言し、動的パックは起動時にサイト自身のMCPサーバーへ問い合わせてツールを発見する
+      - 静的パックはCloudflare Radarのみで使え、動的パックはBrowserRunのみで使える
+      - 静的パックはサーバー側で実行され、動的パックはエッジのWorkerで実行される
+    answer: 1
+    explanation: Wikiの「発表内容 / アーキテクチャ」の「2. The bridge」節で、静的パック（例：Content Credentials）は事前定義済みツールをそのまま宣言し、動的パック（例：Site MCP Server）は起動時にサイト自身のMCPサーバーへ問い合わせてツールを発見すると説明されている。
+  - q: Site MCP Serverパックが登録するツールと、既存のMCP（Model Context Protocol）標準との関係について正しい説明はどれか。
+    choices:
+      - 独自の型定義を使っており、MCP標準とは互換性がない
+      - MCPの Tool / CallToolResult 型にそのまま準拠しており、既存のMCPクライアントは特別な追加対応なしに呼び出せる
+      - MCPサーバーへの通信にはWebSocketのみが使用され、JSON-RPCは使われない
+      - MCP標準に準拠させるためには、サイト側で新たに認証サーバーを構築する必要がある
+    answer: 1
+    explanation: Wikiの「発表内容 / アーキテクチャ」の「MCP標準との関係」で、登録されるツールはMCPの Tool / CallToolResult 型にそのまま準拠し、既存のMCPクライアントは特別な追加対応なしに呼び出せると説明されている。
+  - q: Wikiの「コード例」にあるMCP Tool Proxyのコードで、execute関数内のfetch呼び出しに指定されている credentials オプションの値と、その意味の組み合わせとして正しいものはどれか。
+    code: |
+      execute: async (args) => {
+        const res = await fetch(mcpUrl, {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            jsonrpc: "2.0", id: 1, method: "tools/call",
+            params: { name: tool.name, arguments: args },
+          }),
+        });
+      }
+    codeLang: javascript
+    choices:
+      - "`same-origin`が指定されており、訪問者本人のセッション・Cookieを使って同一オリジンのMCPサーバーにリクエストする"
+      - "`same-origin`が指定されており、CloudflareのAPIキーを使ってリクエストを認証する"
+      - "`include`が指定されており、クロスオリジンでも常にCookieを送信する"
+      - "`omit`が指定されており、Cookieを一切送信せず匿名でリクエストする"
+    answer: 0
+    explanation: Wikiの「コード例」の「MCP Tool Proxy（JavaScript）」解説にある通り、credentials："same-origin"により訪問者本人のセッション・Cookieを使って同一オリジンの/mcpエンドポイントにリクエストが送られる仕組みになっている。
+  - q: Content Credentialsパックの`inspect_image_c2pa`ツールについて、記事で説明されている現時点の制約として正しいものはどれか。
+    choices:
+      - 画像1枚あたり10秒以上の処理時間がかかるため、実運用では利用できない
+      - 認証情報の報告のみを行い、暗号学的な署名検証は行わない（signatureVerified：falseが常に含まれる）
+      - JPEG形式の画像にのみ対応しており、PNG形式は解析できない
+      - C2PA準拠の画像のみを取得対象とし、非準拠の画像はエラーになる
+    answer: 1
+    explanation: Wikiの「発表内容 / アーキテクチャ」の「Content Credentials パックの詳細」で、inspect_image_c2paは現時点で認証情報の報告のみを行い暗号学的な署名検証は行わず、結果には常にsignatureVerified：falseが含まれると説明されている。
+  - q: 記事全体を踏まえたとき、WebMCPおよびCloudflareのdeveloper previewが目指している方向性として最も適切なものはどれか。
+    choices:
+      - クローラー型スクレイピングをより高速化し、AIエージェントによるコンテンツコピーを促進すること
+      - サイト側の実装コストをほぼゼロに抑えつつ、エージェントがページ推測ではなくツール呼び出しでタスクを遂行できるようにし、既存MCPエコシステムとも相互運用できるようにすること
+      - すべてのAIエージェントのWebサイトへのアクセスを技術的に遮断すること
+      - WebMCPをW3C標準として正式化し、Chrome以外のブラウザでの実装を義務付けること
+    answer: 1
+    explanation: Wikiの「背景・課題」「発表内容 / アーキテクチャ」「所感・ポイント」全体を通じて、サイト側のコード変更をほぼゼロに抑えながら、エージェントがページ構造の推測ではなくツール呼び出しでタスクを遂行できるようにし、MCP標準への準拠によって既存エコシステムと相互運用できるようにする、という方向性が一貫して示されている。

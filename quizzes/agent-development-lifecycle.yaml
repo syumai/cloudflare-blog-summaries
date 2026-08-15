@@ -1,0 +1,104 @@
+title: Cloudflareにエージェント開発ライフサイクルの時代が到来
+slug: agent-development-lifecycle
+sourceUrl: https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/
+wiki: ../docs/articles/2026-08-04-agent-development-lifecycle.md
+questions:
+  - q: 記事が指摘する現状の課題として最も適切なものはどれか。
+    choices:
+      - エージェントがコードを書く速度が遅すぎて開発が進まない
+      - エージェントのコーディング速度が、レビュー・デプロイ・保守の速度を上回っている
+      - 人間のエンジニアがコードレビューを一切行わなくなった
+      - SDLCという概念自体がすでに廃止されている
+    answer: 1
+    explanation: 「背景・課題」に記載の通り、記事は「エージェントのコーディング速度は、開発チームがそのコードをレビュー、デプロイ、保守するスピードを上回ります」という現状のギャップを冒頭で提示している。
+  - q: 従来のSDLC（Systems Development Lifecycle）は何年にRANDが提唱した概念か。
+    choices:
+      - 1965年
+      - 1975年
+      - 1985年
+      - 1995年
+    answer: 1
+    explanation: Wiki「背景・課題」に記載の通り、SDLCは1975年にRANDが提唱した概念に遡るとされている。
+  - q: AIコーディングエージェントが劇的に高速化させたのは、SDLCのどの工程か。
+    choices:
+      - デプロイ工程
+      - 保守工程
+      - 実装工程
+      - 廃止工程
+    answer: 2
+    explanation: 記事はAIが高速化するのは「実装」工程のみであり、レビュー・デプロイ・保守といった後続工程の負荷はむしろ増大していると指摘している。
+  - q: 記事が提唱する「ADLC」は何の略か。
+    choices:
+      - Application Deployment Life Cycle
+      - Agent Development Lifecycle
+      - Automated Delivery and Lifecycle Control
+      - Agile Development and Launch Cycle
+    answer: 1
+    explanation: ADLCはAgent Development Lifecycle（エージェント開発ライフサイクル）の略で、SDLCがソフトウェアチーム向けであるのに対し、ADLCはソフトウェアファクトリー向けの概念として提示されている。
+  - q: 記事が定義する「ソフトウェアファクトリー」の説明として最も適切なものはどれか。
+    choices:
+      - 人間のエンジニアのみで構成された高速な開発チーム
+      - エージェントを中心に動作し、入力情報からソフトウェアの構築・改善・デプロイ・管理までを自律的に行うシステム
+      - コードのビルドのみを高速化するCIサーバー
+      - 物理的なデータセンター内のサーバー工場
+    answer: 1
+    explanation: 「発表内容 / アーキテクチャ」の「SDLCからADLCへの転換」に記載の通り、ソフトウェアファクトリーは本番エラー・バグ報告・新機能アイデアなどの入力をもとに、構築・改善・デプロイ・管理を自律的に行うシステムと定義されている。
+  - q: ソフトウェアファクトリーに必要な7つの要件に含まれないものはどれか。
+    choices:
+      - プログラムから操作可能
+      - 再現可能
+      - 手動承認を一切排除した完全無権限運用
+      - 自己改善性
+    answer: 2
+    explanation: 7要件は「プログラムから操作可能」「水平方向にスケール可能」「再現可能」「リアルタイムかつプッシュ型」「個別性」「許可制」「自己改善性」であり、「許可制」は無権限運用ではなく段階的に権限を拡大できる仕組みを指すため、選択肢の説明は誤り。
+  - q: 記事が自動運転車になぞらえて説明している課題は何か。
+    choices:
+      - 車両価格の高騰
+      - 80%の精度から99.999%に近い信頼性へ到達することの難しさ
+      - センサーの製造コスト削減
+      - 交通渋滞の緩和
+    answer: 1
+    explanation: 「自動運転車との類比」で述べられている通り、他の自律システムと同様、エージェント駆動開発も「80%の確率で正しく動く」段階から「99.999%に近い信頼性」へ到達することが課題とされている。
+  - q: |
+      次のコード例は `@cloudflare/ci` を使ったCI/CDパイプライン定義の抜粋である。このコードの動作として正しい説明はどれか。
+    code: |
+      await Promise.all([
+        deps.runner({ name: 'lint', command: 'bun run lint' }),
+        deps.runner({ name: 'test', command: 'bun run test' }),
+        deps.runner({ name: 'typecheck', command: 'bun run typecheck' }),
+        deps.runner({ name: 'build', command: 'bun run build' }),
+      ]);
+    codeLang: ts
+    choices:
+      - lint・test・typecheck・buildを順番に1つずつ直列実行する
+      - lint・test・typecheck・buildを並列実行し、CI全体のレイテンシを短縮する
+      - このコードはデプロイ処理そのものを実行している
+      - このコードはキャッシュの生成のみを行う
+    answer: 1
+    explanation: 「コード例」の解説にある通り、`Promise.all` によって依存関係のない4つの検証タスクを並列実行し、CI全体のレイテンシを縮めているのがこのコードのポイントである。
+  - q: Nightly Reviewワークフローのコード例で、`step.do()` を使う目的として最も適切なものはどれか。
+    code: |
+      const findings = await step.do('collect findings', () =>
+        collectFindings(event.payload.date));
+
+      const agent = init(Reviewer, { id: `nightly-${event.payload.date}` });
+
+      const receipt = await step.do('dispatch review', () =>
+        agent.dispatch(`Review these findings:\n${findings}`),
+      );
+    codeLang: ts
+    choices:
+      - 各処理ステップを冪等な単位として実行し、失敗時に自動的にリトライできるようにするため
+      - TypeScriptの型チェックを高速化するため
+      - エージェントのモデルをファインチューニングするため
+      - ローカル開発環境でのみ動作するようにするため
+    answer: 0
+    explanation: 「コード例」解説の通り、`step.do()` はWorkflowsが提供する仕組みで、各ステップを冪等な単位として実行し、失敗時には自動的にリトライされる。これにより数分〜数週間にわたる長時間の状態保持や再試行が可能になる。
+  - q: 記事中で「エージェントに自動承認・自動マージをまだ許可していない理由」として挙げられているのはどれか。
+    choices:
+      - エージェントの処理速度がまだ人間より遅いため
+      - 構築しているものの重要性に比例して、慎重さの必要性が増していくため
+      - Cloudflareの技術的な制約でAPI連携ができないため
+      - 法律でエージェントによる自動マージが禁止されているため
+    answer: 1
+    explanation: 「発表内容 / アーキテクチャ」の該当箇所で、ダッシュボードへの小さな変更でも複数の役割・専門分野・組織構造をまたぐ可能性があり、構築物の重要性に比例して自動化の慎重さが必要になると説明されている。

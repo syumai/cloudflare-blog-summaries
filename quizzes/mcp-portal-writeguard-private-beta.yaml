@@ -1,0 +1,111 @@
+title: "WriteGuard: MCPサーバーのためのきめ細かな制御機能"
+slug: mcp-portal-writeguard-private-beta
+sourceUrl: https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/
+wiki: ../docs/articles/2026-08-05-mcp-portal-writeguard-private-beta.md
+questions:
+  - q: 記事冒頭の「Endlessly Closing Tickets」のシナリオで、実際にチケットを大量に閉じてしまっていた原因は何でしたか。
+    choices:
+      - 複数の自動エージェントが、少し広すぎるクリーンアップタスクのプロンプトで動いていたこと
+      - システムのバグによる誤動作
+      - 悪意のある第三者による不正アクセス
+      - チケットシステムの仕様変更
+    answer: 0
+    explanation: Wikiの「背景・課題」節にある通り、表向きはエンジニアのJoeが大量にチケットを閉じたように見えたが、実際には複数の自動エージェントが3つの同時セッションで動いており、少し広すぎるクリーンアップタスクのプロンプトが原因でした。
+
+  - q: WriteGuard開発の前提として、記事が「頼れない」としている制御手段はどれですか。
+    choices:
+      - サーバー側のアクセスポリシー
+      - スキルやプロンプトエンジニアリングなど、クライアント側の制御
+      - Cloudflare Accessによる認証
+      - MCPサーバーポータル経由の接続
+    answer: 1
+    explanation: Wikiの「背景・課題」節にある通り、スキルやプロンプトエンジニアリングはハーネスによって挙動が異なり、ユーザー側で無効化もできるため、クライアント側の制御には頼れないとされています。
+
+  - q: Cloudflare社内のMCPサーバーポータルに接続されているサーバー数は、4月時点と本記事執筆時点でそれぞれいくつですか。
+    choices:
+      - 4月：5個、現在：13個
+      - 4月：13個、現在：27個
+      - 4月：27個、現在：50個
+      - 4月：1個、現在：13個
+    answer: 1
+    explanation: Wikiの「背景・課題」節にある通り、4月時点で13個のMCPサーバーが接続されていましたが、現在は27個に増加しています。
+
+  - q: WriteGuardの役割を最もよく表しているのはどれですか。
+    choices:
+      - MCPサーバー自体を高速化するキャッシュレイヤー
+      - 共有ポリシー・帰属・監査を組み合わせ、ツールの構成とリクエストコンテキストから何が起こるかを判断する層
+      - MCPサーバーのソースコードを自動生成するツール
+      - ユーザー認証を代替する新しいIDプロバイダー
+    answer: 1
+    explanation: Wikiの「WriteGuardとは」節にある通り、WriteGuardは「共有ポリシー、帰属、監査層」であり、呼び出しを通す・帰属を付与して記録する・ブロックする、のいずれかを判断します。
+
+  - q: WriteGuardのリスク層のうち、「MRを作成」「コメントを追加」が該当するのはどれですか。
+    choices:
+      - Read Only
+      - Minimal Impact
+      - Contained Write
+      - Critical
+    answer: 2
+    explanation: Wikiのリスク層テーブルにある通り、「コメントを追加」「MRを作成」「問題フィールドを更新」は Contained Write（限定的な書き込み）に分類されます。
+
+  - q: 以下は記事内で示されているWriteGuardのツールポリシー設定です。このコードの説明として正しいものはどれですか。
+
+    code: |
+      const sendEmailTool = {
+        tool: EmailMCP.sendEmailTool,
+        writeGuard: {
+          riskLevel: RiskLevel.CONTAINED_WRITE,
+          enabled: true,
+          labeling: {
+            field: "body",
+            supportedFormats: [
+              LabelFormat.PLAIN_TEXT,
+              LabelFormat.HTML,
+            ],
+          },
+        },
+      };
+    codeLang: typescript
+    choices:
+      - EmailMCP.sendEmailTool 自体のソースコードを書き換えて、リスク判定ロジックを直接埋め込んでいる
+      - EmailMCPのコードを変更せず、writeGuard設定オブジェクトを外付けすることでリスク層とラベリング形式を定義しており、labeling.fieldで指定したメール本文にエージェント帰属を挿入できる
+      - このツールはCRITICALリスク層に分類されており、呼び出しは常にブロックされる
+      - labeling.supportedFormats はツールの実行速度を制御するパラメータである
+    answer: 1
+    explanation: Wikiの「コード例」節で解説されている通り、このコードは EmailMCP.sendEmailTool 本体を変更せず、riskLevel＝CONTAINED_WRITE のポリシーと、labeling.fieldに"body"を指定したメール本文への帰属挿入設定を外付けしています。
+
+  - q: Cloudflareの内部MCPサーバーにおけるエージェントの権限モデルとして正しいものはどれですか。
+    choices:
+      - すべてのエージェントは共通の「エージェントアカウント」の権限で動作する
+      - エージェントは、それを動かしている従業員本人のAccess/OAuth権限で動作する
+      - エージェントは常に管理者権限で動作し、WriteGuardが事後的に制限する
+      - エージェントごとに個別のAPIキーが発行され、それを使って動作する
+    answer: 1
+    explanation: Wikiの「人間を維持し、エージェントを追加する」節にある通り、Cloudflareの内部MCPサーバーはAccessとOAuthでユーザーを識別し、エージェントはその従業員本人の権限で動作します。Joeが閉じられないチケットは、Joeのエージェントも閉じられません。
+
+  - q: Cloudflareが独立した「エージェントアカウント」を新設しなかった理由は何ですか。
+    choices:
+      - コストが高すぎるため
+      - 管理すべき権限の2番目のセットを生み、責任の所在を曖昧にしてしまうため
+      - 技術的に実装が不可能だったため
+      - MCPの仕様がエージェントアカウントをサポートしていないため
+    answer: 1
+    explanation: Wikiの「人間を維持し、エージェントを追加する」節にある通り、エージェントアカウントは権限管理を複雑にし、エージェントの背後にいる責任者への接続を曖昧にしてしまうため、Cloudflareはこの方式を採用しませんでした。
+
+  - q: GitLabの例で、`merge_mr`ツールがCRITICALリスク層に分類され「無効（disabled）」として構成されている理由は何ですか。
+    choices:
+      - GitLabのAPI仕様上、マージ機能自体が提供されていないため
+      - マージは通常デプロイメントパイプラインをトリガーするため、人間の判断を介在させる必要があるため
+      - マージリクエストの数が多すぎて処理しきれないため
+      - セキュリティ上、読み取り専用ツールしか実装していないため
+    answer: 1
+    explanation: Wikiの「コードのマージ」節にある通り、Cloudflareでのマージは通常デプロイメントパイプラインをトリガーするため人間をループに組み込む必要があり、merge_mrはCRITICALに分類した上で無効として構成されています。
+
+  - q: WriteGuardが「共有レイヤー」として構築された理由として、記事が説明しているものはどれですか。
+    choices:
+      - Jira・社内ウィキ・Google Workspaceなど、追加される全MCPサーバーに同じ機能が必要で、各サーバーで個別実装すると作業量が増え挙動も一貫しなくなるため
+      - 単一のGitLabサーバーだけで十分な機能だったため
+      - ライセンス費用を削減するため
+      - Cloudflare Workersの技術的制約でサーバーごとの実装が不可能だったため
+    answer: 0
+    explanation: Wikiの「単一サーバー例を超えて」節にある通り、GitLabだけならサーバーに直接組み込むこともできたが、増え続けるMCPサーバー全体に同じ機能を持たせるため、WriteGuardは共有レイヤーとして構築されました。

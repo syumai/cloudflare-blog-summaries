@@ -1,0 +1,123 @@
+title: "AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介"
+slug: cloudflare-computer
+sourceUrl: https://blog.cloudflare.com/ja-jp/cloudflare-computer/
+wiki: ../docs/articles/2026-08-05-cloudflare-computer.md
+questions:
+  - q: >-
+      記事における「アイソレート」の特徴として<strong>正しいもの</strong>はどれか。
+    choices:
+      - 完全なLinux環境を提供し、npmやnodeなどの実バイナリを直接実行できる
+      - Filesystem in Userspace（FUSE）としてファイルシステムをマウントする
+      - 高速に起動・終了でき、アイドル時は休止状態（ハイバネーション）に入って状態を保持できる
+      - Cloudflare Containersを使用して実現されている
+    answer: 2
+    explanation: >-
+      アイソレートは、Workers（約10年前）・Durable Objects（約6年前）から投資されてきた技術で、ほぼ無限に近い水平方向のスケール拡張に対応でき、非常に高速に起動・終了できる。アイドル時には休止状態（ハイバネーション）に入り状態を保持したままリソース消費を抑えられる、と記事にある。A・B・Dは「コンテナ型」バックエンドの特徴であり、アイソレートとは逆。
+
+  - q: >-
+      <code>@cloudflare/computer</code>が提供する標準ツール（AI
+      SDK互換のツールキット）に<strong>含まれないもの</strong>はどれか。
+    choices:
+      - read
+      - deploy
+      - edit
+      - exec
+    answer: 1
+    explanation: >-
+      記事では、よく使用される基本的なツールとして <code>read</code>・<code>write</code>・<code>edit</code>・<code>ls</code>・<code>exec</code> の5つが標準ツールとして挙げられている。<code>deploy</code>という名前の標準ツールは記事中に登場しない。
+
+  - q: >-
+      Workspace（仮想ファイルシステム）がバックエンドに使用している技術は何か。
+    choices:
+      - SQLite
+      - PostgreSQL
+      - R2オブジェクトストレージのみ
+      - Durable Objects Storage APIを使わないインメモリキャッシュ
+    answer: 0
+    explanation: >-
+      記事では「ワークスペースは、SQLiteをバックエンドに使用した仮想ファイルシステムで、クラウドストレージやソースコード管理システムなど、さまざまなソースから内容を取り込むことができます」と説明されている。
+
+  - q: >-
+      <code>@cloudflare/computer</code>の公開形態について、記事の内容として正しいものはどれか。
+    choices:
+      - まだプライベートベータで、招待制でのみ利用できる
+      - すでに正式版（GA）としてリリースされている
+      - ソースコードは非公開だが、npmパッケージのみ配布されている
+      - 初期プレビュー版として、GitHub上でOSSとして公開されている
+    answer: 3
+    explanation: >-
+      記事では「本日、私たちは@cloudflare/computerの初期プレビュー版を公開します」と述べられ、<code>github.com/cloudflare/computer</code> でOSSとして公開されている。利用開始には<code>npm install @cloudflare/computer</code> を実行する。
+
+  - q: >-
+      コンテナ型バックエンドについて<strong>正しいもの</strong>はどれか。
+    choices:
+      - just-bashを使ってシェルコードをJavaScriptに変換して実行する
+      - 動的なWorker上でシェルコードを直接実行する
+      - Cloudflare Containersを使用し、Workspaceを Filesystem in Userspace（FUSE）としてマウントする
+      - アイソレートよりも高速に起動・終了できる
+    answer: 2
+    explanation: >-
+      記事では「コンテナ型：Cloudflare Containersを使用して、完全なLinux環境を提供し、ファイルシステムはFilesystem in Userspace（FUSE）としてマウントされる」と説明されている。A・Bはアイソレート型（just-bash）の説明であり、Dは実際には逆（アイソレートの方が高速起動）。
+
+  - q: >-
+      Cloudflareが、AIエージェントの実行基盤として「コンテナだけ」ではなく「アイソレート」を重視する<strong>最大の理由</strong>は何か。
+    choices:
+      - アイソレートの方がセキュリティ的に安全だから
+      - すべてのエージェントに専用のコンテナ環境を用意できるほどの計算資源は存在せず、数億〜数十億規模のエージェントを支えられないから
+      - コンテナはTypeScriptのコードを実行できないから
+      - アイソレートの方がストレージ容量が大きいから
+    answer: 1
+    explanation: >-
+      記事の背景・課題セクションで「世界中のすべての企業が、自社ユーザーのAIエージェント1つひとつに専用のコンテナ型コンピューティング環境を提供できるほどの計算資源は存在しません」「数億、さらには数十億もののAIエージェントを稼働させる規模には対応できない」と述べられている。アイソレートは高速起動・ハイバネーション・ほぼ無限の水平スケールによってこの制約を回避する。
+
+  - q: >-
+      モデルが実行バックエンド（アイソレート／コンテナ）を自動選択する仕組みについて、記事の説明として正しいものはどれか。
+    choices:
+      - 各ツールの説明文（description）に適した実行ランタイムを判断するための情報を含めておき、モデルがそれを読んで選択する
+      - 開発者があらかじめ全タスクをアイソレート用・コンテナ用に手動で振り分けておく
+      - リクエストごとにランダムでバックエンドを選択し、失敗したら再試行する
+      - ファイルサイズが1MBを超えたら自動的にコンテナへ切り替わる固定ルールがある
+    answer: 0
+    explanation: >-
+      記事では「ツールの説明には、現在のタスクに適した実行ランタイムをAIエージェントが選択できるような情報が含まれ」「最先端のAIモデルはこの判断を非常に高い精度で行い、本当に必要な場合にのみコンテナを利用」すると説明されている。コード例③でも、コンテナのツール説明文に「npm, node, package managers, test runners, and real binaries on $PATHが必要なときに使え」という文言が埋め込まれている。
+
+  - q: >-
+      アイソレートとコンテナ間のファイルシステム共有について、記事の説明として正しいものはどれか。
+    choices:
+      - アイソレートとコンテナはそれぞれ別々のファイルシステムを持ち、手動でコピーする必要がある
+      - コンテナ側の変更はアイソレート側には反映されない
+      - ファイルシステムはタスク完了後にのみ同期される
+      - アイソレートとコンテナは同じファイルシステムを共有し、各環境で変更された内容は常に同期される
+    answer: 3
+    explanation: >-
+      記事では「アイソレートとコンテナが同じファイルシステムを共有して作業を行い、各環境で変更された内容は、元となるファイルシステムと常に同期されます」と説明されている。これにより、タスクの前半をアイソレート、後半をコンテナで実行するといった切り替えがファイルの一貫性を保ったまま行える。
+
+  - q: >-
+      （コード読解）以下のコードは、コード例①のアイソレート専用エージェントに対して追加された変更である。この変更が実現していることとして<strong>最も適切なもの</strong>はどれか。
+    code: |
+      export class Agent extends withWorkspaceContainer(Think) {
+        override workspaceBash = false;
+
+        override workspace = new Workspace({
+          storage: this.ctx.storage,
+          useThink: true,
+          backends: [
+            new CloudflareContainerBackend({
+              container: () => this,
+              workspace: {
+                binding: "Agent",
+                id: this.ctx.id.toString(),
+              },
+            }),
+          ],
+        });
+      }
+    codeLang: ts
+    choices:
+      - アイソレートを完全に無効化し、コンテナのみで動作するように切り替えている
+      - Workspaceのストレージバックエンドを SQLite からPostgreSQLに変更している
+      - <code>withWorkspaceContainer</code>によるミックスインと<code>backends</code>配列への<code>CloudflareContainerBackend</code>の追加により、既存のエージェントにコンテナ実行バックエンドを追加している
+      - GitHub Issueへの自動返信ツールを新たに追加している
+    answer: 2
+    explanation: >-
+      <code>withWorkspaceContainer(Think)</code>というミックスイン形式のクラス拡張でコンテナのライフサイクル管理機能を追加し、<code>backends</code>配列に<code>CloudflareContainerBackend</code>を渡すことで、Workspaceはアイソレート（デフォルト）に加えてコンテナも実行先として認識するようになる。<code>workspace.binding</code>と<code>workspace.id</code>は、どのDurable Object（エージェントインスタンス）に紐づくコンテナかを一意に特定するための情報。アイソレートを無効化するものではなく、両方を使い分けられるようにする変更である（A・B・Dはいずれも誤り。ツール統合の<code>replyToIssue</code>はコード例③で追加される別の変更）。

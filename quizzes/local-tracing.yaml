@@ -1,0 +1,95 @@
+title: エージェントがローカルトレースでWorkersをデバッグ可能に
+slug: local-tracing
+sourceUrl: https://blog.cloudflare.com/local-tracing/
+wiki: ../docs/articles/2026-08-04-local-tracing.md
+questions:
+  - q: この記事で発表された機能は、どの2つの開発コマンドに組み込まれたか。
+    choices:
+      - "`npm run build` と `npm run deploy`"
+      - "`wrangler dev` と `vite dev`"
+      - "`git commit` と `git push`"
+      - "`docker run` と `docker build`"
+    answer: 1
+    explanation: TL;DRおよび本文に記載の通り、`wrangler dev` と `vite dev` が、ローカルでのWorker呼び出しに対して自動的にOpenTelemetryトレースを生成するようになった。
+  - q: エージェントがLocal Explorer APIを利用する際、事前に必要な作業として正しいものはどれか。
+    choices:
+      - 専用SDKのインストールと詳細な設定
+      - プロンプトにAPIのURLを明示的に記載すること
+      - 特別な準備は不要。開発サーバーが自動的にヒントを出力する
+      - Cloudflareダッシュボードでの事前登録
+    answer: 2
+    explanation: 記事に記載の通り、SDKのインストール・設定・プロンプトへの明示的な言及なしに、コーディングエージェントのセッションを検出した開発サーバーが自動的にヒントメッセージを出力し、Local Explorer APIへ誘導する。
+  - q: Local Explorer APIのエンドポイントに対して、エージェントはどのような形式でトレースとログを検索できるか。
+    choices:
+      - GraphQLクエリ
+      - SQL
+      - 正規表現のみ
+      - 自然言語のみ
+    answer: 1
+    explanation: 記事内のヒントメッセージに `POST /cdn-cgi/explorer/api/local/observability/query -- query traces and logs with SQL` とある通り、SQLでトレースとログを検索できる。
+  - q: 記事の具体例で、`POST /api/orders` が500エラーを返すようになった直接の原因は何だったか。
+    choices:
+      - KVへの接続がタイムアウトした
+      - "D1への挿入が `no such column: delivery_window` で失敗した"
+      - キューへのメッセージ送信が拒否された
+      - Durable Objectsのストレージ容量が上限に達した
+    answer: 1
+    explanation: "Wiki本文に記載の通り、トレースデータからKV読み取りは成功し、D1への挿入が「no such column: delivery_window」というエラーで失敗し、キューは一度も呼び出されなかったことが判明した。"
+  - q: 上記の障害の根本原因として、エージェントがAPI経由でD1のスキーマを調べた結果、何が判明したか。
+    choices:
+      - テーブル自体が存在しなかった
+      - "`delivery_window` カラムを追加するマイグレーションが存在するがローカルに未適用だった"
+      - D1のバインディング設定が間違っていた
+      - 権限不足でD1にアクセスできなかった
+    answer: 1
+    explanation: 記事に記載の通り、エージェントはD1のスキーマを検査し、マイグレーションが定義済みであるにもかかわらずローカル環境に適用されていないことを突き止め、適用することで問題を解決した。
+  - q: Local Explorer（ブラウザUI）はどこで動作するか。
+    choices:
+      - Cloudflareダッシュボード上
+      - Workerと同じlocalhostオリジン上のローカル開発サーバー
+      - 別途起動する専用のクラウドサービス上
+      - VS Code拡張機能の中のみ
+    answer: 1
+    explanation: 記事に明記されている通り、Local ExplorerはCloudflareダッシュボード上ではなく、Workerと同じlocalhostオリジン上で動作し、Wranglerで `e` キーを押すか `/cdn-cgi/explorer` にアクセスすることで開ける。
+  - q: Workers Tracingの計測はどこに直接組み込まれているか。
+    choices:
+      - 各アプリケーションのフレームワークコード内
+      - workerd（OSSのWorkersランタイム）
+      - Cloudflareダッシュボードのフロントエンド
+      - npmパッケージとして配布される専用SDK
+    answer: 1
+    explanation: 「仕組みの内側」に記載の通り、Workers Tracingはworkerd（Workersを支えるOSSランタイム）に直接組み込まれた計測機能として提供されており、SDKのインストールやコード変更は不要である。
+  - q: |
+      次のヒントメッセージについて、エージェントに提供している情報として正しいものはどれか。
+    code: |
+      This dev session is running in an AI agent.
+
+      The Local Explorer API is available at
+      http://localhost:8787/cdn-cgi/explorer/api
+
+      Debug with traces:
+      POST /cdn-cgi/explorer/api/local/observability/query -- query traces and logs with SQL
+    codeLang: text
+    choices:
+      - デプロイ先の本番環境のURL
+      - Local Explorer APIのURLと、トレース・ログをSQLで検索するためのエンドポイント
+      - エージェントが使うべきAIモデルの名前
+      - Wranglerのバージョン情報
+    answer: 1
+    explanation: このメッセージは開発サーバーが自動出力するものであり、Local Explorer APIのベースURLと、SQLでトレース・ログをクエリできるエンドポイントの存在をエージェントに伝えている。人間向けドキュメントを読ませずにAPIを発見させる役割を持つ。
+  - q: Miniflareがローカルトレースの仕組みで果たしている役割として正しいものはどれか。
+    choices:
+      - 本番環境のWorkerを直接呼び出してテレメトリを転送する
+      - ランタイムのイベントとコンソール出力を収集し、OpenTelemetryトレースへ組み立てて内部のSQLiteバックエンドDurable Objectに書き込む
+      - トレースをすべてクラウド上のS3互換ストレージに保存する
+      - JavaScriptのコードをPythonへトランスパイルする
+    answer: 1
+    explanation: 「仕組みの内側」に記載の通り、Miniflareはランタイムのイベントとコンソール出力を収集し、相関付けられたログとともにOpenTelemetryトレースへ組み立て、ローカルのトレースストアとして機能する内部のSQLiteバックエンドDurable Objectにテレメトリを書き込む。
+  - q: この機能を有効化するために必要な作業として、記事が示しているものはどれか。
+    choices:
+      - "`wrangler` または `@cloudflare/vite-plugin` を最新版にインストールするだけでよい"
+      - 別途、専用のオブザーバビリティSDKを新規にインストールする必要がある
+      - Cloudflareの有料プランへの加入が必須である
+      - Workerのコードをすべて書き直す必要がある
+    answer: 0
+    explanation: 「使い始める」セクションに記載の通り、`npm install --save-dev wrangler@latest` または `npm install --save-dev @cloudflare/vite-plugin@latest` を実行するだけで、追加のSDKインストールや設定変更なしにローカルトレースが有効化される。
