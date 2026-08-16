@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: "Cloudflare AI Search: エージェントにあなたのデータのための検索エンジンを"
 info: |
@@ -22,6 +23,15 @@ themeConfig:
 原文: https://blog.cloudflare.com/ai-search-easier/<br>
 公開日: 2026-08-06
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflare AI Searchが大幅アップデート。自作していた検索/RAGパイプラインを単一のマネージドサービスとして自動構築可能に
+- 新機能: サイトマップ不要のクロール（Discover）、複数インスタンス横断検索（`/search`・`/mcp`）、Access連携、EmDash統合
+- 実例として、開発者向けドキュメントを横断検索できる**Cloudflare Dev Stack MCP**を構築・公開。ブログ自身の検索もハイブリッド検索に刷新
+- デフォルトのWorkers AIモデルを使う埋め込み・再ランキングが無料の新価格体系をプレビュー公開
 
 ---
 

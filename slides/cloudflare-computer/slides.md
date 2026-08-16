@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介
 info: |
@@ -22,8 +23,17 @@ themeConfig:
 
 <div class="pt-4 text-sm opacity-70">
 原文: https://blog.cloudflare.com/ja-jp/cloudflare-computer/<br>
-公開日: 2026-08-05
+公開日: 2026-08-03
 </div>
+
+---
+
+# TL;DR
+
+- 高性能なAIエージェントに共通するのは、専用の「コンピューター環境」（ファイルシステム・シェル・ツール・実行権限）を持つこと
+- 全エージェントに専用コンテナを用意するだけの計算資源は存在しないという課題に対し、高速な**アイソレート**環境と完全な**Linuxコンテナ**環境を動的に組み合わせるアプローチを提案
+- 実装として、SQLiteバックエンドの仮想ファイルシステムを中核とするエージェントランタイム<strong>`@cloudflare/computer`</strong>の初期プレビュー版を公開
+- 目標は、コンテナが必要になる作業の割合を10%未満に抑えること
 
 ---
 
@@ -596,5 +606,5 @@ npm install @cloudflare/computer
 - Workers サンプル: [examples/cloudflare-computer/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/cloudflare-computer)
 
 <div class="pt-8 text-sm opacity-50">
-Wiki: docs/articles/2026-08-05-cloudflare-computer.md
+Wiki: docs/articles/2026-08-03-cloudflare-computer.md
 </div>

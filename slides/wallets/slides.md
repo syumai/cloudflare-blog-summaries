@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Cloudflare Walletsを発表
 themeConfig:
@@ -23,6 +24,16 @@ lineNumbers: true
 原文: https://blog.cloudflare.com/ja-jp/wallets/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+- AIエージェントは人間向けに設計されたログインページの操作を強いられがちで、<strong>「安定したID」</strong>と<strong>「ネイティブな決済手段」</strong>の両方を持たないことが普及の妨げに
+- Cloudflareは**Cloudflare Wallets**を発表。`cloudflare.pay`で一意のハンドルを取得し、ステーブルコインの保管・サービス購入・Web全体での資金受け取りが可能に
+- 各アカウントは、予算・許可する販売先・1回あたりの上限額などを設定できる**Virtual Wallets**を作成し、エージェントに安全な範囲で資金を利用させられる
+- 決済だけでなく、`research.example.cloudflare.pay`のような人間が読めるエージェント識別子を通じて「誰の代理として動いているか」を検証可能にするデジタルアイデンティティの側面も持つ
+- <strong>Monetization Gateway</strong>（販売側の決済受け取り）・Wallets（購入側の決済）・Identity（本人確認）の3要素で<strong>「ヘッドレスマーケットプレイス」</strong>の実現を目指す
 
 ---
 

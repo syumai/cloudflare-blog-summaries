@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 themeConfig:
   primary: '#f6821f'
@@ -22,6 +23,17 @@ lineNumbers: true
 原文: https://blog.cloudflare.com/grpc-workers/<br>
 公開日: 2026-08-03
 </div>
+
+---
+
+# TL;DR
+
+
+- Cloudflare WorkersとContainersが、インバウンドの**TCP接続**と**gRPC**をサポート（プライベートベータ）
+- 3つの柱: `connect(socket)`ハンドラー・Container上gRPCサーバーへの双方向ストリーミング転送・WorkerのgRPC⇄gRPC-web変換
+- 背景には、低レイテンシな音声AIの多くがgRPCで実装されているという課題意識がある
+- 内部はCap'n Protoを使いつつ、外部にはgRPCを含む既存エコシステムをそのまま提供。**330拠点以上**を活かした低レイテンシ通信基盤
+
 
 ---
 

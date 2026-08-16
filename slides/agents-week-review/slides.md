@@ -8,6 +8,7 @@ drawings:
   persist: false
 transition: slide-left
 mdc: true
+routerMode: hash
 themeConfig:
   primary: '#f6821f'
 ---
@@ -20,9 +21,19 @@ Cloudflare ブログ記事解説
 
 原文: https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/
 
-公開日: 2026-08-13
+公開日: 2026-08-10
 
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflare は 2026年8月3日〜7日の5日間、「Agents Week」として AI エージェント関連の発表を**約26件**連続で行った
+- テーマは1日ごとに区切られ、<strong>「実行環境とインフラ」→「開発ライフサイクル（ADLC）」→「Zero Trust とセキュリティ」→「エージェント型インターネット」→「実装と現実」</strong>の順に展開
+- 通底するメッセージは、モデル性能だけでは解決できず、<strong>アイデンティティ・通信・オーケストレーション・メモリ・オブザーバビリティ・セキュリティ</strong>という基盤全体の整備が必要という点
+- 目玉発表は `@cloudflare/computer`・Agent Development Lifecycle（ADLC）・Agent Access Model・WebMCP・AEO など多岐にわたる
+- 本スライドは5日間・全<strong>27発表</strong>への「目次」的なまとめであり、各発表は個別の解説スライド・解説記事にリンクしている
 
 ---
 
@@ -67,19 +78,17 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**@cloudflare/computer**<br>
-<span class="text-sm opacity-60">『AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介』</span><br>
+<strong>『AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介』</strong><br>
 エージェントのタスクに応じてアイソレート実行とコンテナ実行を切り替えられる、新しい実行環境<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-03-cloudflare-computer.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Workers RPC が Python ⇄ JavaScript 間で利用可能に**<br>
-<span class="text-sm opacity-60">『Workers RPC が Python と JavaScript 間で利用可能に』</span><br>
+<strong>『Workers RPC が Python と JavaScript 間で利用可能に』</strong><br>
 多言語エージェントコンポーネントを直接連携できるようになった<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/python-workers-rpc/)</span> ・ <span class="text-xs">▶ <a href="../python-workers-rpc/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/python-workers-rpc/)</span> ・ <span class="text-xs">▶ <a href="../python-workers-rpc/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-03-python-workers-rpc.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -93,19 +102,17 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**Kimi / GLM を大規模に実行**<br>
-<span class="text-sm opacity-60">『より小さく、より速く、より安全に：Kimi と GLM を大規模に実行』</span><br>
+<strong>『より小さく、より速く、より安全に：Kimi と GLM を大規模に実行』</strong><br>
 オープンウェイトモデルを「より小さく、速く、安全に」提供する取り組み<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/smaller-faster-safer-models/)</span> ・ <span class="text-xs">▶ <a href="../smaller-faster-safer-models/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/smaller-faster-safer-models/)</span> ・ <span class="text-xs">▶ <a href="../smaller-faster-safer-models/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-03-smaller-faster-safer-models.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Billable Usage API**<br>
-<span class="text-sm opacity-60">『Billable Usage API を提供開始』</span><br>
+<strong>『Billable Usage API を提供開始』</strong><br>
 エージェント自身が使用量・コストをプログラムから取得できる API<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/)</span> ・ <span class="text-xs">▶ <a href="../billable-usage-api/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/)</span> ・ <span class="text-xs">▶ <a href="../billable-usage-api/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-03-billable-usage-api.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -115,10 +122,9 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**インバウンド TCP / gRPC サポート**（Workers・Containers）<br>
-<span class="text-sm opacity-60">『Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート』</span><br>
+<strong>『Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート』</strong><br>
 リアルタイム音声エージェントなど低レイテンシ通信が必要なユースケースに対応<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/grpc-workers/)</span> ・ <span class="text-xs">▶ <a href="../grpc-workers/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/grpc-workers/)</span> ・ <span class="text-xs">▶ <a href="../grpc-workers/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-03-grpc-workers.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -132,19 +138,17 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**ADLC 提案**<br>
-<span class="text-sm opacity-60">『Cloudflare にエージェント開発ライフサイクルの時代が到来』</span><br>
+<strong>『Cloudflare にエージェント開発ライフサイクルの時代が到来』</strong><br>
 従来の SDLC（Software Development Lifecycle）に代わる概念として ADLC を提案<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)</span> ・ <span class="text-xs">▶ <a href="../agent-development-lifecycle/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)</span> ・ <span class="text-xs">▶ <a href="../agent-development-lifecycle/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-agent-development-lifecycle.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Cloudflare Agents**<br>
-<span class="text-sm opacity-60">『Cloudflare Agents の紹介』</span><br>
+<strong>『Cloudflare Agents の紹介』</strong><br>
 トレース・再実行・承認機能で本番運用を管理できるフレームワーク<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/agents-on-cloudflare/)</span> ・ <span class="text-xs">▶ <a href="../agents-on-cloudflare/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/agents-on-cloudflare/)</span> ・ <span class="text-xs">▶ <a href="../agents-on-cloudflare/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-agents-on-cloudflare.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -154,19 +158,17 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**ローカルトレースによる Workers デバッグ**<br>
-<span class="text-sm opacity-60">『エージェントがローカルトレースで Workers をデバッグ可能に』</span><br>
+<strong>『エージェントがローカルトレースで Workers をデバッグ可能に』</strong><br>
 分散トレーシングをデプロイ前の問題検出に活用する仕組み<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/local-tracing/)</span> ・ <span class="text-xs">▶ <a href="../local-tracing/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/local-tracing/)</span> ・ <span class="text-xs">▶ <a href="../local-tracing/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-local-tracing.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Cloudflare Wallets**<br>
-<span class="text-sm opacity-60">『Cloudflare Wallets を発表』</span><br>
+<strong>『Cloudflare Wallets を発表』</strong><br>
 エージェントが「エージェント経済」の参加者として安全に取引を行うためのウォレット<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/)</span> ・ <span class="text-xs">▶ <a href="../wallets/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/)</span> ・ <span class="text-xs">▶ <a href="../wallets/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-wallets.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -176,19 +178,17 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**数百万リポジトリで CI/CD を実行**<br>
-<span class="text-sm opacity-60">『数百万のリポジトリで CI/CD を実行』</span><br>
+<strong>『数百万のリポジトリで CI/CD を実行』</strong><br>
 パイプラインをコードベースから記述し、失敗時にエージェントが自律的に修復を試行<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ci-workflows/)</span> ・ <span class="text-xs">▶ <a href="../ci-workflows/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ci-workflows/)</span> ・ <span class="text-xs">▶ <a href="../ci-workflows/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-ci-workflows.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**AI によるエンジニアリング標準の徹底**<br>
-<span class="text-sm opacity-60">『Cloudflare が AI を活用してエンジニアリング標準を徹底する方法』</span><br>
+<strong>『Cloudflare が AI を活用してエンジニアリング標準を徹底する方法』</strong><br>
 開発ワークフロー全体に AI を組み込み、規約遵守を自動チェック<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/engineering-standards-enforcement/)</span> ・ <span class="text-xs">▶ <a href="../engineering-standards-enforcement/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/engineering-standards-enforcement/)</span> ・ <span class="text-xs">▶ <a href="../engineering-standards-enforcement/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-engineering-standards-enforcement.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -204,10 +204,9 @@ Cloudflare の主張:
 
 <div class="pb-3">
 
-**Astro の GitHub Issue をゼロにするソフトウェアファクトリー**<br>
-<span class="text-sm opacity-60">『Astro の GitHub Issue をゼロにするソフトウェアファクトリーを構築した方法』</span><br>
+<strong>『Astro の GitHub Issue をゼロにするソフトウェアファクトリーを構築した方法』</strong><br>
 Issue の自動分類・トリアージで OSS 保守コストを削減<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/astro-issue-triage/)</span> ・ <span class="text-xs">▶ <a href="../astro-issue-triage/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/astro-issue-triage/)</span> ・ <span class="text-xs">▶ <a href="../astro-issue-triage/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-04-astro-issue-triage.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -219,19 +218,17 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 <div class="pb-3">
 
-**Agent Access Model**<br>
-<span class="text-sm opacity-60">『エージェントアクセスモデル（Agent Access Model）』</span><br>
+<strong>『エージェントアクセスモデル（Agent Access Model）』</strong><br>
 エージェントが人間・サービスに代わって安全にリソースへアクセスするアクセス制御フレームワーク<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/the-agent-access-model/)</span> ・ <span class="text-xs">▶ <a href="../the-agent-access-model/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/the-agent-access-model/)</span> ・ <span class="text-xs">▶ <a href="../the-agent-access-model/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-05-the-agent-access-model.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Cloudflare OS で働き方を見直す**<br>
-<span class="text-sm opacity-60">『Cloudflare OS で Cloudflare の働き方を見直す』</span><br>
+<strong>『Cloudflare OS で Cloudflare の働き方を見直す』</strong><br>
 社内業務に AI エージェントを組み込みつつ、効率性と人間の監督を両立<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../how-we-use-ai-with-cloudflare-os/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../how-we-use-ai-with-cloudflare-os/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -241,19 +238,17 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 <div class="pb-3">
 
-**Cloudflare OS（オープンプラットフォーム）**<br>
-<span class="text-sm opacity-60">『Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム』</span><br>
+<strong>『Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム』</strong><br>
 社内向けに構築した Cloudflare OS を、オープンなプラットフォームとして他チームにも提供<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-os/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-os/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-05-cloudflare-os.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**ID情報ベースの分析**<br>
-<span class="text-sm opacity-60">『ID 情報に基づく分析で、不正な AI の利用を検出』</span><br>
+<strong>『ID 情報に基づく分析で、不正な AI の利用を検出』</strong><br>
 エージェントのトラフィックを実ユーザーの ID 情報と関連付け、不正利用を検出<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/)</span> ・ <span class="text-xs">▶ <a href="../identity-aware-ai-gateway/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/)</span> ・ <span class="text-xs">▶ <a href="../identity-aware-ai-gateway/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-05-identity-aware-ai-gateway.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -263,10 +258,9 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 <div class="pb-3">
 
-**WriteGuard**<br>
-<span class="text-sm opacity-60">『WriteGuard：MCP サーバーをきめ細かく制御』</span><br>
+<strong>『WriteGuard：MCP サーバーをきめ細かく制御』</strong><br>
 MCP サーバー経由のリスクの高い書き込み操作をきめ細かく制御<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/)</span> ・ <span class="text-xs">▶ <a href="../mcp-portal-writeguard-private-beta/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/)</span> ・ <span class="text-xs">▶ <a href="../mcp-portal-writeguard-private-beta/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-05-mcp-portal-writeguard-private-beta.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -282,19 +276,17 @@ MCP サーバー経由のリスクの高い書き込み操作をきめ細かく�
 
 <div class="pb-3">
 
-**オープンなエージェンティックインターネットの構築**<br>
-<span class="text-sm opacity-60">『読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築』</span><br>
+<strong>『読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築』</strong><br>
 読み取り・発見・呼び出し・決済までを、パブリッシャーが管理権を維持したまま実現する全体構想<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/the-agentic-internet/)</span> ・ <span class="text-xs">▶ <a href="../the-agentic-internet/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/the-agentic-internet/)</span> ・ <span class="text-xs">▶ <a href="../the-agentic-internet/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-the-agentic-internet.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**WebMCP**<br>
-<span class="text-sm opacity-60">『あらゆる Web サイトに WebMCP インターフェースを提供』</span><br>
+<strong>『あらゆる Web サイトに WebMCP インターフェースを提供』</strong><br>
 あらゆる Web サイトにエージェント向けの MCP インターフェースを付与<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/webmcp/)</span> ・ <span class="text-xs">▶ <a href="../webmcp/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/webmcp/)</span> ・ <span class="text-xs">▶ <a href="../webmcp/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-webmcp.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -304,19 +296,17 @@ MCP サーバー経由のリスクの高い書き込み操作をきめ細かく�
 
 <div class="pb-3">
 
-**AEO (Answer Engine Optimization)**<br>
-<span class="text-sm opacity-60">『ランク付けから推奨へ：AI エージェント時代でサイトを成功に導く準備を整える』</span><br>
+<strong>『ランク付けから推奨へ：AI エージェント時代でサイトを成功に導く準備を整える』</strong><br>
 SEO（検索エンジン最適化）から、AI エージェントに「推奨」されるための最適化へ<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/aeo/)</span> ・ <span class="text-xs">▶ <a href="../aeo/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/aeo/)</span> ・ <span class="text-xs">▶ <a href="../aeo/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-aeo.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Kitesurf**<br>
-<span class="text-sm opacity-60">『Kitesurf のご紹介』</span><br>
+<strong>『Kitesurf のご紹介』</strong><br>
 メモリ・CPU使用量を抑えた、エージェント専用の軽量ブラウザ<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/kitesurf/)</span> ・ <span class="text-xs">▶ <a href="../kitesurf/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/kitesurf/)</span> ・ <span class="text-xs">▶ <a href="../kitesurf/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-kitesurf.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -326,19 +316,17 @@ SEO（検索エンジン最適化）から、AI エージェントに「推奨�
 
 <div class="pb-3">
 
-**MCPv2**<br>
-<span class="text-sm opacity-60">『MCP の次世代バージョン（MCPv2）』</span><br>
+<strong>『MCP の次世代バージョン（MCPv2）』</strong><br>
 MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-v2/)</span> ・ <span class="text-xs">▶ <a href="../mcp-v2/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-v2/)</span> ・ <span class="text-xs">▶ <a href="../mcp-v2/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-mcp-v2.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Cloudflare AI Search**<br>
-<span class="text-sm opacity-60">『Cloudflare AI Search』</span><br>
+<strong>『Cloudflare AI Search』</strong><br>
 ファイル・Web サイトを変換し、エージェント向け検索エンジンとして提供<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ai-search-easier/)</span> ・ <span class="text-xs">▶ <a href="../ai-search-easier/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ai-search-easier/)</span> ・ <span class="text-xs">▶ <a href="../ai-search-easier/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-06-ai-search-easier.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -357,19 +345,17 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 <div class="pb-3">
 
-**良い振る舞い / 悪い振る舞いの見極め**<br>
-<span class="text-sm opacity-60">『エージェントが動くインターネットで、「良い振る舞い」と「悪い振る舞い」を見極める』</span><br>
+<strong>『エージェントが動くインターネットで、「良い振る舞い」と「悪い振る舞い」を見極める』</strong><br>
 従来の bot 対策を、継続的な信頼評価（continuous trust evaluation）へ転換<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/)</span> ・ <span class="text-xs">▶ <a href="../good-and-bad-agentic-behaviors/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/)</span> ・ <span class="text-xs">▶ <a href="../good-and-bad-agentic-behaviors/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-07-good-and-bad-agentic-behaviors.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Workers AI と AI Gateway の統合**<br>
-<span class="text-sm opacity-60">『Workers AI と AI Gateway を単一の AI コントロールプレーンに統合』</span><br>
+<strong>『Workers AI と AI Gateway を単一の AI コントロールプレーンに統合』</strong><br>
 統一されたバインディング・ウォレット・ダッシュボードでモデル呼び出しを一元管理<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/workers-ai-gateway-unification/)</span> ・ <span class="text-xs">▶ <a href="../workers-ai-gateway-unification/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/workers-ai-gateway-unification/)</span> ・ <span class="text-xs">▶ <a href="../workers-ai-gateway-unification/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-07-workers-ai-gateway-unification.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -379,19 +365,17 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 <div class="pb-3">
 
-**Cloudflare Ambassadors / Community Engineers**<br>
-<span class="text-sm opacity-60">『Cloudflare Ambassadors と Community Engineers を発表』</span><br>
+<strong>『Cloudflare Ambassadors と Community Engineers を発表』</strong><br>
 コミュニティリーダー・OSSメンテナー向けの新プログラム。今後2年間で OSS に追加100万ドルを提供<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/community-program-refresh/)</span> ・ <span class="text-xs">▶ <a href="../community-program-refresh/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/community-program-refresh/)</span> ・ <span class="text-xs">▶ <a href="../community-program-refresh/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-07-community-program-refresh.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
 <div class="pb-3">
 
-**Radar Researcher**<br>
-<span class="text-sm opacity-60">『Radar Researcher のご紹介』</span><br>
+<strong>『Radar Researcher のご紹介』</strong><br>
 自然言語での問いかけでインターネットデータを分析できる AI ツール<br>
-<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/introducing-radar-researcher/)</span> ・ <span class="text-xs">▶ <a href="../introducing-radar-researcher/" target="_blank">解説スライド</a></span>
+<span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/introducing-radar-researcher/)</span> ・ <span class="text-xs">▶ <a href="../introducing-radar-researcher/" target="_blank">解説スライド</a></span> ・ <span class="text-xs"><a href="../../docs/articles/2026-08-07-introducing-radar-researcher.html" target="_blank">📖 解説記事</a></span>
 
 </div>
 
@@ -432,12 +416,8 @@ Agents Week 2026 の中でも特に掘り下げて、別デッキ・別 Wiki ペ
 
 <div class="pt-6 text-sm">
 
-📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) ・ <a href="../cloudflare-computer/" target="_blank">▶ 解説スライド</a>
+📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) ・ <a href="../cloudflare-computer/" target="_blank">▶ 解説スライド</a> ・ <a href="../../docs/articles/2026-08-03-cloudflare-computer.html" target="_blank">📖 解説記事</a>
 
-</div>
-
-<div class="text-xs opacity-50 pt-2">
-Wiki: `docs/articles/2026-08-05-cloudflare-computer.md`
 </div>
 
 ---
@@ -458,12 +438,8 @@ Wiki: `docs/articles/2026-08-05-cloudflare-computer.md`
 
 <div class="pt-6 text-sm">
 
-📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/) ・ <a href="../wallets/" target="_blank">▶ 解説スライド</a>
+📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/) ・ <a href="../wallets/" target="_blank">▶ 解説スライド</a> ・ <a href="../../docs/articles/2026-08-04-wallets.html" target="_blank">📖 解説記事</a>
 
-</div>
-
-<div class="text-xs opacity-50 pt-2">
-Wiki: `docs/articles/2026-08-04-wallets.md`
 </div>
 
 ---
@@ -484,12 +460,8 @@ Wiki: `docs/articles/2026-08-04-wallets.md`
 
 <div class="pt-6 text-sm">
 
-📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/) ・ <a href="../cloudflare-os/" target="_blank">▶ 解説スライド</a>
+📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/) ・ <a href="../cloudflare-os/" target="_blank">▶ 解説スライド</a> ・ <a href="../../docs/articles/2026-08-05-cloudflare-os.html" target="_blank">📖 解説記事</a>
 
-</div>
-
-<div class="text-xs opacity-50 pt-2">
-Wiki: `docs/articles/2026-08-05-cloudflare-os.md`
 </div>
 
 ---
@@ -510,12 +482,8 @@ Wiki: `docs/articles/2026-08-05-cloudflare-os.md`
 
 <div class="pt-6 text-sm">
 
-📄 [原文](https://blog.cloudflare.com/webmcp/) ・ <a href="../webmcp/" target="_blank">▶ 解説スライド</a>
+📄 [原文](https://blog.cloudflare.com/webmcp/) ・ <a href="../webmcp/" target="_blank">▶ 解説スライド</a> ・ <a href="../../docs/articles/2026-08-06-webmcp.html" target="_blank">📖 解説記事</a>
 
-</div>
-
-<div class="text-xs opacity-50 pt-2">
-Wiki: `docs/articles/2026-08-06-webmcp.md`
 </div>
 
 ---
@@ -536,12 +504,8 @@ Wiki: `docs/articles/2026-08-06-webmcp.md`
 
 <div class="pt-6 text-sm">
 
-📄 [原文](https://blog.cloudflare.com/kitesurf/) ・ <a href="../kitesurf/" target="_blank">▶ 解説スライド</a>
+📄 [原文](https://blog.cloudflare.com/kitesurf/) ・ <a href="../kitesurf/" target="_blank">▶ 解説スライド</a> ・ <a href="../../docs/articles/2026-08-06-kitesurf.html" target="_blank">📖 解説記事</a>
 
-</div>
-
-<div class="text-xs opacity-50 pt-2">
-Wiki: `docs/articles/2026-08-06-kitesurf.md`
 </div>
 
 ---

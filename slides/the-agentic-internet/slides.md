@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: 読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築
 info: |
@@ -22,6 +23,16 @@ themeConfig:
 原文: https://blog.cloudflare.com/ja-jp/the-agentic-internet/<br>
 公開日: 2026-08-10
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareの観測データでは、良性ボットの大量トラフィックの多くが**前回のクロール以降変わっていないページ**を再取得しており、計算資源が成果を生まないまま消費されている
+- 背景にあるのは、Webの新しい訪問者層「エージェント」の台頭。エージェントは新種のソフトウェアではなく、新種のサイト訪問者
+- Cloudflareは、サイトを<strong>「読み取り可能」「発見可能」「呼び出し可能」「決済可能」</strong>にすることで、オープンな「エージェンティックインターネット」を構築しようとしている
+- 4つのプリミティブはx402・MCP・Web Bot Auth・PACTなどのオープン標準に基づき、自社スタックへの囲い込みではなく中立的な基盤を志向
+- Markdown for Agents・Kitesurf・AI Search・AEO・WebMCP・Code Mode・Wallets・Monetization Gatewayなど一群のツール・仕様を紹介
 
 ---
 

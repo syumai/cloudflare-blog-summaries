@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Cloudflare Ambassadors、Community Engineers を発表
 info: |
@@ -27,6 +28,17 @@ themeConfig:
 公開日: 2026-08-07
 
 </div>
+
+---
+
+# TL;DR
+
+
+- Cloudflareは開発者・OSSコミュニティ向けの支援体制を刷新し、新しい**コミュニティプログラム**を発表
+- 「<strong>Cloudflare Ambassadors</strong>」（伝道者向け）と「<strong>Cloudflare Community Engineers</strong>」（OSS貢献者向け）の2トラック構成
+- Community Engineersトラックでは、OSS支援に今後2年間で新たに**100万ドル**を追加投資
+- Ambassadorsの応募締切は**9月6日**、選出結果の通知は**10月5日**を予定。Discordの運営体制も見直し
+
 
 ---
 

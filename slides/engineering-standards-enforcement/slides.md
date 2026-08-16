@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: CloudflareがAIを使ってエンジニアリング標準を徹底する方法
 info: |
@@ -22,6 +23,17 @@ themeConfig:
 原文: https://blog.cloudflare.com/engineering-standards-enforcement/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+
+- 過去4か月で、CloudflareのAIコードレビュアーが標準逸脱を約**25万件**検出し、**1万6,000件**のマージをブロック
+- spec reviewerエージェントは、実装前の技術設計書**600件近く**を同じ標準で評価
+- 両システムは、人間とエージェント共通のエンジニアリング指針「Cloudflare Codex」を参照
+- CodexはRFC形式で標準を管理し、承認と強制のライフサイクルを分けて段階的にブロッキングへ移行
+
 
 ---
 

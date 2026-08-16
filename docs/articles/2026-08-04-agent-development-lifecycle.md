@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)（英語版: [https://blog.cloudflare.com/agent-development-lifecycle/](https://blog.cloudflare.com/agent-development-lifecycle/)）
 - 公開日: 2026-08-04
-- 関連: [Agents Week 2026 まとめ](./2026-08-13-agents-week-review.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md) / [ローカルトレースでWorkersをデバッグ](./2026-08-04-local-tracing.md) / [Cloudflare Walletsを発表](./2026-08-04-wallets.md)
+- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md) / [ローカルトレースでWorkersをデバッグ](./2026-08-04-local-tracing.md) / [Cloudflare Walletsを発表](./2026-08-04-wallets.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ6A4Q5CY65JFVVYMJCV4AG7.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/）*

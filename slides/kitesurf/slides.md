@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Kitesurfのご紹介
 info: |
@@ -24,6 +25,17 @@ Cloudflare Workersのアイソレート上で動く、
 原文: https://blog.cloudflare.com/kitesurf/<br>
 公開日: 2026-08-06
 </div>
+
+---
+
+# TL;DR
+
+
+- Cloudflareは、AIエージェント専用ブラウザ「Kitesurf」を発表。Chromiumなど既存エンジンを使わず**Workers上で完全動作**する点が最大の特徴
+- タブ・拡張機能などの人間向け機能を削ぎ落とし、トークン数・コンテキストウィンドウ・コストなどエージェントに重要な観点へ最適化
+- 内部はRust実装をWebAssemblyにコンパイルし、HTML/CSSパースに`Blitz`と`Stylo`、eval実行に`Boa JS`を利用
+- スクリーンショット取得等の典型タスクで、Chromiumに比べCPU・メモリ消費が**3〜7倍**少ない。WPTを**21万5,000件以上**通過
+
 
 ---
 

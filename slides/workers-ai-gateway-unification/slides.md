@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合
 info: |
@@ -22,6 +23,15 @@ themeConfig:
 原文: https://blog.cloudflare.com/ja-jp/workers-ai-gateway-unification/<br>
 公開日: 2026-08-07
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareは、これまで別プロダクトだった<strong>AI Gateway</strong>（任意のモデルプロバイダーへのプロキシ・可観測性レイヤー）と<strong>Workers AI</strong>（Cloudflare自身がホストするマネージドGPU推論）を、単一の「AIコントロールプレーン」へ統合
+- WorkersバインディングとREST APIの両方が同じ経路を通るようになり、ゲートウェイIDに`default`を指定するだけで、事前にゲートウェイを作成しなくても自動的にロギング・可観測性が有効に
+- AI Gatewayのクレジット（ウォレット課金）がWorkers AIにも使えるようになり、統合請求を使うとWorkers AIモデルのレート制限が緩和される
+- 近い将来、プロバイダーではなくモデル名を指定するだけで自動的にフェイルオーバー・負荷分散される「モデルファーストルーティング」と、プロンプト内容から最適なモデルを自動選択する「スマートルーティング」が投入予定（現在は内部パイロット段階）
 
 ---
 

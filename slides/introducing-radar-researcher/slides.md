@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: 平易な言葉でインターネットデータを探索するAIツール「Radar Researcher」のご紹介
 info: |
@@ -24,6 +25,17 @@ themeConfig:
 原文: https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/<br>
 公開日: 2026-08-07
 </div>
+
+---
+
+# TL;DR
+
+
+- Cloudflare Radarは2020年以来、インターネットトラフィックの洞察を無償公開してきたが、扱うには専門知識の壁があった
+- Cloudflareはこの壁を下げるため、自然言語で問い合わせ実際のインタラクティブなチャートで回答するAIツール「Radar Researcher」を発表
+- 言語モデルは生の数値を出力せず、Radar APIエンドポイントを参照する「チャート仕様」を発行し、フロントエンドが実データで描画
+- Cloudflare Agents SDK・Durable Objects・Workers AI・AI Gateway・MCP server・Code Modeなど各種プロダクトを組み合わせて実装
+
 
 ---
 

@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: ID情報に基づく分析で、不正なAIの利用を検出
 info: |
@@ -24,6 +25,17 @@ Identity-aware AI Gateway と User Insights
 原文: https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/<br>
 公開日: 2026-08-10
 </div>
+
+---
+
+# TL;DR
+
+
+- AI利用の請求書だけでは異常を判断しづらく、「通常の利用パターン」の把握が鍵になる
+- Cloudflare Accessと連携する**Identity-aware AI Gateway**がオープンベータで、全リクエストに確認済みユーザーIDを紐付け
+- **User Insights**が全AI Gateway利用者に無償提供され、普段の利用パターンからの逸脱を検知
+- 異常判定は、そのアカウントのp95の**2倍**、かつ組織全体のp99を超えるかという相対基準で行う
+
 
 ---
 

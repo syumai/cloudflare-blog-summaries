@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: エージェンティック・インターネットにおける「良い振る舞い」と「悪い振る舞い」を見極める
 info: |
@@ -22,6 +23,17 @@ themeConfig:
 原文: https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/<br>
 公開日: 2026-08-07
 </div>
+
+---
+
+# TL;DR
+
+
+- 「ボットは悪、人間は善」という二分法はもはや通用せず、人間とエージェントが主体を切り替える「ハイブリッドトラフィック」も一般化
+- Cloudflareはリスク（一時的な害）と信頼（積み上げた評判）を別軸で扱い、組み合わせて対応の選択肢を提供
+- 検出面では、セッション全体を継続評価する「Precursor」と新エンジン「Adaptive Intelligence」が軸
+- 対応面では単純な403ブロックを避け、予測不能な処理・「AI Labyrinth」・良性ボットのキューイングなど複数手法を組み合わせる
+
 
 ---
 

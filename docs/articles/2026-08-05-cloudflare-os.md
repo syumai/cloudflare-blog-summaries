@@ -174,7 +174,7 @@ const issues = await app.listIssues({
 
 - 「エージェントは最初はどのアクセス権も持たない」という設計は、Zero Trustの発想をAIエージェントの権限モデルにそのまま持ち込んだものであり、APIキーの直接共有という従来の危険なパターンからの明確な転換点として読める。
 - Gatekeeperが「最初のデータ取得」だけでなく「その後の共有・公開・外部送信」まで、参照履歴に基づいて制御するという発想は、生成AI活用における情報漏えいリスクへの実務的な回答になっている。
-- アプリがすべてDynamic Worker + Durable Object Facetという軽量な実行単位として動く設計は、[@cloudflare/computer](2026-08-05-cloudflare-computer.md)で語られていた「アイソレート優先・専用サーバー不要」という思想と地続きであり、Cloudflareの製品群全体を貫く一貫したアーキテクチャ思想が見て取れる。
+- アプリがすべてDynamic Worker + Durable Object Facetという軽量な実行単位として動く設計は、[@cloudflare/computer](2026-08-03-cloudflare-computer.md)で語られていた「アイソレート優先・専用サーバー不要」という思想と地続きであり、Cloudflareの製品群全体を貫く一貫したアーキテクチャ思想が見て取れる。
 - 同時公開されたCIO Sam Rhea氏の一人称記事「[Cloudflare OSで、Cloudflareの働き方を再構築する](2026-08-05-how-we-use-ai-with-cloudflare-os.md)」を合わせて読むと、本記事のGatekeeperやAI Gatewayが実際の社内業務でどう機能しているかの具体例（ITヘルプデスクのレポート自動化など）がよく分かる。
 
 > **Workers サンプル**: 対象外（中心機能であるGatekeeper・Dynamic Worker・Durable Object Facetを組み合わせた社内プラットフォーム全体は、100行前後の最小実装では要点を再現できないため）。個別要素のCap'n Web RPCやAI Gateway経由の推論は他記事のサンプル（例: [examples/workers-ai-gateway-unification/](../../examples/workers-ai-gateway-unification/)）で扱っている。

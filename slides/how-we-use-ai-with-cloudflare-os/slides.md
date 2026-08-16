@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Cloudflare OSで、Cloudflareの働き方を再構築する
 info: |
@@ -25,6 +26,17 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 著者: Sam Rhea（Cloudflare チーフインフォメーションオフィサー）<br>
 公開日: 2026-08-05
 </div>
+
+---
+
+# TL;DR
+
+
+- CIOのSam Rhea氏が、Cloudflare社内のAI活用の舞台裏を一人称で語る記事
+- 2025年末のモデル・ツール急速進化を機に、社員から「AIで仕事のやり方を変えたい」という要望が殺到
+- 「装備・有効化する責務」と「安全に保つ責務」の両立のため、**5つの基本原則**を策定
+- エンジニア向け・非エンジニア向けの2パイロットを経て**Cloudflare OS v1**を構築、さらに決定論的な**Cloudflare OS v2**へ進化。直近1か月で営業チームだけで**1万時間以上**を削減
+
 
 ---
 

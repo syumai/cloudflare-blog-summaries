@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: AstroのGitHub Issue数をゼロへ導くソフトウェアファクトリーを構築した方法
 info: |
@@ -22,6 +23,15 @@ themeConfig:
 原文: https://blog.cloudflare.com/astro-issue-triage/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareは、Astroリポジトリで数か月間、バグ報告の再現・診断・プレビュー配布を自動化するトリアージパイプラインを運用
+- 中核エンジンは、この種のエージェント自動化を構築するオープンなフレームワーク**Flue**へ発展
+- オープンIssue数を200件超から約30件まで削減。数か月以内にゼロ達成の見込み（Astro史上初）
+- issue bankruptcyや強制クローズは使わず、GitHub Actions上の隔離されたAIサブエージェントのチームで実現
 
 ---
 

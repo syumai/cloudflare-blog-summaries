@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Cloudflareにエージェント開発ライフサイクルの時代が到来
 themeConfig:
@@ -24,6 +25,15 @@ ADLC（Agent Development Lifecycle）の提唱
 原文: https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+- エージェントによるコード実装速度は、人間によるレビュー・デプロイ・保守の速度をすでに上回っている
+- 実装だけを高速化する従来のSDLCに代わり、コーディング以降の工程もエージェントに委ねる**ソフトウェアファクトリー**という発想と、それを支える<strong>ADLC（Agent Development Lifecycle）</strong>を提唱
+- ソフトウェアファクトリーの成立には、プログラムから操作可能・水平スケール可能・再現可能など7つの要件が必要
+- `@cloudflare/ci`、ローカルOpenTelemetryトレース、Agent Traces、AIによる標準適用など、支えるツール群を同時発表
 
 ---
 

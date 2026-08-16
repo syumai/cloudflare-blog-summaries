@@ -22,8 +22,8 @@ cloudflare-blog-summaries/
 ├── docs/                      # === Wiki ===
 │   ├── index.md               # 記事一覧
 │   └── articles/
-│       ├── 2026-08-13-agents-week-review.md
-│       └── 2026-08-05-cloudflare-computer.md
+│       ├── 2026-08-10-agents-week-review.md
+│       └── 2026-08-03-cloudflare-computer.md
 ├── slides/                    # === スライド (Slidev) ===
 │   ├── package.json           # 全デッキ共通の devDependencies
 │   ├── .gitignore
@@ -48,6 +48,7 @@ cloudflare-blog-summaries/
 
 | 公開日 | タイトル | Wiki | スライド | クイズ | 原文リンク |
 |--------|----------|------|----------|--------|------------|
+| 2026-08-03 | AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介 | [Wiki](docs/articles/2026-08-03-cloudflare-computer.md) | [スライド](slides/cloudflare-computer/slides.md) | [クイズ](quizzes/cloudflare-computer.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |
 | 2026-08-03 | Billable Usage APIを提供開始：Cloudflareの課金情報をプログラムから取得可能に | [Wiki](docs/articles/2026-08-03-billable-usage-api.md) | [スライド](slides/billable-usage-api/slides.md) | [クイズ](quizzes/billable-usage-api.html) | [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/) |
 | 2026-08-03 | Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート | [Wiki](docs/articles/2026-08-03-grpc-workers.md) | [スライド](slides/grpc-workers/slides.md) | [クイズ](quizzes/grpc-workers.html) | [原文](https://blog.cloudflare.com/grpc-workers/) |
 | 2026-08-03 | Workers RPC が Python と JavaScript 間で利用可能に | [Wiki](docs/articles/2026-08-03-python-workers-rpc.md) | [スライド](slides/python-workers-rpc/slides.md) | [クイズ](quizzes/python-workers-rpc.html) | [原文](https://blog.cloudflare.com/python-workers-rpc/) |
@@ -59,7 +60,6 @@ cloudflare-blog-summaries/
 | 2026-08-04 | CloudflareがAIを使ってエンジニアリング標準を徹底する方法 | [Wiki](docs/articles/2026-08-04-engineering-standards-enforcement.md) | [スライド](slides/engineering-standards-enforcement/slides.md) | [クイズ](quizzes/engineering-standards-enforcement.html) | [原文](https://blog.cloudflare.com/engineering-standards-enforcement/) |
 | 2026-08-04 | エージェントがローカルトレースでWorkersをデバッグ可能に | [Wiki](docs/articles/2026-08-04-local-tracing.md) | [スライド](slides/local-tracing/slides.md) | [クイズ](quizzes/local-tracing.html) | [原文](https://blog.cloudflare.com/local-tracing/) |
 | 2026-08-04 | Cloudflare Walletsを発表：エージェント型インターネットのためのプログラム可能なウォレット | [Wiki](docs/articles/2026-08-04-wallets.md) | [スライド](slides/wallets/slides.md) | [クイズ](quizzes/wallets.html) | [原文](https://blog.cloudflare.com/ja-jp/wallets/) |
-| 2026-08-05 | AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介 | [Wiki](docs/articles/2026-08-05-cloudflare-computer.md) | [スライド](slides/cloudflare-computer/slides.md) | [クイズ](quizzes/cloudflare-computer.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |
 | 2026-08-05 | Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム | [Wiki](docs/articles/2026-08-05-cloudflare-os.md) | [スライド](slides/cloudflare-os/slides.md) | [クイズ](quizzes/cloudflare-os.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/) |
 | 2026-08-05 | Cloudflare OSで、Cloudflareの働き方を再構築する | [Wiki](docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.md) | [スライド](slides/how-we-use-ai-with-cloudflare-os/slides.md) | [クイズ](quizzes/how-we-use-ai-with-cloudflare-os.html) | [原文](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/) |
 | 2026-08-05 | ID情報に基づく分析で、不正なAIの利用を検出 | [Wiki](docs/articles/2026-08-05-identity-aware-ai-gateway.md) | [スライド](slides/identity-aware-ai-gateway/slides.md) | [クイズ](quizzes/identity-aware-ai-gateway.html) | [原文](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/) |
@@ -75,7 +75,7 @@ cloudflare-blog-summaries/
 | 2026-08-07 | エージェンティック・インターネットにおける「良い振る舞い」と「悪い振る舞い」を見極める | [Wiki](docs/articles/2026-08-07-good-and-bad-agentic-behaviors.md) | [スライド](slides/good-and-bad-agentic-behaviors/slides.md) | [クイズ](quizzes/good-and-bad-agentic-behaviors.html) | [原文](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/) |
 | 2026-08-07 | 平易な言葉でインターネットデータを探索するAIツール「Radar Researcher」のご紹介 | [Wiki](docs/articles/2026-08-07-introducing-radar-researcher.md) | [スライド](slides/introducing-radar-researcher/slides.md) | [クイズ](quizzes/introducing-radar-researcher.html) | [原文](https://blog.cloudflare.com/introducing-radar-researcher/) |
 | 2026-08-07 | Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合 | [Wiki](docs/articles/2026-08-07-workers-ai-gateway-unification.md) | [スライド](slides/workers-ai-gateway-unification/slides.md) | [クイズ](quizzes/workers-ai-gateway-unification.html) | [原文](https://blog.cloudflare.com/workers-ai-gateway-unification/) |
-| 2026-08-13 | Agents Week 2026で行った発表内容の全て | [Wiki](docs/articles/2026-08-13-agents-week-review.md) | [スライド](slides/agents-week-review/slides.md) | [クイズ](quizzes/agents-week-review.html) | [原文](https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/) |
+| 2026-08-10 | Agents Week 2026で行った発表内容の全て | [Wiki](docs/articles/2026-08-10-agents-week-review.md) | [スライド](slides/agents-week-review/slides.md) | [クイズ](quizzes/agents-week-review.html) | [原文](https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

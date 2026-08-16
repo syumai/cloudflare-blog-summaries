@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 themeConfig:
   primary: '#f6821f'
@@ -22,6 +23,16 @@ lineNumbers: true
 原文: https://blog.cloudflare.com/python-workers-rpc/<br>
 公開日: 2026-08-03
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflare Workers RPCが**Python WorkersとJavaScript Workers間のクロス言語呼び出し**に対応
+- 通常の関数呼び出しと同じ感覚で扱え、JavaScript/TypeScript側は`Promise`、Python側は`Future`を返し、例外も呼び出し元に伝播
+- Structured Cloneableな型はそのまま受け渡し可能で自動変換される（例: JavaScriptの`Date`はPythonの`datetime`に変換）
+- 関数そのものも言語をまたいで渡すことができ、呼び出されると新たなRPC呼び出しが発生
+- 同一スレッド内で動くWorker同士のRPCはほぼゼロオーバーヘッド。`workerd`と`workers-runtime-sdk`としてOSS公開
 
 ---
 

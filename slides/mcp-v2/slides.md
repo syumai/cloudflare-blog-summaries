@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: 次世代のMCP
 info: |
@@ -23,6 +24,16 @@ themeConfig:
 原文: https://blog.cloudflare.com/mcp-v2/<br>
 公開日: 2026-08-06
 </div>
+
+---
+
+# TL;DR
+
+- MCPの新仕様 `2026-07-28` がリリースされ、**ステートフル**から**ステートレス**なプロトコルへと作り変えられた
+- `initialize`/`initialized`ハンドシェイクと`Mcp-Session-Id`ヘッダーが不要になり、`McpAgent`（Durable Object）を使わずとも通常のCloudflare Workers上でMCPサーバーを動かせるように
+- elicitationは、オープンストリームに依存しない新方式の<strong>MRTR（Multi Round-Trip Requests）</strong>に置き換え
+- HTTPリクエストに`Mcp-Method`/`Mcp-Name`ヘッダーが追加され、ゲートウェイやWAFがJSON本文をパースせずにルーティング・レート制限が可能に
+- 認可まわりも強化。CIMD採用が進み、DCRは非推奨化、2027年夏以降に廃止予定
 
 ---
 

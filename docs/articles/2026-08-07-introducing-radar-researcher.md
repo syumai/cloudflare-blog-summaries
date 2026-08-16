@@ -88,11 +88,11 @@ Radar Researcher自身がAIエージェントとして動作するだけでな�
 
 Radar Researcherの応答生成では、言語モデルは基本的にMarkdownでテキスト回答を組み立てる。しかし、グラフとして提示すべき数値データについては、モデルが数値そのものを本文に埋め込むのではなく、Radar APIのパスを参照する「チャート仕様」の専用ブロックを発行する設計になっている。
 
-```
+````
 ```radar-chart
 { "type": "speedFlower", "title": "Internet speed quality — Portugal", "dataFrom": "/radar/quality/speed/summary?location=PT" }
 ```
-```
+````
 
 この `radar-chart` ブロックは、Markdown内のコードフェンスとして出力される点は通常のMarkdownと同じだが、フロントエンド側がこれを検出すると、`dataFrom` に書かれたAPIパス（この例では `/radar/quality/speed/summary?location=PT`、ポルトガルのインターネット速度品質サマリー）に対して実際にリクエストを送り、その場でインタラクティブなチャートとして描画する。
 

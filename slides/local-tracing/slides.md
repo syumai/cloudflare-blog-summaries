@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: エージェントがローカルトレースでWorkersをデバッグ可能に
 themeConfig:
@@ -25,6 +26,17 @@ lineNumbers: true
 原文: https://blog.cloudflare.com/local-tracing/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+
+- `wrangler dev`と`vite dev`が、ローカルでのWorker呼び出しに対し自動で**OpenTelemetryトレース**を生成するように
+- コーディングエージェントのセッションを検出すると、SDKインストールや明示的な言及なしに**Local Explorer API**へ自動誘導
+- 狙いは、エージェントがデプロイ前にローカルで失敗を特定し、修正を検証できるようにすること
+- Local Explorerはブラウザ向けUIとREST APIを提供し、D1・KV・R2・Durable Objects等の閲覧・編集や可観測性データへのSQLクエリが可能
+
 
 ---
 

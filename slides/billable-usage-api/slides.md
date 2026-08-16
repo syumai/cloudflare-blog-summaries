@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 themeConfig:
   primary: '#f6821f'
@@ -23,6 +24,16 @@ Cloudflareの課金情報をプログラムから取得可能に
 原文: https://blog.cloudflare.com/ja-jp/billable-usage-api/<br>
 公開日: 2026-08-06
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareが**Billable Usage API**を公開。単一エンドポイントから全従量課金サービスの課金・利用状況をプログラムで取得可能に
+- レスポンス項目の多くが業界標準**FOCUS**仕様に対応し、他クラウドと同じ語彙で扱える
+- コスト管理プラットフォーム**Vantage**とのネイティブ連携も同時発表
+- 開発動機は、AIエージェントがインフラ構築を自動化する時代に、コスト把握もプログラムから行える必要があるという課題意識
+- 初回リリースはセルフサービスアカウント向け。Enterprise対応や予測機能は今後のロードマップ
 
 ---
 

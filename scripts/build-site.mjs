@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // site/ を毎回クリーンビルドする静的サイトビルドスクリプト。
-// 依存は marked のみ（他はすべて Node.js 標準ライブラリ）。
+// 依存は marked・yaml・shiki（docs のコードブロックのビルド時シンタックスハイライト用）のみ
+// （他はすべて Node.js 標準ライブラリ）。
 //
 // 使い方:
 //   npm run build                              # BASE_PATH=/ でローカル向けビルド
@@ -19,8 +20,9 @@ import {
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { marked } from "marked";
+import { Marked } from "marked";
 import { parse as parseYaml } from "yaml";
+import { bundledLanguages, createHighlighter, isSpecialLang } from "shiki";
 import { renderQuizPage } from "../quizzes/template/render.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -146,6 +148,89 @@ function rewriteMarkdownLinks(markdown) {
 }
 
 // ---------------------------------------------------------------------------
+// コードブロックのシンタックスハイライト（Shiki）
+//
+//   - ビルド時に Shiki でハイライトし、生成 HTML は自己完結（クライアントJS/CDN不要）にする。
+//   - ライト/ダークのデュアルテーマ（github-light / github-dark）を CSS 変数で埋め込み、
+//     PAGE_CSS 側の prefers-color-scheme と連動させる。
+//   - 未知/未対応の言語（例: 独自の "radar-chart"）はエラーにせず "text"（無着色）にフォールバックする。
+// ---------------------------------------------------------------------------
+
+const SHIKI_THEMES = { light: "github-light", dark: "github-dark" };
+
+let highlighterPromise;
+function getHighlighter() {
+  // ハイライターはプロセス内で使い回す（毎ページ生成するとビルドが極端に遅くなるため）。
+  if (!highlighterPromise) {
+    highlighterPromise = createHighlighter({
+      themes: [SHIKI_THEMES.light, SHIKI_THEMES.dark],
+      // よく使う言語だけ事前ロードし、それ以外は初出時に遅延ロードする。
+      langs: ["typescript", "javascript", "json", "bash", "yaml", "python", "html", "go"],
+    });
+  }
+  return highlighterPromise;
+}
+
+/**
+ * コードフェンスの info string（例: "typescript" や "js twoslash"）から言語名を取り出す。
+ * 未指定の場合は "text" 扱いにする。
+ */
+function normalizeLang(rawLang) {
+  const lang = (rawLang ?? "").trim().split(/\s+/)[0]?.toLowerCase();
+  return lang || "text";
+}
+
+/**
+ * コードを Shiki でハイライトした HTML（<pre class="shiki ...">...）を返す。
+ * 未対応言語や個別のハイライト失敗時は、プレーン表示（無着色）にフォールバックする。
+ */
+async function highlightCode(code, rawLang) {
+  const highlighter = await getHighlighter();
+  let lang = normalizeLang(rawLang);
+
+  if (!isSpecialLang(lang) && !highlighter.getLoadedLanguages().includes(lang)) {
+    if (Object.prototype.hasOwnProperty.call(bundledLanguages, lang)) {
+      try {
+        await highlighter.loadLanguage(lang);
+      } catch {
+        lang = "text";
+      }
+    } else {
+      // Shiki が知らない独自言語（例: "radar-chart"）は無着色のプレーン表示にフォールバックする。
+      lang = "text";
+    }
+  }
+
+  try {
+    return highlighter.codeToHtml(code, {
+      lang,
+      themes: SHIKI_THEMES,
+      defaultColor: false,
+    });
+  } catch {
+    // 想定外のハイライト失敗時も、ビルドを止めずプレーン表示にフォールバックする。
+    return `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`;
+  }
+}
+
+/**
+ * コードフェンスを Shiki でハイライト済み HTML に置き換える marked インスタンス。
+ * walkTokens が非同期のため marked.parse() は Promise を返す（{ async: true }）。
+ */
+const markedWithShiki = new Marked({
+  async: true,
+  async walkTokens(token) {
+    if (token.type !== "code") return;
+    const html = await highlightCode(token.text, token.lang);
+    Object.assign(token, {
+      type: "html",
+      block: true,
+      text: `${html}\n`,
+    });
+  },
+});
+
+// ---------------------------------------------------------------------------
 // HTML テンプレート
 // ---------------------------------------------------------------------------
 
@@ -228,6 +313,23 @@ const PAGE_CSS = `
     font-size: 0.9em;
   }
   pre code { background: none; padding: 0; }
+  /*
+   * Shiki（ビルド時ハイライト）が出力する pre.shiki は、pre 要素あたり
+   * --shiki-light / --shiki-dark（文字色）と --shiki-light-bg / --shiki-dark-bg（背景色）を
+   * インラインの CSS カスタムプロパティとして持つ（defaultColor: false のデュアルテーマ出力）。
+   * ここでそれらを実際の color / background-color に反映し、ライト/ダークを切り替える。
+   * 変数が無い場合（未対応言語のフォールバック等）は既存の --code-bg / --fg にフォールバックする。
+   */
+  pre.shiki, .shiki, .shiki span {
+    color: var(--shiki-light, var(--fg));
+    background-color: var(--shiki-light-bg, var(--code-bg));
+  }
+  @media (prefers-color-scheme: dark) {
+    pre.shiki, .shiki, .shiki span {
+      color: var(--shiki-dark, var(--fg));
+      background-color: var(--shiki-dark-bg, var(--code-bg));
+    }
+  }
   blockquote {
     margin: 1rem 0;
     padding: 0.25rem 1rem;
@@ -278,7 +380,7 @@ function cleanSite() {
   writeFileSync(path.join(SITE_DIR, ".nojekyll"), "");
 }
 
-function buildDocsMarkdown() {
+async function buildDocsMarkdown() {
   const outDocsDir = path.join(SITE_DIR, "docs");
   const outArticlesDir = path.join(outDocsDir, "articles");
   ensureDir(outArticlesDir);
@@ -290,7 +392,8 @@ function buildDocsMarkdown() {
   if (existsSync(indexPath)) {
     const raw = readFileSync(indexPath, "utf8");
     const title = extractTitle(raw, "記事一覧");
-    const bodyHtml = marked.parse(rewriteMarkdownLinks(raw));
+    // コードフェンスを Shiki でビルド時ハイライトするため async な marked インスタンスを使う。
+    const bodyHtml = await markedWithShiki.parse(rewriteMarkdownLinks(raw));
     writeFileSync(path.join(outDocsDir, "index.html"), renderPage({ title, bodyHtml }));
     built.push("site/docs/index.html");
   }
@@ -299,7 +402,7 @@ function buildDocsMarkdown() {
   for (const file of listFiles(ARTICLES_DIR, ".md")) {
     const raw = readFileSync(path.join(ARTICLES_DIR, file), "utf8");
     const title = extractTitle(raw, file.replace(/\.md$/, ""));
-    const bodyHtml = marked.parse(rewriteMarkdownLinks(raw));
+    const bodyHtml = await markedWithShiki.parse(rewriteMarkdownLinks(raw));
     const outFile = file.replace(/\.md$/, ".html");
     writeFileSync(path.join(outArticlesDir, outFile), renderPage({ title, bodyHtml }));
     built.push(`site/docs/articles/${outFile}`);
@@ -310,7 +413,7 @@ function buildDocsMarkdown() {
 }
 
 /**
- * quiz.wiki（例: "../docs/articles/2026-08-05-cloudflare-computer.md"）を
+ * quiz.wiki（例: "../docs/articles/2026-08-03-cloudflare-computer.md"）を
  * サイト内で有効な Wiki ページへの絶対リンク（BASE_PATH 込み）に変換する。
  */
 function resolveWikiHref(wikiRelativePath) {
@@ -493,9 +596,9 @@ ${bodyHtml}
   log(`ポータルページを生成しました: site/index.html (${articles.length} 記事)`);
 }
 
-function main() {
+async function main() {
   cleanSite();
-  buildDocsMarkdown();
+  await buildDocsMarkdown();
   buildQuizzes();
 
   const decks = discoverSlideDecks();
@@ -507,4 +610,7 @@ function main() {
   log("ビルド完了: site/");
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exitCode = 1;
+});

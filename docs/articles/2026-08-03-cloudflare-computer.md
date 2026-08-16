@@ -1,7 +1,7 @@
 # AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介
 
 - 原文: [https://blog.cloudflare.com/ja-jp/cloudflare-computer/](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)（英語版: [https://blog.cloudflare.com/cloudflare-computer/](https://blog.cloudflare.com/cloudflare-computer/)）
-- 公開日: 2026-08-05
+- 公開日: 2026-08-03
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZB3S8MBM35D38QT8Q470C0V.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-computer/）*

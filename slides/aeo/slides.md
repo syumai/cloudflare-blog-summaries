@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: ランク付けから推奨へ：AIエージェント時代でサイトを成功に導く準備を整える
 info: |
@@ -25,6 +26,16 @@ Agent Readiness と Answer Engine Optimization（AEO）
 原文: https://blog.cloudflare.com/ja-jp/aeo/<br>
 公開日: 2026-08-10
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareの集計では、HTMLページへの人間によるリクエストはすでに半数を下回っている
+- 「見つけてもらう」の意味が、検索順位表示からAIエージェントに発見・推奨されることへシフト
+- サイトのエージェント可読性を診断する**Agent Readiness / Diagnostics**と、新機能<strong>AEO（Answer Engine Optimization）</strong>をダッシュボードに追加
+- AEOはCitation Rate・Prominence・Mention Rate・Share of Voiceの4指標でAIアシスタントからの引用・推奨度を計測
+- AI Gatewayとカテゴリベンチマークにより、都度のモデル呼び出しなしで低遅延・低コストに実現
 
 ---
 

@@ -1,6 +1,6 @@
 # cloudflare-computer example
 
-対応記事: [AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介](../../docs/articles/2026-08-05-cloudflare-computer.md)（[原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)）
+対応記事: [AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介](../../docs/articles/2026-08-03-cloudflare-computer.md)（[原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)）
 
 ## 何を体験できるか
 

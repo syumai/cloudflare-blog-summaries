@@ -23,8 +23,8 @@ commit は行わない。ユーザーから明示的な指示があるまで、�
 
 作業を始める前に、既存の2記事を実例として読むこと。文体・粒度・構成の基準になる。
 
-- `docs/articles/2026-08-13-agents-week-review.md`
-- `docs/articles/2026-08-05-cloudflare-computer.md`
+- `docs/articles/2026-08-10-agents-week-review.md`
+- `docs/articles/2026-08-03-cloudflare-computer.md`
 - `slides/agents-week-review/slides.md`
 - `slides/cloudflare-computer/slides.md`
 - `quizzes/agents-week-review.yaml`（クイズYAMLスキーマの参照実装）
@@ -126,6 +126,7 @@ Slidev 形式で作成する。frontmatter の例:
 ```yaml
 ---
 theme: default
+routerMode: hash  # 静的ホスティングで URL hash によるページ遷移にする（必須）
 title: <記事タイトル>
 info: |
   <記事タイトル>の解説スライド。
@@ -140,7 +141,8 @@ mdc: true
 共通構成（内容に応じて枚数は可変。目安: 深掘り記事20〜30枚、週まとめ記事15〜20枚）:
 
 1. タイトル（記事名・原文URL・公開日）
-2. アジェンダ
+2. **TL;DR**（Wiki の TL;DR セクションを元にした3〜5個の箇条書き。必須）
+3. アジェンダ
 3. 背景・課題（1〜3枚）
 4. 本編: 発表内容／アーキテクチャ（図をURL直接参照で引用）
 5. **コード例**（Slidevのコードハイライト機能・行フォーカス `{1-3|5|all}` などを活用。必須）

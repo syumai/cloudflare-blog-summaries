@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: Cloudflare Agentsの紹介
 themeConfig:
@@ -23,6 +24,15 @@ lineNumbers: true
 原文: https://blog.cloudflare.com/agents-on-cloudflare/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+- デプロイ済みエージェントを一元管理する統合プラットフォーム**Cloudflare Agents**を発表。AI Gateway・Durable Objects・Workflows・サンドボックス・R2という既存インフラの上に構築
+- 第一弾機能として、モデル呼び出し・ツール実行・トークン消費を可視化する**エージェントトレーシング**を公開
+- Think・Flue・AI SDKなどOpenTelemetry互換ハーネスに対応。「セッションのリプレイ」と「トレースの確認」の2手法でデバッグ可能
+- 有効化は`wrangler.jsonc`の設定のみ。ベータ期間中は無料で、2026年10月1日にWorkers Observability料金へ統合
 
 ---
 

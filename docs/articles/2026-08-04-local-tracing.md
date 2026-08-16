@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/local-tracing/](https://blog.cloudflare.com/local-tracing/)（日本語版なし）
 - 公開日: 2026-08-04
-- 関連: [Agents Week 2026 まとめ](./2026-08-13-agents-week-review.md) / [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md)
+- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md) / [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4VE2P2E0N8JGH2VJ245E2G.png&w=1999&h=1125&f=webp&fit=cover&position=center)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/local-tracing/）*

@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: あらゆるWebサイトにWebMCPインターフェースを付与する
 info: |
@@ -25,6 +26,16 @@ Cloudflareが developer preview として提供する
 原文: https://blog.cloudflare.com/webmcp/<br>
 公開日: 2026-08-06
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareは、任意のWebサイトにAIエージェント向けの「ツール」インターフェースを付与するdeveloper preview版**WebMCP**を発表
+- WebMCPはChrome 146で実験的に提供されるブラウザ標準で、ページ上に`document.modelContext`として現れ、サイトが自身の「ツール」一式をAIエージェントに公開できる仕組み
+- Cloudflareの実装は、サイトのオリジンコードを一切変更せず、エッジ側でHTML配信時に小さなブリッジスクリプトを1行注入するだけで有効化できる
+- 初回プレビューでは「Content Credentials」（C2PA画像の来歴確認）と「Site MCP Server」（サイト自身のMCPサーバーへのプロキシ）という2つの「ツールパック」が提供される
+- 登録されるツールはMCPの`Tool`/`CallToolResult`型に準拠しており、既存のMCPクライアント・エージェントは特別な対応なしにページ上のツールを呼び出せる
 
 ---
 

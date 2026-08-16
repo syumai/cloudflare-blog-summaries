@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "marked": "18.0.9",
+    "shiki": "4.4.3",
     "yaml": "2.9.0"
   }
 }

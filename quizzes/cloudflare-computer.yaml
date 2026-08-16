@@ -1,7 +1,7 @@
 title: "AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介"
 slug: cloudflare-computer
 sourceUrl: https://blog.cloudflare.com/ja-jp/cloudflare-computer/
-wiki: ../docs/articles/2026-08-05-cloudflare-computer.md
+wiki: ../docs/articles/2026-08-03-cloudflare-computer.md
 questions:
   - q: >-
       記事における「アイソレート」の特徴として<strong>正しいもの</strong>はどれか。

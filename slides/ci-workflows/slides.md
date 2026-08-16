@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: 数百万のリポジトリのCI/CDを、あなたのプラットフォーム上でCloudflareが動かす
 info: |
@@ -22,6 +23,16 @@ themeConfig:
 原文: https://blog.cloudflare.com/ci-workflows/<br>
 公開日: 2026-08-04
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareは、コードのストア・ビルド・テスト・デプロイを自社プラットフォーム上で完結させる方向へ。第一歩はバージョン管理付きストレージ「Artifacts」
+- 今回発表は、Workflows上に構築された<strong>CI SDK</strong>（`@cloudflare/ci`）。Artifactsのpushイベントをそのままワークフロー実行としてCIジョブ化
+- CI/CDパイプラインはYAMLではなくTypeScriptで記述し、Sandbox SDKによる隔離環境でコマンドを実行
+- Think + Workers AIを組み込んだ「自己修復（self-healing）」CIも実現可能
+- 同じnamespace内で、共通CIの一括適用と顧客ごとのカスタムCIを同時に行える
 
 ---
 

@@ -1,8 +1,8 @@
 # Agents Week 2026で行った発表内容の全て
 
 - 原文: [https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/](https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/)（英語版: [https://blog.cloudflare.com/agents-week-review-august-2026/](https://blog.cloudflare.com/agents-week-review-august-2026/)）
-- 公開日: 2026-08-13
-- 関連: [@cloudflare/computer 記事](./2026-08-05-cloudflare-computer.md)
+- 公開日: 2026-08-10
+- 関連: [@cloudflare/computer 記事](./2026-08-03-cloudflare-computer.md)
 
 ![Agents Week 2026 ヘッダー画像](https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZEF2H4G3BD74C5TP4BWMS76.png&w=1999&h=1125&f=webp&fit=cover&position=center)
 *図: Agents Week 2026 ヘッダー画像（出典: Cloudflare Blog, https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/）*
@@ -35,7 +35,7 @@ Agents Week 2026 は、この「モデル以外」の課題に対する Cloudfla
 
 | 発表 | 概要 | 詳細記事 |
 |------|------|----------|
-| AIエージェントに必要なのはコンテナではなくコンピューター — 「@cloudflare/computer」のご紹介 | エージェントのタスクに応じてアイソレート実行とコンテナ実行を切り替えられる、新しい実行環境。SQLite バックエンドの仮想ファイルシステムを介して両バックエンドが同じファイル群を共有する。 | [Wiki](./2026-08-05-cloudflare-computer.md) / [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |
+| AIエージェントに必要なのはコンテナではなくコンピューター — 「@cloudflare/computer」のご紹介 | エージェントのタスクに応じてアイソレート実行とコンテナ実行を切り替えられる、新しい実行環境。SQLite バックエンドの仮想ファイルシステムを介して両バックエンドが同じファイル群を共有する。 | [Wiki](./2026-08-03-cloudflare-computer.md) / [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |
 | Workers RPC が Python と JavaScript 間で利用可能に | Python Workers と JavaScript Workers が RPC 経由で直接メソッド呼び出しできるようになり、複数言語で書かれたエージェントコンポーネントを組み合わせやすくなった。 | [Wiki](./2026-08-03-python-workers-rpc.md) / [原文](https://blog.cloudflare.com/python-workers-rpc/) |
 | より小さく、より速く、より安全に：Kimi と GLM を大規模に実行 | オープンウェイトの大規模モデル（Kimi・GLM）を、コストと安全性を両立させながら大規模に提供する方法を模索した発表。 | [Wiki](./2026-08-03-smaller-faster-safer-models.md) / [原文](https://blog.cloudflare.com/smaller-faster-safer-models/) |
 | Billable Usage API を提供開始 | エージェントやアプリケーションが自身の課金対象の使用量をプログラムから取得できる API。コスト管理をエージェント自身に組み込める。 | [Wiki](./2026-08-03-billable-usage-api.md) / [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/) |
@@ -97,7 +97,7 @@ Agents Week 2026 は、この「モデル以外」の課題に対する Cloudfla
 ## 所感・ポイント
 
 - 5日間の構成は「実行環境 → 開発ライフサイクル → セキュリティ → インターネット全体への波及 → 現実世界での運用」という順に並んでおり、単発の新機能発表というより、エージェントが本番で安全に動くための「積み重ね」を意識した構成になっている点が特徴的。
-- `@cloudflare/computer` は単体でも大きなトピックであり、実行バックエンドの使い分けという発想は、他社のエージェント実行基盤（サンドボックス型が主流）と比較しても独自性が強い。詳細は別 Wiki ページ（[2026-08-05-cloudflare-computer.md](./2026-08-05-cloudflare-computer.md)）を参照。
+- `@cloudflare/computer` は単体でも大きなトピックであり、実行バックエンドの使い分けという発想は、他社のエージェント実行基盤（サンドボックス型が主流）と比較しても独自性が強い。詳細は別 Wiki ページ（[2026-08-03-cloudflare-computer.md](./2026-08-03-cloudflare-computer.md)）を参照。
 - ADLC（Agent Development Lifecycle）という言葉の提示は、SDLC の延長線上にエージェント固有のライフサイクル管理が必要であるという問題提起として興味深く、CI/CD・トレーシング・承認フローなど複数の発表がこの概念を具体化する形で連動している。
 - Agent Access Model・WriteGuard・ID 情報ベースの分析など、水曜日のセキュリティ関連発表は「エージェントに何をどこまで許可するか」というアクセス制御の細やかさを重視しており、Zero Trust の考え方をエージェント向けに拡張した内容といえる。
 - 木曜日の WebMCP・AEO・MCPv2 などは、Web サイト側が「エージェントに読まれること」を前提に設計を変える必要性を示しており、SEO 対策の延長として AEO を捉える視点は日本語圏の開発者・マーケターにも参考になりそうである。
@@ -109,7 +109,7 @@ Agents Week 2026 は、この「モデル以外」の課題に対する Cloudfla
 
 Agents Week 2026 で発表された約26件の中でも、特に読む価値が高いと考える5件を、推薦理由とともに挙げる。
 
-- **[@cloudflare/computer](./2026-08-05-cloudflare-computer.md)**（[スライド](../slides/cloudflare-computer/slides.md)） — アイソレートとコンテナを動的に使い分けるハイブリッド実行環境。数十億規模のエージェントをどう安価に動かすかという、Agents Week全体を貫くスケーリング課題への最も具体的な回答であり、週の目玉として真っ先に読む価値がある。
+- **[@cloudflare/computer](./2026-08-03-cloudflare-computer.md)**（[スライド](../slides/cloudflare-computer/slides.md)） — アイソレートとコンテナを動的に使い分けるハイブリッド実行環境。数十億規模のエージェントをどう安価に動かすかという、Agents Week全体を貫くスケーリング課題への最も具体的な回答であり、週の目玉として真っ先に読む価値がある。
 - **[WebMCP](./2026-08-06-webmcp.md)**（[スライド](../slides/webmcp/slides.md)） — オリジンのコード変更ゼロでサイトをエージェント対応にする発想は、AEOやSEOの延長として今後の実務に直結しやすい。ブラウザ標準としての広がりにも注目したい。
 - **[Cloudflare OS](./2026-08-05-cloudflare-os.md)**（[スライド](../slides/cloudflare-os/slides.md)） — 「エージェントは最初はどのアクセス権も持たない」というZero Trustの徹底と、参照履歴に基づく情報漏えい防止（Gatekeeper）は、社内でエージェントを本格運用する際の権限設計の指針として参考になる。
 - **[Kitesurf](./2026-08-06-kitesurf.md)**（[スライド](../slides/kitesurf/slides.md)） — Chromiumを使わずWorkers上で完全に動くエージェント専用ブラウザという発想は独自性が高く、CPU・メモリ効率の実測値（3〜7倍）とWPT準拠の透明性ある性能開示が説得力を持たせている。

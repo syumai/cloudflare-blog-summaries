@@ -1,4 +1,5 @@
 ---
+routerMode: hash
 theme: default
 title: "WriteGuard: MCPサーバーのためのきめ細かな制御機能"
 info: |
@@ -24,6 +25,16 @@ MCPサーバーのための
 著者: Scott Roe-Meschke, Kenny Johnson<br>
 公開日: 2026-08-05
 </div>
+
+---
+
+# TL;DR
+
+- Cloudflareが**WriteGuard**を発表。MCPサーバー向けのきめ細かな制御レイヤーを、Cloudflare MCPサーバーポータル経由のプライベートベータとして提供開始
+- ツールごとの「リスク層」に基づき、通す・帰属情報付きで監査ログに記録・実行前にブロック、のいずれかを判断する共有ポリシー層
+- 社内では27のMCPサーバーが接続され、書き込みを伴うツールの需要急増が開発の背景
+- エージェントは人間の権限で動作させつつ、WriteGuardが人間のアイデンティティに紐付けて可視化
+- GitLab MCPサーバーの3つのツール例で、リスク層ごとの挙動を具体的に紹介
 
 ---
 
