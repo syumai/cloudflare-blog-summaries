@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ai-search-easier/](https://blog.cloudflare.com/ai-search-easier/)（日本語版なし）
 - 公開日: 2026-08-06
+- GitHub: [docs/articles/2026-08-06-ai-search-easier.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-06-ai-search-easier.md)
 
 ## TL;DR
 

@@ -3,6 +3,7 @@
 - 原文: [https://blog.cloudflare.com/ja-jp/cloudflare-os/](https://blog.cloudflare.com/ja-jp/cloudflare-os/)（英語版: [https://blog.cloudflare.com/cloudflare-os/](https://blog.cloudflare.com/cloudflare-os/)）
 - 公開日: 2026-08-05
 - 関連: [Cloudflare OSで、Cloudflareの働き方を再構築する（CIO Sam Rhea視点）](2026-08-05-how-we-use-ai-with-cloudflare-os.md)、[WriteGuard: MCPサーバーのためのきめ細かな制御機能](2026-08-05-mcp-portal-writeguard-private-beta.md)
+- GitHub: [docs/articles/2026-08-05-cloudflare-os.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-cloudflare-os.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXE4XKZZQV409JNYTS85.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/）*

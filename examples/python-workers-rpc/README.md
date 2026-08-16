@@ -1,5 +1,11 @@
 # python-workers-rpc サンプル
 
+## Demo
+
+デプロイ済み（呼び出し側 / Python Worker）: https://python-workers-rpc-py-example.syumai.workers.dev
+
+アクセスすると、TS Worker への RPC 結果 `{"result":186}` が返ります。RPC提供側（TypeScript Worker）は https://python-workers-rpc-ts-example.syumai.workers.dev にデプロイされており、`py` 側からのサービスバインディング越しの呼び出し先として動作しています。
+
 記事「[Workers RPC が Python と JavaScript 間で利用可能に](https://blog.cloudflare.com/python-workers-rpc/)」（[Wiki](../../docs/articles/2026-08-03-python-workers-rpc.md)）に対応する、デプロイ可能な最小 Worker サンプルです。
 
 ## 記事との対応

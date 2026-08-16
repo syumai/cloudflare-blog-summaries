@@ -4,6 +4,7 @@
 - 公開日: 2026-08-05
 - 著者: Matt Silverlock
 - 関連: [[2026-08-04-agent-development-lifecycle.md]]
+- GitHub: [docs/articles/2026-08-05-the-agent-access-model.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-the-agent-access-model.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7NYA8BN3XM3K0Y64KJCWP4.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/the-agent-access-model/）*

@@ -1,5 +1,11 @@
 # mcp-v2 サンプル
 
+## Demo
+
+デプロイ済み: https://example-mcp-v2.syumai.workers.dev
+
+`POST /mcp` に JSON-RPC リクエストを送ると応答します（例: `curl -X POST https://example-mcp-v2.syumai.workers.dev/mcp -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'`）。
+
 元記事: [次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol](https://blog.cloudflare.com/mcp-v2/)（[Wiki](../../docs/articles/2026-08-06-mcp-v2.md)）
 
 ## これは何か

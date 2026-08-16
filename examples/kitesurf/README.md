@@ -1,5 +1,11 @@
 # kitesurf サンプル
 
+## Demo
+
+デプロイ済み: https://example-kitesurf.syumai.workers.dev
+
+`CF_ACCOUNT_ID` / `CF_API_TOKEN` の secret を設定していないため、デモは案内文を返すのみで、実際のスクリーンショット取得は行われません。
+
 元記事: [Kitesurfのご紹介 — Cloudflare Workers上で動く、エージェントファーストのブラウザ](https://blog.cloudflare.com/kitesurf/)（[Wiki](../../docs/articles/2026-08-06-kitesurf.md)）
 
 ## これは何か

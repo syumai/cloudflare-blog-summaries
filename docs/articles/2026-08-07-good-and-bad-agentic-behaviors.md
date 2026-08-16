@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/)（英語版: [https://blog.cloudflare.com/good-and-bad-agentic-behaviors/](https://blog.cloudflare.com/good-and-bad-agentic-behaviors/)）
 - 公開日: 2026-08-07
+- GitHub: [docs/articles/2026-08-07-good-and-bad-agentic-behaviors.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-good-and-bad-agentic-behaviors.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9VT6PFY8DZNPV0SX1SS.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/）*

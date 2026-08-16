@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/the-agentic-internet/](https://blog.cloudflare.com/ja-jp/the-agentic-internet/)（英語版: [https://blog.cloudflare.com/the-agentic-internet/](https://blog.cloudflare.com/the-agentic-internet/)）
 - 公開日: 2026-08-06
+- GitHub: [docs/articles/2026-08-06-the-agentic-internet.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-06-the-agentic-internet.md)
 
 ![記事メインイメージ](https://blog.cloudflare.com/_emdash/api/media/file/01KZNGTBZ8JY7JJZ7SVS09K60E.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/the-agentic-internet/）*

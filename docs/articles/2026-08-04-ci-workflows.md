@@ -4,6 +4,7 @@
 - 公開日: 2026-08-04
 - 著者: André Venceslau, Mia Malden, Tomáš Hobza
 - 関連: [[2026-08-04-agent-development-lifecycle.md]]
+- GitHub: [docs/articles/2026-08-04-ci-workflows.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-04-ci-workflows.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z776V82BHE7244CN1VVD7.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/）*

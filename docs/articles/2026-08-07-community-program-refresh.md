@@ -3,6 +3,7 @@
 - 原文: [https://blog.cloudflare.com/community-program-refresh/](https://blog.cloudflare.com/community-program-refresh/)（日本語版なし）
 - 公開日: 2026-08-07
 - 関連: [Agents Week 2026 まとめ記事](./2026-08-10-agents-week-review.md)（金曜日「実装と現実」の発表の1つとして本記事が紹介されている）
+- GitHub: [docs/articles/2026-08-07-community-program-refresh.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-community-program-refresh.md)
 
 ![Cloudflare Ambassadors / Community Engineers 発表バナー](https://blog.cloudflare.com/_emdash/api/media/file/01KZCB5TGPAH6A73FHJ2QHFR7T.png)
 *図: 本記事のヘッダーバナー画像（出典: Cloudflare Blog, https://blog.cloudflare.com/community-program-refresh/）*

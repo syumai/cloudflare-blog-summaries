@@ -3,6 +3,7 @@
 - 原文: [https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/)（英語版: [https://blog.cloudflare.com/identity-aware-ai-gateway/](https://blog.cloudflare.com/identity-aware-ai-gateway/)）
 - 公開日: 2026-08-05
 - 関連: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](2026-08-05-cloudflare-os.md)
+- GitHub: [docs/articles/2026-08-05-identity-aware-ai-gateway.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-identity-aware-ai-gateway.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4V2YNVJJXE8VE6E5ZK5E.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/）*

@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/workers-ai-gateway-unification/](https://blog.cloudflare.com/workers-ai-gateway-unification/)（日本語版なし）
 - 公開日: 2026-08-07
+- GitHub: [docs/articles/2026-08-07-workers-ai-gateway-unification.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-workers-ai-gateway-unification.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZA5VCX2R70YMT8M56D89B37.png)
 *図: 統合されたAIコントロールプレーンのイメージ（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/workers-ai-gateway-unification/）*

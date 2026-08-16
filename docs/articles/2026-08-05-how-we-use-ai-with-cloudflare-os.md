@@ -4,6 +4,7 @@
 - 著者: Sam Rhea（Cloudflare チーフインフォメーションオフィサー）
 - 公開日: 2026-08-05
 - 関連: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](2026-08-05-cloudflare-os.md)
+- GitHub: [docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNANPJDHWFZFBPEFG96H.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/）*

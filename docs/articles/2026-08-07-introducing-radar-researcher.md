@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/introducing-radar-researcher/](https://blog.cloudflare.com/introducing-radar-researcher/)（日本語版なし）
 - 公開日: 2026-08-07
+- GitHub: [docs/articles/2026-08-07-introducing-radar-researcher.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-introducing-radar-researcher.md)
 
 ![Radar Researcherヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8J1HF1P5HPSDNRYWTR7.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/）*

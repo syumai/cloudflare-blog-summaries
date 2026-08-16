@@ -3,6 +3,7 @@
 - 原文: [https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/](https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/)（英語版: [https://blog.cloudflare.com/agents-week-review-august-2026/](https://blog.cloudflare.com/agents-week-review-august-2026/)）
 - 公開日: 2026-08-10
 - 関連: [@cloudflare/computer 記事](./2026-08-03-cloudflare-computer.md)
+- GitHub: [docs/articles/2026-08-10-agents-week-review.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-10-agents-week-review.md)
 
 ![Agents Week 2026 ヘッダー画像](https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZEF2H4G3BD74C5TP4BWMS76.png&w=1999&h=1125&f=webp&fit=cover&position=center)
 *図: Agents Week 2026 ヘッダー画像（出典: Cloudflare Blog, https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/）*

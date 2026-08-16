@@ -4,6 +4,7 @@
 - 公開日: 2026-08-04
 - 著者: Matthew Phillips
 - 関連: [[2026-08-04-agent-development-lifecycle.md]]
+- GitHub: [docs/articles/2026-08-04-astro-issue-triage.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-04-astro-issue-triage.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ4HKHHS409626RAQN3HX651.png)
 *図: 記事ヘッダー画像（出典: Cloudflare Blog https://blog.cloudflare.com/astro-issue-triage/）*

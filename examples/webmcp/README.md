@@ -1,5 +1,11 @@
 # webmcp サンプル
 
+## Demo
+
+デプロイ済み: https://example-webmcp.syumai.workers.dev
+
+アクセスすると、Worker が生成する Todo アプリの HTML に WebMCP ブリッジスクリプトが注入された状態を確認できます。
+
 元記事: [あらゆるWebサイトにWebMCPインターフェースを付与する](https://blog.cloudflare.com/webmcp/)（[Wiki](../../docs/articles/2026-08-06-webmcp.md)）
 
 ## これは何か

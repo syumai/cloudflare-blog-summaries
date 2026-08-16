@@ -1,5 +1,11 @@
 # billable-usage-api example
 
+## Demo
+
+デプロイ済み: https://billable-usage-api-example.syumai.workers.dev
+
+`CLOUDFLARE_API_TOKEN` の secret を設定していないため、デモは `/usage` にアクセスしても 501 を返すのみです。
+
 対応記事: [Billable Usage APIを提供開始](../../docs/articles/2026-08-03-billable-usage-api.md)
 
 Cloudflare の **Billable Usage API**（`GET /accounts/:account_id/billable-usage`）を Worker から呼び出す最小サンプルです。記事内のユースケース「開発者によるスクリプトへの組み込み（日次でコストを取得し、閾値超過でアラートを出す）」を再現しています。
