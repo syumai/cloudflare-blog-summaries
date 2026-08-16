@@ -190,6 +190,8 @@ class: text-center
 # WriteGuardのツールポリシー
 
 ---
+layout: two-cols
+---
 
 # コード例: sendEmailToolへのポリシー付与
 
@@ -210,18 +212,21 @@ const sendEmailTool = {
 };
 ```
 
----
+::right::
 
-# コード例 解説
+<div class="pl-4">
 
-
-- `EmailMCP.sendEmailTool`という既存のMCPツールに
-  `writeGuard`設定オブジェクトを**外付け**
-- `riskLevel: CONTAINED_WRITE`で「限定的な書き込み」に分類
+- `EmailMCP.sendEmailTool`という既存ツールに
+  `writeGuard`設定を**外付け**
+- `riskLevel: CONTAINED_WRITE`で
+  「限定的な書き込み」に分類
 - `enabled: true`で呼び出し自体は許可
-- `labeling.field: "body"`でメール本文に帰属ラベルを挿入
-  - プレーンテキスト／HTMLどちらの形式にも対応
-- **ポイント**: `EmailMCP`本体のコードは一切変更していない
+- `labeling.field: "body"`でメール本文に
+  帰属ラベルを挿入
+- **ポイント**: `EmailMCP`本体のコードは
+  一切変更していない
+
+</div>
 
 
 ---

@@ -3,7 +3,7 @@
 - 原文: [https://blog.cloudflare.com/ci-workflows/](https://blog.cloudflare.com/ci-workflows/)（日本語版なし）
 - 公開日: 2026-08-04
 - 著者: André Venceslau, Mia Malden, Tomáš Hobza
-- 関連: [[2026-08-04-agent-development-lifecycle.md]]
+- 関連: [Cloudflareにエージェント開発ライフサイクルの時代が到来](2026-08-04-agent-development-lifecycle.md) / [Project Think：Cloudflareで次世代のAIエージェント構築](2026-04-15-project-think.md)
 - GitHub: [docs/articles/2026-08-04-ci-workflows.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-04-ci-workflows.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z776V82BHE7244CN1VVD7.png)

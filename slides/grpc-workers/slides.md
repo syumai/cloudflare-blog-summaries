@@ -139,6 +139,18 @@ export default {
 
 # コード例③ Container へのソケット転送
 
+外部ソケットをContainer内のサービスへ橋渡しする実装。
+次のコードの `start()` ・ `getTcpPort` ・ `pipeTo` に注目
+
+- `this.ctx.container!.start()` でコンテナを起動
+- `getTcpPort(8080).connect(...)` でコンテナの8080番ポートへ接続
+- `containerSocket.opened` で接続確立を待機
+- 外部ソケットとコンテナ側ソケットを双方向に `pipeTo` で接続
+
+---
+
+# Container へのソケット転送（コード例）
+
 ```ts {1-3|8-16|all} {maxHeight:'380px'}
 import { DurableObject } from "cloudflare:workers";
 
@@ -185,8 +197,8 @@ with Server(("0.0.0.0", 8080), Handler) as server:
 ```
 
 
-`this.ctx.container!.getTcpPort(8080).connect(...)` でコンテナのポート8080へ接続し、
-外部ソケットとコンテナ側ソケットを双方向にパイプする
+前ページの `getTcpPort(8080)` が接続する相手。`recv` したデータの先頭に
+`Echo: ` を付けて `sendall` で送り返すだけの最小TCPエコーサーバー
 
 
 ---
@@ -217,6 +229,19 @@ message HelloReply {
   string message = 1;
 }
 ```
+
+---
+
+# コード例④ Go による双方向ストリーミングgRPCサーバー
+
+標準の `google.golang.org/grpc` を使う一般的な実装で**Cloudflare固有のコードは無い**。
+任意の言語・既存のgRPCエコシステムをそのまま使えることを示す例
+
+次の3枚のコードでは以下に注目
+
+- **1/3**: 接続直後に `stream.Send` で `"connected\n"` を送信
+- **2/3**: `stream.Recv()` のループ。`io.EOF` なら `"goodbye\n"` を送って終了、それ以外は `"echo: "` を付けて送り返す
+- **3/3**: ポート50051で待ち受け（例③のコンテナ内サービスに相当）
 
 ---
 
@@ -289,18 +314,6 @@ func main() {
 	log.Fatal(grpcServer.Serve(listener))
 }
 ```
-
----
-
-# コード例④ 解説
-
-
-- `Chat` は双方向ストリーム。まず `"connected\n"` を送信し、以降 `stream.Recv()` でループ受信
-- `io.EOF` を検出したら `"goodbye\n"` を送って終了、それ以外は `"echo: "` を付けて送り返す
-- ポート50051で待ち受け（例③のコンテナ内サービスに相当）
-- 標準の `google.golang.org/grpc` を使う一般的な実装で **Cloudflare固有のコードは無い**
-- 任意の言語・既存のgRPCエコシステムをそのまま使える、ということを示す例
-
 
 ---
 class: text-center

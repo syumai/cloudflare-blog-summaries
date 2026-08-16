@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/agents-on-cloudflare/](https://blog.cloudflare.com/agents-on-cloudflare/)（日本語版なし）
 - 公開日: 2026-08-04
-- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md) / [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md) / [ローカルトレースでWorkersをデバッグ](./2026-08-04-local-tracing.md)
+- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md) / [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md) / [ローカルトレースでWorkersをデバッグ](./2026-08-04-local-tracing.md) / [Project Think：Cloudflareで次世代のAIエージェント構築](./2026-04-15-project-think.md)
 - GitHub: [docs/articles/2026-08-04-agents-on-cloudflare.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-04-agents-on-cloudflare.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGXSXP7S27P8VKV4F0D2N.png&w=1999&h=1125&f=webp&fit=cover&position=center)

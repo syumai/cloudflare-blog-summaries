@@ -24,6 +24,7 @@ import { Marked } from "marked";
 import { parse as parseYaml } from "yaml";
 import { bundledLanguages, createHighlighter, isSpecialLang } from "shiki";
 import { renderQuizPage } from "../quizzes/template/render.mjs";
+import { runLinkCheck } from "./check-links.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -108,12 +109,14 @@ function rewriteHref(href) {
   }
   if (href.startsWith("#")) return href;
 
-  const slidesMatch = href.match(/^\.\.\/slides\/([^/]+)\/slides\.md$/);
+  // docs/index.md（"../slides/..."）・docs/articles/*.md（"../../slides/..."）など、
+  // 参照元の深さによって ".." の数が変わるため、深さを問わず許容する。
+  const slidesMatch = href.match(/^(?:\.\.\/)+slides\/([^/]+)\/slides\.md$/);
   if (slidesMatch) {
     return `${BASE_PATH}slides/${slidesMatch[1]}/`;
   }
 
-  const quizMatch = href.match(/^\.\.\/quizzes\/([^/]+\.html)$/);
+  const quizMatch = href.match(/^(?:\.\.\/)+quizzes\/([^/]+\.html)$/);
   if (quizMatch) {
     return `${BASE_PATH}quizzes/${quizMatch[1]}`;
   }
@@ -608,6 +611,16 @@ async function main() {
   buildPortal(articles);
 
   log("ビルド完了: site/");
+
+  if (process.env.SKIP_LINK_CHECK === "1") {
+    log("SKIP_LINK_CHECK=1 が指定されたため、リンクチェックをスキップします");
+    return;
+  }
+  log("内部リンクをチェックしています...");
+  const { ok } = runLinkCheck({ basePath: BASE_PATH });
+  if (!ok) {
+    throw new Error("リンク切れが見つかったため、ビルドを失敗させます（SKIP_LINK_CHECK=1 でスキップ可能）");
+  }
 }
 
 main().catch((err) => {

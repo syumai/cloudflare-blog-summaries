@@ -12,15 +12,26 @@
   "kv_namespaces": [
     {
       "binding": "CARTS",
-      "id": "local-tracing-example-carts"
+      "id": "5404cc3130fc44fa80b19911f9a95558"
     }
   ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "local-tracing-example-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "f45be77d-719c-4356-ad9f-f1a897d5657a",
       "migrations_dir": "migrations"
     }
-  ]
+  ],
+  // Cloudflare Access で保護する（ https://developers.cloudflare.com/workers/configuration/cloudflare-access/ ）。
+  // ここは `wrangler dev` 用のローカルシミュレーションのみで、本番の Access
+  // アプリケーション（許可ポリシー）は Zero Trust ダッシュボードで別途作成する
+  // 必要がある。手順は README.md の「Cloudflare Access 設定」を参照。
+  // aud は本番の Access アプリケーション作成後、実際の値に置き換えること。
+  "access": {
+    "dev": {
+      "aud": "local-tracing-example-dev",
+      "identity": { "email": "syumai@gmail.com" }
+    }
+  }
 }

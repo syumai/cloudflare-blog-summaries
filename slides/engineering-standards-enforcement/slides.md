@@ -140,6 +140,21 @@ themeConfig:
 
 # コード例: RFCステートメントのJSON表現
 
+RFC本文ではなく、`SHOULD`/`MUST`の要求事項単位でJSON抽出
+
+次のコードの `statements` 配列と `slug` に注目
+
+
+- `rfc`・`title`・`status`・`domain` でRFC全体のライフサイクル状態とドメインを表現
+- `statements` 配列の各要素が1つの要求事項に対応
+- `level`（SHOULD/MUST）でレビュアーの対応が変わる
+- `slug` は**RFC更新後も変わらない安定識別子** → 同じ要求事項を時間をまたいで追跡
+- `href` は元RFCの該当セクションへのリンク
+
+---
+
+# RFCステートメントのJSON表現（コード例）
+
 ```json {1-4|5-14|15-21|all} {maxHeight:'400px'}
 {
   "rfc": 14,
@@ -165,17 +180,6 @@ themeConfig:
   ]
 }
 ```
-
----
-
-# コード例 解説
-
-
-- `rfc`・`title`・`status`・`domain` でRFC全体のライフサイクル状態とドメインを表現
-- `statements` 配列の各要素が1つの要求事項に対応
-- `level`（SHOULD/MUST）でレビュアーの対応が変わる
-- `slug` は**RFC更新後も変わらない安定識別子** → 同じ要求事項を時間をまたいで追跡
-- `href` は元RFCの該当セクションへのリンク
 
 
 ---

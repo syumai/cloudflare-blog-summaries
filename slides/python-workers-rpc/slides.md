@@ -193,19 +193,36 @@ class Default(WorkerEntrypoint):
 ]
 ```
 
----
-
-# コード例② 解説
-
-
-- `self.env.RPC` で TypeScript 側 Worker への RPC スタブを取得
-- `await rpc.add(42, 144)` は、ローカルの Python 関数を呼ぶのと同じ構文
-- 引数・戻り値の数値型はいずれも意識せず自動変換される
+`self.env.RPC` でRPCスタブを取得し、`await rpc.add(42, 144)` はローカルのPython関数を呼ぶのと同じ構文。
+数値型は意識せず自動変換され、呼び出し先は`services`バインディングで指定する。
 
 
 ---
 
-# コード例③ JavaScript から Python の Pygments を呼ぶ（コード読解）
+# コード例③ JavaScript から Python の Pygments を呼ぶ: 見どころ
+
+
+- 次の2枚は JavaScript Worker が Python Worker の Pygments（構文ハイライト）機能を呼び出す例
+- 1枚目（JS）: `env.PYTHON_RPC` 越しに `highlight_code('print(42)', 'python')` を文字列2つで呼ぶだけ
+- 2枚目（Python）: `highlight_code` の中で Pygments（Pythonエコシステムのライブラリ）を使って処理
+- 戻り値の `dict`（`html`/`css`）は自動的に JavaScript の `Object` に変換され、そのまま `Response.json()` に渡せる
+- **ポイント**: 同等の処理を JavaScript で書き直す必要がない
+
+
+<div class="pt-4">
+
+```bash
+# Terminal 1
+cd ts/ && npx wrangler dev
+# Terminal 2
+cd py/ && uv run pywrangler dev
+```
+
+</div>
+
+---
+
+# コード例③ (JS) Python の Pygments を呼ぶ側
 
 ```js {1-10}
 export default {
@@ -221,7 +238,13 @@ export default {
 }
 ```
 
-```py {1-3|5-6|8-13|15-16|all} {maxHeight:'260px'}
+`env.PYTHON_RPC` 越しに `highlight_code('print(42)', 'python')` を文字列2つで呼ぶだけ
+
+---
+
+# コード例③ (Python) Pygmentsによる実装
+
+```py {1-3|5-6|8-13|15-16|all}
 from pygments.formatters import HtmlFormatter
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
@@ -239,27 +262,7 @@ class Default(WorkerEntrypoint):
         return {"html": highlighted_html, "css": css}
 ```
 
----
-
-# コード例③ 解説
-
-
-- JavaScript 側は `env.PYTHON_RPC` 越しに `highlight_code` を文字列2つで呼ぶだけ
-- Python 側は Pygments（Python エコシステムのライブラリ）でハイライト処理を実装
-- Python の `dict` は自動的に JavaScript の `Object` に変換され、そのまま `Response.json()` に渡せる
-- **同等の処理を JavaScript で書き直す必要がない**、という点がこの例の要点
-
-
-<div class="pt-4">
-
-```bash
-# Terminal 1
-cd ts/ && npx wrangler dev
-# Terminal 2
-cd py/ && uv run pywrangler dev
-```
-
-</div>
+戻り値の `dict`（`html`/`css`）は自動的にJavaScriptの`Object`に変換され、そのまま`Response.json()`に渡せる
 
 ---
 class: text-center

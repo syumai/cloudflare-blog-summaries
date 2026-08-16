@@ -10,6 +10,8 @@
 // D1への挿入が "no such column: delivery_window" で失敗する様子と、
 // Local Explorer API でその原因を特定する手順をREADMEで案内している。
 
+import { requireAllowedAccess } from "../../shared/access";
+
 export interface Env {
   CARTS: KVNamespace;
   DB: D1Database;
@@ -48,7 +50,12 @@ async function handleCreateOrder(request: Request, env: Env): Promise<Response> 
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     const url = new URL(request.url);
 
     if (url.pathname === "/api/orders" && request.method === "POST") {

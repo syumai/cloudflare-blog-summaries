@@ -247,6 +247,20 @@ C2PA（Content Authenticity and Provenance Association）準拠の
 
 ---
 
+# コード例: MCP Tool Proxy の見どころ
+
+
+- Site MCP Serverパックの中核実装。次のコードに注目
+- サイト自身のMCPサーバーが `tools/list` で公開しているツールごとに、
+  `document.modelContext.registerTool()`（4行目）でプロキシツールを登録
+- `execute()`（8行目〜）は標準のMCP JSON-RPCリクエスト（`tools/call`）を、
+  訪問者本人のブラウザから `credentials: "same-origin"` 付きで `/mcp` に送信
+- つまりツール呼び出しは「訪問者本人のセッション・Cookieで
+  サイト自身のMCPサーバーを叩く」形で実行される
+- レスポンスの `result`（MCPの `CallToolResult`）はそのままエージェントに返される（20行目）
+
+---
+
 # コード例: MCP Tool Proxy
 
 ```javascript {1-3|5-10|11-19|20-21|all}
@@ -272,17 +286,6 @@ document.modelContext.registerTool({
   },
 });
 ```
-
----
-
-# コード例: MCP Tool Proxy 解説
-
-
-- Site MCP Serverパックの中核実装
-- サイト自身のMCPサーバーが `tools/list` で公開しているツールごとに、`document.modelContext.registerTool()` でプロキシツールを登録
-- `execute()` は標準のMCP JSON-RPCリクエスト（`tools/call`）を、訪問者本人のブラウザから `credentials: "same-origin"` 付きで `/mcp` に送信
-- つまりツール呼び出しは「訪問者本人のセッション・Cookieでサイト自身のMCPサーバーを叩く」形で実行される
-- レスポンスの `result`（MCPの `CallToolResult`）はそのままエージェントに返される
 
 
 ---

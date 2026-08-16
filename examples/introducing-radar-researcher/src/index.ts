@@ -21,6 +21,8 @@
  * RADAR_API_TOKEN が未設定でも Worker は起動する（実データ取得だけ省略される）。
  */
 
+import { requireAllowedAccess } from "../../shared/access";
+
 interface Env {
   AI: Ai;
   RADAR_API_TOKEN?: string;
@@ -30,7 +32,12 @@ interface Env {
 const DEFAULT_RADAR_PATH = "/radar/quality/speed/summary?location=PT";
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     const url = new URL(request.url);
 
     if (url.pathname === "/" && request.method === "GET") {

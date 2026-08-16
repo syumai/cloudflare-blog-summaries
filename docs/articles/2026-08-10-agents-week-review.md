@@ -12,7 +12,7 @@
 
 - Cloudflare は 2026年8月3日〜7日の5日間、「Agents Week」として AI エージェント関連の発表を約26件連続で行った。
 - テーマは1日ごとに区切られており、月曜は実行環境とインフラ、火曜はエージェント開発ライフサイクル（ADLC）、水曜は Zero Trust とセキュリティ、木曜はエージェント型インターネット、金曜は実装と現実（エコシステム）という構成。
-- 通底するメッセージは、「エージェント経済」の課題はモデル性能だけでは解決できず、アイデンティティ・通信・オーケストレーション・メモリ・オブザーバビリティ・セキュリティといった基盤全体の整備が必要だという点。
+- 全体に共通するメッセージは、「エージェント経済」の課題はモデル性能だけでは解決できず、アイデンティティ・通信・オーケストレーション・メモリ・オブザーバビリティ・セキュリティといった基盤全体の整備が必要だという点。
 - 目玉発表は `@cloudflare/computer`（エージェント専用実行環境）、Agent Development Lifecycle（ADLC）、Agent Access Model、WebMCP、AEO（Answer Engine Optimization）など多岐にわたる。
 - 本記事はその5日間・全発表への「目次」的なまとめ記事であり、個々の発表は詳細記事にリンクされている。
 
@@ -110,11 +110,11 @@ Agents Week 2026 は、この「モデル以外」の課題に対する Cloudfla
 
 Agents Week 2026 で発表された約26件の中でも、特に読む価値が高いと考える5件を、推薦理由とともに挙げる。
 
-- **[@cloudflare/computer](./2026-08-03-cloudflare-computer.md)**（[スライド](../slides/cloudflare-computer/slides.md)） — アイソレートとコンテナを動的に使い分けるハイブリッド実行環境。数十億規模のエージェントをどう安価に動かすかという、Agents Week全体を貫くスケーリング課題への最も具体的な回答であり、週の目玉として真っ先に読む価値がある。
-- **[WebMCP](./2026-08-06-webmcp.md)**（[スライド](../slides/webmcp/slides.md)） — オリジンのコード変更ゼロでサイトをエージェント対応にする発想は、AEOやSEOの延長として今後の実務に直結しやすい。ブラウザ標準としての広がりにも注目したい。
-- **[Cloudflare OS](./2026-08-05-cloudflare-os.md)**（[スライド](../slides/cloudflare-os/slides.md)） — 「エージェントは最初はどのアクセス権も持たない」というZero Trustの徹底と、参照履歴に基づく情報漏えい防止（Gatekeeper）は、社内でエージェントを本格運用する際の権限設計の指針として参考になる。
-- **[Kitesurf](./2026-08-06-kitesurf.md)**（[スライド](../slides/kitesurf/slides.md)） — Chromiumを使わずWorkers上で完全に動くエージェント専用ブラウザという発想は独自性が高く、CPU・メモリ効率の実測値（3〜7倍）とWPT準拠の透明性ある性能開示が説得力を持たせている。
-- **[Cloudflare Wallets](./2026-08-04-wallets.md)**（[スライド](../slides/wallets/slides.md)） — エージェントに「安定したID」と「決済手段」を与えるという発想は、エージェント経済が実際にお金を動かすフェーズに入りつつあることを象徴しており、Monetization Gateway・Identityと合わせた全体戦略の理解に役立つ。
+- **[@cloudflare/computer](./2026-08-03-cloudflare-computer.md)**（[スライド](../../slides/cloudflare-computer/slides.md)） — アイソレートとコンテナを動的に使い分けるハイブリッド実行環境。数十億規模のエージェントをどう安価に動かすかという、Agents Week全体を貫くスケーリング課題への最も具体的な回答であり、週の目玉として真っ先に読む価値がある。
+- **[WebMCP](./2026-08-06-webmcp.md)**（[スライド](../../slides/webmcp/slides.md)） — オリジンのコード変更ゼロでサイトをエージェント対応にする発想は、AEOやSEOの延長として今後の実務に直結しやすい。ブラウザ標準としての広がりにも注目したい。
+- **[Cloudflare OS](./2026-08-05-cloudflare-os.md)**（[スライド](../../slides/cloudflare-os/slides.md)） — 「エージェントは最初はどのアクセス権も持たない」というZero Trustの徹底と、参照履歴に基づく情報漏えい防止（Gatekeeper）は、社内でエージェントを本格運用する際の権限設計の指針として参考になる。
+- **[Kitesurf](./2026-08-06-kitesurf.md)**（[スライド](../../slides/kitesurf/slides.md)） — Chromiumを使わずWorkers上で完全に動くエージェント専用ブラウザという発想は独自性が高く、CPU・メモリ効率の実測値（3〜7倍）とWPT準拠の透明性ある性能開示が説得力を持たせている。
+- **[Cloudflare Wallets](./2026-08-04-wallets.md)**（[スライド](../../slides/wallets/slides.md)） — エージェントに「安定したID」と「決済手段」を与えるという発想は、エージェント経済が実際にお金を動かすフェーズに入りつつあることを象徴しており、Monetization Gateway・Identityと合わせた全体戦略の理解に役立つ。
 
 ## 関連リンク
 

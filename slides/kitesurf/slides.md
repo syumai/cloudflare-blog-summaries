@@ -410,15 +410,14 @@ class: text-center
 
 </div>
 
----
-
-# コード例① 解説
-
+<div class="text-sm pt-1" style="line-height: 1.3;">
 
 - MCPクライアント（例: Opencode）の設定に `chrome-devtools-mcp` をローカルコマンドとして登録
 - `--wsEndpoint` のクエリパラメータに `browser=kitesurf` を付けるだけで接続先を切り替え
 - 認証は `--wsHeaders` の `Authorization: Bearer <API_TOKEN>` ヘッダーで実施
 - 既存のCDP対応ツールをそのまま流用できることを体現する設定例
+
+</div>
 
 
 ---

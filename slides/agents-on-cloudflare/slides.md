@@ -357,6 +357,7 @@ class: text-center
 - [エージェント開発ライフサイクル ▶ 解説スライド](../agent-development-lifecycle/)
 - [Workersトレーシング（開発者ドキュメント）](https://developers.cloudflare.com/workers/observability/traces/)
 - [Workers サンプル（examples/agents-on-cloudflare/）](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/agents-on-cloudflare)
+- 関連デッキ: <a href="../project-think/" target="_blank">Project Think：Cloudflareで次世代のAIエージェント構築</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-04-agents-on-cloudflare.md

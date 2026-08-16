@@ -1,3 +1,5 @@
+import { requireAllowedAccess } from "../../shared/access";
+
 export interface Env {
   CLOUDFLARE_ACCOUNT_ID: string;
   COST_ALERT_THRESHOLD_USD: string;
@@ -42,7 +44,14 @@ function summarizeByService(rows: BillableUsageRow[]): Record<string, number> {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    // CLOUDFLARE_API_TOKEN secret 設定後に請求情報が未認証で見えてしまわないよう、
+    // 全パスをガードする。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     if (!env.CLOUDFLARE_API_TOKEN) {
       return Response.json(
         {
@@ -72,7 +81,7 @@ export default {
   // Runs on the configured cron schedule (see wrangler.jsonc `triggers.crons`).
   // In production, replace the console.log below with a webhook call
   // (e.g. Slack incoming webhook) to actually page someone.
-  async scheduled(_event: ScheduledEvent, env: Env): Promise<void> {
+  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
     if (!env.CLOUDFLARE_API_TOKEN) {
       console.log("Skipping billable-usage check: CLOUDFLARE_API_TOKEN not set.");
       return;

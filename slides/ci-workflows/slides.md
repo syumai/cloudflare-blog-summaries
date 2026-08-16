@@ -139,6 +139,16 @@ install → 並列チェック（lint/test/typecheck/build）→ deploy
 
 # コード例① 基本パイプライン
 
+CI/CDパイプラインが「ただのWorkflow」であることを、実際のコードで確認する。次のコードでは以下に注目
+
+- 1〜5行目: `ci.runner()` の呼び出し1回 = Workflowの1ステップ（`step.do()`）。`install` は `cache.inputs` のファイル内容に基づきキャッシュされ、`deps` を返す
+- 7〜12行目: `deps.runner()` を `Promise.all()` でまとめることで **lint/test/typecheck/build を並列実行**
+- 14〜20行目: すべての検証が完了して初めて `deploy` ステップが `wrangler deploy` を実行
+
+---
+
+# コード例①（コード全文）
+
 ```ts {1-5|7-12|14-20|all}
 const deps: CiRunnerResult = await ci.runner({
   name: 'install',
@@ -162,16 +172,6 @@ await deps.runner({
 });
 ```
 
----
-
-# コード例① 解説
-
-
-- `ci.runner()` の呼び出し1回 = Workflowの1ステップ（`step.do()`）
-- `install` は `cache.inputs` のファイル内容に基づきキャッシュされ、`deps` を返す
-- `deps.runner()` を `Promise.all()` でまとめることで **lint/test/typecheck/build を並列実行**
-- すべての検証が完了して初めて `deploy` ステップが `wrangler deploy` を実行
-
 
 ---
 layout: image-right
@@ -189,6 +189,8 @@ CI全体のレイテンシを短縮する
 出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/
 </footer>
 
+---
+layout: two-cols
 ---
 
 # コード例② トリガー設定（wrangler config）
@@ -213,21 +215,21 @@ CI全体のレイテンシを短縮する
 }
 ```
 
----
+<style>
+.slidev-code { font-size: 0.72em; }
+</style>
 
-# コード例② 解説
+::right::
 
+<div class="pl-4 pt-8">
 
 - `triggers.events` に `cf.artifacts.repo.pushed` イベントを登録
 - 該当する `namespace`（と任意で `repoName`）へのpushでWorkflowが自動起動
 - `repoName` を**省略**すると、namespace内の全リポジトリへのpushで同じWorkflowを実行
 - プラットフォーム事業者が顧客の全リポジトリに同一CIを適用する用途に最適
+- 必要なバインディング: `artifacts` / `workflows` / `containers` / `durable_objects` / `r2`（キャッシュ用）
 
-
-<br>
-
-
-必要なバインディング: `artifacts` / `workflows` / `containers` / `durable_objects` / `r2`（キャッシュ用）
+</div>
 
 
 ---
@@ -288,6 +290,19 @@ export class Healer extends HealingAgent {
 
 ---
 
+# コード例④ 失敗検知とhealへの委譲
+
+ビルドが壊れたとき、CIジョブがどうやってHealerエージェントに処理を委譲するか。
+次の2枚のコード（1/2・2/2）に分けて見ていく。以下に注目
+
+- **1/2の2〜14行目**: `try` でinstall（3〜7行目）と並列チェック lint/test/typecheck/build（9〜14行目）を実行
+- **1/2の15〜18行目**: `catch (failure)` と `isCiRunnerFailure()` — **runnerが報告した失敗だけ**をhealの対象にし、それ以外は再スロー
+- **2/2の1〜13行目**: healへの委譲自体も `step.do('heal', ...)`（タイムアウト5時間・リトライなし）で実行
+- **2/2の6〜10行目**: `healer.heal()` は修正の `branch` / `commit` / `steps` を返す
+- **2/2の15行目**: 元の実行は `CiRunFailedWithFix` で**失敗のまま記録**し、検証済みの修正は**別ブランチ**に残す
+
+---
+
 # コード例④ 失敗検知とhealへの委譲（1/2）
 
 ```ts {1-13|14-19|all}
@@ -342,17 +357,6 @@ await deps.runner({
 ```
 
 <div class="text-xs opacity-50 mt-2">前スライドの try / catch(failure) の続き</div>
-
----
-
-# コード例④ 解説
-
-
-- `try` でinstall + 並列チェックを実行、失敗すると `catch` へ
-- `isCiRunnerFailure()` で**runnerが報告した失敗だけ**をhealの対象にし、それ以外は再スロー
-- healへの委譲自体も `step.do('heal', ...)`（タイムアウト5時間・リトライなし）
-- `healer.heal()` は修正のブランチ・コミット・ステップ数を返す
-- 元の実行は**失敗のまま記録**し、検証済みの修正は**別ブランチ**に残す
 
 
 ---
@@ -454,6 +458,7 @@ class: text-center
 - [Cloudflare Workflows ドキュメント](https://developers.cloudflare.com/workflows/)
 - [自己修復CIのサンプル（Project Think）](https://github.com/cloudflare/ci/blob/main/examples/self-healing)
 - [Sandbox SDK ドキュメント](https://developers.cloudflare.com/sandbox/)
+- 関連デッキ: <a href="../project-think/" target="_blank">Project Think：Cloudflareで次世代のAIエージェント構築</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-04-ci-workflows.md

@@ -265,6 +265,17 @@ class: text-center
 
 # コード例① `@cloudflare/ci` によるCI/CD定義
 
+依存関係のインストールからデプロイまでを、`@cloudflare/ci` でどう記述するか。次のコードでは以下に注目
+
+- 3〜7行目: `ci.runner()` で依存関係をインストール。`cache.inputs` が変わらなければキャッシュ再利用
+- 9〜14行目: `Promise.all` で lint・test・typecheck・build を**並列実行**し、CI全体のレイテンシを短縮
+- 16〜22行目: 最後に `deploy` タスクで `wrangler deploy` を実行し本番デプロイ
+- これが「数百万のリポジトリでCI/CDを実行する」ための基本単位
+
+---
+
+# コード例①（コード全文）
+
 ```ts {1|3-6|8-13|15-20|all}
 import { CIWorkflow } from `@cloudflare/ci`
 
@@ -292,18 +303,19 @@ await deps.runner({
 
 ---
 
-# コード例① 解説
+# コード例② 夜間レビューエージェントの起動
 
+次のコードは、Workflowsの1タスクとして夜間レビューエージェントを起動する例。以下に注目
 
-- `ci.runner()` で依存関係をインストール。`cache.inputs` が変わらなければキャッシュ再利用
-- `Promise.all` で lint・test・typecheck・build を**並列実行**し、CI全体のレイテンシを短縮
-- 最後に `deploy` タスクで `wrangler deploy` を実行し本番デプロイ
-- これが「数百万のリポジトリでCI/CDを実行する」ための基本単位
-
+- 8行目: `WorkflowEntrypoint` を継承し、Workflowsの1タスクとして定義
+- 10・14・18行目: `step.do()` は各ステップを冪等な単位として実行し、失敗時は自動リトライ
+- 10行目: `collectFindings()` で対象日の知見を収集 → 12行目の `init(Reviewer, ...)` でFlueのエージェント初期化
+- 15・19行目: `agent.dispatch()` で指示を送信し、`agent.read()` で応答を取得
+- ステップ単位の分割により、起動タイミングと指示内容をコード側で完全に制御
 
 ---
 
-# コード例② 夜間レビューエージェントの起動
+# コード例②（コード全文）
 
 ```ts {1-4|6|8-9|11|13-14|16-19|all} {maxHeight:'440px'}
 import { WorkflowEntrypoint, type WorkflowEvent, type WorkflowStep } from 'cloudflare:workers';
@@ -330,17 +342,6 @@ export class NightlyReview extends WorkflowEntrypoint {
   }
 }
 ```
-
----
-
-# コード例② 解説
-
-
-- `WorkflowEntrypoint` を継承し、Workflowsの1タスクとして定義
-- `step.do()` は各ステップを冪等な単位として実行し、失敗時は自動リトライ
-- `collectFindings()` で対象日の知見を収集 → Flueの `init(Reviewer, ...)` でエージェント初期化
-- `agent.dispatch()` で指示を送信し、`agent.read()` で応答を取得
-- ステップ単位の分割により、起動タイミングと指示内容をコード側で完全に制御
 
 
 ---

@@ -1,0 +1,23 @@
+{
+  "name": "project-think-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "dry-run": "wrangler deploy --dry-run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cloudflare/think": "0.15.1",
+    "agents": "0.20.1",
+    "ai": "7.0.66",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260815.1",
+    "typescript": "7.0.2",
+    "wrangler": "4.123.0"
+  }
+}

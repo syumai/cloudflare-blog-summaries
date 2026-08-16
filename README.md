@@ -48,6 +48,7 @@ cloudflare-blog-summaries/
 
 | 公開日 | タイトル | Wiki | スライド | クイズ | 原文リンク |
 |--------|----------|------|----------|--------|------------|
+| 2026-04-15 | Project Think：Cloudflareで次世代のAIエージェント構築 | [Wiki](docs/articles/2026-04-15-project-think.md) | [スライド](slides/project-think/slides.md) | [クイズ](quizzes/project-think.html) | [原文](https://blog.cloudflare.com/ja-jp/project-think/) |
 | 2026-08-03 | AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介 | [Wiki](docs/articles/2026-08-03-cloudflare-computer.md) | [スライド](slides/cloudflare-computer/slides.md) | [クイズ](quizzes/cloudflare-computer.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |
 | 2026-08-03 | Billable Usage APIを提供開始：Cloudflareの課金情報をプログラムから取得可能に | [Wiki](docs/articles/2026-08-03-billable-usage-api.md) | [スライド](slides/billable-usage-api/slides.md) | [クイズ](quizzes/billable-usage-api.html) | [原文](https://blog.cloudflare.com/ja-jp/billable-usage-api/) |
 | 2026-08-03 | Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート | [Wiki](docs/articles/2026-08-03-grpc-workers.md) | [スライド](slides/grpc-workers/slides.md) | [クイズ](quizzes/grpc-workers.html) | [原文](https://blog.cloudflare.com/grpc-workers/) |

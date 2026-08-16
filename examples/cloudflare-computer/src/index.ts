@@ -1,4 +1,5 @@
 import { Workspace, type DurableObjectStorageLike } from "@cloudflare/computer";
+import { requireAllowedAccess } from "../../shared/access";
 
 export interface Env {
   WORKSPACE: DurableObjectNamespace;
@@ -61,7 +62,12 @@ export class WorkspaceDO implements DurableObject {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     // A single named Workspace shared by every request in this demo.
     // In a real agent, you would key this by session/user/issue id.
     const id = env.WORKSPACE.idFromName("demo-workspace");

@@ -3,7 +3,7 @@
 - 原文: [https://blog.cloudflare.com/the-agent-access-model/](https://blog.cloudflare.com/the-agent-access-model/)（日本語版なし）
 - 公開日: 2026-08-05
 - 著者: Matt Silverlock
-- 関連: [[2026-08-04-agent-development-lifecycle.md]]
+- 関連: [Cloudflareにエージェント開発ライフサイクルの時代が到来](2026-08-04-agent-development-lifecycle.md)
 - GitHub: [docs/articles/2026-08-05-the-agent-access-model.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-the-agent-access-model.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7NYA8BN3XM3K0Y64KJCWP4.png)

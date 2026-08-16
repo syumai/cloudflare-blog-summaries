@@ -181,10 +181,12 @@ curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage?f
 
 
 ---
+layout: two-cols
+---
 
 # コード例③ レスポンス例（コード読解）
 
-```json {1-2|4-14|all} {maxHeight:'380px'}
+```json {1-2|4-14|all} {maxHeight:'360px'}
 {
   "result": [
     {
@@ -206,15 +208,20 @@ curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage?f
 }
 ```
 
----
+<style>
+.slidev-code { font-size: 0.68em; }
+</style>
 
-# コード例③ 解説
+::right::
 
+<div class="pl-4 pt-8">
 
 - `result` 配列の中に製品・課金期間ごとの行が並ぶ、標準的なCloudflare APIレスポンス形式
 - `ServiceName: "Workers Standard"` について 2025年2月の課金期間の利用量・料金を表現
 - `ConsumedQuantity: 150000`（`GB-months`）に対し `ContractedCost: 0.75`
 - `CumulatedContractedCost: 2.25` は請求期間全体の累計 — 途中経過の追跡に便利
+
+</div>
 
 
 ---

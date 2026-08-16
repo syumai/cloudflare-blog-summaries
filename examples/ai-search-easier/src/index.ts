@@ -17,12 +17,19 @@
  * インスタンスが存在しない状態でも Worker 自体のデプロイ・起動には影響しません。
  */
 
+import { requireAllowedAccess } from "../../shared/access";
+
 interface Env {
   AI_SEARCH: AiSearchNamespace;
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     const url = new URL(request.url);
 
     if (url.pathname === "/") {

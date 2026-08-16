@@ -11,6 +11,8 @@
 // これらのフレームワークを使うと、エージェント・会話・ツール実行単位のスパンが
 // 自動収集されるが、ここでは Workers AI バインディングを直接呼び出す最小構成にとどめる。
 
+import { requireAllowedAccess } from "../../shared/access";
+
 export interface Env {
   AI: Ai;
 }
@@ -44,7 +46,12 @@ async function handleChat(request: Request, env: Env): Promise<Response> {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // Cloudflare Access (https://developers.cloudflare.com/workers/configuration/cloudflare-access/)
+    // で保護されたエンドポイント。syumai@gmail.com 以外は 403 になる。
+    const denied = await requireAllowedAccess(ctx);
+    if (denied) return denied;
+
     const url = new URL(request.url);
 
     if (url.pathname === "/") {

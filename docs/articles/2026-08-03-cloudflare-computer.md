@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/cloudflare-computer/](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)（英語版: [https://blog.cloudflare.com/cloudflare-computer/](https://blog.cloudflare.com/cloudflare-computer/)）
 - 公開日: 2026-08-03
+- 関連: [Project Think：Cloudflareで次世代のAIエージェント構築](./2026-04-15-project-think.md)
 - GitHub: [docs/articles/2026-08-03-cloudflare-computer.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-03-cloudflare-computer.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZB3S8MBM35D38QT8Q470C0V.png)

@@ -296,7 +296,18 @@ npx wrangler ai-search create cloudflare-community \
 
 # コード例③ 複数インスタンスを横断検索するツール
 
-```ts {1-6|9-16|17|all} {maxHeight:'400px'}
+Option A（Worker上でMCPサーバーを自前実装）に相当する実装例。次のコードでは以下に注目
+
+- 1〜6行目: `registerTool` でMCPツール `search_dev_stack` を定義
+- 8行目: `env.AI_SEARCH.search()` を呼び出して検索を実行
+- 11行目: `instance_ids` に複数のインスタンスIDを渡すことで**1回のクエリで横断検索**
+- 12〜13行目: `retrieval.max_num_results` / `reranking.enabled` で取得件数・再ランキングを制御
+
+---
+
+# コード例③（コード全文）
+
+```ts {1-6|9-16|17|all} {maxHeight:'440px'}
 context.registerTool(
   'search_dev_stack',
   {
@@ -316,17 +327,6 @@ context.registerTool(
   }
 )
 ```
-
----
-
-# コード例③ 解説
-
-
-- `registerTool` でMCPツール `search_dev_stack` を定義
-- `env.AI_SEARCH.search()` を呼び出して検索を実行
-- `instance_ids` に複数のインスタンスIDを渡すことで**1回のクエリで横断検索**
-- `retrieval.max_num_results` / `reranking.enabled` で取得件数・再ランキングを制御
-- Option A（Worker上でMCPサーバーを自前実装）に相当する実装例
 
 
 ---

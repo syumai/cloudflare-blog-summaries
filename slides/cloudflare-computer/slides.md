@@ -296,6 +296,17 @@ GitHub Issueのバグ報告を受け取り、調査・修正・検証まで行�
 
 # コード例① アイソレートのみの最小構成
 
+最初の一歩として、コンテナを一切使わずアイソレートだけでバグトリアージエージェントを動かす。次のコードでは以下に注目
+
+- 6行目: `workspaceBash = false` で、`@cloudflare/computer` 側のツールセットを使うよう切り替え
+- 8〜9行目: `Workspace` は Durable Object の `storage`（`this.ctx.storage`）をバックエンドに構築
+- 17〜22行目: `getSystemPrompt()` で「`/workspace/repo` のバグを再現・調査・修正・検証せよ」と明確に指示
+- この段階ではコンテナバックエンドを持たず、**アイソレート（just-bash）のみ**で動作
+
+---
+
+# コード例①（コード全文）
+
 ```ts {1-2|4-8|10-13|15-21|all}
 import { Think } from "@cloudflare/think";
 import { Workspace, type DurableObjectStorageLike } from "@cloudflare/computer";
@@ -325,20 +336,23 @@ code, make a focused fix when it is safe, and run verification.`;
 
 ---
 
-# コード例① 解説
+# コード例② コンテナバックエンドの追加
 
+①のエージェントに、フルLinux環境が必要なタスク向けの**コンテナ実行先**を追加する。
+コードは1/2・2/2の2枚に分けて見ていく。次のコードでは以下に注目
 
-- `Workspace` は Durable Object の `storage`（`this.ctx.storage`）をバックエンドに構築
-- `workspaceBash = false` で、`@cloudflare/computer` 側のツールセットを使うよう切り替え
-- `getSystemPrompt()` で「`/workspace/repo` のバグを再現・調査・修正・検証せよ」と明確に指示
-- この段階ではコンテナバックエンドを持たず、**アイソレート（just-bash）のみ**で動作
-
+- 1/2の10行目: `withWorkspaceContainer(Think)` というミックスインでコンテナのライフサイクル管理機能を追加
+- 1/2の16行目〜2/2の8行目: `backends` 配列に `CloudflareContainerBackend` を渡すと、Workspaceは
+  アイソレート（デフォルト）に加えてコンテナも実行先として認識する
+- 2/2の3〜5行目: `workspace.binding` / `workspace.id` は、どのDurable Object（＝どのエージェント）に
+  紐づくコンテナかを一意に特定する情報
+- ここまでで、1つのエージェントがアイソレートとコンテナの**両方**を使い分けられる
 
 ---
 
-# コード例② コンテナバックエンドの追加
+# コード例②（コード全文 1/2）
 
-```ts {1-7|9|11-22|all} {maxHeight:'440px'}
+```ts {1-6|10|13-16|all}
 import { Think } from "@cloudflare/think";
 import { Workspace, WorkspaceProxy } from "@cloudflare/computer";
 import {
@@ -355,6 +369,14 @@ export class Agent extends withWorkspaceContainer(Think) {
     storage: this.ctx.storage,
     useThink: true, // soon will not be needed
     backends: [
+      // 続きは次のスライドへ
+```
+
+---
+
+# コード例②（コード全文 2/2）
+
+```ts {1-9|3-5|all}
       new CloudflareContainerBackend({
         container: () => this,
         workspace: {
@@ -369,24 +391,26 @@ export class Agent extends withWorkspaceContainer(Think) {
 }
 ```
 
----
-
-# コード例② 解説
-
-
-- `withWorkspaceContainer(Think)` というミックスインでコンテナのライフサイクル管理機能を追加
-- `backends` 配列に `CloudflareContainerBackend` を渡すと、Workspaceは
-  アイソレート（デフォルト）に加えてコンテナも実行先として認識する
-- `workspace.binding` / `workspace.id` は、どのDurable Object（＝どのエージェント）に
-  紐づくコンテナかを一意に特定する情報
-- ここまでで、1つのエージェントがアイソレートとコンテナの**両方**を使い分けられる
-
+<div class="text-xs opacity-50 mt-2">前スライドの backends: [ の続き</div>
 
 ---
 
 # コード例③ 標準ツール＋独自ツールの統合
 
-```ts {1-3|9-25|all} {maxHeight:'440px'}
+エージェントが「今どちらのバックエンドを使うべきか」をどう判断するかを見る。
+コードは1/2・2/2の2枚に分けて見ていく。次のコードでは以下に注目
+
+- 1/2の12行目: `createAITools()` は AI SDK（`ToolSet`）互換のツール一式を生成するヘルパー
+- 1/2の17行目〜2/2の6行目: 注目ポイントは `shell.backends.container.description` の自然文の説明。
+  「ファイル操作以上のことが必要なときに使え」という指示が**ツールの説明文自体**に埋め込まれている
+  — これが「モデルによるバックエンド自動選択」の実体
+- 2/2の10行目: 独自ツール `replyToIssue`（GitHub Issue返信）を標準ツール群と並べて追加
+
+---
+
+# コード例③（コード全文 1/2）
+
+```ts {1-3|9-17|all}
 import { createAITools } from "@cloudflare/computer/tools";
 import type { ToolSet } from "ai";
 import { replyToIssue } from "./tools/github";
@@ -404,6 +428,14 @@ export class Agent extends withWorkspaceContainer(Think) {
           defaultBackend: "container",
           backends: {
             container: {
+              // 続きは次のスライドへ
+```
+
+---
+
+# コード例③（コード全文 2/2）
+
+```ts {1-6|10|all}
               description:
                 "Cloudflare Container with a full Linux userland: " +
                 "npm, node, package managers, test runners, and real " +
@@ -419,23 +451,26 @@ export class Agent extends withWorkspaceContainer(Think) {
 }
 ```
 
----
-
-# コード例③ 解説
-
-
-- `createAITools()` は AI SDK（`ToolSet`）互換のツール一式を生成するヘルパー
-- 注目ポイント: `shell.backends.container.description` の自然文の説明
-  - 「ファイル操作以上のことが必要なときに使え」という指示が**ツールの説明文自体**に埋め込まれている
-  - これが「モデルによるバックエンド自動選択」の実体
-- 独自ツール `replyToIssue`（GitHub Issue返信）を標準ツール群と並べて追加
-
+<div class="text-xs opacity-50 mt-2">前スライドの container: { の続き</div>
 
 ---
 
 # コード例④ Workspace APIの直接利用
 
-```ts {1-4|6-11|13-15|17-30|all} {maxHeight:'440px'}
+最後に、エージェントの「頭脳」側からWorkspaceを直接プログラム的に操作する統合パターンを見る。
+コードは1/2・2/2の2枚に分けて見ていく。次のコードでは以下に注目
+
+- 1/2の6行目: `startTriage()` は外部トリガー（GitHub Issueのwebhookなど）を起点に呼ばれる想定
+- 1/2の7〜11行目: `workspace.fs.mkdir` / `writeFile` でバグ報告をファイルとして書き出し
+- 1/2の13〜16行目: `workspace.git.clone` でリポジトリをチェックアウト
+- 2/2の1〜16行目: `submitMessages()` でエージェントの処理ループにユーザーメッセージとして指示を投入
+- ホスト側コードがWorkspaceをセットアップしてからエージェントを起動する統合パターン
+
+---
+
+# コード例④（コード全文 1/2）
+
+```ts {1-4|6-11|13-16|all}
 export class Agent extends withWorkspaceContainer(Think) {
   override workspaceBash = false;
 
@@ -453,6 +488,14 @@ export class Agent extends withWorkspaceContainer(Think) {
       dir: "/workspace/repo",
     });
 
+    // 続きは次のスライドへ
+```
+
+---
+
+# コード例④（コード全文 2/2）
+
+```ts {1|2-15|all}
     return this.submitMessages([
       {
         id: crypto.randomUUID(),
@@ -473,17 +516,7 @@ export class Agent extends withWorkspaceContainer(Think) {
 }
 ```
 
----
-
-# コード例④ 解説
-
-
-- エージェントの「頭脳」側から Workspace を**直接プログラム的に操作**する例
-- `workspace.fs.mkdir` / `writeFile` でバグ報告をファイルとして書き出し
-- `workspace.git.clone` でリポジトリをチェックアウト
-- `submitMessages()` でエージェントの処理ループにユーザーメッセージとして指示を投入
-- 外部トリガー（GitHub Issue の webhook など）を起点にホスト側コードが
-  Workspace をセットアップしてからエージェントを起動する統合パターン
+<div class="text-xs opacity-50 mt-2">前スライドの startTriage() の続き</div>
 
 
 ---
@@ -604,6 +637,7 @@ npm install @cloudflare/computer
 - チュートリアル: [examples/tutorial](https://github.com/cloudflare/computer/tree/main/examples/tutorial)
 - [just-bash](https://justbash.dev/)
 - Workers サンプル: [examples/cloudflare-computer/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/cloudflare-computer)
+- 関連デッキ: <a href="../project-think/" target="_blank">Project Think：Cloudflareで次世代のAIエージェント構築</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-03-cloudflare-computer.md

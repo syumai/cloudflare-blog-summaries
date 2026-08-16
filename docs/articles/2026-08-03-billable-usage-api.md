@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/billable-usage-api/](https://blog.cloudflare.com/ja-jp/billable-usage-api/)（英語版: [https://blog.cloudflare.com/billable-usage-api/](https://blog.cloudflare.com/billable-usage-api/)）
 - 公開日: 2026-08-03
-- 関連: [[2026-08-10-agents-week-review]]（Agents Week 2026 まとめ。月曜日「実行環境とインフラ」のテーマに分類）
+- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（月曜日「実行環境とインフラ」のテーマに分類）
 - GitHub: [docs/articles/2026-08-03-billable-usage-api.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-03-billable-usage-api.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ1WZB6KJGKY7A4HBARJW87R.png)

@@ -298,6 +298,20 @@ class: text-center
 
 ---
 
+# コード例③ 最小構成のMCPサーバー: 見どころ
+
+
+- 次の2枚のコードは `McpServer`（公式SDK）に `registerTool()` で
+  `hello` ツールを1つ登録するだけの最小構成
+- 入力スキーマは `zod` で定義（`name` は任意の文字列）
+- 2枚目末尾の `export default` に注目
+  — これは**通常のWorkersの `fetch` ハンドラー**そのもの
+- `createMcpHandler(createServer)` が `fetch(request, env, ctx)` を返す
+- Durable Objectのクラス継承も `Agent` クラスも**一切登場しない**
+  — これが「ステートレス化」がコードレベルにもたらした最も分かりやすい変化
+
+---
+
 # コード例③ 最小構成のMCPサーバー
 
 ```ts {1-3|5-6|8-17|19-20|all}
@@ -327,6 +341,8 @@ function createServer() {
 
 # コード例③ 最小構成のMCPサーバー（続き）
 
+`export default` に注目 — 通常のWorkersの `fetch` ハンドラーそのもの
+
 ```ts
 export default {
   fetch(request, env, ctx) {
@@ -334,19 +350,6 @@ export default {
   },
 }
 ```
-
----
-
-# コード例③ 解説
-
-
-- `McpServer`（公式SDK）に `registerTool()` で `hello` ツールを1つ登録
-- 入力スキーマは `zod` で定義（`name` は任意の文字列）
-- 最後の `export default` が**通常のWorkersの `fetch` ハンドラー**そのもの
-- `createMcpHandler(createServer)` が `fetch(request, env, ctx)` を返す
-- Durable Objectのクラス継承も `Agent` クラスも**一切登場しない**
-- これが「ステートレス化」がコードレベルにもたらした最も分かりやすい変化
-
 
 ---
 class: text-center

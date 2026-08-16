@@ -287,25 +287,8 @@ document.modelContext.registerTool({
 });
 ```
 
-「呼び出し可能（Callable）」セクション内、WebMCPの説明箇所に掲載
-
----
-
-# コード例 解説
-
-
-- `document.modelContext.registerTool()` — ページ自身が「自分にできる操作」を
-  エージェントに向けて宣言するAPI
-- `name` / `description` — エージェントがどのツールをいつ使うべきか判断する手がかり
-- `inputSchema` — JSON Schema形式で入力パラメータの型・必須項目を定義
-- `execute` — 実際の処理本体。既存のアプリケーション関数を呼び出し、
-  結果を `content` 配列として返す
-
-
-<br>
-
-
-不安定なDOM操作の推測を挟まず、**サイト側が最初から処理を公開**するアプローチ
+`document.modelContext.registerTool()` はページ自身が「自分にできる操作」をエージェントに宣言するAPI。
+`inputSchema`で入力の型・必須項目を、`execute`で実処理を定義する——不安定なDOM操作の推測を挟まず、**サイト側が最初から処理を公開**するアプローチ。
 
 
 ---

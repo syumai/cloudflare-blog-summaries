@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/python-workers-rpc/](https://blog.cloudflare.com/python-workers-rpc/)（日本語版なし）
 - 公開日: 2026-08-03
-- 関連: [[2026-08-10-agents-week-review]]（Agents Week 2026 まとめ／月曜日: 実行環境とインフラ）
+- 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（月曜日: 実行環境とインフラ）
 - GitHub: [docs/articles/2026-08-03-python-workers-rpc.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-03-python-workers-rpc.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ0T9TN8SAPV2GRS5YR8YM4E.png)
