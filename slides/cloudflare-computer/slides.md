@@ -81,17 +81,17 @@ themeConfig:
 AIエージェントの処理ループ
 判断・指示を担当
 
+</div>
+<div>
+
 ### 手（Hands）
 コードを実行するサンドボックス環境
 実際の作業を担当
 
 </div>
-<div>
-
-![エージェントハーネス分離図](https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGR1F725Y45HAYQ7EP4V.png)
-
 </div>
-</div>
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGR1F725Y45HAYQ7EP4V.png" class="mx-auto rounded mt-2" alt="エージェントハーネス分離図" style="max-height: 220px;" />
 
 近年のエージェント設計では、この2つを分離して構築できるようになった
 
@@ -118,6 +118,7 @@ AIエージェントの処理ループ
 ---
 layout: image-right
 image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHG8112R261JGEK5515Y7.png
+backgroundSize: contain
 ---
 
 # スケーリングの課題
@@ -143,15 +144,13 @@ Cloudflareは Workers（約10年前）、Durable Objects（約6年前）の頃�
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGJWE4D64HEZPZ1PMCAN.png
-backgroundSize: contain
----
 
 # 垂直スケール vs 水平スケール
 
 フルコンテナ（垂直・重量級）と
 アイソレート（水平・軽量級）の対比
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHGJWE4D64HEZPZ1PMCAN.png" class="mx-auto rounded mt-4" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-computer/

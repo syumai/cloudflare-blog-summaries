@@ -311,10 +311,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA2SC8RB6YS1V3S3FQ1RS1P.png
-backgroundSize: contain
----
 
 # AI Operator Activity
 
@@ -324,6 +320,11 @@ backgroundSize: contain
 - 403（アクセス拒否）・404（リンク切れ）などクロール時のエラーも確認可能
 - 特に注意すべきは、大量にクロールしながら訪問者を一切送り返さない事業者
 
+---
+
+# AI Operator Activity（ダッシュボード画面）
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA2SC8RB6YS1V3S3FQ1RS1P.png" class="mx-auto rounded mt-4" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/aeo/

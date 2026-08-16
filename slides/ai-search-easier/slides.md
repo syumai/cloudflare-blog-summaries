@@ -104,15 +104,13 @@ AI Search自体は以前から複数プリミティブをまとめる
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9Q0TF9PKSV1ESVPJ9M1.png
-backgroundSize: contain
----
 
 # 記事冒頭のビジュアル
 
 AI Searchのアップデート全体を象徴する
 記事トップのイメージ
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9Q0TF9PKSV1ESVPJ9M1.png" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ai-search-easier/
@@ -194,24 +192,18 @@ Worker上でリモートMCPサーバーを
 </footer>
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9C19KKHFFAPKSBVY6Q2.png
-backgroundSize: contain
----
 
 # パブリックエンドポイント機能
 
 "Option B: flip on public endpoints (no code)" の
 直後に掲載されているスクリーンショット
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9C19KKHFFAPKSBVY6Q2.png" class="mx-auto rounded" style="max-height: 300px;" />
+
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ai-search-easier/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9XV4EAC6SEBKG5WH0JG.png
-backgroundSize: contain
 ---
 
 # ステップ3: ブランディングと保護
@@ -220,15 +212,12 @@ backgroundSize: contain
 - カスタムドメインでエンドポイントを自社ブランド化
 - **Cloudflare Access** で認証をかけ、アクセスを制限
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9XV4EAC6SEBKG5WH0JG.png" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ai-search-easier/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9XD3VNB63VGZ3AFE6TR.png
-backgroundSize: contain
 ---
 
 # 実際に試す: AI Playground
@@ -242,6 +231,11 @@ backgroundSize: contain
 > "replaces the usual fallback (web search then fetching full pages),
 > which is slow, token-heavy"
 
+---
+
+# 実際に試す: AI Playgroundの画面
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA4N9XD3VNB63VGZ3AFE6TR.png" class="mx-auto rounded" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ai-search-easier/

@@ -163,10 +163,6 @@ class: text-center
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4VMH9D9FYZTWDMRSWZJS.png
-backgroundSize: contain
----
 
 # 図1: セッションコストの異常検知
 
@@ -175,6 +171,7 @@ backgroundSize: contain
 - Y軸: ユーザー自身のp95基準値に対する倍率（対数）
 - 2本の破線: 2× User p95 と アカウント全体のp99
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4VMH9D9FYZTWDMRSWZJS.png" class="mx-auto rounded mt-2" style="max-height: 280px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -193,10 +190,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4V6XV5D14V3FW55YHKTZ.png
-backgroundSize: contain
----
 
 # 図2: アカウント全体のコスト分布
 
@@ -214,15 +207,16 @@ p99を「絶対的な上限」として併用することで、
 
 </div>
 
+---
+
+# 図2: アカウント全体のコスト分布（グラフ）
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4V6XV5D14V3FW55YHKTZ.png" class="mx-auto rounded mt-4" style="max-height: 420px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4VJ083H8C3Q82M6D6Q6W.png
-backgroundSize: contain
 ---
 
 # 図3: 単一ユーザーのセッション履歴
@@ -234,15 +228,12 @@ backgroundSize: contain
 - コストには最低金額も設定
   - 「統計的異常」かつ「調査する価値のある金額」が条件
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4VJ083H8C3Q82M6D6Q6W.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZBWJPJZPCZJYCR5D89H0DZ3.png
-backgroundSize: contain
 ---
 
 # 不正利用を検出する最適な視点
@@ -254,15 +245,12 @@ backgroundSize: contain
 - 分かりやすい兆候（禁止操作等）ではなく、
   信頼されたアカウントによる許可済み操作が対象
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZBWJPJZPCZJYCR5D89H0DZ3.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ93AY5C3BJQW575MS95PZXC.png
-backgroundSize: contain
 ---
 
 # User Insightsの役割の境界
@@ -273,6 +261,7 @@ backgroundSize: contain
 - 本格的なセキュリティ調査に発展する場合もあれば、
   単なるユーザー指導で済む場合もある
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ93AY5C3BJQW575MS95PZXC.png" class="mx-auto rounded mt-2" style="max-height: 240px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/

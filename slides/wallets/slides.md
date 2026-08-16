@@ -100,6 +100,7 @@ API・MCPツール・コンテンツなどを購入できる
 ---
 layout: image-right
 image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ517G703TJNQB9WCE3VG3BY.png&w=715&h=557&f=webp&fit=cover&position=center
+backgroundSize: contain
 ---
 
 # 2種類のウォレット

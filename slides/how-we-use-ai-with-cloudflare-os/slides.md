@@ -178,9 +178,6 @@ class: text-center
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2AGR0Z.png
----
 
 # Cloudflare OS v1
 
@@ -192,6 +189,7 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2A
 - Cloudflare Zero Trustで認証
 - ローカル環境の構成は不要
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2AGR0Z.png" class="mx-auto rounded mt-2" style="max-height: 260px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -213,10 +211,6 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2A
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNHBNVFCWA84C9DZH2FS.png
-backgroundSize: contain
----
 
 # v1: MCP Portalによるデータ接続
 
@@ -226,15 +220,12 @@ backgroundSize: contain
 - 多くの場合、自前実装のMCPサーバーをWorkers上に構築
   - ロール・地域別のレート制限などを独自に追加可能
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNHBNVFCWA84C9DZH2FS.png" class="mx-auto rounded mt-2" style="max-height: 240px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNTTDXVRB6GPN1XPVADD.png
-backgroundSize: contain
 ---
 
 # v1: AI Gatewayによる監視・制御
@@ -245,6 +236,7 @@ backgroundSize: contain
 - モデル利用をロール別にゲート制御
   - 自動化ユースケースはより効率的なモデルへ誘導
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNTTDXVRB6GPN1XPVADD.png" class="mx-auto rounded mt-2" style="max-height: 240px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -287,10 +279,6 @@ class: text-center
 Sam Rhea氏自身の事例
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNJ3NG9A98ZYVSZNKF36.png
-backgroundSize: contain
----
 
 # Before: 手作業によるレポート作成
 
@@ -301,6 +289,11 @@ backgroundSize: contain
 - クローズ済みチケットを手動で1件ずつ確認
 - 時間がかかり、システム外に冗長なコピーも発生
 
+---
+
+# Before: 手作業によるレポート作成（画面）
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNJ3NG9A98ZYVSZNKF36.png" class="mx-auto rounded mt-4" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -319,10 +312,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNJMKFH9E6MDZY92DWW1.png
-backgroundSize: contain
----
 
 # v2での解決
 
@@ -334,6 +323,11 @@ backgroundSize: contain
 - 返信ドラフトなど推論が必要な部分だけアプリ内に埋め込み
 - 同僚と共有しても、各自の権限でデータ境界を越えない
 
+---
+
+# v2での解決（画面）
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNJMKFH9E6MDZY92DWW1.png" class="mx-auto rounded mt-4" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/

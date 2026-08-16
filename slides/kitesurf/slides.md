@@ -173,10 +173,6 @@ AIエージェント専用に設計された、
 </div>
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A7NX68CP9DHW93JAHJX.png
-backgroundSize: contain
----
 
 # リクエストのライフサイクル
 
@@ -189,15 +185,12 @@ Kitesurfは1件のページ描画リクエストを
 - PageScript（DOM・JS実行）
 - PageRenderer（ピクセル生成）
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A7NX68CP9DHW93JAHJX.png" class="mx-auto rounded mt-2" style="max-height: 280px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AAR723T5KJCNQ547FAV.png
-backgroundSize: contain
 ---
 
 # SandboxOutbound
@@ -211,15 +204,12 @@ backgroundSize: contain
 - ページごとにクッキーを個別の「jar」で隔離
 - ポリシー違反は**403で拒否**
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AAR723T5KJCNQ547FAV.png" class="mx-auto rounded mt-2" style="max-height: 240px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AHPEVW2VZK1VM59SZHW.png
-backgroundSize: contain
 ---
 
 # Engine
@@ -231,15 +221,12 @@ Kitesurfで**唯一、外部に公開される**コンポーネント
 - 各セッションの状態を保持（他コンポーネントはすべてステートレス）
 - CDP採用によりPuppeteer・Playwright・chrome-remote-interfaceが**そのまま動作**
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AHPEVW2VZK1VM59SZHW.png" class="mx-auto rounded mt-2" style="max-height: 260px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
 </footer>
 
----
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A7714HEP695P6HKY8GD.png
-backgroundSize: contain
 ---
 
 # PageScript
@@ -253,6 +240,7 @@ backgroundSize: contain
 - HTML/CSSパースは Rust製の `Blitz` と `Stylo`
 - `<script>` / `.wasm` は同じアイソレート内で実行
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A7714HEP695P6HKY8GD.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -274,10 +262,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AR04KBNA79NHBQYG562.png
-backgroundSize: contain
----
 
 # PageRenderer
 
@@ -290,6 +274,7 @@ backgroundSize: contain
 - `blitz-paint` と `Parley` でラスタライズ
 - JPEG/PNG/PDFとしてEngineへ返す
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8AR04KBNA79NHBQYG562.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -313,10 +298,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A1TZBWVWDT3XZQR7AB1.png
-backgroundSize: contain
----
 
 # WPT 21万5,000件突破
 
@@ -325,6 +306,7 @@ backgroundSize: contain
 - 毎週数百件のペースで通過数を伸ばしている
 - CSS・DOM・HTML・selection・SVG・XHRなど、エージェントに重要な領域はすでに手厚くカバー
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ9Z8A1TZBWVWDT3XZQR7AB1.png" class="mx-auto rounded mt-2" style="max-height: 260px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/

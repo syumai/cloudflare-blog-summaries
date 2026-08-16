@@ -101,3 +101,40 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/*
+ * 画像クリック拡大表示（ライトボックス）。
+ * JS 側（theme/image-zoom.ts）が本文画像 / 背景画像のクリックを検知し、
+ * `.slidev-image-zoom-overlay--active` の付け外しで開閉する。
+ */
+.slidev-layout img {
+  cursor: zoom-in;
+}
+.slidev-layout [style*='background-image'] {
+  cursor: zoom-in;
+}
+
+.slidev-image-zoom-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+  background: rgba(10, 12, 16, 0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.slidev-image-zoom-overlay--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slidev-image-zoom-overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  cursor: zoom-out;
+}

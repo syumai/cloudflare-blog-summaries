@@ -71,10 +71,6 @@ Webは長らく「人間がブラウザで見る」ことを前提に設計さ�
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA0FN16ARXEBX3WSM9XNTM9.png
-backgroundSize: contain
----
 
 # 変わらないページの再取得
 
@@ -84,6 +80,12 @@ backgroundSize: contain
 ドメイン所有者の配信コストと
 エージェントの取得コストが、
 どちらにも成果をもたらさず無駄になっている
+
+<div class="pt-4 text-center">
+
+![変わらないページの再取得を示す図](https://blog.cloudflare.com/_emdash/api/media/file/01KZA0FN16ARXEBX3WSM9XNTM9.png){style="max-height:230px"}
+
+</div>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/the-agentic-internet/

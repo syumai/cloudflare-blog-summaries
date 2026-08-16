@@ -194,15 +194,13 @@ AAMは**タスク実行グラフ**から暗黙の信頼を除去する
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7MZ4NXG163SJP4DYY5XJK9.png
-backgroundSize: contain
----
 
 # 図1: Trust Ratchet
 
 宣言された制限が有効になるまで
 保護対象データを保持する
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7MZ4NXG163SJP4DYY5XJK9.png" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/the-agent-access-model/
@@ -220,16 +218,14 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7N2Q721RGSMEE0R0NATKC4.png
-backgroundSize: contain
----
 
 # 図2: 支援システムの連携
 
 Agent Activity Logと
 Grant Review Loopが
 将来のポリシー変更を支える
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7N2Q721RGSMEE0R0NATKC4.png" class="mx-auto rounded" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/the-agent-access-model/
@@ -270,16 +266,14 @@ class: text-center
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7N4FGVAA66ZJWZDPBG12D1.png
-backgroundSize: contain
----
 
 # 図3: 流出のブロック
 
 保護対象の入力が
 プロセッサー/サポート経路を閉じ、
 承認済みの財務出力だけを維持する
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7N4FGVAA66ZJWZDPBG12D1.png" class="mx-auto rounded" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/the-agent-access-model/

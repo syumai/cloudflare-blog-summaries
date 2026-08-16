@@ -67,14 +67,17 @@ ADLC（Agent Development Lifecycle）の提唱
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ6A6DRX3WD507M2ZM4JJ353.png&w=715&h=336&f=webp&fit=cover&position=center
----
 
 # SDLC各段階のボトルネック
 
 実装だけが速くなり、
 後工程にボトルネックが移動する
+
+<div class="pt-4 text-center">
+
+![SDLC各段階のボトルネック](https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ6A6DRX3WD507M2ZM4JJ353.png&w=715&h=336&f=webp&fit=cover&position=center){style="max-height:340px"}
+
+</div>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/

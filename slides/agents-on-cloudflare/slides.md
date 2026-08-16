@@ -145,14 +145,13 @@ lineNumbers: true
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGY4GARDCD8QBXHMJXZ7W.png&w=715&h=445&f=webp&fit=cover&position=center
----
 
 # ダッシュボード: Agentsビュー
 
 観測されたエージェント・トレース・実行（run）・
 セッション・インスタンス・トークン使用量を一覧表示
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGY4GARDCD8QBXHMJXZ7W.png&w=715&h=445&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/agents-on-cloudflare/
@@ -172,9 +171,6 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGY3V7MFS80WYSPV8SFS9.png&w=715&h=462&f=webp&fit=cover&position=center
----
 
 # 例: リスボン旅行プランニング
 
@@ -185,6 +181,11 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 - `destination_researcher` への2回の呼び出し（1回のリトライを含む）
 - 旅程を組み立てる際の思考過程
 
+---
+
+# 例: リスボン旅行プランニングの画面
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGY3V7MFS80WYSPV8SFS9.png&w=715&h=462&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/agents-on-cloudflare/
@@ -211,9 +212,6 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ68BX4H0PZP1A0W8T7JD3GW.png&w=715&h=426&f=webp&fit=cover&position=center
----
 
 # トレース例: TravelPlanner → itinerary_builder
 
@@ -225,6 +223,12 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 - `execute_tool` / `cloudflare-d1` / `cloudflare-kv`: ツールとインフラの実行
 
 </div>
+
+---
+
+# トレース例の画面: ウォーターフォール表示
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ68BX4H0PZP1A0W8T7JD3GW.png&w=715&h=426&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/agents-on-cloudflare/
@@ -281,9 +285,6 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGXX79HX11A7GKFY8M06B.png&w=715&h=131&f=webp&fit=cover&position=center
----
 
 # 料金
 
@@ -296,6 +297,12 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 |--------|-----------|----------|
 | Free | 1日20万件 | 3日間 |
 | Paid | 月2,000万件込み+$0.60/百万件 | 7日間 |
+
+---
+
+# 料金の出典スクリーンショット
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4WGXX79HX11A7GKFY8M06B.png&w=715&h=131&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 200px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/agents-on-cloudflare/

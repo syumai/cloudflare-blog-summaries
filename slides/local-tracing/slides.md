@@ -135,9 +135,6 @@ KVからカート取得 → D1にチェックアウト保存 → キューに送
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4VE2DX8FKHW5QXQB829PGY.png&w=715&h=394&f=webp&fit=cover&position=center
----
 
 # トレースがある場合
 
@@ -147,6 +144,11 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 - D1挿入: `no such column: delivery_window` で失敗
 - キュー: 一度も呼び出されなかった
 
+---
+
+# トレースがある場合の画面
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4VE2DX8FKHW5QXQB829PGY.png&w=715&h=394&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 420px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/local-tracing/
@@ -170,9 +172,6 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4VE2E11BF2S4PHMXV262T1.png&w=715&h=352&f=webp&fit=cover&position=center
----
 
 # Local Explorerでの閲覧（人間向け）
 
@@ -182,6 +181,11 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 - Wranglerで `e` キー、または `/cdn-cgi/explorer` にアクセス
 - Cloudflareダッシュボードではなく**localhost上で動作**
 
+---
+
+# Local Explorerの画面
+
+<img src="https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com%2F_emdash%2Fapi%2Fmedia%2Ffile%2F01KZ4VE2E11BF2S4PHMXV262T1.png&w=715&h=352&f=webp&fit=cover&position=center" class="mx-auto rounded" style="max-height: 420px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/local-tracing/

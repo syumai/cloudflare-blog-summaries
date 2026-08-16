@@ -111,16 +111,14 @@ Cloudflareは2025年3月、Agents SDK向けの `McpAgent` プリミティブを�
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A6RYJARJY0Q83JSH53M.png
-backgroundSize: contain
----
 
 # ステートフルからステートレスへ
 
 「リクエストを受け取り、
 ツール・プロンプト・リソースを呼び出し、
 結果を返す」という単純なモデルへ
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A6RYJARJY0Q83JSH53M.png" class="mx-auto rounded" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-v2/
@@ -147,10 +145,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A5N7VQM3QTA57A2FN83.png
-backgroundSize: contain
----
 
 # MRTRのフロー
 
@@ -159,6 +153,8 @@ backgroundSize: contain
 
 ストリームを維持したまま
 待ち続ける必要がない
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A5N7VQM3QTA57A2FN83.png" class="mx-auto rounded" style="max-height: 280px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-v2/
@@ -203,10 +199,6 @@ JSON本文と同じ情報（`method` / `params.name`）が
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A660J99FJBX7DAWZ4MZ.png
-backgroundSize: contain
----
 
 # ヘッダーで見えるMCP
 
@@ -215,6 +207,8 @@ backgroundSize: contain
 
 既存のHTTPインフラの語彙で
 MCPを扱えるようになる
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZA53A660J99FJBX7DAWZ4MZ.png" class="mx-auto rounded" style="max-height: 260px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-v2/

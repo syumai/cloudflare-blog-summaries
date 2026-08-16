@@ -68,16 +68,14 @@ themeConfig:
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z777D8N208M839X5BR9F3.png
-backgroundSize: contain
----
 
 # 両立する2つのCIモデル
 
 **プラットフォーム管理CI**（一括定義・namespace全体に適用）と
 **顧客のカスタムCI**（dynamic workflowsで自分のリポジトリに適用）が、
 同じnamespace内で同時に動作できる
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z777D8N208M839X5BR9F3.png" class="mx-auto rounded mt-4" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/
@@ -101,14 +99,12 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z76ZHWTPR0ZA4TBN50FGF.png
-backgroundSize: contain
----
 
 # CI/CDパイプラインの構成
 
 install → 並列チェック（lint/test/typecheck/build）→ deploy
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z76ZHWTPR0ZA4TBN50FGF.png" class="mx-auto rounded mt-4" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/
@@ -174,16 +170,14 @@ await deps.runner({
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z76GKCCHH18MTF77SMYVZ.png
-backgroundSize: contain
----
 
 # ステップは
 # デフォルトで並列実行
 
 依存関係のない検証は同時に走らせ、
 CI全体のレイテンシを短縮する
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z76GKCCHH18MTF77SMYVZ.png" class="mx-auto rounded mt-4" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/
@@ -257,15 +251,13 @@ CIジョブはリモートで実行・再実行される → ノートPCを開�
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z77AA36JAVHQKVZ7B6VZ8.png
-backgroundSize: contain
----
 
 # 自己修復CIの流れ
 
 失敗検知 → エージェントが修正 →
 別ブランチへコミット → 人間が承認
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z77AA36JAVHQKVZ7B6VZ8.png" class="mx-auto rounded mt-4" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ci-workflows/

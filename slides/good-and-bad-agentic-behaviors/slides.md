@@ -110,16 +110,14 @@ Cloudflareは、リスクと信頼を同じ物差しの両端ではなく
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9V3BAKZ4ADYESCQ1BS7.png
-backgroundSize: contain
----
 
 # 信頼・リスクの判定マトリックス
 
 信頼度は上から下へ低くなる軸
 
 右列はサイト運営者が取りうる一般的な対応
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9V3BAKZ4ADYESCQ1BS7.png" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/
@@ -158,10 +156,6 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9H9G0DQFWTMBJV2JSPN.png
-backgroundSize: contain
----
 
 # 直近24時間の稼働実績
 
@@ -169,6 +163,7 @@ backgroundSize: contain
 - **73,438** ゾーンで実行
 - **2億600万件**のPrecursor評価イベント
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9H9G0DQFWTMBJV2JSPN.png" class="mx-auto rounded" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/
@@ -208,15 +203,13 @@ backgroundSize: contain
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9VXYV81SE8T9TT2SFZN.png
-backgroundSize: contain
----
 
 # カーソル動作の評価画面
 
 Precursor Traceが
 カーソルの動きをリアルタイムに評価している様子
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9VXYV81SE8T9TT2SFZN.png" class="mx-auto rounded" style="max-height: 320px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/
@@ -292,10 +285,6 @@ Precursor Traceが
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9MEHG636KGSKZVJV4GR.png
-backgroundSize: contain
----
 
 # 防御の進化的アプローチ
 
@@ -305,6 +294,7 @@ backgroundSize: contain
 - 攻撃側の進化に、防御側も進化し続けて対抗する
 - 上記の機能は年末に近い時期から順次提供予定
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCHB9MEHG636KGSKZVJV4GR.png" class="mx-auto rounded" style="max-height: 280px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/

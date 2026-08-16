@@ -89,10 +89,6 @@ Radarのデータセットは複雑で、知りたいことに答えるには
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8CGKHH0H5K32A9HXB9C.png
-backgroundSize: contain
----
 
 # Radar Researcherを発表
 
@@ -102,6 +98,7 @@ Radar APIを土台に構築された、
 
 Radarダッシュボードの「Researcher」ボタンから起動できる
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8CGKHH0H5K32A9HXB9C.png" class="mx-auto rounded mt-4" style="max-height: 160px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/
@@ -151,15 +148,13 @@ Radarダッシュボードの「Researcher」ボタンから起動できる
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8C36Q2QXHDPGR9ZP8HT.png
-backgroundSize: contain
----
 
 # Explain with AI
 
 チャートからワンアクションで
 AIとの対話を開始する導線
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8C36Q2QXHDPGR9ZP8HT.png" class="mx-auto rounded mt-4" style="max-height: 340px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/
@@ -192,15 +187,13 @@ AIとの対話を開始する導線
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8QFJNCYQPD2FV56JEB6.png
-backgroundSize: contain
----
 
 # アーキテクチャ図
 
 Worker・Durable Objects・Workers AI・
 AI Gateway・MCP serverの連携
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZCGV8QFJNCYQPD2FV56JEB6.png" class="mx-auto rounded mt-4" style="max-height: 360px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/

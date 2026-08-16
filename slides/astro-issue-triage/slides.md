@@ -114,15 +114,13 @@ themeConfig:
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4HM3V36EC0NEZAT3Y9Q3DK.png
-backgroundSize: contain
----
 
 # トリアージスキルの4フェーズ
 
 Reproduce → Diagnose →
 Verify → Fix
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4HM3V36EC0NEZAT3Y9Q3DK.png" class="mx-auto rounded" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/astro-issue-triage/
@@ -157,16 +155,14 @@ Verify → Fix
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ4HM3RKB6EVF79SRVAVYXZD.png
-backgroundSize: contain
----
 
 # ラベル遷移で駆動する
 # ステートマシン
 
 `triage needed` →
 （修正確認後）→ `fix verified`
+
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ4HM3RKB6EVF79SRVAVYXZD.png" class="mx-auto rounded" style="max-height: 300px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/astro-issue-triage/

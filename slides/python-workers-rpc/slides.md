@@ -115,16 +115,18 @@ lineNumbers: true
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KYT1YP3XQB1NVNJ4C94AQ7G2.png
-backgroundSize: contain
----
 
 # Pyodide FFI の型変換フロー
 
 Python のキーワード引数 ⇄ JavaScript のオブジェクト形式パラメータ
 
 双方が慣用的な書き方のまま利用できるようマッピングされる
+
+<div class="pt-4 text-center">
+
+![Pyodide FFI の型変換フロー](https://blog.cloudflare.com/_emdash/api/media/file/01KYT1YP3XQB1NVNJ4C94AQ7G2.png){style="max-height:280px"}
+
+</div>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/python-workers-rpc/

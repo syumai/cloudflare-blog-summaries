@@ -97,10 +97,6 @@ themeConfig:
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDY68A0TND85MN4AZCF3G.png
-backgroundSize: contain
----
 
 # Cloudflare OSの3つの構成要素
 
@@ -112,6 +108,7 @@ backgroundSize: contain
 3. **個人向けアプリのプラットフォーム**
    社員が作成・共有・変更し続けられるアプリ環境
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDY68A0TND85MN4AZCF3G.png" class="mx-auto rounded mt-2" style="max-height: 200px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/
@@ -220,10 +217,6 @@ const issues = await env.PROJECT.listIssues({
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXZJ8CW8K5Y8DBCBACM7.png
-backgroundSize: contain
----
 
 # Gatekeeperがリソースと操作を管理
 
@@ -233,6 +226,7 @@ backgroundSize: contain
 - 単一リポジトリのみ許可、読み取り専用、フィールドマスキング、
   レート制限、マージ前承認要求など細かな制御が可能
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXZJ8CW8K5Y8DBCBACM7.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/
@@ -275,10 +269,6 @@ class: text-center
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXTESRQTCERH9MDPVGC3.png
-backgroundSize: contain
----
 
 # すべてのアプリはWorkerとして動作
 
@@ -288,6 +278,7 @@ backgroundSize: contain
 - 各アプリが専用のSQLiteデータベースを持つ
 - 軽量なV8アイソレートのため専用サーバー・コンテナ不要
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXTESRQTCERH9MDPVGC3.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/
@@ -318,10 +309,6 @@ const issues = await app.listIssues({
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXN0ZTW8DZZ0VC98Z0AP.png
-backgroundSize: contain
----
 
 # アプリの共有方法は2通り
 
@@ -332,6 +319,7 @@ backgroundSize: contain
   複製を作成できるようにする
   （コードのみ引き継ぎ、データ・履歴・資格情報は引き継がない）
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXN0ZTW8DZZ0VC98Z0AP.png" class="mx-auto rounded mt-2" style="max-height: 200px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/
@@ -379,10 +367,6 @@ const issues = await app.listIssues({
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXTSXP67QP4M7F21B9V1.png
-backgroundSize: contain
----
 
 # あらゆるモデルを使え、コストも管理できる
 
@@ -392,6 +376,7 @@ backgroundSize: contain
 - すべての作業に最高価格のモデルは不要
 - 予算・レート制限、上限到達時の挙動も設定可能
 
+<img src="https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXTSXP67QP4M7F21B9V1.png" class="mx-auto rounded mt-2" style="max-height: 220px;" />
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-os/

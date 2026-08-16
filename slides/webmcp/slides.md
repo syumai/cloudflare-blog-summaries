@@ -206,10 +206,6 @@ C2PA画像の来歴情報を読み取る
 
 
 ---
-layout: image-right
-image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ9RNNWJYGQX5J64W5GW04E3.png
-backgroundSize: contain
----
 
 # ダッシュボードでの設定
 
@@ -221,6 +217,11 @@ Cloudflare Dashboardの
 Content CredentialsとSite MCP Serverは
 デフォルトで有効
 
+<div class="pt-4 text-center">
+
+![Agent Readiness > WebMCP ダッシュボード](https://blog.cloudflare.com/_emdash/api/media/file/01KZ9RNNWJYGQX5J64W5GW04E3.png){style="max-height:250px"}
+
+</div>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/webmcp/
