@@ -28,7 +28,6 @@ Cloudflareの課金情報をプログラムから取得可能に
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: エージェント時代のコスト可視化という課題
 - 発表内容: Billable Usage API
@@ -38,38 +37,31 @@ Cloudflareの課金情報をプログラムから取得可能に
 - ユースケース
 - 今後の展開
 
-</v-clicks>
 
 ---
 
 # 背景: なぜプログラムからコストを取得したいのか
 
-<v-clicks>
 
 - AIエージェントがコード作成・Workersのデプロイ・インフラ構築を自動化する時代が到来
 - アカウントへのプログラムによる操作を許すなら、そのコストも**プログラムから確認**できる必要がある
 - ダッシュボードは**人間向け**。自動化システムには不向き
 
-</v-clicks>
 
-<v-click>
 
 > 月末ではなく、1日の中で、製品ごとに、
 > 別のプログラムが利用できる形式で把握することが重要
 
-</v-click>
 
 ---
 
 # 求められていたニーズ
 
-<v-clicks>
 
 - 財務チーム: 利用料金を自社システムに取り込み、プロジェクト・チーム単位でコスト配分したい
 - 開発者: スクリプトに組み込めるシンプルな `curl` コマンドが欲しい
 - これまでは: スクリーンショット取得・手動データエクスポートに頼るしかなかった
 
-</v-clicks>
 
 ---
 
@@ -78,19 +70,16 @@ Cloudflareの課金情報をプログラムから取得可能に
 単一エンドポイントから、全従量課金型Cloudflare製品の
 コスト・利用状況をプログラムで取得できるAPI
 
-<v-clicks>
 
 - 製品ごと・課金期間ごとに1レコード
 - 日単位に近い粒度でコストを追跡可能
 - セルフサービスアカウント向けに本日より提供開始
 
-</v-clicks>
 
 ---
 
 # レスポンスに含まれる主なフィールド
 
-<v-clicks>
 
 - **ServiceName / ServiceFamilyName**: 製品情報（例: Workers Standard、R2 Storage）
 - **ChargePeriodStart / ChargePeriodEnd**: レコードの対象期間
@@ -99,18 +88,15 @@ Cloudflareの課金情報をプログラムから取得可能に
 - **CumulatedPricingQuantity / CumulatedContractedCost**: 請求期間中の累計
 - **ZoneId / ZoneName**: 特定ゾーンに紐づく場合の識別子
 
-</v-clicks>
 
 ---
 
 # FOCUS仕様への対応
 
-<v-click>
 
 **FinOps Open Cost and Usage Specification（FOCUS）** の列名に
 多くの項目名を意図的に対応させている
 
-</v-click>
 
 <div class="pt-4">
 
@@ -123,37 +109,31 @@ Cloudflareの課金情報をプログラムから取得可能に
 
 </div>
 
-<v-click>
 
 AWS・Azure・GCP等のFOCUS対応データと**同じ語彙**で扱える
 （※現時点では完全準拠ではなく、今後のロードマップで対応予定）
 
-</v-click>
 
 ---
 
 # Vantageとのパートナーシップ
 
-<v-clicks>
 
 - インフラコスト管理プラットフォーム **Vantage** とネイティブ連携
 - Billing Read権限の読み取り専用トークンで毎日データを取得
 - 製品・ゾーン・アカウント単位で自動分類
 - 他のクラウド（AWS/Azure等）と**同じ画面・仕組み**でCloudflareのコストを管理
 
-</v-clicks>
 
 ---
 
 # Vantage連携でできる3つのワークフロー
 
-<v-clicks>
 
 1. **クラウド横断のコスト配分**: Virtual Tagsでチーム・製品ライン単位に割り当て
 2. **異常検出**: 通常パターンからの変化をSlack/メールで通知
 3. **FinOpsエージェント/MCP**: Vantageコンソール、あるいはClaude/ChatGPT経由でも同じデータに自然言語で問い合わせ
 
-</v-clicks>
 
 ---
 class: text-center
@@ -170,12 +150,10 @@ curl https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage \
   -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
 ```
 
-<v-click>
 
 Billing Read 権限のAPIトークンを指定するだけで、
 現在の請求期間の利用状況を製品ごとの内訳で取得できる
 
-</v-click>
 
 ---
 
@@ -186,12 +164,10 @@ curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage?f
   -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN"
 ```
 
-<v-click>
 
 クエリパラメータ `from` / `to` で任意の期間を指定可能。
 月末を待たず日次でコストを追跡できる
 
-</v-click>
 
 ---
 
@@ -223,14 +199,12 @@ curl "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/billable-usage?f
 
 # コード例③ 解説
 
-<v-clicks>
 
 - `result` 配列の中に製品・課金期間ごとの行が並ぶ、標準的なCloudflare APIレスポンス形式
 - `ServiceName: "Workers Standard"` について 2025年2月の課金期間の利用量・料金を表現
 - `ConsumedQuantity: 150000`（`GB-months`）に対し `ContractedCost: 0.75`
 - `CumulatedContractedCost: 2.25` は請求期間全体の累計 — 途中経過の追跡に便利
 
-</v-clicks>
 
 ---
 class: text-center
@@ -242,70 +216,58 @@ class: text-center
 
 # ユースケース①: 財務チームのコスト取り込み
 
-<v-clicks>
 
 - 定期実行スクリプトでAPIを叩き、自社の会計・コスト配分システムに取り込む
 - プロジェクト・チーム・エンドユーザー単位でコストを割り当てる
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 開発者によるスクリプト組み込み・アラート
 
-<v-clicks>
 
 - CI/CDや監視スクリプトの一部として日次でコストを取得
 - 閾値超過時にアラートを出す仕組みを `curl` 1つから構築
 
-</v-clicks>
 
 ---
 
 # ユースケース③: Vantageによるクロスクラウド管理
 
-<v-clicks>
 
 - AWS/Azure等のコストをすでにVantageで管理している場合、Cloudflareを接続するだけで統合
 - 同じCost Reports・Budgets・Cost Alertsの仕組みにそのまま乗る
 
-</v-clicks>
 
 ---
 
 # ユースケース④: FinOpsエージェント/MCP経由の問い合わせ
 
-<v-clicks>
 
 - 「先月のWorkersのコストはいくらか」を自然言語でVantageのFinOpsエージェントに質問
 - MCPサーバー経由でClaudeやChatGPTからも同じデータに問い合わせ可能
 
-</v-clicks>
 
 ---
 
 # 今後の展開
 
-<v-clicks>
 
 - **より細かい時間単位**での利用状況提供（日次を超えたリアルタイムに近い粒度）
 - **コスト予測機能**: `CumulatedContractedCost` を活用した最終コスト予測。アカウント単位・製品単位の両方を検討
 - **Enterprise契約への対応**: 初回リリースはセルフサービスアカウントのみ。Enterprise向けも開発中
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Cloudflareの全従量課金製品のコストを、単一エンドポイントからプログラムで取得可能に
 - FOCUS仕様準拠の項目名により、他クラウドのコストデータと同じ語彙で扱える
 - Vantageとのネイティブ連携で、クロスクラウドのコスト管理・異常検出・FinOpsエージェント対応が可能
 - 「アカウント操作をエージェントに任せるなら、コストも機械可読に」という思想の実装
 
-</v-clicks>
 
 ---
 

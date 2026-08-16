@@ -30,7 +30,6 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 
 # アジェンダ
 
-<v-clicks>
 
 - 発端: ある社員からの「過大な権限」リクエスト
 - 5つの基本原則
@@ -40,32 +39,26 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 - ユースケース: ITヘルプデスクの日次レポート
 - 展開の成果とまとめ
 
-</v-clicks>
 
 ---
 
 # 発端: 「約12システムへの本番アクセス」
 
-<v-click>
 
 > 営業組織のあるメンバーが、AIで"スーパーアプリ"を作って
 > go-to-marketチームを変革したいとして、
 > **約12の本番システムへのアクセスと、
 > デプロイメントパイプラインへの管理者権限**を要求した
 
-</v-click>
 
-<v-click>
 
 この要求の大きさが、当時Cloudflareが直面していた課題を象徴している
 
-</v-click>
 
 ---
 
 # 背景: 慎重姿勢から一転した年末年始
 
-<v-clicks>
 
 - 2025年を通じて、Cloudflareは AI 導入に慎重だった
   - 情報チャットボット、ボイラープレートコード生成止まり
@@ -74,7 +67,6 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 - 数百人の社員が新ツールを試し、かつてないほど簡単に構築できると気付く
 - 「仕事のやり方を変えたい」という要望が一気に押し寄せた
 
-</v-clicks>
 
 ---
 
@@ -97,7 +89,6 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 </div>
 </div>
 
-<v-click>
 
 <div class="pt-8 text-center">
 
@@ -105,13 +96,11 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 
 </div>
 
-</v-click>
 
 ---
 
 # 基本ルール: 5つの原則①②
 
-<v-clicks>
 
 - **原則1: AIを使うためにAIを使わない**
   - まず「解決すべき仕事」を定義し、その後で適切なツールを選ぶ
@@ -119,13 +108,11 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
   - 開発者向けCLIに偏らず、直感的なプラットフォームで
     非開発者にも力を与える
 
-</v-clicks>
 
 ---
 
 # 基本ルール: 5つの原則③④⑤
 
-<v-clicks>
 
 - **原則3: 出力の所有者は人間である**
   - AIはツール（メーカー）。品質・テストの責任は人間が負う
@@ -135,7 +122,6 @@ CIO Sam Rhea氏が語る、社内AI活用の舞台裏
 - **原則5: AI利用でアクセス権を拡張しない**
   - 既存のスコープされたデータアクセスを、AI利用時もそのまま適用
 
-</v-clicks>
 
 ---
 class: text-center
@@ -149,7 +135,6 @@ class: text-center
 
 # パイロット①: エンジニア向け「Engineering Codex」
 
-<v-clicks>
 
 - AIツールはエンジニアの業務を加速する一方、悪いコードもより速く書けてしまう
 - 権威あるガイド「Cloudflare Engineering Codex」を整備
@@ -157,9 +142,7 @@ class: text-center
 - ソフトウェア開発ライフサイクル全体でエージェントが活用
   - 作業計画支援、MRレビュー、技術設計レビュー、インシデントレビュー
 
-</v-clicks>
 
-<v-click>
 
 <div class="pt-4 text-center text-lg">
 
@@ -168,13 +151,11 @@ class: text-center
 
 </div>
 
-</v-click>
 
 ---
 
 # パイロット②: 非エンジニア向け「魔法のメールエイリアス」
 
-<v-clicks>
 
 - エンジニア向けハーネス（リポジトリをクローン＋`AGENTS.md`）は
   非エンジニアの業務（1回限りの成果物、複数システム横断）と相性が悪い
@@ -183,7 +164,6 @@ class: text-center
 - 裏側の小さなチームが数百、やがて数千件のセッションを処理
 - 繰り返し依頼される定型業務のパターンをスキルファイル・文脈ファイル化
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -195,13 +175,11 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2A
 ブラウザ完結の
 クラウドワークスペース
 
-<v-clicks>
 
 - コンテナ上で動くシンプルなハーネス
 - Cloudflare Zero Trustで認証
 - ローカル環境の構成は不要
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -211,7 +189,6 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2A
 
 # v1: クラウドベースであることの利点
 
-<v-clicks>
 
 - エフェメラルなクラウド環境は、そのセッションで
   持ち込んだデータへのアクセスのみを持つ
@@ -222,7 +199,6 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNN9369M9JEXJ7W2A
 - 出力（ドキュメント・スライド等）は右パネルにレンダリングされ、
   チームメイトと共有できる
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -232,14 +208,12 @@ backgroundSize: contain
 
 # v1: MCP Portalによるデータ接続
 
-<v-clicks>
 
 - MCP標準でAIツールをシステムオブレコードに接続
 - アクセス範囲は本人の既存の権限にスコープ
 - 多くの場合、自前実装のMCPサーバーをWorkers上に構築
   - ロール・地域別のレート制限などを独自に追加可能
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -253,14 +227,12 @@ backgroundSize: contain
 
 # v1: AI Gatewayによる監視・制御
 
-<v-clicks>
 
 - すべての推論リクエストがAI Gatewayを経由
 - Secure Web GatewayのDLPルールを再利用してブロック可能
 - モデル利用をロール別にゲート制御
   - 自動化ユースケースはより効率的なモデルへ誘導
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -270,26 +242,21 @@ backgroundSize: contain
 
 # 課題: 都度実行するAI推論のコスト
 
-<v-click>
 
 > Cloudflare OS v1では、ユーザーがスキルファイルを実行するたびに
 > **トークン集約的な推論セッション**が立ち上がっていた
 
-</v-click>
 
-<v-clicks>
 
 - しかしCloudflareの業務の多くは、実質ほぼ決定論的な一連のステップ
 - 適切な箇所にだけ推論（あるいは人間の判断）を挟めば十分
 - 「AIは常にツールである必要はなく、**ツールメーカー**であればよい」
 
-</v-clicks>
 
 ---
 
 # Cloudflare OS v2: より決定論的なエージェント
 
-<v-clicks>
 
 - 自然言語でワークフローを説明
 - AIエージェントがそのワークフローを支えるコードを実際に生成
@@ -297,7 +264,6 @@ backgroundSize: contain
 - 権限管理は`gatekeeper`サービスが担当
   - データセットへの安全な接続を組み込む
 
-</v-clicks>
 
 ---
 class: text-center
@@ -316,7 +282,6 @@ backgroundSize: contain
 
 # Before: 手作業によるレポート作成
 
-<v-clicks>
 
 - 毎朝、未処理チケットのキューとメトリクスを確認したい
 - チケットシステムの組み込みダッシュボードは簡易的
@@ -324,7 +289,6 @@ backgroundSize: contain
 - クローズ済みチケットを手動で1件ずつ確認
 - 時間がかかり、システム外に冗長なコピーも発生
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -334,7 +298,6 @@ backgroundSize: contain
 
 # v1での改善、そして残った課題
 
-<v-clicks>
 
 - チケットシステムのMCPサーバーに接続したスキルファイルとして実行
 - 手作業は減り、安全性も向上
@@ -342,7 +305,6 @@ backgroundSize: contain
   **毎回数千トークンを消費**
 - チケットのトリアージや返信ドラフトでも同様にトークンを消費
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -352,7 +314,6 @@ backgroundSize: contain
 
 # v2での解決
 
-<v-clicks>
 
 - 見たいチャートを説明するだけ
 - AIエージェントがそれを実現するコードを**一度だけ**生成
@@ -361,7 +322,6 @@ backgroundSize: contain
 - 返信ドラフトなど推論が必要な部分だけアプリ内に埋め込み
 - 同僚と共有しても、各自の権限でデータ境界を越えない
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/
@@ -371,7 +331,6 @@ backgroundSize: contain
 
 # 展開の成果
 
-<v-clicks>
 
 - 専任AIチームではなく、各部門の早期採用者を「チャンピオン」に
 - 数千人のCloudflareチームメンバーが毎週プラットフォームを利用
@@ -379,13 +338,11 @@ backgroundSize: contain
   （テリトリー計画・提案作成など）
 - 同じ30日間で**4,000以上**のアプリ・ツールが作成された
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Cloudflare OSは「装備・有効化」と「安全に保つ」という
   相反する責務を両立させるために構築された
@@ -394,7 +351,6 @@ backgroundSize: contain
   AIエージェント活用のコスト最適化パターンとして参考になる
 - Gatekeeperがv1・v2を貫く権限管理の要
 
-</v-clicks>
 
 ---
 

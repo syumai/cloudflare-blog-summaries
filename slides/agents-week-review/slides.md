@@ -31,8 +31,6 @@ Cloudflare ブログ記事解説
 - 2026年8月3日〜7日の **5日間**、Cloudflare が AI エージェント関連の発表を連続して行ったイベント
 - 約 **26件** の発表が5つのテーマ（曜日）に分かれて公開された
 
-<v-click>
-
 ## エージェント経済の課題は「モデル」だけではない
 
 Cloudflare の主張:
@@ -41,13 +39,7 @@ Cloudflare の主張:
 > **アイデンティティ・通信・オーケストレーション・メモリ・オブザーバビリティ・セキュリティ**
 > にまで広がっている
 
-</v-click>
-
-<v-click>
-
 - モデル性能の勝負ではなく、**エージェントが安全かつ本番品質で動くための基盤全体**をどう整備するかが焦点
-
-</v-click>
 
 ---
 
@@ -73,8 +65,6 @@ Cloudflare の主張:
 
 エージェントが実際に「動く」ための土台
 
-<v-click>
-
 <div class="pb-3">
 
 **@cloudflare/computer**<br>
@@ -83,10 +73,6 @@ Cloudflare の主張:
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/)</span> ・ <span class="text-xs">▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a></span>
 
 </div>
-
-</v-click>
-
-<v-click>
 
 <div class="pb-3">
 
@@ -97,8 +83,6 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
 <div class="text-xs opacity-60 pt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/
 </div>
@@ -106,8 +90,6 @@ Cloudflare の主張:
 ---
 
 # 月曜日: 実行環境とインフラ (2/3)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -118,10 +100,6 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Billable Usage API**<br>
@@ -131,13 +109,9 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
 ---
 
 # 月曜日: 実行環境とインフラ (3/3)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -145,18 +119,6 @@ Cloudflare の主張:
 <span class="text-sm opacity-60">『Cloudflare Workers と Containers がインバウンド TCP 接続と gRPC をサポート』</span><br>
 リアルタイム音声エージェントなど低レイテンシ通信が必要なユースケースに対応<br>
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/grpc-workers/)</span> ・ <span class="text-xs">▶ <a href="../grpc-workers/" target="_blank">解説スライド</a></span>
-
-</div>
-
-</v-click>
-
-<div class="pt-6">
-
-具体的に何ができるようになるか:
-
-- エージェントが**自分のコスト**を把握しながら動作できる
-- **音声・ストリーミング**を扱うエージェントを Workers 上に直接構築できる
-- Python と JavaScript のエージェント部品を**組み合わせて**開発できる
 
 </div>
 
@@ -168,8 +130,6 @@ Cloudflare の主張:
 
 エージェントは「試作 → 本番」の間に、通常のソフトウェアとは異なる検証・承認・トレースが必要
 
-<v-click>
-
 <div class="pb-3">
 
 **ADLC 提案**<br>
@@ -178,10 +138,6 @@ Cloudflare の主張:
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)</span> ・ <span class="text-xs">▶ <a href="../agent-development-lifecycle/" target="_blank">解説スライド</a></span>
 
 </div>
-
-</v-click>
-
-<v-click>
 
 <div class="pb-3">
 
@@ -192,13 +148,9 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
 ---
 
 # 火曜日: エージェント開発ライフサイクル (2/4)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -209,10 +161,6 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Cloudflare Wallets**<br>
@@ -222,13 +170,9 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
 ---
 
 # 火曜日: エージェント開発ライフサイクル (3/4)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -239,10 +183,6 @@ Cloudflare の主張:
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **AI によるエンジニアリング標準の徹底**<br>
@@ -251,8 +191,6 @@ Cloudflare の主張:
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/engineering-standards-enforcement/)</span> ・ <span class="text-xs">▶ <a href="../engineering-standards-enforcement/" target="_blank">解説スライド</a></span>
 
 </div>
-
-</v-click>
 
 <div class="pt-2 text-sm opacity-70">
 
@@ -264,8 +202,6 @@ Cloudflare の主張:
 
 # 火曜日: エージェント開発ライフサイクル (4/4)
 
-<v-click>
-
 <div class="pb-3">
 
 **Astro の GitHub Issue をゼロにするソフトウェアファクトリー**<br>
@@ -275,24 +211,11 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 </div>
 
-</v-click>
-
-<div class="pt-8">
-
-具体的に何ができるようになるか:
-
-- **試作から本番までの一連のプロセス**をエージェント前提で設計できる（ADLC）
-- CI/CD・Issue 対応など、**運用の定常業務をエージェントに任せられる**
-
-</div>
-
 ---
 
 # 水曜日: Zero Trust とセキュリティ (1/3)
 
 エージェントが安全にリソースへアクセスするための仕組み
-
-<v-click>
 
 <div class="pb-3">
 
@@ -303,10 +226,6 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Cloudflare OS で働き方を見直す**<br>
@@ -316,13 +235,9 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 </div>
 
-</v-click>
-
 ---
 
 # 水曜日: Zero Trust とセキュリティ (2/3)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -333,10 +248,6 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **ID情報ベースの分析**<br>
@@ -346,13 +257,9 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 
 </div>
 
-</v-click>
-
 ---
 
 # 水曜日: Zero Trust とセキュリティ (3/3)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -360,17 +267,6 @@ Issue の自動分類・トリアージで OSS 保守コストを削減<br>
 <span class="text-sm opacity-60">『WriteGuard：MCP サーバーをきめ細かく制御』</span><br>
 MCP サーバー経由のリスクの高い書き込み操作をきめ細かく制御<br>
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/)</span> ・ <span class="text-xs">▶ <a href="../mcp-portal-writeguard-private-beta/" target="_blank">解説スライド</a></span>
-
-</div>
-
-</v-click>
-
-<div class="pt-6">
-
-具体的に何ができるようになるか:
-
-- エージェントに<strong>「何を・どこまで」許可するか</strong>を細かく制御できる
-- 「エージェントが勝手にデータを書き換えた」といった事故を**未然に防止**できる
 
 </div>
 
@@ -384,8 +280,6 @@ MCP サーバー経由のリスクの高い書き込み操作をきめ細かく�
 
 ## オープンなエージェンティックインターネットの構築
 
-<v-click>
-
 <div class="pb-3">
 
 **オープンなエージェンティックインターネットの構築**<br>
@@ -394,10 +288,6 @@ MCP サーバー経由のリスクの高い書き込み操作をきめ細かく�
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/the-agentic-internet/)</span> ・ <span class="text-xs">▶ <a href="../the-agentic-internet/" target="_blank">解説スライド</a></span>
 
 </div>
-
-</v-click>
-
-<v-click>
 
 <div class="pb-3">
 
@@ -408,13 +298,9 @@ MCP サーバー経由のリスクの高い書き込み操作をきめ細かく�
 
 </div>
 
-</v-click>
-
 ---
 
 # 木曜日: エージェント型インターネット (2/4)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -425,10 +311,6 @@ SEO（検索エンジン最適化）から、AI エージェントに「推奨�
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Kitesurf**<br>
@@ -438,13 +320,9 @@ SEO（検索エンジン最適化）から、AI エージェントに「推奨�
 
 </div>
 
-</v-click>
-
 ---
 
 # 木曜日: エージェント型インターネット (3/4)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -455,10 +333,6 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Cloudflare AI Search**<br>
@@ -468,13 +342,9 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 </div>
 
-</v-click>
-
 ---
 
 # 木曜日: エージェント型インターネット (4/4)
-
-具体的に何ができるようになるか:
 
 - サイト運営者は**エージェントに読まれる前提**でコンテンツを最適化できる（AEO・WebMCP）
 - エージェントは**軽量なブラウザ**で Web を探索し、必要な情報だけを取得できる
@@ -485,8 +355,6 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 エージェントが実際にインターネット上で動く際の「現実」への対応
 
-<v-click>
-
 <div class="pb-3">
 
 **良い振る舞い / 悪い振る舞いの見極め**<br>
@@ -495,10 +363,6 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 <span class="text-xs opacity-50">📄 [原文](https://blog.cloudflare.com/ja-jp/good-and-bad-agentic-behaviors/)</span> ・ <span class="text-xs">▶ <a href="../good-and-bad-agentic-behaviors/" target="_blank">解説スライド</a></span>
 
 </div>
-
-</v-click>
-
-<v-click>
 
 <div class="pb-3">
 
@@ -509,13 +373,9 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 </div>
 
-</v-click>
-
 ---
 
 # 金曜日: 実装と現実 (2/3)
-
-<v-click>
 
 <div class="pb-3">
 
@@ -526,10 +386,6 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 </div>
 
-</v-click>
-
-<v-click>
-
 <div class="pb-3">
 
 **Radar Researcher**<br>
@@ -539,33 +395,153 @@ MCP プロトコルの次世代版。サーバーの展開・拡張を簡素化<
 
 </div>
 
-</v-click>
-
 ---
 
 # 金曜日: 実装と現実 (3/3)
-
-具体的に何ができるようになるか:
 
 - プラットフォーム側は**エージェントの振る舞いを継続的に評価**し、悪意ある挙動を判別できる
 - OSS エコシステムを支える**人とコミュニティ**にも投資が続けられる
 
 ---
 
+# 注目ピックアップ: 5つの発表
+
+Agents Week 2026 の中でも特に掘り下げて、別デッキ・別 Wiki ページで詳しく解説している5件
+
+1. **@cloudflare/computer**（月曜）— エージェント専用の実行環境
+2. **Cloudflare Wallets**（火曜）— エージェント経済のためのプログラム可能なウォレット
+3. **Cloudflare OS**（水曜）— エージェント・アプリ・作業のためのオープンプラットフォーム
+4. **WebMCP**（木曜）— あらゆるサイトをエージェント対応にするブラウザ標準
+5. **Kitesurf**（木曜）— Workers 上で動くエージェント専用ブラウザ
+
+---
+
 # 注目ピックアップ: @cloudflare/computer
 
-- 月曜日の発表の中でも特に大きなトピック
-- **アイソレート実行**（高速起動・軽量）と **コンテナ実行**（FUSEマウント）を、
-  タスクの要求に応じて使い分ける新しい実行環境
-- SQLite バックエンドの仮想ファイルシステムで両バックエンドがファイルを共有
+<div class="text-sm opacity-60 pb-4">
 
-<div class="pt-6">
+『AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介』
 
-詳細は別デッキ・別 Wiki ページで解説:
+</div>
 
-- Wiki: `docs/articles/2026-08-05-cloudflare-computer.md`
-- スライド: ▶ <a href="../cloudflare-computer/" target="_blank">解説スライド</a>（`slides/cloudflare-computer/slides.md`）
+- 高性能なエージェントに必要な「専用コンピューター環境」を、全エージェント分のコンテナで用意するのは現実的に不可能という課題認識
+- <strong>アイソレート実行</strong>（高速起動・軽量、just-bash でシェルを JS 変換）と<strong>コンテナ実行</strong>（フル Linux、FUSE マウント）を状況に応じて自動選択
+- SQLite バックエンドの仮想ファイルシステム「Workspace」を介して両バックエンドが同じファイルを共有
+- ツールの説明文にバックエンド選択のヒントを埋め込み、モデル自身が最適な実行環境を判断
+- 目標はエージェント作業のうちコンテナが必要になる割合を**10%未満**に抑えること
 
+<div class="pt-6 text-sm">
+
+📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) ・ <a href="../cloudflare-computer/" target="_blank">▶ 解説スライド</a>
+
+</div>
+
+<div class="text-xs opacity-50 pt-2">
+Wiki: `docs/articles/2026-08-05-cloudflare-computer.md`
+</div>
+
+---
+
+# 注目ピックアップ: Cloudflare Wallets
+
+<div class="text-sm opacity-60 pb-4">
+
+『Cloudflare Walletsを発表：エージェント型インターネットのためのプログラム可能なウォレット』
+
+</div>
+
+- エージェントが「安定した ID」と「ネイティブな決済手段」を持てないことが、オンボーディングと商取引普及を妨げてきた課題に対応
+- `cloudflare.pay` で一意のハンドルを取得し、ステーブルコインの保管・サービス購入・Web 全体での資金受け取りが可能に
+- 利用条件（予算・許可販売先・1回あたりの上限額）を設定できる **Virtual Wallets** で、エージェントに安全な範囲だけ資金を利用させられる
+- `research.example.cloudflare.pay` のような人間可読な識別子で、エージェントが「誰の代理か」を検証可能に
+- Monetization Gateway（販売側）・Wallets（購入側）・Identity（本人確認）の3要素で「ヘッドレスマーケットプレイス」を目指す
+
+<div class="pt-6 text-sm">
+
+📄 [原文](https://blog.cloudflare.com/ja-jp/wallets/) ・ <a href="../wallets/" target="_blank">▶ 解説スライド</a>
+
+</div>
+
+<div class="text-xs opacity-50 pt-2">
+Wiki: `docs/articles/2026-08-04-wallets.md`
+</div>
+
+---
+
+# 注目ピックアップ: Cloudflare OS
+
+<div class="text-sm opacity-60 pb-4">
+
+『Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム』
+
+</div>
+
+- 社内で数千人が日常利用してきた業務プラットフォームをオープンソースとして公開
+- 構成要素は「エージェントワークスペース」「セキュリティ・ガバナンス基盤（Gatekeeper）」「個人向けアプリのプラットフォーム」の3つ
+- エージェントは最初は**どのアクセス権も持たない状態**から始まり、許可されたリソースのみ型付きバインディングとしてコードに渡される
+- Gatekeeper はエージェントが「参照した情報」を記録し、その後の共有・公開・外部送信まで参照履歴に基づいて制御
+- 作成されたアプリは**Dynamic Worker 上の Durable Object Facet**として動く、専用 SQLite 付きフルスタックアプリケーション
+
+<div class="pt-6 text-sm">
+
+📄 [原文](https://blog.cloudflare.com/ja-jp/cloudflare-os/) ・ <a href="../cloudflare-os/" target="_blank">▶ 解説スライド</a>
+
+</div>
+
+<div class="text-xs opacity-50 pt-2">
+Wiki: `docs/articles/2026-08-05-cloudflare-os.md`
+</div>
+
+---
+
+# 注目ピックアップ: WebMCP
+
+<div class="text-sm opacity-60 pb-4">
+
+『あらゆるWebサイトにWebMCPインターフェースを付与する』
+
+</div>
+
+- Chrome 146 で実験提供される新ブラウザ標準。ページ上に `document.modelContext` として現れ、サイトが「ツール」をエージェントに公開できる
+- Cloudflare の実装は<strong>オリジンのコード変更ゼロ</strong>。エッジで HTMLRewriter により1行のブリッジスクリプトを注入するだけで有効化
+- 初回プレビューは「Content Credentials（C2PA 画像の来歴確認）」と「Site MCP Server（自サイトの MCP サーバーへのプロキシ）」の2ツールパック
+- 登録ツールは MCP の `Tool` / `CallToolResult` 型に準拠し、既存の MCP クライアント／エージェントがそのまま呼び出し可能
+- ツールはすべて訪問者自身のブラウザ内・セッションで実行され、人間の操作と同じ認証境界を保つ
+
+<div class="pt-6 text-sm">
+
+📄 [原文](https://blog.cloudflare.com/webmcp/) ・ <a href="../webmcp/" target="_blank">▶ 解説スライド</a>
+
+</div>
+
+<div class="text-xs opacity-50 pt-2">
+Wiki: `docs/articles/2026-08-06-webmcp.md`
+</div>
+
+---
+
+# 注目ピックアップ: Kitesurf
+
+<div class="text-sm opacity-60 pb-4">
+
+『Kitesurfのご紹介 — Cloudflare Workers上で動く、エージェントファーストのブラウザ』
+
+</div>
+
+- Chromium など既存エンジンを使わず、**Cloudflare Workers 上で完全動作**する AI エージェント専用ブラウザ
+- Rust 実装を Wasm にコンパイルして構築。HTML/CSS は Blitz・Stylo、`eval` 実行は Boa JS で実現
+- スクリーンショット・HTML 抽出で Chromium より CPU・メモリ消費が**3〜7倍**少ない（壁時計時間は1.7〜1.8倍遅い）
+- Web Platform Tests を**21万5,000件以上**通過、CDP 互換で既存の Puppeteer / Playwright / MCP クライアントがそのまま接続可能
+- Browser Run 経由で無料ベータとして利用開始可能（動画再生・WebGL・長時間認証セッションなどは非対応）
+
+<div class="pt-6 text-sm">
+
+📄 [原文](https://blog.cloudflare.com/kitesurf/) ・ <a href="../kitesurf/" target="_blank">▶ 解説スライド</a>
+
+</div>
+
+<div class="text-xs opacity-50 pt-2">
+Wiki: `docs/articles/2026-08-06-kitesurf.md`
 </div>
 
 ---

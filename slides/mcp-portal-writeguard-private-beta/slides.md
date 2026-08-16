@@ -29,7 +29,6 @@ MCPサーバーのための
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: 「無限に閉じられるチケット」問題
 - CloudflareにおけるMCPの現状
@@ -40,32 +39,26 @@ MCPサーバーのための
 - 実例: GitLabで見るWriteGuard
 - プライベートベータとまとめ
 
-</v-clicks>
 
 ---
 
 # 背景: Endlessly Closing Tickets
 
-<v-click>
 
 > エンジニアのJoeが数千件のチケットを自動的に閉じてしまった
 
-</v-click>
 
-<v-clicks>
 
 - 実際には複数の自動エージェントが3つの同時セッションで実行中
 - 原因は「少し広すぎる」クリーンアップタスクのプロンプト
 - 契約ソフトウェアなら契約を書き換え、サポートキューなら
   数百件の誤送信、DBアクセス権があればテーブル全体を削除も
 
-</v-clicks>
 
 ---
 
 # 前提: クライアント側の制御には頼れない
 
-<v-clicks>
 
 - 「全従業員がすべてのエージェントを完璧に設定し、
   すべてのツール呼び出しを監視する」ことには依存できない
@@ -73,13 +66,11 @@ MCPサーバーのための
 - ユーザー側で無効化することもできてしまう
 - → プラットフォーム側で一元的に制御する仕組みが必要
 
-</v-clicks>
 
 ---
 
 # MCPの基礎
 
-<v-clicks>
 
 - Model Context Protocol: AIアプリを外部ツール・データソースに
   接続するための標準
@@ -88,13 +79,11 @@ MCPサーバーのための
 - エージェントがツールを選ぶ → クライアントが呼び出しを送信
   → サーバーがダウンストリームと連携
 
-</v-clicks>
 
 ---
 
 # CloudflareにおけるMCP
 
-<v-clicks>
 
 - OpenCodeやCloudflare OSなどのローカルクライアント、
   長時間実行されるエージェントサービスから利用
@@ -102,9 +91,7 @@ MCPサーバーのための
 - 4月時点で13サーバー → 現在**27サーバー**に増加
 - 当初はすべて読み取り専用（Jira・GitLab・ウィキ・運用系を検索）
 
-</v-clicks>
 
-<v-click>
 
 <div class="pt-4 text-center">
 
@@ -113,19 +100,16 @@ MCPサーバーのための
 
 </div>
 
-</v-click>
 
 ---
 
 # 必要だった3つの仕組み
 
-<v-clicks>
 
 - エージェントが実行できる**書き込みアクション**の一元的な制御
 - ダウンストリームアプリケーションに表示される**エージェントラベル**
 - エージェント活動の調査を容易にする**監査証跡**
 
-</v-clicks>
 
 ---
 class: text-center
@@ -141,20 +125,16 @@ backgroundSize: contain
 
 # WriteGuardとは
 
-<v-clicks>
 
 - 「共有ポリシー、帰属、監査層」
 - ツールの構成とリクエストコンテキストから何が起こるかを判断
 
-</v-clicks>
 
-<v-clicks>
 
 - 呼び出しをそのまま通す
 - 帰属情報を付与し、スクラブ済み監査イベントを生成する
 - ハンドラー実行前にアクションをブロックする
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/
@@ -164,7 +144,6 @@ backgroundSize: contain
 
 # 呼び出し可能なツールから統治可能なアクションへ
 
-<v-clicks>
 
 - MCPサーバー本体を変更せずにツールごとポリシーを定義
 - 全ツールに「リスク層」「有効／無効」「ラベリング構成」を付与
@@ -172,7 +151,6 @@ backgroundSize: contain
 - ラベリングでエージェント帰属を挿入
   （サーバー側のコード変更なしに、最適な形式で）
 
-</v-clicks>
 
 ---
 
@@ -185,7 +163,6 @@ backgroundSize: contain
 | Contained Write | コメント追加、MR作成、`create_mr_note` |
 | Critical | MRをマージ、本番デプロイ、`merge_mr` |
 
-<v-click>
 
 <div class="pt-4 text-center text-sm opacity-70">
 
@@ -193,7 +170,6 @@ backgroundSize: contain
 
 </div>
 
-</v-click>
 
 ---
 class: text-center
@@ -227,7 +203,6 @@ const sendEmailTool = {
 
 # コード例 解説
 
-<v-clicks>
 
 - `EmailMCP.sendEmailTool`という既存のMCPツールに
   `writeGuard`設定オブジェクトを**外付け**
@@ -237,13 +212,11 @@ const sendEmailTool = {
   - プレーンテキスト／HTMLどちらの形式にも対応
 - **ポイント**: `EmailMCP`本体のコードは一切変更していない
 
-</v-clicks>
 
 ---
 
 # 現状と今後
 
-<v-clicks>
 
 - 現在は内部MCPモノレポでTypeScriptとして構成
 - プライベートベータの展開に伴い、サーバー所有者は
@@ -251,7 +224,6 @@ const sendEmailTool = {
 - すべてのMCPサーバーに、ベースラインアクセスポリシーと
   ツールごとのWriteGuard制御が含まれる
 
-</v-clicks>
 
 ---
 class: text-center
@@ -263,7 +235,6 @@ class: text-center
 
 # アイデンティティの原則
 
-<v-clicks>
 
 - Cloudflareの内部MCPサーバーはAccessとOAuthでユーザーを識別
 - エージェントは**その従業員の権限**で動作
@@ -271,13 +242,11 @@ class: text-center
 - 独立した「エージェントアカウント」は新設しない
   - 権限の2番目のセットを生み、責任の所在を曖昧にするため
 
-</v-clicks>
 
 ---
 
 # トレードオフとWriteGuardの解決策
 
-<v-clicks>
 
 - ダウンストリームにはJoeの資格情報しか見えず、
   背後のエージェントを識別する手段がない
@@ -287,7 +256,6 @@ class: text-center
   として識別
 - 何も問題が起きていない場合でも、変更の解釈・対応判断に有用
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -298,7 +266,6 @@ backgroundSize: contain
 # 機械速度のアクティビティを
 クエリ可能にする
 
-<v-clicks>
 
 - 各呼び出しを成功／失敗／ブロックに分類
 - 非同期でスクラブ済みイベントを内部監査ワーカーへ送信
@@ -306,7 +273,6 @@ backgroundSize: contain
   処理時間を記録（秘密情報は省略）
 - 非同期化によりエージェントの応答遅延には影響しない
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/
@@ -323,14 +289,12 @@ GitLab MCPサーバー
 
 # ① マージリクエストの読み取り
 
-<v-clicks>
 
 - エンジニアがコード変更の要約を依頼
 - `get_merge_request`を呼び出し
 - リスク層: **Read Only**
 - WriteGuardは呼び出しをそのまま通す
 
-</v-clicks>
 
 ---
 layout: two-cols
@@ -338,7 +302,6 @@ layout: two-cols
 
 # ② MRへのメモ追加
 
-<v-clicks>
 
 - `create_mr_note`を呼び出し
 - リスク層: **Contained Write**
@@ -346,7 +309,6 @@ layout: two-cols
   帰属情報を追加してハンドラー呼び出し
 - 非同期でスクラブ済み監査イベントを記録
 
-</v-clicks>
 
 ::right::
 
@@ -364,13 +326,11 @@ backgroundSize: contain
 
 # ②の監査ログ例
 
-<v-clicks>
 
 - ユーザー・ツール・結果
 - エージェント識別コンテキストを含む
 - スクラブ済み（秘密情報は省略）
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/
@@ -384,7 +344,6 @@ backgroundSize: contain
 
 # ③ コードのマージ
 
-<v-clicks>
 
 - エージェントが「役に立とうとして」
   指示範囲を超え`merge_mr`を呼び出し
@@ -393,7 +352,6 @@ backgroundSize: contain
 - リスク層: **Critical** → **無効（disabled）として構成**
 - WriteGuardがハンドラー実行前にブロックし、試行を記録
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/mcp-portal-writeguard-private-beta/
@@ -403,7 +361,6 @@ backgroundSize: contain
 
 # 単一サーバー例を超えて
 
-<v-clicks>
 
 - 同じサーバー・アイデンティティフロー・APIでも、
   WriteGuardはツールごとに異なる方法で処理
@@ -412,9 +369,7 @@ backgroundSize: contain
   同じ機能が必要なサーバーは増え続ける
 - 各サーバーで再実装すると、作業量増・挙動の不整合が発生
 
-</v-clicks>
 
-<v-click>
 
 <div class="pt-4 text-center">
 
@@ -423,13 +378,11 @@ backgroundSize: contain
 
 </div>
 
-</v-click>
 
 ---
 
 # 内部展開からプライベートベータへ
 
-<v-clicks>
 
 - 自社のMCPサーバー向けに構築（読み取り専用の先へ進む必要から）
 - プライベートベータでは同じアーキテクチャをMCPサーバーポータルへ
@@ -439,13 +392,11 @@ backgroundSize: contain
   - ダウンストリームが必要とする帰属形式
   - 監査配信の保証水準
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - WriteGuardは、MCPサーバー本体を変更せず
   ツールごとの構成だけでガバナンスを適用できる共有レイヤー
@@ -454,7 +405,6 @@ backgroundSize: contain
 - 27のMCPサーバーを横断した一元的な監査が可能に
 - プライベートベータとして展開中、段階的に拡大予定
 
-</v-clicks>
 
 ---
 

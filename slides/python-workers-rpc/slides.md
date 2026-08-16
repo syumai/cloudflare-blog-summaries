@@ -27,7 +27,6 @@ lineNumbers: true
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: Python Workers と Pyodide FFI
 - 課題: 異なる言語の Worker 同士を RPC で繋ぐには
@@ -37,45 +36,37 @@ lineNumbers: true
 - ユースケース
 - まとめ
 
-</v-clicks>
 
 ---
 
 # 背景: Python Workers を支える Pyodide
 
-<v-clicks>
 
 - Python Workers は登場当初から **Pyodide**（CPython を WebAssembly にコンパイルしたもの）の上で動作
 - Pyodide は JavaScript とやり取りするための堅牢な **Foreign Function Interface（FFI）** を備える
 - 一方 Workers RPC はこれまで JavaScript 環境内、その後ブラウザ・サーバー間で機能してきた
 - **Python と JavaScript の Worker 間の RPC** にはまだ対応していなかった
 
-</v-clicks>
 
 ---
 
 # 課題: 言語をまたぐ Worker の組み合わせ
 
-<v-click>
 
 > Python で書かれた Worker と JavaScript で書かれた Worker を組み合わせようとすると、
 > 独自のAPI定義や protobuf のようなシリアライゼーション形式を
 > 用意する必要があった
 
-</v-click>
 
-<v-click>
 
 追加のスキーマ定義やシリアライゼーションコードを書かずに、
 言語の境界を越えて**透過的にメソッド呼び出し**をしたい
 
-</v-click>
 
 ---
 
 # 発表内容: クロス言語 RPC
 
-<v-clicks>
 
 - クロス言語の RPC 呼び出しは通常の関数呼び出しのように振る舞う
   - JavaScript/TypeScript では `Promise`、Python では `Future` を返す
@@ -87,18 +78,15 @@ lineNumbers: true
 - 同一スレッド内で動く Worker 同士の RPC は**ほぼゼロオーバーヘッド**
 - 実装は `workerd` と `workers-runtime-sdk` としてOSS公開
 
-</v-clicks>
 
 ---
 
 # 型変換の仕組み①: Pyodide FFI
 
-<v-clicks>
 
 - JavaScript の開発者はオブジェクト（Object）を、Python の開発者はキーワード引数を使うのが自然
 - Pyodide FFI が RPC 呼び出しの際に型を自動変換する
 
-</v-clicks>
 
 <div class="pt-4">
 
@@ -111,11 +99,9 @@ lineNumbers: true
 
 </div>
 
-<v-click>
 
 直接変換できない独自クラス・関数は **Proxy オブジェクト**として転送される
 
-</v-click>
 
 ---
 layout: image-right
@@ -137,7 +123,6 @@ Python のキーワード引数 ⇄ JavaScript のオブジェクト形式パラ
 
 # 型変換の仕組み②: Workers 固有オブジェクトの扱い
 
-<v-clicks>
 
 - Pyodide FFI は `Request` / `Response` / `Blob` / `File` などの Web API オブジェクトは自動理解できない
 - デフォルトのままだと単なる JavaScript の Proxy になり、実装の詳細が Python 側に漏れる
@@ -146,7 +131,6 @@ Python のキーワード引数 ⇄ JavaScript のオブジェクト形式パラ
   - それぞれの言語のネイティブな形に変換
 - `from workers import Response` を使う開発者はこの変換層を自動的に利用している
 
-</v-clicks>
 
 ---
 class: text-center
@@ -169,12 +153,10 @@ export class RpcService extends WorkerEntrypoint {
 }
 ```
 
-<v-click>
 
 `WorkerEntrypoint` を継承した `RpcService` に `add` メソッドを実装するだけで、
 他の Worker から RPC 経由で呼び出せるエントリポイントになる
 
-</v-click>
 
 ---
 
@@ -204,13 +186,11 @@ class Default(WorkerEntrypoint):
 
 # コード例② 解説
 
-<v-clicks>
 
 - `self.env.RPC` で TypeScript 側 Worker への RPC スタブを取得
 - `await rpc.add(42, 144)` は、ローカルの Python 関数を呼ぶのと同じ構文
 - 引数・戻り値の数値型はいずれも意識せず自動変換される
 
-</v-clicks>
 
 ---
 
@@ -252,14 +232,12 @@ class Default(WorkerEntrypoint):
 
 # コード例③ 解説
 
-<v-clicks>
 
 - JavaScript 側は `env.PYTHON_RPC` 越しに `highlight_code` を文字列2つで呼ぶだけ
 - Python 側は Pygments（Python エコシステムのライブラリ）でハイライト処理を実装
 - Python の `dict` は自動的に JavaScript の `Object` に変換され、そのまま `Response.json()` に渡せる
 - **同等の処理を JavaScript で書き直す必要がない**、という点がこの例の要点
 
-</v-clicks>
 
 <div class="pt-4">
 
@@ -282,47 +260,39 @@ class: text-center
 
 # ユースケース①: Python ライブラリの JS からの利用
 
-<v-clicks>
 
 - Pygments のような Python 専用ライブラリを、JavaScript/TypeScript から書き直しなしで呼び出す
 - Python にしかない、あるいは Python の方が成熟しているライブラリ資産を活用できる
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 複数言語のエージェントコンポーネント統合
 
-<v-clicks>
 
 - AI エージェントのロジックを Python、インフラ/API 層を TypeScript で書くといった構成を組みやすい
 - RPC 呼び出しがほぼゼロオーバーヘッドなため、頻繁なやり取りが発生するエージェントアーキテクチャに向く
 
-</v-clicks>
 
 ---
 
 # ユースケース③: 既存 JS Worker への Python 処理の後付け
 
-<v-clicks>
 
 - サービスバインディングを追加するだけで、既存 JavaScript Worker から新規 Python Worker のメソッドを呼び出せる
 - 大規模な書き換えを行わずに機能を追加できる
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Workers RPC が Python と JavaScript の間でも透過的に使えるようになった
 - 型変換は「Pyodide FFI（標準型）＋ `workers-runtime-sdk`（Workers 固有型）」の2層構造
 - Python のキーワード引数、JavaScript のオブジェクト引数、双方の慣用的な書き方をそのまま活かせる
 - 言語ごとの強いライブラリエコシステムを、書き直しなしで組み合わせられる
 
-</v-clicks>
 
 ---
 

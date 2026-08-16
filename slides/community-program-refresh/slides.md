@@ -32,7 +32,6 @@ themeConfig:
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: コミュニティ支援のギャップ
 - Cloudflare Ambassadors トラック
@@ -43,7 +42,6 @@ themeConfig:
 - まとめ・所感
 - 参考リンク
 
-</v-clicks>
 
 ---
 
@@ -52,18 +50,14 @@ themeConfig:
 Cloudflareは「インターネットを構築するプラットフォーム」として、
 Workers・Discord・オープンソースを通じたコミュニティが既に存在していた
 
-<v-clicks>
 
 - **草の根の伝道者への支援不足**: 勉強会・ハッカソンを主催する個人への体系的な支援がなかった
 - **OSSメンテナーへの直接支援の不足**: `workerd` や `quiche` など、自社が公開・依拠するOSSの貢献者を直接支援する仕組みが限定的だった
 
-</v-clicks>
 
-<v-click>
 
 これらを埋めるため、既存の取り組み（TanStackスポンサーシップ、VoidZero買収時のVite支援）を土台に、制度化された2トラックのプログラムとして再構成
 
-</v-click>
 
 ---
 
@@ -89,7 +83,6 @@ OSSプロジェクトの貢献者向け
 
 </div>
 
-<v-click>
 
 <div class="pt-8">
 
@@ -97,7 +90,6 @@ OSSプロジェクトの貢献者向け
 
 </div>
 
-</v-click>
 
 <div class="text-xs opacity-60 pt-8">
 出典: Cloudflare Blog https://blog.cloudflare.com/community-program-refresh/
@@ -107,14 +99,12 @@ OSSプロジェクトの貢献者向け
 
 # Cloudflare Ambassadors とは
 
-<v-clicks>
 
 - 年1回の応募プロセスで選出、**任期は最大2年間**
 - 役割: 地元ミートアップ開催、学生グループの主導、学習スペースの創出、チュートリアル執筆など
 - 支援内容: クレジット・マーケティング素材・技術リソース
 - Discordなどのオンラインコミュニティスペースで目立つ役割（バッジ的立場）を付与
 
-</v-clicks>
 
 ---
 
@@ -145,7 +135,6 @@ OSSプロジェクトの貢献者向け
 
 </div>
 
-<v-click>
 
 <div class="pt-8 text-sm opacity-70">
 
@@ -155,40 +144,33 @@ Sruthi Pereddy さんのコメントが事例として紹介されている
 
 </div>
 
-</v-click>
 
 ---
 
 # Cloudflare Community Engineers とは
 
-<v-clicks>
 
 - 対象: Cloudflareの開発者プラットフォームが依拠する、または自社公開のOSS（`workerd`、`quiche` など）の貢献者・メンテナー
 - 先行事例: TanStack（Tanner Linsley氏がCEO）へのスポンサーシップ
 - Ambassadorsと異なり**最大在任期間の上限なし**（OSS特有の不規則な貢献サイクルに配慮）
 - 初期フォーカス: Astro、Agents SDK、EmDash、Hono、Vinext など、Cloudflareの OSS の活動範囲にあるプロジェクト
 
-</v-clicks>
 
 ---
 
 # Community Engineers への投資
 
-<v-click>
 
 > 今後2年間で、オープンソースプロジェクトの支援に
 > **新たに100万ドルを追加投資**
 
-</v-click>
 
-<v-clicks>
 
 - VoidZero買収に伴い既にコミットしていた、Viteコミュニティ向けの100万ドルとは**別枠**
 - 適格と認められたCommunity Engineersは、この基金から助成金を受給できる
 - Discordなどでの特別な役職付与も予定
 - 応募開始時期は本記事公開時点では未定（「後日開始」とのみ案内）
 
-</v-clicks>
 
 <div class="text-xs opacity-60 pt-6">
 出典: Cloudflare Blog https://blog.cloudflare.com/community-program-refresh/
@@ -198,19 +180,16 @@ Sruthi Pereddy さんのコメントが事例として紹介されている
 
 # Discordコミュニティの改善 (1/2)
 
-<v-clicks>
 
 - Cloudflare公式Discordは2020年開設以来、**約10万人**が参加する規模に成長
 - 質問対応・プロジェクト共有・フィードバック収集の主要な場に
 - 規模拡大に伴い、健全性を維持する運営体制の強化が課題に
 
-</v-clicks>
 
 ---
 
 # Discordコミュニティの改善 (2/2)
 
-<v-clicks>
 
 - 対策: **Cloudflare Ambassadors + スタッフ**からなる新しい「Discord委員会」を設置
 - 重点はモデレーション・管理業務そのものではない
@@ -218,7 +197,6 @@ Sruthi Pereddy さんのコメントが事例として紹介されている
 - 委員会はコンテンツのキュレーション・機会の提供・社内チームとの橋渡しに集中
 - これらの防御ツールは将来的に**オープンソースとして公開・共有**する計画
 
-</v-clicks>
 
 ---
 class: text-center
@@ -232,14 +210,11 @@ class: text-center
 
 # コード例が無い記事です
 
-<v-click>
 
 この記事は、コミュニティプログラムの**制度設計・運営体制**に関する発表であり、
 技術的なAPIやSDKを紹介する記事ではないため、コード例は掲載されていない
 
-</v-click>
 
-<v-click>
 
 <div class="pt-6">
 
@@ -247,13 +222,11 @@ class: text-center
 
 </div>
 
-</v-click>
 
 ---
 
 # 記事の位置づけ: Agents Week 2026 の中で
 
-<v-clicks>
 
 - 本記事は、2026年8月3日〜7日の「Agents Week 2026」最終日（金曜・テーマ「実装と現実」）に発表された4本の1つ
 - 同じ金曜日の他の発表:
@@ -261,9 +234,7 @@ class: text-center
   - Workers AI と AI Gateway の統合
   - Radar Researcher（自然言語でインターネットデータを分析するAIツール）
 
-</v-clicks>
 
-<v-click>
 
 <div class="pt-6">
 
@@ -271,7 +242,6 @@ class: text-center
 
 </div>
 
-</v-click>
 
 <div class="text-xs opacity-60 pt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/
@@ -287,75 +257,63 @@ class: text-center
 
 # ユースケース①: 学生団体のハンズオンイベント
 
-<v-clicks>
 
 - Ambassadorに選出された学生が、大学のCS系サークルでWorkersのハンズオンワークショップを開催
 - Cloudflareから提供されるクレジットや技術資料を活用して教材を作成
 - キャンパス内での学習スペース創出にもつながる
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 地域コミュニティのミートアップ継続開催
 
-<v-clicks>
 
 - 地元の開発者コミュニティを主宰するAmbassadorが、マーケティング素材や登壇者リソースの支援を受ける
 - 定期的な勉強会・ハッカソンを企画・運営
 - Discord上での可視的な役割により、参加者からの信頼・認知も得やすくなる
 
-</v-clicks>
 
 ---
 
 # ユースケース③: OSSメンテナーへの継続支援
 
-<v-clicks>
 
 - Astro や Hono など、Cloudflareの OSS の活動範囲にあるプロジェクトのメンテナーがCommunity Engineersに
 - 助成金を受け取りながら、不規則な貢献サイクルの中でもプロジェクト保守を継続
 - 最大在任期間の上限がないため、燃え尽き期間や活動休止を挟んでも支援を受けやすい設計
 
-</v-clicks>
 
 ---
 
 # ユースケース④: Discordでの情報キュレーション
 
-<v-clicks>
 
 - 新設のDiscord委員会が、自動スパム対策ツールと合わせて有益な議論・機会をキュレーション
 - イベント告知やコラボレーションの機会が、約10万人規模のコミュニティの中で埋もれにくくなる
 - 社内チーム・ビルダーとの橋渡し役としても機能
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - 「コミュニティを広める人」（Ambassadors）と「コードを書く人」（Community Engineers）の2トラックに明確に分離
 - Community Engineersへの投資は、既存のVite向け100万ドルとは別枠で**新たに2年間100万ドルを追加**
 - Ambassadorsの応募締切は**9月6日**、通知は**10月5日**
 - Discordは自動化ツール＋人によるキュレーションの二段構えで健全性を維持する方針
 
-</v-clicks>
 
 ---
 
 # 所感
 
-<v-clicks>
 
 - Community Engineersの「在任期間上限なし」は、OSS貢献の不規則さに配慮した設計判断として興味深い
 - 2つの100万ドル規模の投資が並走する構図は、OSSエコシステムの持続可能性が企業スポンサーシップの積み重ねで支えられている実態をよく表している
 - Discord運営で「モデレーションではなくキュレーションに重点を置く」という役割分担は、他のコミュニティ運営にも参考になりうる
 - 技術記事ではないため、新機能・SDKの詳細を期待すると肩透かしになる点は留意が必要
 
-</v-clicks>
 
 ---
 

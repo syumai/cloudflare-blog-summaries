@@ -105,6 +105,16 @@ Agents Week 2026 は、この「モデル以外」の課題に対する Cloudfla
 
 > **Workers サンプル**: 対象外（本記事は週内発表のまとめ記事であり、個別技術を体験する対象ではないため。各発表の詳細記事・サンプルを参照）
 
+## 注目ピックアップ
+
+Agents Week 2026 で発表された約26件の中でも、特に読む価値が高いと考える5件を、推薦理由とともに挙げる。
+
+- **[@cloudflare/computer](./2026-08-05-cloudflare-computer.md)**（[スライド](../slides/cloudflare-computer/slides.md)） — アイソレートとコンテナを動的に使い分けるハイブリッド実行環境。数十億規模のエージェントをどう安価に動かすかという、Agents Week全体を貫くスケーリング課題への最も具体的な回答であり、週の目玉として真っ先に読む価値がある。
+- **[WebMCP](./2026-08-06-webmcp.md)**（[スライド](../slides/webmcp/slides.md)） — オリジンのコード変更ゼロでサイトをエージェント対応にする発想は、AEOやSEOの延長として今後の実務に直結しやすい。ブラウザ標準としての広がりにも注目したい。
+- **[Cloudflare OS](./2026-08-05-cloudflare-os.md)**（[スライド](../slides/cloudflare-os/slides.md)） — 「エージェントは最初はどのアクセス権も持たない」というZero Trustの徹底と、参照履歴に基づく情報漏えい防止（Gatekeeper）は、社内でエージェントを本格運用する際の権限設計の指針として参考になる。
+- **[Kitesurf](./2026-08-06-kitesurf.md)**（[スライド](../slides/kitesurf/slides.md)） — Chromiumを使わずWorkers上で完全に動くエージェント専用ブラウザという発想は独自性が高く、CPU・メモリ効率の実測値（3〜7倍）とWPT準拠の透明性ある性能開示が説得力を持たせている。
+- **[Cloudflare Wallets](./2026-08-04-wallets.md)**（[スライド](../slides/wallets/slides.md)） — エージェントに「安定したID」と「決済手段」を与えるという発想は、エージェント経済が実際にお金を動かすフェーズに入りつつあることを象徴しており、Monetization Gateway・Identityと合わせた全体戦略の理解に役立つ。
+
 ## 関連リンク
 
 - 原文（週まとめ記事）: https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/

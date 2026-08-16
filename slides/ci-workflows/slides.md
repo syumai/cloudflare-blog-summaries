@@ -27,7 +27,6 @@ themeConfig:
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: プラットフォームが抱えるCI/CDの悩み
 - CI/CDパイプラインは、ただのWorkflowである
@@ -38,29 +37,24 @@ themeConfig:
 - ユースケース
 - 今後の展望
 
-</v-clicks>
 
 ---
 
 # 背景: プラットフォームとCI/CDの悩み
 
-<v-clicks>
 
 - 多くのチームが「プラットフォーム」を構築している（社内vibe codingツール〜顧客向けカスタマイズ機能まで）
 - Artifacts上に自社コードと顧客コードを合わせて**数百万リポジトリ規模**で保存
 - チームごとにCI/CDへのニーズは異なる
 - 顧客の多くはCI/CD管理という手間を負いたくない
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 理想: プラットフォーム側が一度書いたCI/CDを全顧客アプリへ横展開したい
 一方で、顧客自身がカスタムCIを書きたいケースもある
 
-</v-click>
 
 ---
 layout: image-right
@@ -82,22 +76,18 @@ backgroundSize: contain
 
 # CI/CDパイプラインは、ただのWorkflowである
 
-<v-clicks>
 
 - GitHub Actions的なCI/CDは「決まった順序でステップを実行し、失敗したら止める」処理
 - 本質的には**単なるWorkflow**
 - YAMLの代わりに**TypeScript**でCI/CDを定義 → 高いカスタマイズ性
 - 各ステップ = Workflowの `step.do()`
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 > YAMLで定義されたCI/CDは「YAML疲れ」を招く制約ですぐ複雑化する
 
-</v-click>
 
 ---
 layout: image-right
@@ -117,26 +107,22 @@ install → 並列チェック（lint/test/typecheck/build）→ deploy
 
 # CI SDKが提供するもの
 
-<v-clicks>
 
 - 各ステップ（build・lint・typecheck）を**安全な隔離環境**で実行（Workflows + Sandbox SDK）
 - イベントサブスクリプション／キュー／コンシューマーの個別設定なしで**push時に直接CI起動**
 - Sandbox APIを直接呼ばず、各コマンドを**Workflowの1ステップ**として実行 → リトライ・タイムアウトを標準装備
 - **依存関係のキャッシュ**でinstallの再実行を回避し、レイテンシを削減
 
-</v-clicks>
 
 ---
 
 # CIジョブ定義に必要な3ステップ
 
-<v-clicks>
 
 1. **install**: bundler・linter・test runnerなど依存関係をインストール
 2. **各ステップのコマンド**: `bun run build` / `bun run test` / `bun run lint` など（依存関係はキャッシュ済みなので並列実行可能）
 3. **deploy**: `wrangler deploy` を渡すと、ビルド成功時に自動デプロイ
 
-</v-clicks>
 
 ---
 
@@ -169,14 +155,12 @@ await deps.runner({
 
 # コード例① 解説
 
-<v-clicks>
 
 - `ci.runner()` の呼び出し1回 = Workflowの1ステップ（`step.do()`）
 - `install` は `cache.inputs` のファイル内容に基づきキャッシュされ、`deps` を返す
 - `deps.runner()` を `Promise.all()` でまとめることで **lint/test/typecheck/build を並列実行**
 - すべての検証が完了して初めて `deploy` ステップが `wrangler deploy` を実行
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -222,22 +206,18 @@ CI全体のレイテンシを短縮する
 
 # コード例② 解説
 
-<v-clicks>
 
 - `triggers.events` に `cf.artifacts.repo.pushed` イベントを登録
 - 該当する `namespace`（と任意で `repoName`）へのpushでWorkflowが自動起動
 - `repoName` を**省略**すると、namespace内の全リポジトリへのpushで同じWorkflowを実行
 - プラットフォーム事業者が顧客の全リポジトリに同一CIを適用する用途に最適
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 必要なバインディング: `artifacts` / `workflows` / `containers` / `durable_objects` / `r2`（キャッシュ用）
 
-</v-click>
 
 ---
 class: text-center
@@ -251,21 +231,17 @@ class: text-center
 
 # 自己修復に必要な2つの要素
 
-<v-clicks>
 
 - **LLM**: 修正内容を生成するモデル
 - **エージェントハーネス**: Think agent（`HealingAgent`）
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 CIジョブはリモートで実行・再実行される → ノートPCを開いたまま待つ必要がない
 エンジニアは**修正コミットをレビューしてマージするだけ**
 
-</v-click>
 
 ---
 layout: image-right
@@ -294,12 +270,10 @@ export class Healer extends HealingAgent {
 }
 ```
 
-<v-click>
 
 `HealingAgent` を継承し `getModel()` を実装するだけで、
 失敗時に呼び出せる `heal` メソッドを持つエージェントになる
 
-</v-click>
 
 ---
 
@@ -362,7 +336,6 @@ await deps.runner({
 
 # コード例④ 解説
 
-<v-clicks>
 
 - `try` でinstall + 並列チェックを実行、失敗すると `catch` へ
 - `isCiRunnerFailure()` で**runnerが報告した失敗だけ**をhealの対象にし、それ以外は再スロー
@@ -370,7 +343,6 @@ await deps.runner({
 - `healer.heal()` は修正のブランチ・コミット・ステップ数を返す
 - 元の実行は**失敗のまま記録**し、検証済みの修正は**別ブランチ**に残す
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -392,13 +364,11 @@ Sandbox SDK上の安全な環境で
 
 # Workflow上で動かすメリット
 
-<v-clicks>
 
 - **レジリエントなリトライ**: 状態を永続化した自動リトライ、ステップ単位のリトライ/タイムアウト設定、特定ステップからの再開
 - **Workflowsのオブザーバビリティ**: ダッシュボードでステップごとの入出力・実時間・CPU時間を確認、並列/直列の可視化
 - **コードであることの強み**: AIコードレビュアー・R2への成果物書き込み・完了/失敗時のメール通知など、任意のロジックをステップとして実装可能
 
-</v-clicks>
 
 ---
 class: text-center
@@ -410,56 +380,47 @@ class: text-center
 
 # ユースケース①: プラットフォームによるCI一括管理
 
-<v-clicks>
 
 - `repoName` を指定しないfilterで、namespace内の**全顧客リポジトリ**に同一CIを適用
 - プラットフォーム側は一度Workflowを書くだけ
 - 顧客はCI/CDパイプラインを個別管理しなくてよい
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 顧客ごとのカスタムCI
 
-<v-clicks>
 
 - dynamic workflowsで顧客自身がWorkflowを記述
 - 自分のリポジトリだけにカスタムCIジョブを適用
 - プラットフォーム管理CIと**同じnamespace内で共存**可能
 
-</v-clicks>
 
 ---
 
 # ユースケース③: 自己修復CIによる無人運用
 
-<v-clicks>
 
 - Think + Workers AIのhealingエージェントがビルド/lintの失敗を自動修正
 - エンジニアはCIジョブに張り付く必要がない
 - 用意された修正コミットを**レビューしてマージするだけ**
 
-</v-clicks>
 
 ---
 
 # 今後の展望
 
-<v-clicks>
 
 - **直接統合**: `build.preview()` / `build.deploy()` プリミティブ（Workers & Workers for Platforms向け）
 - **段階的デプロイ**: Workflowsによるパーセンテージベースのロールアウト管理
 - **モノレポ対応**: 1つのCIパイプラインで複数Workerのデプロイを管理
 - **トリガー拡張**: Artifacts以外のバージョン管理システムからのpushイベントにも対応
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - CI/CDパイプラインは、本質的には**ただのWorkflow**である
 - YAMLではなくTypeScriptで、`step.do()` を単位にCI/CDを記述できる
@@ -467,7 +428,6 @@ class: text-center
 - AIエージェントによる**自己修復CI**で、ビルド失敗の一次対応を自動化
 - プラットフォーム管理CIと顧客のカスタムCIが**同じnamespaceで共存**可能
 
-</v-clicks>
 
 ---
 

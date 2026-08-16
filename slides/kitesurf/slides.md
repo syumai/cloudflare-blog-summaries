@@ -29,7 +29,6 @@ Cloudflare Workersのアイソレート上で動く、
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: ブラウザは「人間向け」に作られてきた
 - Kitesurfを発表: エージェント専用ブラウザ
@@ -40,7 +39,6 @@ Cloudflare Workersのアイソレート上で動く、
 - ユースケースとできないこと
 - まとめ・所感
 
-</v-clicks>
 
 ---
 
@@ -49,19 +47,15 @@ Cloudflare Workersのアイソレート上で動く、
 ブラウザは「インターネットのOS」とも言える、
 最も重要なソフトウェアの1つ
 
-<v-click>
 
 しかし、AI エージェントの普及によって前提が変わった
 
-</v-click>
 
-<v-clicks>
 
 - ChromiumのようなブラウザエンジンはGUIを持つ**人間**向けに設計されている
 - タブ・テーマ・拡張機能・デバイス間同期は、AIエージェントには一切不要
 - それでもメモリと計算資源を大きく消費する
 
-</v-clicks>
 
 ---
 
@@ -90,11 +84,9 @@ Cloudflare Workersのアイソレート上で動く、
 </div>
 </div>
 
-<v-click>
 
 脅威モデルも異なる: **プロンプトインジェクション**やツールの安全性が最優先事項に
 
-</v-click>
 
 ---
 
@@ -111,39 +103,33 @@ AIエージェント専用に設計された、
 
 </div>
 
-<v-clicks>
 
 - Chromiumなど既存のブラウザエンジンを使わない
 - Browser Runで**無料ベータ**として提供開始
 - スクリーンショット・HTML抽出でChromiumよりCPU・メモリ効率が3〜7倍良い
 
-</v-clicks>
 
 ---
 
 # 開発の経緯
 
-<v-clicks>
 
 - インスピレーション元は [obscura](https://github.com/h4ckf0r0day/obscura) — "no Chrome, no Node.js, no dependencies" を掲げるRust製ヘッドレスエンジン
 - AIエージェントの力を借りてCloudflare Workersへの移植を試みる
 - 最初はうまく動かなかったが、**明確な計画と成功の定義**を与えたところ動作するプロトタイプが誕生
 - このプロトタイプに手応えを得て、チームとして本格的に開発を開始
 
-</v-clicks>
 
 ---
 
 # 設計上の意思決定①: テスト、テスト、テスト
 
-<v-clicks>
 
 - AIによる開発を加速しつつ品質を担保する手段として **Web Platform Tests（WPT）** を採用
 - WPTはW3C標準への準拠を測る大規模なテストスイート — AIエージェントに明確な達成目標を与えられる
 - ただしWPTは実サイトの描画・操作能力までは測れない
 - そこでPuppeteerによる**統合テスト・ビジュアルリグレッションテスト**を実装し、Chromiumとの出力差分を毎ステップ比較
 
-</v-clicks>
 
 ---
 
@@ -185,14 +171,12 @@ backgroundSize: contain
 Kitesurfは1件のページ描画リクエストを
 **4つのコンポーネント**で処理する
 
-<v-clicks>
 
 - SandboxOutbound（origin取得の唯一の窓口）
 - Engine（唯一の外部公開コンポーネント）
 - PageScript（DOM・JS実行）
 - PageRenderer（ピクセル生成）
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -209,14 +193,12 @@ backgroundSize: contain
 信頼できないページから任意のアセットを
 取得するのは、ブラウザで最も危険な操作の1つ
 
-<v-clicks>
 
 - ネットワークに直接触れるコンポーネントを**1つに限定**（Dynamic Workersで強制）
 - CORSの強制・ヘッダー付与・レスポンスのフィルタリング
 - ページごとにクッキーを個別の「jar」で隔離
 - ポリシー違反は**403で拒否**
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -232,13 +214,11 @@ backgroundSize: contain
 
 Kitesurfで**唯一、外部に公開される**コンポーネント
 
-<v-clicks>
 
 - CDP（Chrome DevTools Protocol）のWebSocket/HTTP REST APIを処理
 - 各セッションの状態を保持（他コンポーネントはすべてステートレス）
 - CDP採用によりPuppeteer・Playwright・chrome-remote-interfaceが**そのまま動作**
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -255,14 +235,12 @@ backgroundSize: contain
 **Dynamic Workers**の威力を示す好例
 — この機能なしにはKitesurfは実現できなかった
 
-<v-clicks>
 
 - ページ／OOPIFごとに長寿命のアイソレートを起動
 - クリーンな `globalThis` とDOMドキュメントを持つ
 - HTML/CSSパースは Rust製の `Blitz` と `Stylo`
 - `<script>` / `.wasm` は同じアイソレート内で実行
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -272,20 +250,16 @@ backgroundSize: contain
 
 # PageScript: evalへの対応
 
-<v-click>
 
 > セキュリティ上の理由から、Workersはネイティブの `eval` をまだサポートしていない
 
-</v-click>
 
-<v-clicks>
 
 - 別のアイソレートを起動しても `globalThis` にアクセスできず解決にならない
 - 解決策: Rust製ECMAScriptエンジン **Boa JS** をコンパイルしてWorkers上で実行
 - 「ランタイムの上でランタイムを動かす」— 最適ではないが実用上は十分機能する
 - Workersにネイティブ `eval` が実装され次第、Boaから移行予定
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -298,14 +272,12 @@ backgroundSize: contain
 計算済みのページオブジェクトから
 **実際のピクセルを生成**する
 
-<v-clicks>
 
 - PageScriptから "scene"（ページオブジェクト）を取得
 - Static Assetsから内部フォント・画像を取得
 - `blitz-paint` と `Parley` でラスタライズ
 - JPEG/PNG/PDFとしてEngineへ返す
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -315,22 +287,18 @@ backgroundSize: contain
 
 # Workers組み込みRPCによる連携
 
-<v-clicks>
 
 - EngineとPageRendererは Cloudflare Workers の**組み込みRPC**で通信
 - API仕様・型・認証を意識せず `remoteFunction(...params)` を呼ぶだけ
 - Engineは `renderFrame()` を1回のRPC呼び出しで叩き、PNGを受け取る
 - PageRendererは状態を持たないため、Engineは失敗時に**いつでも安全に再起動**できる
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 レンダリング要求は自己完結・再試行可能・アイソレートは使い捨て可能
 
-</v-click>
 
 ---
 layout: image-right
@@ -340,13 +308,11 @@ backgroundSize: contain
 
 # WPT 21万5,000件突破
 
-<v-clicks>
 
 - Web Platform Tests（WPT）を**215,000件以上**通過
 - 毎週数百件のペースで通過数を伸ばしている
 - CSS・DOM・HTML・selection・SVG・XHRなど、エージェントに重要な領域はすでに手厚くカバー
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -360,12 +326,10 @@ backgroundSize: contain
 
 # カテゴリ別テストカバレッジ
 
-<v-click>
 
 streamsのように、エージェント用途では優先度が
 低そうな領域でも十分なサポートが実現されている
 
-</v-click>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/kitesurf/
@@ -384,18 +348,15 @@ streamsのように、エージェント用途では優先度が
 | 壁時計: スクリーンショット | 1,148 ms | 637 ms | 1.8倍遅い |
 | 壁時計: HTML抽出 | 820 ms | 472 ms | 1.7倍遅い |
 
-<v-click>
 
 壁時計時間はChromiumが優位（JITの恩恵）だが、
 **課金対象となるCPU・メモリではKitesurfが3〜7倍効率的**
 
-</v-click>
 
 ---
 
 # 使い始める: Browser Run
 
-<v-clicks>
 
 - Browser Run経由で**今日から無料ベータ**として利用可能（アカウントごとの利用制限あり）
 - 既存のPuppeteer/Playwright/chrome-remote-interface/MCPクライアントが
@@ -403,7 +364,6 @@ streamsのように、エージェント用途では優先度が
 - DevTools内蔵の **Kitesurf Playground** で任意URLの描画結果を確認可能
 - Memoryパネルで各アイソレートのWasmフットプリントを確認できる
 
-</v-clicks>
 
 ---
 class: text-center
@@ -442,14 +402,12 @@ class: text-center
 
 # コード例① 解説
 
-<v-clicks>
 
 - MCPクライアント（例: Opencode）の設定に `chrome-devtools-mcp` をローカルコマンドとして登録
 - `--wsEndpoint` のクエリパラメータに `browser=kitesurf` を付けるだけで接続先を切り替え
 - 認証は `--wsHeaders` の `Authorization: Bearer <API_TOKEN>` ヘッダーで実施
 - 既存のCDP対応ツールをそのまま流用できることを体現する設定例
 
-</v-clicks>
 
 ---
 
@@ -465,12 +423,10 @@ curl -X POST 'https://api.cloudflare.com/client/v4/accounts/<accountId>/browser-
   --output "screenshot.png"
 ```
 
-<v-click>
 
 CDPセッションを自前で組み立てる必要がなく、
 URLをJSONボディに指定するだけでスクリーンショットPNGを取得できる
 
-</v-click>
 
 ---
 class: text-center
@@ -482,51 +438,42 @@ class: text-center
 
 # ユースケース①: エージェントによるページ描画・情報抽出
 
-<v-clicks>
 
 - 完全機能・ピクセルパーフェクトなChromiumのトレードオフを許容できる場面に適する
 - 対応例: TodoMVC（vanilla/React/Vue/Angular/Preact）、Wikipedia、Hacker News、Cloudflareブログ、Cloudflareダッシュボードの大部分
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 一発完結タスク（Quick Actions）
 
-<v-clicks>
 
 - スクリーンショット取得・PDF生成・コンテンツ抽出などの単発API呼び出し
 - タスクの実行時間だけ存在する、一時的で完全に分離されたステートレスなエンジン
 - バースト的でAI駆動のワークロードによくスケールする
 
-</v-clicks>
 
 ---
 
 # 現時点では対応していない領域
 
-<v-clicks>
 
 - 動画再生
 - WebGLレンダリング
 - 実TLSフィンガープリントを使ったボットチャレンジの突破
 - 永続的な状態を要する長時間の認証済みセッション
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 これらが必要な場合は、Chromiumで動くBrowser Runの通常構成を利用する
 
-</v-click>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Kitesurfは、AIエージェント専用に設計され、**Cloudflare Workers上で完全に動作**するブラウザ
 - Rust実装をWasmへコンパイル（Blitz・Stylo・Boa JS）し、CDP互換で既存ツールをそのまま活用できる
@@ -534,7 +481,6 @@ class: text-center
 - WPTを215,000件以上通過、CPU・メモリはChromiumの3〜7倍効率的
 - Browser Runで**無料ベータ**として今日から利用可能
 
-</v-clicks>
 
 ---
 

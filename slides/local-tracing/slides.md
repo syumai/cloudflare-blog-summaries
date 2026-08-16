@@ -30,7 +30,6 @@ lineNumbers: true
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: エラーは分かるが原因が分からない
 - エージェントがLocal Explorer APIを自動発見する仕組み
@@ -40,46 +39,37 @@ lineNumbers: true
 - 使い始める
 - ユースケース
 
-</v-clicks>
 
 ---
 
 # 背景: エラーは分かるが原因が分からない
 
-<v-clicks>
 
 - 500エラーが返ってきても、どの処理で失敗したか分からない
 - エージェントは手動でログを追加 → リクエスト再実行 → 出力確認、を繰り返す
 - 時間とトークンを消費しながらテキストベースでリクエストを再構成
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 Miniflareの導入・Wrangler 3のローカルファースト化の延長線上にある取り組み
 
-</v-click>
 
 ---
 
 # 新機能: ローカル開発サーバーの自動トレース生成
 
-<v-click>
 
 `wrangler dev` と `vite dev` が、ローカルでのWorker呼び出しに対して
 **自動的にOpenTelemetryトレースを生成**
 
-</v-click>
 
-<v-clicks>
 
 - SDKのインストール・設定・プロンプトへの明示的な言及は不要
 - コーディングエージェントのセッションを検出して自動誘導
 - 目的: デプロイ前にローカルで失敗を特定・修正を検証
 
-</v-clicks>
 
 ---
 
@@ -95,25 +85,21 @@ Debug with traces:
 POST /cdn-cgi/explorer/api/local/observability/query -- query traces and logs with SQL
 ```
 
-<v-click>
 
 開発サーバーがこのヒントを自動出力し、
 エージェントはドキュメントを読まずにAPIを発見できる
 
-</v-click>
 
 ---
 
 # Local Explorerとは
 
-<v-clicks>
 
 - ブラウザ向けUIと**REST API**の両方として機能
 - ローカルリソース（D1・KV・R2・Durable Objects・Workflows）の閲覧・編集
 - 可観測性データへの**SQLクエリ**
 - APIルートはOpenAPIスキーマを提供 → エージェントが実行時にエンドポイントを発見
 
-</v-clicks>
 
 ---
 class: text-center
@@ -129,14 +115,12 @@ KVからカート取得 → D1にチェックアウト保存 → キューに送
 
 # トレースがない場合
 
-<v-clicks>
 
 - 500レスポンスからはどの処理が失敗したか分からない
 - KV・D1・キューの各処理の周りに手動でログを追加
 - リクエストを再実行し、出力を確認し、それを繰り返す
 - 時間とトークンを消費する
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -145,14 +129,12 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 # トレースがある場合
 
-<v-clicks>
 
 - 読み取り専用の可観測性エンドポイントにクエリ
 - KV読み取り: 成功
 - D1挿入: `no such column: delivery_window` で失敗
 - キュー: 一度も呼び出されなかった
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/local-tracing/
@@ -162,22 +144,18 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 # 原因特定 → 修正 → 検証
 
-<v-clicks>
 
 1. D1のスキーマをAPI経由で検査
 2. `delivery_window` を追加するマイグレーションが**未適用**と判明
 3. マイグレーションを適用
 4. リクエストを再送信し、新しいトレースをクエリ
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 デプロイや一時的なログ追加なしに、**すべてローカルで完結**
 
-</v-click>
 
 ---
 layout: image-right
@@ -186,14 +164,12 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 # Local Explorerでの閲覧（人間向け）
 
-<v-clicks>
 
 - ローカル開発サーバーに組み込まれたブラウザUI
 - スパン・タイミング・属性・エラー、相関付けられたログを表示
 - Wranglerで `e` キー、または `/cdn-cgi/explorer` にアクセス
 - Cloudflareダッシュボードではなく**localhost上で動作**
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/local-tracing/
@@ -205,27 +181,22 @@ image: https://blog.cloudflare.com/_image?href=https%3A%2F%2Fblog.cloudflare.com
 
 Workers Tracingは **workerd**（OSSのWorkersランタイム）に直接組み込み
 
-<v-clicks>
 
 - **fetch呼び出し**: すべてのアウトバウンドHTTPリクエスト
 - **バインディング呼び出し**: KV・R2・D1・Durable Objects・Queuesなど
 - **ハンドラー呼び出し**: `fetch` / `scheduled` / キューハンドラー等の全ライフサイクル
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 SDKやコード変更は不要。カスタムスパンも自動生成スパンと並んで表示
 
-</v-click>
 
 ---
 
 # 仕組みの内側②: Miniflareの役割
 
-<v-clicks>
 
 - WranglerとCloudflare ViteプラグインはMiniflareでWorkerをローカル実行
 - 本番と**同じランタイム**上で動くため、計測もそのまま利用可能
@@ -233,7 +204,6 @@ SDKやコード変更は不要。カスタムスパンも自動生成スパン�
 - ローカルのトレースストア = 内部のSQLiteバックエンドDurable Object
 - Local Explorer APIがこのデータを開発サーバー経由で公開
 
-</v-clicks>
 
 ---
 
@@ -247,12 +217,10 @@ npm install --save-dev wrangler@latest
 npm install --save-dev @cloudflare/vite-plugin@latest
 ```
 
-<v-click>
 
 最新版に更新するだけで、追加のSDKインストールや設定変更なしに
 ローカルトレースが有効化される
 
-</v-click>
 
 ---
 class: text-center
@@ -264,38 +232,32 @@ class: text-center
 
 # ユースケース①: スキーマ変更後の500エラー調査
 
-<v-clicks>
 
 - KV読み取り・D1書き込み・キュー送信から成るエンドポイントの障害切り分け
 - SQLクエリ1回で失敗箇所（D1挿入のスキーマ不一致）まで即座に特定
 - 「キューが一度も呼ばれていない」ことも同時に判明
 
-</v-clicks>
 
 ---
 
 # ユースケース②: マイグレーション未適用の検出・デプロイ前検証
 
-<v-clicks>
 
 - ローカルと本番のスキーマのズレをエージェント自身が発見・修正
 - 失敗特定 → 環境修正 → 結果検証のサイクルをローカルだけで完結
 - デプロイやCI/CD実行前の「セルフチェック」として組み込みやすい
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - `wrangler dev` / `vite dev` がOpenTelemetryトレースを自動生成
 - エージェントはSDKレスでLocal Explorer APIを自動発見してデバッグできる
 - 本番と同じ計測（workerd組み込み）をMiniflare経由でローカルにも提供
 - デプロイ前にエージェントが自律的に「失敗特定→修正→検証」を完結できる
 
-</v-clicks>
 
 ---
 

@@ -29,7 +29,6 @@ themeConfig:
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: AIエージェントに必要な「専用のコンピューター」
 - 課題: 「頭脳」と「手」の分離、そしてCPU資源不足
@@ -39,7 +38,6 @@ themeConfig:
 - ユースケース
 - 将来像と使い始め方
 
-</v-clicks>
 
 ---
 
@@ -48,7 +46,6 @@ themeConfig:
 最も高性能なAIエージェントに共通するのは、
 **エージェント専用の「コンピューター環境」** を持っていること
 
-<v-clicks>
 
 - ファイルシステム
 - シェル
@@ -56,15 +53,12 @@ themeConfig:
 - パッケージ
 - コードを実行する権限
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 コーディングエージェントは、この環境を**調査・変更・テスト**しながら作業を進める
 
-</v-click>
 
 ---
 
@@ -99,21 +93,17 @@ AIエージェントの処理ループ
 
 # 課題: 数億エージェントとCPU資源不足
 
-<v-click>
 
 > 世界中のすべての企業が、自社ユーザーのAIエージェント1つひとつに
 > 専用のコンテナ型コンピューティング環境を提供できるほどの
 > **計算資源は存在しない**
 
-</v-click>
 
-<v-click>
 
 - フルスペックのLinuxコンテナは起動が重く、常時起動にはコストがかかる
 - 数億、さらには数十億ものAIエージェントを同時稼働させる規模には対応できない
 - 「コンテナを増やす」だけの発想ではエージェント経済のスケールを支えきれない
 
-</v-click>
 
 ---
 layout: image-right
@@ -136,13 +126,11 @@ image: https://blog.cloudflare.com/_emdash/api/media/file/01KZ0QHG8112R261JGEK55
 Cloudflareは Workers（約10年前）、Durable Objects（約6年前）の頃から
 **アイソレート技術**に投資を続けてきた
 
-<v-clicks>
 
 - ほぼ無限に近い**水平方向のスケール拡張**に対応
 - 非常に**高速に起動・終了**できる
 - アイドル時は**休止状態（ハイバネーション）**に入り、状態を保持したままリソース消費を抑える
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -173,13 +161,11 @@ AIエージェント向けの実行環境（エージェントランタイム）
 
 </div>
 
-<v-clicks>
 
 - 初期プレビュー版を公開
 - GitHub上で **OSS** として公開
 - リポジトリ: github.com/cloudflare/computer
 
-</v-clicks>
 
 ---
 
@@ -187,12 +173,10 @@ AIエージェント向けの実行環境（エージェントランタイム）
 
 **Workspace** = `@cloudflare/computer` の中核
 
-<v-clicks>
 
 - **SQLite** をバックエンドに使用した仮想ファイルシステム
 - クラウドストレージやソースコード管理システムなど、さまざまなソースから内容を取り込み可能
 
-</v-clicks>
 
 <div class="pt-4">
 
@@ -234,11 +218,9 @@ AIエージェント向けの実行環境（エージェントランタイム）
 
 <br>
 
-<v-click>
 
 タスクの性質に応じて、この2つを使い分ける
 
-</v-click>
 
 ---
 
@@ -253,11 +235,9 @@ AIエージェント向けの実行環境（エージェントランタイム）
 
 </div>
 
-<v-click>
 
 各環境で変更された内容は、元となるファイルシステムと**常に同期**される
 
-</v-click>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/cloudflare-computer/
@@ -285,14 +265,12 @@ AI SDK と互換性のあるツールキットを提供
 
 > 「必要なときだけコンテナを利用」
 
-<v-clicks>
 
 - 各ツールの説明文に、現在のタスクに適した実行ランタイムを
   エージェント自身が選択できるような情報を含める
 - 最先端のAIモデルはこの判断を**非常に高い精度**で実行
 - プロンプトエンジニアリングではなく、**ツール設計**でルーティングを制御する発想
 
-</v-clicks>
 
 ---
 class: text-center
@@ -339,14 +317,12 @@ code, make a focused fix when it is safe, and run verification.`;
 
 # コード例① 解説
 
-<v-clicks>
 
 - `Workspace` は Durable Object の `storage`（`this.ctx.storage`）をバックエンドに構築
 - `workspaceBash = false` で、`@cloudflare/computer` 側のツールセットを使うよう切り替え
 - `getSystemPrompt()` で「`/workspace/repo` のバグを再現・調査・修正・検証せよ」と明確に指示
 - この段階ではコンテナバックエンドを持たず、**アイソレート（just-bash）のみ**で動作
 
-</v-clicks>
 
 ---
 
@@ -387,7 +363,6 @@ export class Agent extends withWorkspaceContainer(Think) {
 
 # コード例② 解説
 
-<v-clicks>
 
 - `withWorkspaceContainer(Think)` というミックスインでコンテナのライフサイクル管理機能を追加
 - `backends` 配列に `CloudflareContainerBackend` を渡すと、Workspaceは
@@ -396,7 +371,6 @@ export class Agent extends withWorkspaceContainer(Think) {
   紐づくコンテナかを一意に特定する情報
 - ここまでで、1つのエージェントがアイソレートとコンテナの**両方**を使い分けられる
 
-</v-clicks>
 
 ---
 
@@ -439,7 +413,6 @@ export class Agent extends withWorkspaceContainer(Think) {
 
 # コード例③ 解説
 
-<v-clicks>
 
 - `createAITools()` は AI SDK（`ToolSet`）互換のツール一式を生成するヘルパー
 - 注目ポイント: `shell.backends.container.description` の自然文の説明
@@ -447,7 +420,6 @@ export class Agent extends withWorkspaceContainer(Think) {
   - これが「モデルによるバックエンド自動選択」の実体
 - 独自ツール `replyToIssue`（GitHub Issue返信）を標準ツール群と並べて追加
 
-</v-clicks>
 
 ---
 
@@ -495,7 +467,6 @@ export class Agent extends withWorkspaceContainer(Think) {
 
 # コード例④ 解説
 
-<v-clicks>
 
 - エージェントの「頭脳」側から Workspace を**直接プログラム的に操作**する例
 - `workspace.fs.mkdir` / `writeFile` でバグ報告をファイルとして書き出し
@@ -504,7 +475,6 @@ export class Agent extends withWorkspaceContainer(Think) {
 - 外部トリガー（GitHub Issue の webhook など）を起点にホスト側コードが
   Workspace をセットアップしてからエージェントを起動する統合パターン
 
-</v-clicks>
 
 ---
 class: text-center
@@ -516,34 +486,28 @@ class: text-center
 
 # ユースケース①: バグトリアージ
 
-<v-clicks>
 
 - GitHub Issueのバグ報告をもとに、`/workspace/repo` のコードを調査
 - バグを再現し、安全な範囲で修正、検証コマンドを実行して結果を報告
 - 調査・小さな修正は**アイソレート**で完結することが多い
 - テストスイートの実行など重い処理が必要な場面でのみ**コンテナ**に切り替わる
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 コード例①〜④で一貫して題材にされているシナリオ
 
-</v-click>
 
 ---
 
 # ユースケース②: JSアプリのビルド・テスト・デプロイ
 
-<v-clicks>
 
 - npm install、ビルドツール、テストランナーの実行
 - 実バイナリと `$PATH` に依存する重量級の作業
 - コード例③のツール説明文がまさにこの用途を想定
 
-</v-clicks>
 
 ```ts
 description:
@@ -553,52 +517,42 @@ description:
   "file manipulation.",
 ```
 
-<v-click>
 
 こうした場面では、モデルが自律的に**コンテナ**バックエンドを選択する
 
-</v-click>
 
 ---
 
 # ユースケース③: ドキュメント生成
 
-<v-clicks>
 
 - 各顧客向けに最適化されたドキュメント作成
 - ファイルの読み書きが中心となる作業
 - 多くの場合**アイソレート**のみで完結
 - コンテナ起動コストをかけずに高速に処理できる
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 （このほか、記事では「Webブラウザーを使った複雑な作業」も言及されている）
 
-</v-click>
 
 ---
 
 # 将来像: コンテナ利用を10%未満に
 
-<v-click>
 
 > `@cloudflare/computer` の目標は、
 > AIエージェントの作業のうちコンテナが必要になる割合を
 > **10%未満**に抑えること
 
-</v-click>
 
-<v-clicks>
 
 - 音声・動画編集、ドキュメント作成などを含む多くのタスクをアイソレート上で実行
 - コンテナは「本当に完全なLinux環境が必要な場合」のみに限定
 - 数億〜数十億規模のエージェントを実用的なコストで運用するための設計思想
 
-</v-clicks>
 
 ---
 
@@ -608,18 +562,15 @@ description:
 npm install @cloudflare/computer
 ```
 
-<v-clicks>
 
 - リポジトリ: [github.com/cloudflare/computer](https://github.com/cloudflare/computer)（早期プレビュー・OSS公開）
 - チュートリアル: [examples/tutorial](https://github.com/cloudflare/computer/tree/main/examples/tutorial) で手順を追って学べる
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - AIエージェントの規模拡大には、コンテナだけでは計算資源が足りない
 - Cloudflareの答えは「アイソレート＋コンテナ」の**ハイブリッド**運用
@@ -628,7 +579,6 @@ npm install @cloudflare/computer
 - 標準ツール（read/write/edit/ls/exec）とWorkspace APIの両方から利用可能
 - 目標は「コンテナ利用10%未満」——軽量・大規模なエージェント実行基盤へ
 
-</v-clicks>
 
 ---
 

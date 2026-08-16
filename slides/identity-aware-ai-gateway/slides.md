@@ -29,7 +29,6 @@ Identity-aware AI Gateway と User Insights
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景・課題: 請求書だけでは異常が分からない
 - AI Gatewayという中央管理基盤
@@ -38,13 +37,11 @@ Identity-aware AI Gateway と User Insights
 - 異常検知の仕組み（3つの図で見る）
 - ユースケースと今後の展開
 
-</v-clicks>
 
 ---
 
 # 背景: 「知識不足」というガバナンスの壁
 
-<v-clicks>
 
 - AIの請求書を見ても、その支出が妥当かどうか判断は難しい
 - 「通常の利用状況」という基準があって初めて逸脱に気付ける
@@ -54,13 +51,11 @@ Identity-aware AI Gateway と User Insights
   1. すべてのリクエストに確認済みのIDを紐付けること
   2. そのIDの普段の利用状況を把握すること
 
-</v-clicks>
 
 ---
 
 # AI Gateway: 中央管理基盤
 
-<v-clicks>
 
 - OpenAI・Anthropic・Google・Workers AIへの直接呼び出しをやめ、
   すべてAI Gatewayを経由させる
@@ -68,13 +63,11 @@ Identity-aware AI Gateway と User Insights
 - Claude Code・Codex・GitHub Copilotなどコーディングツールにも対応
   - 開発ツールのAI利用も可視化・アクセス制御の対象にできる
 
-</v-clicks>
 
 ---
 
 # Identity-aware AI Gateway
 
-<v-clicks>
 
 - AI GatewayとCloudflare Accessを連携
 - ゲートウェイ前段にバニティドメインを置き、Accessで保護
@@ -82,13 +75,11 @@ Identity-aware AI Gateway と User Insights
 - 誰がゲートウェイにアクセスできるかを細かく管理
 - `ai.example.com`のようなシンプルなホスト名でリクエスト送信
 
-</v-clicks>
 
 ---
 
 # `cf.user_id`によるID紐付け
 
-<v-clicks>
 
 - Accessで認証されたリクエストにユーザーID情報が付与される
 - AI Gatewayが確認済みのAccessユーザーIDを
@@ -97,13 +88,11 @@ Identity-aware AI Gateway と User Insights
 - 利用料金の上限設定と組み合わせ、ユーザー単位の予算管理も可能
   - 上限到達でブロック、または安価なモデルへ自動切替
 
-</v-clicks>
 
 ---
 
 # 早期導入企業: Flexportの声
 
-<v-click>
 
 > 共有APIキーでは、誰がAIサービスを利用しているのかを
 > 把握することがほぼ不可能であり、従業員向けに設定している
@@ -112,7 +101,6 @@ Identity-aware AI Gateway と User Insights
 > 各リクエストに認証済みのIDを付与でき、既存のID管理ポリシーを
 > ゲートウェイで利用できるようになります。
 
-</v-click>
 
 <div class="text-right text-sm opacity-70 pt-2">
 — Max Baumgarten氏, Staff Security Engineer, Flexport
@@ -129,7 +117,6 @@ class: text-center
 
 # User Insightsとは
 
-<v-clicks>
 
 - AI Gatewayに新設された「User Insights」タブ
 - 各アカウントの通常の利用パターンを学習
@@ -138,13 +125,11 @@ class: text-center
 - 既存の通信を利用するため、追加の導入作業は不要
 - コスト増加要因（低いキャッシュヒット率など）の把握にも活用
 
-</v-clicks>
 
 ---
 
 # 人間とエージェントで異なる利用パターン
 
-<v-clicks>
 
 - エージェント（例: 3時間ごとの要約タスク）は行動パターンが安定
 - 人間はプロンプト内容・時間帯・作業の長さで不規則になりがち
@@ -152,13 +137,11 @@ class: text-center
   という場合がある
 - → セッション単位で、**そのアカウント自身の履歴**と比較する
 
-</v-clicks>
 
 ---
 
 # 基準値の作り方: p95の2倍
 
-<v-clicks>
 
 - 普段利用量が多いユーザーが+500ドルでも通常の範囲かもしれない
 - 普段5ドルのエージェントが50ドル使えば10倍 → 重大な異常の疑い
@@ -166,7 +149,6 @@ class: text-center
 - → 過去30日間のセッションコストの**p95**（95パーセンタイル）を基準に
   - セッションコストがその**2倍**を超えたら異常の可能性
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -176,13 +158,11 @@ backgroundSize: contain
 
 # 図1: セッションコストの異常検知
 
-<v-clicks>
 
 - X軸: セッションコスト（対数）
 - Y軸: ユーザー自身のp95基準値に対する倍率（対数）
 - 2本の破線: 2× User p95 と アカウント全体のp99
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -192,7 +172,6 @@ backgroundSize: contain
 
 # 図1の4象限
 
-<v-clicks>
 
 - **右上（★）**: 両方の基準値を超える → **アラート対象**
 - **左上**: ユーザー基準値は超えるがp99未満 → アラートなし
@@ -200,7 +179,6 @@ backgroundSize: contain
 - **右下**: 高額だが普段からその程度の利用 → アラートなし
 - **左下**: どちらの基準値も超えない → 通常の利用
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -210,15 +188,12 @@ backgroundSize: contain
 
 # 図2: アカウント全体のコスト分布
 
-<v-clicks>
 
 - 大半のセッションは10ドル未満
 - p95 = 20ドル
 - p99 = 200ドル（全体の上位わずか1%）
 
-</v-clicks>
 
-<v-click>
 
 <div class="pt-4 text-sm">
 
@@ -227,7 +202,6 @@ p99を「絶対的な上限」として併用することで、
 
 </div>
 
-</v-click>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -241,7 +215,6 @@ backgroundSize: contain
 
 # 図3: 単一ユーザーのセッション履歴
 
-<v-clicks>
 
 - 基準値は固定ではない
 - 過去30日間のp95（緑線）としきい値（オレンジ線）が
@@ -249,7 +222,6 @@ backgroundSize: contain
 - コストには最低金額も設定
   - 「統計的異常」かつ「調査する価値のある金額」が条件
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -263,7 +235,6 @@ backgroundSize: contain
 
 # 不正利用を検出する最適な視点
 
-<v-clicks>
 
 - 通常の利用を除外し、自身の通常パターンから
   外れた利用だけを表示
@@ -271,7 +242,6 @@ backgroundSize: contain
 - 分かりやすい兆候（禁止操作等）ではなく、
   信頼されたアカウントによる許可済み操作が対象
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -285,14 +255,12 @@ backgroundSize: contain
 
 # User Insightsの役割の境界
 
-<v-clicks>
 
 - 意図の判断や自動ブロックは行わない
 - 通常パターンから外れた**少数のアカウント**を管理者に提示
 - 本格的なセキュリティ調査に発展する場合もあれば、
   単なるユーザー指導で済む場合もある
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/
@@ -308,20 +276,17 @@ class: text-center
 
 # ユースケース①: 共有APIキーからの脱却
 
-<v-clicks>
 
 - Flexportの事例: 共有APIキーでは利用者を特定できない
 - Cloudflare Accessを前段に置き、認証済みIDを各リクエストに付与
 - 既存のID管理ポリシーをそのままゲートウェイに適用
 - クライアントごとの個別認証システム構築が不要に
 
-</v-clicks>
 
 ---
 
 # ユースケース②③: 予算管理とリスク検知
 
-<v-clicks>
 
 - **ユーザー単位の予算管理**
   - `cf.user_id`で集計・上限設定
@@ -330,13 +295,11 @@ class: text-center
   - 普段5ドルのサービスアカウントが突然50ドル使うケースを検知
   - 固定しきい値では見逃されがちな異常を発見
 
-</v-clicks>
 
 ---
 
 # 今後の展開
 
-<v-clicks>
 
 - **コスト最適化**: タスクベースのスマートルーティングを開発中
   - リクエスト内容を分析し、必要な品質を保ちつつ低コストなモデルへ
@@ -344,13 +307,11 @@ class: text-center
   - 「コーディング」「文章作成」等のカテゴリに自動分類
   - いつものカテゴリと異なる急増を見分けやすくする
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Identity-aware AI Gatewayで、すべてのAI利用リクエストに
   確認済みIDを紐付け可能に
@@ -360,7 +321,6 @@ class: text-center
 - 人間とエージェントの利用パターンの違いを前提に設計
 - 今後はコスト最適化・利用目的の自動分類へと発展予定
 
-</v-clicks>
 
 ---
 

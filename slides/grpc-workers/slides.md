@@ -27,7 +27,6 @@ lineNumbers: true
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: 音声AIとgRPCという課題
 - 3つの発表
@@ -38,44 +37,35 @@ lineNumbers: true
 - ユースケース
 - 今後の展望
 
-</v-clicks>
 
 ---
 
 # 背景: 音声AIと低レイテンシ通信
 
-<v-clicks>
 
 - AIが人とコンピューターのやり取りを変えつつあり、**音声**（voice）の重要性が増している
 - リアルタイム音声アシスタントには**低レイテンシな通信**が不可欠
 - 多くの開発者はそのために **gRPC**（HTTP/2・TCPを基盤とするRPCフレームワーク）を利用
 
-</v-clicks>
 
-<v-click>
 
 Workersはこれまで**アウトバウンド**のTCP接続には対応していたが、
 **インバウンド**のTCP接続を直接受け付ける手段がなかった
 
-</v-click>
 
 ---
 
 # 3つの発表
 
-<v-clicks>
 
 1. **`connect(socket)` ハンドラー**: Spectrum経由でインバウンドTCPソケットを受け付ける新しいランタイムハンドラー
 2. **Containersからのフルデュプレックスな gRPC**: Container上のgRPCサーバーへソケットを転送し双方向ストリーミング
 3. **gRPC ⇄ gRPC-web 変換**: Containerなしで Worker 自身がgRPCサーバー／クライアントに
 
-</v-clicks>
 
-<v-click>
 
 Cloudflareの **330拠点以上**のネットワークを活かした低レイテンシ通信
 
-</v-click>
 
 ---
 class: text-center
@@ -98,12 +88,10 @@ export default {
 } satisfies ExportedHandler;
 ```
 
-<v-click>
 
 新しい `connect(socket)` ハンドラーが、Spectrum経由のインバウンドTCPソケットをWorkerに渡す。
 `socket.writable.getWriter()` で直接読み書きできる
 
-</v-click>
 
 ---
 
@@ -184,12 +172,10 @@ with Server(("0.0.0.0", 8080), Handler) as server:
     server.serve_forever()
 ```
 
-<v-click>
 
 `this.ctx.container!.getTcpPort(8080).connect(...)` でコンテナのポート8080へ接続し、
 外部ソケットとコンテナ側ソケットを双方向にパイプする
 
-</v-click>
 
 ---
 class: text-center
@@ -296,7 +282,6 @@ func main() {
 
 # コード例④ 解説
 
-<v-clicks>
 
 - `Chat` は双方向ストリーム。まず `"connected\n"` を送信し、以降 `stream.Recv()` でループ受信
 - `io.EOF` を検出したら `"goodbye\n"` を送って終了、それ以外は `"echo: "` を付けて送り返す
@@ -304,7 +289,6 @@ func main() {
 - 標準の `google.golang.org/grpc` を使う一般的な実装で **Cloudflare固有のコードは無い**
 - 任意の言語・既存のgRPCエコシステムをそのまま使える、ということを示す例
 
-</v-clicks>
 
 ---
 class: text-center
@@ -317,18 +301,14 @@ class: text-center
 
 # なぜ gRPC-web が必要か
 
-<v-click>
 
 > Webブラウザーは、gRPCが必要とする
 > 低レベルのHTTP/2機能を公開していない
 
-</v-click>
 
-<v-click>
 
 プラットフォームが **gRPC ⇄ gRPC-web** の変換を自動的に行う
 
-</v-click>
 
 ---
 
@@ -416,60 +396,50 @@ class: text-center
 
 # ユースケース①: リアルタイム音声AI
 
-<v-clicks>
 
 - 記事の導入部で明示された中心的なユースケース
 - 低レイテンシが要求される音声アシスタントのバックエンドを構築
 - gRPCの双方向ストリーミング × 330拠点以上のネットワーク
 
-</v-clicks>
 
 ---
 
 # ユースケース②: モバイルアプリのバックエンド
 
-<v-clicks>
 
 - ネイティブなgRPCクライアントを実装したモバイルアプリから、Containerデプロイなしに直接アクセス
 - ブラウザが対応していない低レベルHTTP/2機能を、gRPC-web変換で吸収
 
-</v-clicks>
 
 ---
 
 # ユースケース③: 既存gRPCエコシステムの活用
 
-<v-clicks>
 
 - Goサーバーの例のように、標準的なgRPC実装をそのままContainer上で動かせる
 - 特定の言語・フレームワークに縛られずgRPCサービスを構築できる
 
-</v-clicks>
 
 ---
 
 # 今後の展望
 
-<v-clicks>
 
 - 現在は**プライベートベータ**（サインアップフォームから参加登録可能）
 - より広いプロトコルサポートを計画（UDPベースのプロトコルなど）
 - 開発者からのフィードバックを募集中
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - `connect(socket)` によりWorkerが**インバウンドTCP**を受け付けられるように
 - Durable Objects・Containersへのソケット転送と自然に組み合わせられる設計
 - Container上の**フルgRPCサーバー**と、Worker自身の**軽量なgRPC-web変換**の2段構え
 - 内部はCap'n Protoを使いつつ、外部には任意の言語・既存gRPCエコシステムをそのまま提供
 
-</v-clicks>
 
 ---
 

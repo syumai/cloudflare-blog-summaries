@@ -29,7 +29,6 @@ themeConfig:
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: Cloudflare Radarとその利用者
 - 課題: データへアクセスする際の専門知識の壁
@@ -39,7 +38,6 @@ themeConfig:
 - ユースケース
 - まとめ
 
-</v-clicks>
 
 ---
 
@@ -48,7 +46,6 @@ themeConfig:
 Cloudflareのネットワークを流れる膨大なトラフィックをもとに、
 **インターネットの利用状況・障害・攻撃傾向**などを可視化して2020年から無償公開
 
-<v-clicks>
 
 - 人権活動家
 - ジャーナリスト
@@ -56,35 +53,28 @@ Cloudflareのネットワークを流れる膨大なトラフィックをもと�
 - ネットワーク運用者
 - 統計に不慣れな一般の関心層
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 この6年間、複雑なデータセットを**明確かつ信頼できる形**で可視化する取り組みを続けてきた
 
-</v-click>
 
 ---
 
 # 課題: 専門知識という壁
 
-<v-click>
 
 Radarのデータセットは複雑で、知りたいことに答えるには
 **「どのAPIをどう組み合わせるか」という専門知識**が要求される
 
-</v-click>
 
-<v-clicks>
 
 - 専門家でなければ、適切なエンドポイント・パラメータを選べない
 - 結果として専門家が「ゲートキーパー」の役割を担ってしまう
 - AIツールはこの専門知識の障壁を引き下げ、
   専門家を「協力者」に変えうる、というのが記事の視点
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -97,11 +87,9 @@ backgroundSize: contain
 Radar APIを土台に構築された、
 **自然言語でインターネットデータへアクセスする**AIチャットツール
 
-<v-click>
 
 Radarダッシュボードの「Researcher」ボタンから起動できる
 
-</v-click>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/
@@ -111,7 +99,6 @@ Radarダッシュボードの「Researcher」ボタンから起動できる
 
 # 主な機能
 
-<v-clicks>
 
 - 平文の回答 ＋ 実データに基づく**インタラクティブなチャート**
 - 回答の深さを選択（簡潔な要約 / 詳細なレポート）
@@ -119,7 +106,6 @@ Radarダッシュボードの「Researcher」ボタンから起動できる
 - 会話履歴の**検索・共有**
 - LLMの推論プロセスを**後から監査**できる
 
-</v-clicks>
 
 ---
 
@@ -141,20 +127,16 @@ Radarダッシュボードの「Researcher」ボタンから起動できる
 
 各チャートの **「Explain with AI」** アクションから会話を開始できる
 
-<v-clicks>
 
 - チャートのスクリーンショット
 - APIから取得した生データ
 - 現在表示中のビューのパラメータ（国・期間など）
 
-</v-clicks>
 
-<v-click>
 
 この3種類の情報を同時にモデルへ渡すことで、
 **いま見ている画面そのもの**を踏まえた説明ができる
 
-</v-click>
 
 ---
 layout: image-right
@@ -189,7 +171,6 @@ AIとの対話を開始する導線
 
 # 内部アーキテクチャ
 
-<v-clicks>
 
 - **コア**: Cloudflare Agents SDK を実行する Cloudflare Worker
 - **状態管理**: Durable Objects（SQLiteに会話履歴を保存）
@@ -197,7 +178,6 @@ AIとの対話を開始する導線
 - **フォールバック**: モデルファミリー間のカスケード切り替え
 - **ルーティング**: AI Gateway でロギング・コスト追跡・安全性を担保
 
-</v-clicks>
 
 ---
 layout: image-right
@@ -218,42 +198,34 @@ AI Gateway・MCP serverの連携
 
 # データ取得の仕組み: MCP + Code Mode
 
-<v-clicks>
 
 - データアクセスには **Cloudflare MCP server** と **Code Mode** を利用
 - Radar APIの **OpenAPI仕様** から、質問内容に応じた
   適切なエンドポイントを自動的に検索・選択
 - ユーザーはAPIのエンドポイント名やパラメータを意識しなくてよい
 
-</v-clicks>
 
 ---
 
 # 細かい工夫
 
-<v-clicks>
 
 - 会話タイトル・関連質問候補の生成には**小型・高速なモデル**を使用
 - 現在の日時や接続情報をコンテキストとしてモデルへ渡す
 - 会話の共有機能は **R2** を使って保存
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 ## エージェント時代への対応
 
-</v-click>
 
-<v-clicks>
 
 - **WebMCP** 標準に対応し、ブラウザエージェントがRadarを直接操作可能に
 - 命令的API（JavaScriptでのツール登録）と宣言的API（HTML構造の解釈）の両方をサポート
 - Radarを「エージェントが使いやすいサイト」にする Agent-ready の取り組みの一環
 
-</v-clicks>
 
 ---
 class: text-center
@@ -281,19 +253,16 @@ class: text-center
 
 (フェンスの言語タグは実際には `radar-chart`)
 
-<v-click>
 
 フロントエンドがこのブロックを検出すると、
 `dataFrom` のAPIパスに実際にリクエストを送り、
 その場でインタラクティブなチャートとして描画する
 
-</v-click>
 
 ---
 
 # なぜこの設計なのか
 
-<v-clicks>
 
 - モデルが数値を「記憶」や「推測」で書き出すことによる
   **ハルシネーションを避けられる**（数値は常に実データから取得）
@@ -302,7 +271,6 @@ class: text-center
 - 結果として得られるのは静的な画像ではなく、
   Radar本体の他のチャートと同様に**操作可能なチャート**
 
-</v-clicks>
 
 ---
 class: text-center
@@ -319,13 +287,11 @@ backgroundSize: contain
 # ユースケース①
 # ポルトガルのインターネット品質
 
-<v-clicks>
 
 - 「ポルトガルのインターネット品質は？」と平文で質問
 - 対応するインターネット品質APIを自動的に照会
 - インタラクティブなチャートとともに回答
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/
@@ -340,14 +306,12 @@ backgroundSize: contain
 # ユースケース②
 # インターネット遮断の調査
 
-<v-clicks>
 
 - 2026年初頭のイラン政府によるインターネット遮断を題材にした例
 - 「遮断中に何が起きたか」という質問に対応
 - 複数のデータビューを自動集約し、時系列で説明
 - 単一のAPI呼び出しでは終わらない横断調査に対応
 
-</v-clicks>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/ja-jp/introducing-radar-researcher/
@@ -358,7 +322,6 @@ backgroundSize: contain
 # ユースケース③
 # 既存チャートを深掘りする対話の起点に
 
-<v-clicks>
 
 - 普段Radar上でチェックしているチャートについて
   「なぜこの形なのか」「他地域と比べてどうか」を深掘りしたい場合
@@ -366,13 +329,11 @@ backgroundSize: contain
 - スクリーンショット・生データ・表示条件がまとめてモデルへ渡される
 - いま見ている画面そのものを踏まえた説明・追加の掘り下げが可能
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - Cloudflare Radarのデータには、これまで専門知識という「アクセスの壁」があった
 - Radar Researcherは自然言語での問い合わせと実データによる
@@ -384,7 +345,6 @@ backgroundSize: contain
 - WebMCP対応により、Radar自体を人間だけでなくエージェントが
   直接操作できるサイトへと広げている
 
-</v-clicks>
 
 ---
 

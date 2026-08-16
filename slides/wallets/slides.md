@@ -28,7 +28,6 @@ lineNumbers: true
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: エージェントがAPI利用時に直面する2つの壁
 - Cloudflare Walletsの概要
@@ -37,7 +36,6 @@ lineNumbers: true
 - 決済だけでなくデジタルアイデンティティも
 - エージェントコマースの未来
 
-</v-clicks>
 
 ---
 
@@ -46,34 +44,28 @@ lineNumbers: true
 多くの場合、AIエージェントは
 **人間向けに設計されたログインページ**を操作しなければならない
 
-<v-clicks>
 
 - APIを利用開始するための**安定したID**を持っていない
 - APIの利用料金を支払う**ネイティブな決済手段**を持っていない
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 → エージェントはソフトウェアの利用開始（オンボーディング）につまずき、
 エージェントによる商取引の普及が妨げられている
 
-</v-click>
 
 ---
 
 # Cloudflare Walletsの概要
 
-<v-clicks>
 
 - `cloudflare.pay` で一意のハンドルを取得
 - マーチャントとのやり取りで使える一意のユーザー名として機能
 - 先月発表の **Monetization Gateway** と連携
 - Monetization Gateway: x402プロトコルによるHTTPマイクロペイメントに対応
 
-</v-clicks>
 
 ---
 
@@ -81,22 +73,18 @@ lineNumbers: true
 
 Cloudflare Walletsは以下を可能にする仕組み
 
-<v-clicks>
 
 - ステーブルコインの保存
 - サービスの購入
 - Web全体での資金の受け取り
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 各アカウントは **Virtual Wallets** を作成し、
 API・MCPツール・コンテンツなどを購入できる
 
-</v-click>
 
 ---
 layout: image-right
@@ -123,63 +111,51 @@ Account Walletの上限内でのみ利用可能
 
 エージェントによる資金利用を安全に保つための設定
 
-<v-clicks>
 
 - 利用可能な予算
 - 利用を許可する販売先のリスト
 - 1回あたりの最大利用金額
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 リスクを適切に管理しながら、多数のAPIを手軽に試せる
 
-</v-click>
 
 ---
 
 # 自由な試行
 
-<v-click>
 
 Virtual Walletの大きな魅力は、エージェントが得意とする
 「**数十から数百のサービスを試し、最適なものを見つける**」ことの実現
 
-</v-click>
 
-<v-clicks>
 
 - 利用上限を事前設定することで、安全な支出範囲を維持
 - 人間はエージェントに自律的な判断を任せられる
 
-</v-clicks>
 
 ---
 
 # 例: 従業員向けAI利用予算の設定
 
-<v-click>
 
 > 従業員全員にAI推論用として週100ドルまで利用できる
 > 予算を設定したい場合は、必要な残高を設定した
 > Account Walletを用意し、そのルールを適用した
 > Virtual Walletを各従業員向けに作成するだけです
 
-</v-click>
 
 ---
 
 # 入出金の仕組み
 
-<v-clicks>
 
 - 対応地域では法定通貨からの入金・出金（オンランプ／オフランプ）を提供予定
 - 対象ユーザー向けにはステーブルコインによる直接の資金投入にも対応
 
-</v-clicks>
 
 ---
 class: text-center
@@ -193,42 +169,34 @@ class: text-center
 
 # 誰の代理として動いているのか
 
-<v-click>
 
 エージェントがマーチャントとやり取りする際、
 そのエージェントが誰の代理として動いているのかは
 **必ずしも明確ではない**
 
-</v-click>
 
-<v-clicks>
 
 - `cloudflare.pay` の識別子でエージェントは必要に応じ自身のIDを提示可能
 - 例: 調査用エージェントが `research.example.cloudflare.pay` を持つ
 - IDの公開は完全に**任意**。既知エージェントの優遇も企業側の判断
 
-</v-clicks>
 
 ---
 
 # 人間が読めるエージェント識別子
 
-<v-clicks>
 
 - エージェント対応は「VPNへの対応方法」と似たものになっていく
 - 既存の取り組み: Turnstile、Bot Management、Web Bot Auth
 - Web Bot Auth: エージェントが鍵ペアで自身のIDを登録済み
 - Cloudflare Walletの識別子は、その鍵ペアを**人間が読める形**で表現
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 「DNSにおけるURLとIPアドレスの関係」に似た比喩
 
-</v-click>
 
 ---
 class: text-center
@@ -242,24 +210,20 @@ class: text-center
 
 # 3つの構成要素
 
-<v-clicks>
 
 - **Monetization Gateway**: 販売者が決済インフラ不要でサービス・コンテンツの対価を受け取れる
 - **Wallets**: エージェントを介した購入者が人手を介さず支払える
 - **Identity**: マーチャントが身元を明らかにした購入者とやり取り・本人確認できる
 
-</v-clicks>
 
 ---
 
 # 設定イメージ（記事にはコード例なし）
 
-<v-click>
 
 記事にはAPI呼び出しのコード例は含まれていない。
 Virtual Walletの権限設定の考え方を図式化すると:
 
-</v-click>
 
 ```text {1|2-3|4-7|all}
 Account Wallet（人間の所有者）
@@ -270,11 +234,9 @@ Account Wallet（人間の所有者）
            - 1回あたりの最大利用金額
 ```
 
-<v-click>
 
 実装の詳細は開発者ドキュメント（x402互換エンドポイント）を参照
 
-</v-click>
 
 ---
 class: text-center
@@ -332,7 +294,6 @@ Account Wallet + Virtual Wallet
 
 # まとめ
 
-<v-clicks>
 
 - エージェントには「安定したID」と「決済手段」の両方が欠けていた
 - Cloudflare Walletsは `cloudflare.pay` ハンドルでこの2つを同時に提供
@@ -340,7 +301,6 @@ Account Wallet + Virtual Wallet
 - 人間可読な識別子はWeb Bot Authの鍵ペアを表現する仕組み
 - Monetization Gateway・Wallets・Identityの3要素でヘッドレスマーケットプレイスを目指す
 
-</v-clicks>
 
 ---
 

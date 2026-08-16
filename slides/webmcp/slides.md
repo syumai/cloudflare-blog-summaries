@@ -30,7 +30,6 @@ Cloudflareが developer preview として提供する
 
 # アジェンダ
 
-<v-clicks>
 
 - 背景: Webサイトを訪れる「新しい訪問者」としてのAIエージェント
 - 課題: クローラー型スクレイピングの限界
@@ -40,73 +39,60 @@ Cloudflareが developer preview として提供する
 - ユースケース
 - まとめ・所感
 
-</v-clicks>
 
 ---
 
 # 背景: Webは人間のためのものだった
 
-<v-clicks>
 
 - 従来のWebは「人間が読む・クリックする・フォームを埋める」ことを前提に設計されてきた
 - 近年、AIエージェントがWebサイトを訪問しタスクを代行するケースが急増
 - 従来型のクローラーはページをスクレイピングし、コンテンツをサーバー側にコピーする
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 結果として、元のサイト運営者にはトラフィックもクレジット（帰属）もほとんど還元されない
 
-</v-click>
 
 ---
 
 # 課題: 推測に頼るエージェント操作
 
-<v-clicks>
 
 - エージェントはページ構造やナビゲーションの流れを自力で推測してから操作を組み立てる必要がある
 - これは遅く、壊れやすく、無駄なトークン消費（推測・試行錯誤）を生む
 - サイト運営者側には、エージェント経由の訪問を制御・可視化する手段がない
 - エージェント開発者側には、サイトを操作するための正式なAPIが事実上存在しない
 
-</v-clicks>
 
 ---
 
 # WebMCPという新しいブラウザ標準
 
-<v-clicks>
 
 - Chrome 146で**実験的**に搭載される新しいブラウザ標準
 - ページ上に `document.modelContext` として公開される
 - サイトは「ツール」のセットをエージェントに公開できる
 - エージェントはページのナビゲーションを推測する代わりに、公開されたツールを直接呼び出せる
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 トークンは「ページ構造の推測」ではなく「本来のタスク遂行」に使われるようになる
 
-</v-click>
 
 ---
 
 # Cloudflareの実装戦略: ツールパック
 
-<v-clicks>
 
 - 関連するツール群をまとめた「**ツールパック（tool pack）**」という単位で機能を提供
 - サイト運営者はダッシュボードでパックを有効化するだけで機能拡張——**再デプロイ不要**
 - 今回のプレビューでは2つのパックを提供。いずれも訪問者の**ブラウザ内**で完全に実行される
 
-</v-clicks>
 
 <div class="grid grid-cols-2 gap-4 pt-4">
 <div>
@@ -127,21 +113,17 @@ C2PA画像の来歴情報を読み取る
 
 # 実装の2要素
 
-<v-clicks>
 
 1. **Edge injection**: HTMLRewriterで全HTMLレスポンスにブリッジスクリプトを1行注入
 2. **The bridge**: ページ内で実行され、ツールを `document.modelContext` に登録
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 **"no code and nothing changed at your origin"**
 ——オリジン側のコードは一切変更しない
 
-</v-click>
 
 ---
 
@@ -155,25 +137,21 @@ C2PA画像の来歴情報を読み取る
         data-mcp-url="/mcp"></script>
 ```
 
-<v-clicks>
 
 - HTMLRewriterによって、すべてのHTMLレスポンスにこの1行が自動挿入される
 - `data-packs`: 有効化するツールパック名をカンマ区切りで指定
 - `data-mcp-url`: 既存のMCPサーバーがあればそのエンドポイントを指定（未指定時は `/mcp`）
 - オリジンのHTMLはこの1行が足されるだけで、他は一切変更されない
 
-</v-clicks>
 
 ---
 
 # ブリッジの動作: 静的パック vs 動的パック
 
-<v-click>
 
 まずブラウザにWebMCPサーフェス（`document.modelContext`）があるか確認。
 無ければ何もせず終了する（＝未対応ブラウザには無害）
 
-</v-click>
 
 <div class="grid grid-cols-2 gap-4 pt-4">
 <div>
@@ -196,31 +174,25 @@ C2PA画像の来歴情報を読み取る
 </div>
 </div>
 
-<v-click>
 
 <br>登録後、すべてのツールは訪問者自身の**ブラウザ内**で実行される
 
-</v-click>
 
 ---
 
 # MCP標準との関係
 
-<v-clicks>
 
 - Site MCP Serverパックが登録するツールは、MCPの `Tool` / `CallToolResult` 型にそのまま準拠
 - ブリッジは「サイト自身のMCPサーバーへのブラウザ内プロキシ」として機能
 - 既存のMCPサーバーと通信できるエージェントは、**特別な追加対応なしに**ページ上のツールを呼び出せる
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 ブリッジ自体はエッジ上のWorkerが配信。将来的には「サイト単独ではできないタスク」（サイトマップ要約、AI Searchインデックス参照など）も担う方向性が示されている
 
-</v-click>
 
 ---
 layout: image-right
@@ -234,12 +206,10 @@ Cloudflare Dashboardの
 「**Agent Readiness > WebMCP**」から
 ドメインを選択し、パックを選ぶだけ
 
-<v-click>
 
 Content CredentialsとSite MCP Serverは
 デフォルトで有効
 
-</v-click>
 
 <footer class="text-xs opacity-50 mt-4">
 出典: Cloudflare Blog https://blog.cloudflare.com/webmcp/
@@ -252,21 +222,17 @@ Content CredentialsとSite MCP Serverは
 C2PA（Content Authenticity and Provenance Association）準拠の
 画像来歴メタデータを扱う2つのツール
 
-<v-clicks>
 
 - **`scan_images_c2pa`**: ページ内の全画像をスキャンし、C2PAメタデータの有無・件数・要約を一括で返す
 - **`inspect_image_c2pa`**: 単一画像の完全なマニフェスト（編集履歴・作者・署名証明書）をデコードして返す
 
-</v-clicks>
 
 <br>
 
-<v-click>
 
 現時点では認証情報の「報告」のみで、暗号学的な署名検証は行わない
 （レスポンスには常に `signatureVerified: false`）
 
-</v-click>
 
 ---
 
@@ -300,7 +266,6 @@ document.modelContext.registerTool({
 
 # コード例: MCP Tool Proxy 解説
 
-<v-clicks>
 
 - Site MCP Serverパックの中核実装
 - サイト自身のMCPサーバーが `tools/list` で公開しているツールごとに、`document.modelContext.registerTool()` でプロキシツールを登録
@@ -308,7 +273,6 @@ document.modelContext.registerTool({
 - つまりツール呼び出しは「訪問者本人のセッション・Cookieでサイト自身のMCPサーバーを叩く」形で実行される
 - レスポンスの `result`（MCPの `CallToolResult`）はそのままエージェントに返される
 
-</v-clicks>
 
 ---
 
@@ -334,11 +298,9 @@ document.modelContext.registerTool({
 }
 ```
 
-<v-click>
 
 12枚中8枚にC2PAメタデータあり。`claimGenerator` や `signedBy` から生成・編集ツールや署名者が分かる
 
-</v-click>
 
 ---
 
@@ -350,14 +312,12 @@ document.modelContext.registerTool({
 curl -s https://your-site.example | grep webmcp
 ```
 
-<v-clicks>
 
 - 動作確認には Cloudflare のリモートブラウザサービス **BrowserRun** を利用可能
 - BrowserRunは既にWebMCPに対応済み
 - ラップトップ上のブラウザ／クラウド上のヘッドレスブラウザのどちらでも同じ方法で検証できる
 - 今後 **Cloudflare Radar** も自身のWebMCPツールを提供予定
 
-</v-clicks>
 
 ---
 class: text-center
@@ -369,55 +329,46 @@ class: text-center
 
 # ユースケース①: コンテンツの来歴（真正性）確認
 
-<v-clicks>
 
 - `scan_images_c2pa` / `inspect_image_c2pa` を使い、ページ内の画像がAI生成かどうか、誰がどのツールで作成・編集したかを機械的に確認できる
 - ファクトチェック、ニュース記事の検証、画像の出所調査に直結する
 - 署名の暗号学的検証は行われない点には留意が必要（`signatureVerified: false`）
 
-</v-clicks>
 
 ---
 
 # ユースケース②: 既存MCPサーバーの公開
 
-<v-clicks>
 
 - すでにMCPサーバーを持つサイト（例: `search_products` を公開するECサイト）は `data-mcp-url` を指定するだけ
 - ツール群をブラウザ経由でそのままエージェントに公開できる
 - エージェントはページ操作の代わりに、ツールを直接呼び出して検索・注文などのタスクを実行できる
 
-</v-clicks>
 
 ---
 
 # ユースケース③: 既存MCPクライアントとの相互運用
 
-<v-clicks>
 
 - 登録されるツールはMCP標準の `Tool` / `CallToolResult` 型に準拠
 - 既にMCP対応済みのエージェントフレームワーク・クライアントは追加実装なしに利用可能
 - BrowserRunがすでにこの仕組みに対応していることが記事内で紹介されている
 
-</v-clicks>
 
 ---
 
 # ユースケース④: 再デプロイ不要のツール拡張
 
-<v-clicks>
 
 - ツールパック単位で機能を有効化・無効化できる
 - サイト運営者はコード変更や再デプロイを行うことなく、ダッシュボード操作だけでエージェント向け機能を追加・変更できる
 - 新しいパックが追加されれば、有効化するだけで即座に機能拡張される想定
 
-</v-clicks>
 
 ---
 
 # まとめ
 
-<v-clicks>
 
 - WebMCPはChrome 146で実験的に搭載される新ブラウザ標準（`document.modelContext`）
 - Cloudflareの実装は「エッジでの1行注入 + ブラウザ内ブリッジ」構成で、**オリジン側のコード変更ゼロ**を実現
@@ -425,7 +376,6 @@ class: text-center
 - ツールはMCP標準の型に準拠し、既存のMCPエコシステムとそのまま相互運用可能
 - ツール実行は訪問者自身のブラウザ・セッション内で行われ、権限境界は人間の操作と変わらない
 
-</v-clicks>
 
 ---
 
