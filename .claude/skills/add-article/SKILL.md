@@ -39,7 +39,7 @@ WebFetch で対象URLを取得する。`ja-jp` のURLが与えられなかった
 抽出する情報:
 
 - タイトル（日本語。en-us取得の場合は自分で日本語訳する）
-- 公開日（YYYY-MM-DD）
+- 公開日（YYYY-MM-DD）。**ja-jp（翻訳）版を取得した場合でも、公開日は必ず英語原文（`https://blog.cloudflare.com/<slug>/`）の `datePublished` を使う**（ja-jp 版の日付は翻訳公開日でずれていることがある）。英語版から取得できない場合のみ他の情報源（まとめ記事の曜日区分など）で補う
 - セクション構成（見出しとその要約）
 - 画像URL（`blog.cloudflare.com` 配下、`_emdash/api/media/...` 形式など）とその説明・掲載箇所
 - コード例（言語・全文・文脈）
