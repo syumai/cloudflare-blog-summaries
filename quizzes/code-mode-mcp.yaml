@@ -1,0 +1,129 @@
+title: "コードモード: エージェントに1,000トークンのAPI全体を提供"
+slug: code-mode-mcp
+sourceUrl: https://blog.cloudflare.com/ja-jp/code-mode-mcp/
+wiki: ../docs/articles/2026-02-20-code-mode-mcp.md
+questions:
+  - q: >-
+      Cloudflareの統合MCPサーバーが提供するツールの数として<strong>正しいもの</strong>はどれか。
+    choices:
+      - 1つ
+      - 2つ
+      - 5つ
+      - 2,500以上
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「サーバー側コードモードという発想」で説明されている通り、Cloudflareの統合MCPサーバーは
+      <code>search()</code> と <code>execute()</code> の2つのツールだけを公開し、2,500以上あるAPIエンドポイントをすべてこの2ツール経由で扱えるようにしている。
+
+  - q: >-
+      Cloudflare APIの2,500以上のエンドポイントを、それぞれ個別のMCPツールとして公開した場合に必要なトークン数として、記事が挙げている数字に<strong>最も近いもの</strong>はどれか。
+    choices:
+      - 約1,000トークン
+      - 約10万トークン
+      - 約117万トークン
+      - 約2,500万トークン
+    answer: 2
+    explanation: >-
+      「背景・課題」で述べられている通り、すべてのエンドポイントを個別ツールとして公開すると、ツール定義だけでおよそ117万トークンが必要になる。統合MCPサーバーはこれを約1,000トークンまで削減している（99.9%削減）。
+
+  - q: >-
+      <code>search()</code>ツールが検索対象とするものは何か。
+    choices:
+      - インターネット全体のWeb検索結果
+      - あらかじめ<code>$refs</code>が解決済みのOpenAPI仕様オブジェクト（<code>spec</code>）
+      - Cloudflareのサポートチケット履歴
+      - GitHub上のソースコード全体
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「サーバー側コードモードという発想」に説明がある通り、<code>search()</code>は<code>$refs</code>が事前にインライン解決されたOpenAPI仕様オブジェクト<code>spec</code>に対してJavaScriptで検索を行うツールである。
+
+  - q: >-
+      <code>execute()</code>で実際にCloudflare APIへ認証済みリクエストを送るために使う関数はどれか。
+    choices:
+      - <code>fetch()</code>
+      - <code>cloudflare.request()</code>
+      - <code>axios.get()</code>
+      - <code>apiClient.call()</code>
+    answer: 1
+    explanation: >-
+      「コード例」の「3. 既存ルールセットの確認（executeの利用）」で示されている通り、サンドボックス内のコードは<code>cloudflare.request({ method, path })</code>を使って認証済みのCloudflare API呼び出しを行う。
+
+  - q: >-
+      <code>search()</code>や<code>execute()</code>に渡されたJavaScriptコードが実行される環境として<strong>正しいもの</strong>はどれか。
+    choices:
+      - ユーザーのローカルPC上のNode.js
+      - Dynamic Worker Loadingで生成されたV8アイソレートのサンドボックス
+      - 常時起動しているDockerコンテナ
+      - 専用の仮想マシン（VM）
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「実行環境: サンドボックス化されたV8アイソレート」で説明されている通り、コードはDynamic Worker Loadingによって生成された軽量なV8アイソレートのサンドボックス内で実行される。
+
+  - q: >-
+      サンドボックスのデフォルトの挙動として、記事の説明に<strong>合致するもの</strong>はどれか。
+    choices:
+      - ファイルシステムへの読み書きが自由にできる
+      - 環境変数がそのままコードから参照できる
+      - アウトバウンドの外部fetchがデフォルトで無効になっている
+      - rootユーザー権限でコードが実行される
+    answer: 2
+    explanation: >-
+      「実行環境: サンドボックス化されたV8アイソレート」に「ファイルシステムがなく、環境変数もデフォルトで無効化されており、アウトバウンドの外部fetchもデフォルトでは無効」とある。必要な場合のみ明示的にハンドラーで制御できる。
+
+  - q: >-
+      新しいCloudflare製品が追加されたとき、サーバー側コードモードのメリットとして記事が挙げているものはどれか。
+    choices:
+      - 新しいツール定義を書き、MCPサーバーを再デプロイする必要がある
+      - 同じ<code>search()</code>/<code>execute()</code>のコードパスがそのまま新しいエンドポイントを発見・呼び出せる
+      - エージェント側のコードをすべて書き直す必要がある
+      - 新製品ぶんトークンコストが増加する
+    answer: 1
+    explanation: >-
+      「Cloudflare MCPサーバー: 個別サーバーから統合サーバーへ」で述べられている通り、新しい製品のAPIエンドポイントがOpenAPI仕様に載っていれば、既存の<code>search()</code>/<code>execute()</code>のコードパスがそのまま発見・呼び出しに使え、新しいツール定義もMCPサーバーも不要である。
+
+  - q: >-
+      統合MCPサーバーの認証まわりについて、記事の説明として<strong>正しいもの</strong>はどれか。
+    choices:
+      - 認証は不要で誰でもすべての操作ができる
+      - OAuth 2.1に準拠し、トークンは接続時にユーザーが許可した権限の範囲までダウンスコープされる
+      - APIキーをJavaScriptコード中に直接ハードコードする必要がある
+      - TLSクライアント証明書のみが唯一の認証手段である
+    answer: 1
+    explanation: >-
+      「認証とセキュリティ」に「OAuth 2.1に準拠している。Workers OAuth Providerを使い、発行されるトークンは接続時にユーザーが許可した権限の範囲までダウンスコープされる」と説明されている。
+
+  - q: >-
+      記事で比較されている4つのコンテキスト削減アプローチのうち、「シェルの実行が前提になるため、サンドボックス化されたアイソレートに比べて攻撃対象領域が広くなる」という弱点を持つのはどれか。
+    choices:
+      - クライアント側コードモード
+      - CLI型
+      - 動的ツール検索
+      - サーバー側コードモード
+    answer: 1
+    explanation: >-
+      「コンテキスト削減へのアプローチ比較」の説明にある通り、CLI型（OpenClawやMoltworkerなど）はMCPサーバーをCLIに変換して段階的な情報開示を実現する一方、シェルの実行が前提になるためサンドボックス化された隔離よりも攻撃対象領域が広くなる、という弱点が挙げられている。
+
+  - q: >-
+      （コード読解）以下は<code>search()</code>に渡されるJavaScriptコードの例である。このコードが行っていることとして<strong>最も適切なもの</strong>はどれか。
+    code: |
+      async () => {
+        const results = [];
+        for (const [path, methods] of Object.entries(spec.paths)) {
+          if (path.includes('/zones/') &&
+              (path.includes('firewall/waf') || path.includes('rulesets'))) {
+            for (const [method, op] of Object.entries(methods)) {
+              results.push({ method: method.toUpperCase(), path, summary: op.summary });
+            }
+          }
+        }
+        return results;
+      }
+    codeLang: javascript
+    choices:
+      - Cloudflare APIへ実際にリクエストを送信し、WAFルールを更新する
+      - <code>spec.paths</code>をループし、パスに<code>firewall/waf</code>または<code>rulesets</code>を含むエンドポイントを、メソッド・パス・概要（summary）付きで抽出する
+      - 指定したゾーンのDDoS設定をすべて削除する
+      - GraphQL Analytics APIへクエリを送信して集計結果を取得する
+    answer: 1
+    explanation: >-
+      「コード例」の「1. WAF・ルールセット関連エンドポイントの検索」で示されているコードである。<code>spec.paths</code>（$refs解決済みのOpenAPI仕様）を<code>for...of</code>でループし、パスに<code>firewall/waf</code>または<code>rulesets</code>を含むエンドポイントだけを、メソッド・パス・概要とともに<code>results</code>配列へ集めて返している。実際のAPI呼び出しは行っておらず、あくまで仕様オブジェクトに対する検索である点がポイント。
