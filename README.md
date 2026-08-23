@@ -48,6 +48,7 @@ cloudflare-blog-summaries/
 
 | 公開日 | タイトル | Wiki | スライド | クイズ | 原文リンク |
 |--------|----------|------|----------|--------|------------|
+| 2025-09-26 | Code Mode: MCPをもっとうまく使う方法 | [Wiki](docs/articles/2025-09-26-code-mode.md) | [スライド](slides/code-mode/slides.md) | [クイズ](quizzes/code-mode.html) | [原文](https://blog.cloudflare.com/code-mode/) |
 | 2026-02-20 | コードモード: エージェントに1,000トークンのAPI全体を提供 | [Wiki](docs/articles/2026-02-20-code-mode-mcp.md) | [スライド](slides/code-mode-mcp/slides.md) | [クイズ](quizzes/code-mode-mcp.html) | [原文](https://blog.cloudflare.com/ja-jp/code-mode-mcp/) |
 | 2026-04-15 | Project Think：Cloudflareで次世代のAIエージェント構築 | [Wiki](docs/articles/2026-04-15-project-think.md) | [スライド](slides/project-think/slides.md) | [クイズ](quizzes/project-think.html) | [原文](https://blog.cloudflare.com/ja-jp/project-think/) |
 | 2026-08-03 | AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介 | [Wiki](docs/articles/2026-08-03-cloudflare-computer.md) | [スライド](slides/cloudflare-computer/slides.md) | [クイズ](quizzes/cloudflare-computer.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflare-computer/) |

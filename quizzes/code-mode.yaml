@@ -1,0 +1,124 @@
+title: "Code Mode: MCPをもっとうまく使う方法"
+slug: code-mode
+sourceUrl: https://blog.cloudflare.com/code-mode/
+wiki: ../docs/articles/2025-09-26-code-mode.md
+questions:
+  - q: >-
+      記事が提案する「Code Mode」とは何か。<strong>最も適切なもの</strong>を選べ。
+    choices:
+      - MCPサーバーを丸ごと廃止し、独自の通信プロトコルに置き換える方式
+      - MCPツール群をTypeScript APIに変換し、LLMにそのAPIを呼び出すコードを書かせてサンドボックス内で実行する方式
+      - すべてのツール呼び出しを人間が手動で承認する方式
+      - LLMの代わりにルールベースのスクリプトでツールを実行する方式
+    answer: 1
+    explanation: >-
+      「TL;DR」および「発表内容 / アーキテクチャ」の「仕組み: MCPをTypeScriptに変換する」で説明されている通り、Code
+      ModeはMCPツールのスキーマからTypeScript APIを自動生成し、LLMにそのAPIを呼び出す「コード」を書かせてサンドボックス内で実行する方式である。
+
+  - q: >-
+      記事が、LLMにツール呼び出し（<code>&lt;|tool_call|&gt;</code>形式）をさせることの問題点として挙げている理由はどれか。
+    choices:
+      - ツール呼び出し用の特殊トークン形式は、実世界のコードに比べて訓練データ中にほとんど存在しない
+      - ツール呼び出しはネットワーク帯域を大量に消費するため
+      - MCPプロトコル自体にセキュリティ上の欠陥があるため
+      - ツール呼び出しはJSON形式でしか表現できないため
+    answer: 0
+    explanation: >-
+      「背景・課題」で述べられている通り、<code>&lt;|tool_call|&gt;</code>のような特殊トークン形式は合成的な訓練データにしか存在せず、実世界のコードに比べてLLMの訓練データ中で乏しいことが問題として指摘されている。
+
+  - q: >-
+      記事に登場する「シェイクスピアの比喩」が意味していることとして<strong>最も適切なもの</strong>はどれか。
+    choices:
+      - シェイクスピアの戯曲がAI生成コンテンツの訓練データに使われている
+      - LLMは能力があっても、不慣れな形式（ツール呼び出し）で作業させられているために本来の力を発揮できていない
+      - AIは文学作品を理解できない
+      - 中国語はプログラミング言語より難しい
+    answer: 1
+    explanation: >-
+      「背景・課題」で紹介されている「シェイクスピアに1ヶ月の中国語講座を受けさせて中国語で戯曲を書かせるようなもの」というたとえは、LLMに能力があっても不慣れな言語（ツール呼び出し形式）で作業させているために非効率になっている、という趣旨である。
+
+  - q: >-
+      記事はMCP（Model Context Protocol）自体についてどのような立場を取っているか。
+    choices:
+      - MCPは完全に不要なので廃止すべきだと主張している
+      - ツールへの統一的な接続・認可・ドキュメント提供という価値は維持すべきだとしている
+      - MCPをやめてすべてREST APIに置き換えるべきだとしている
+      - MCPはCode Modeより優れているため今後も単独で使うべきだとしている
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「それでもMCPは統一性という価値がある」で説明されている通り、記事はMCPを否定せず、統一的な接続・認可・ドキュメント提供という価値は維持すべきだという立場を取っている。問題視しているのはツール呼び出しという実装方法のみである。
+
+  - q: >-
+      Code Modeで生成されたコードが実行されるサンドボックスの実行基盤として<strong>正しいもの</strong>はどれか。
+    choices:
+      - 常時起動しているDockerコンテナ
+      - Dynamic Worker Loadingによって作られる使い捨てのV8アイソレート
+      - ユーザーのローカルPC上のブラウザ
+      - 専用の仮想マシン（VM）
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「Dynamic Worker Loading: コンテナ不要」で説明されている通り、生成されたコードはコンテナではなく、その場で作られる使い捨てのV8アイソレートの中で実行される。コンテナに比べてミリ秒単位で起動し、消費メモリも数MB程度と軽量である。
+
+  - q: >-
+      サンドボックス内のコードからMCPサーバーへアクセスする際、記事が説明している仕組みとして<strong>正しいもの</strong>はどれか。
+    choices:
+      - APIキーを文字列としてサンドボックス内のコードに直接渡す
+      - 「ライブオブジェクト」としてのbindingを経由してアクセスし、APIキー自体はサンドボックス内のコードに渡らない
+      - サンドボックス内から自由にインターネット全体へアクセスできる
+      - MCPサーバーへは一切アクセスできない
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「Worker Loader API」で説明されている通り、bindingは文字列ではなく「ライブオブジェクト」として渡されるため、APIキーそのものがサンドボックス内のコードに渡ることはなく、ネットワークフィルタより明確な権限境界になる。
+
+  - q: >-
+      複数のツールを連鎖させるタスクにおいて、Code Modeが従来のツール呼び出し方式に比べて節約できるものとして記事が挙げているものはどれか。
+    choices:
+      - サンドボックスのディスク容量
+      - 中間結果をその都度LLMのニューラルネットワークに通す際のトークン・時間・計算資源
+      - MCPサーバーの数
+      - TypeScriptのコンパイル時間
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「何が問題か」で述べられている通り、複数ツールを連鎖させるタスクでは中間結果をその都度LLMに通す必要があり無駄が生じるが、Code Modeではコードとして1回の実行にまとめられるため、この無駄なトークン・時間・計算資源を節約できる。
+
+  - q: >-
+      Code Modeの実行基盤であるWorker Loader APIの、本稿執筆時点での提供状況として記事の説明に<strong>合致するもの</strong>はどれか。
+    choices:
+      - 本番環境・ローカル環境ともに誰でも自由に利用できる
+      - 本番環境ではクローズドベータ（サインアップ制）だが、ローカル環境（wrangler/workerd）では利用できる
+      - すでに廃止され、後継APIに置き換えられている
+      - ローカル環境でのみクローズドベータとして提供されている
+    answer: 1
+    explanation: >-
+      「発表内容 / アーキテクチャ」の「Workersはより良いサンドボックス」および「所感・ポイント」で述べられている通り、Worker Loader APIは本番環境ではクローズドベータ（サインアップ制）だが、ローカル環境（wrangler/workerd）では試すことができる。
+
+  - q: >-
+      （コード読解）以下は<code>codemode()</code>ヘルパーの使用例である。このコードについて説明として<strong>最も適切なもの</strong>はどれか。
+    code: |
+      import { codemode } from "agents/codemode/ai";
+
+      const {system, tools} = codemode({
+        system: "You are a helpful assistant",
+        tools: {
+          // tool definitions
+        },
+        // ...config
+      })
+
+      const stream = streamText({
+        model: openai("gpt-5"),
+        system,
+        tools,
+        messages: [
+          { role: "user", content: "Write a function that adds two numbers" }
+        ]
+      })
+    codeLang: javascript
+    choices:
+      - codemode()は既存のai-sdk用のsystem・toolsをそのまま渡すだけでCode Mode対応に変換でき、streamTextへの渡し方はほとんど変わらない
+      - codemode()はMCPサーバーを新規に起動するためのCLIコマンドである
+      - codemode()を使うとtools定義を1つも書かずにすべてのツールが自動生成される
+      - codemode()はstreamTextの戻り値を暗号化するためのユーティリティである
+    answer: 0
+    explanation: >-
+      「コード例」の「2. codemode()ヘルパーでラップする例」で示されている通り、既存の<code>ai-sdk</code>用の<code>system</code>と<code>tools</code>を<code>codemode()</code>にそのまま渡すだけでCode Mode対応の<code>system</code>・<code>tools</code>に変換でき、<code>streamText</code>への渡し方自体はほぼ変わらない。既存のツール定義を書き換えずにCode Modeへ移行できることを示す例である。
