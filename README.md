@@ -89,6 +89,7 @@ cloudflare-blog-summaries/
 | 2026-09-28 | Webはどれくらい速いのか: BEACON で数十億件の実ユーザー計測を探索する | [Wiki](docs/articles/2026-09-28-how-fast-is-the-web.md) | [スライド](slides/how-fast-is-the-web/slides.md) | [クイズ](quizzes/how-fast-is-the-web.html) | [原文](https://blog.cloudflare.com/how-fast-is-the-web/) |
 | 2026-09-28 | Vite で動く Next.js アプリケーション: Vinext 1.0 のご紹介 | [Wiki](docs/articles/2026-09-28-vinext-nextjs-on-vite.md) | [スライド](slides/vinext-nextjs-on-vite/slides.md) | [クイズ](quizzes/vinext-nextjs-on-vite.html) | [原文](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 | 2026-09-28 | cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI | [Wiki](docs/articles/2026-09-28-cloudflare-cf-cli-launch.md) | [スライド](slides/cloudflare-cf-cli-launch/slides.md) | [クイズ](quizzes/cloudflare-cf-cli-launch.html) | [原文](https://blog.cloudflare.com/cloudflare-cf-cli-launch/) |
+| 2026-09-29 | IPsec に対する量子ダウングレード攻撃の防止 | [Wiki](docs/articles/2026-09-29-ipsec-downgrade-protection.md) | [スライド](slides/ipsec-downgrade-protection/slides.md) | [クイズ](quizzes/ipsec-downgrade-protection.html) | [原文](https://blog.cloudflare.com/ipsec-downgrade-protection/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
