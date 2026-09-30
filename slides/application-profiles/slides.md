@@ -310,3 +310,4 @@ cf.schema_validation.learned.query
 - 違反詳細の見方: https://developers.cloudflare.com/waf/detections/application-profiles/analyze-profile-detections/
 - Web Assets: https://developers.cloudflare.com/security/web-assets/
 - Workers サンプルは対象外（Enterprise 向け WAF / API Security 機能のため）
+- 関連スライド: [WAF を AI でテストしてみた](../adaptive-ai-waf-testing/)

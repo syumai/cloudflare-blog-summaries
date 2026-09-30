@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Daniele Molteni、Zhiyuan Zheng
-- 関連: 同じ Birthday Week 2026 の記事に [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い（本リポジトリ内に WAF / API Shield / Schema Validation を扱う既存記事は現時点でない）
+- 関連: [フロンティア AI モデルで自社の WAF をテストしてみた](./2026-09-29-adaptive-ai-waf-testing.md)（多層防御の例としてポジティブセキュリティに言及）。同じ Birthday Week 2026 の記事に [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い（本リポジトリ内に WAF / API Shield / Schema Validation を扱う既存記事は現時点でない）
 - GitHub: [docs/articles/2026-09-29-application-profiles.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-application-profiles.md)
 
 ![ヘッダー画像（装飾イラスト）](https://blog.cloudflare.com/_emdash/api/media/file/01M3B09CMJMHVJCVMPMCFARRCT.01M3B09DCPG1A08FA7FTWA6PR9.png)
