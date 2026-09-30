@@ -1,0 +1,103 @@
+title: "User Insights で AI モデルの「過剰利用」を見つける"
+slug: ai-model-overuse-user-insights
+sourceUrl: https://blog.cloudflare.com/ai-model-overuse-user-insights/
+wiki: ../docs/articles/2026-09-30-ai-model-overuse-user-insights.md
+questions:
+  - q: "User Insights の Model overkill ビューが特定するものはどれか。"
+    choices:
+      - "選ばれたモデルがタスクの要求より高性能に見える会話"
+      - "応答が遅いデータセンター"
+      - "API キーが漏えいしたリクエスト"
+      - "キャッシュにヒットしたリクエスト"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「モデル過剰利用（Overkill）ビュー」を参照。単純な整形や要約が高性能な推論モデルに送られている、といった会話を見つけられる。"
+
+  - q: "今回の更新で User Insights に加わった「文脈」として、記事が挙げている組み合わせはどれか。"
+    choices:
+      - "DNS・CDN・WAF・Workers"
+      - "Model fit・Potential Savings・タスク分析・ターン分析"
+      - "TLS 証明書・IP レピュテーション・BGP・RPKI"
+      - "リクエストの地理・ISP・デバイス・OS"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」を参照。モデル適合、Potential Savings、タスク分析（coding / research / writing など）、ターン分析が追加された。AI Gateway ユーザーは無料で使える。"
+
+  - q: "Overkill ビューの位置づけとして、記事の内容に合うものはどれか。"
+    choices:
+      - "モデルのランキングであり、最も安いモデルへの置き換えを自動で実行する"
+      - "ユーザーを自動でブロックする仕組み"
+      - "ランキングでも自動推薦でもなく、モデルが適切かを問い直す出発点"
+      - "請求額を確定させるための課金機能"
+    answer: 2
+    explanation: "Wikiの「モデル過剰利用（Overkill）ビュー」を参照。このビューはランキングではなく、置き換え先のモデルを自動で推薦するものでもない。より速く安いモデルで同等か、問題が特定のワークフローに限られるか、といった問いを立てる助けになる。"
+
+  - q: "Potential Savings ビューの金額について、画面の説明として正しいものはどれか。"
+    choices:
+      - "確定した請求額で、すべてのモデルについて計上される"
+      - "提案モデルが安い場合のみ計上される推定値で、請求額ではない"
+      - "過去 1 年分の実際の返金額"
+      - "Workers AI のモデルに限った割引額"
+    answer: 1
+    explanation: "Wikiの「Potential Savings ビューと Auto Router」の図の説明を参照。説明文は「提案モデルが安い場合のみ計上。請求額ではなく推定値」という趣旨。"
+
+  - q: "AI Gateway のログを分類するエンジンと処理方式の説明として正しいものはどれか。"
+    choices:
+      - "リクエストの経路上で同期的に分類し、応答前に結果を返す"
+      - "専用の Cloudflare Worker が、対象ログを非同期に処理する"
+      - "ユーザーが手作業でタスクのラベルを付ける"
+      - "ブラウザ拡張機能がクライアント側で分類する"
+    answer: 1
+    explanation: "Wikiの「トラフィックの分類方法」を参照。分類は AI Gateway がリクエストを処理したあとに行われ、リクエスト経路にレイテンシは加わらない。"
+
+  - q: "非同期分類のトレードオフとして、記事が述べているものはどれか。"
+    choices:
+      - "リクエストのレイテンシが約 1 日増える"
+      - "ログ本文が分類のたびに削除される"
+      - "User Insights はリアルタイムではなく、分析はトラフィックに対して約 1 日遅れることがある"
+      - "分類できるのは 1 日あたり 1 会話だけ"
+    answer: 2
+    explanation: "Wikiの「トラフィックの分類方法」を参照。新しい会話はすぐには表示されない場合があり、ライブの監視ではなく時間をかけた利用パターンの把握に向く。遅れるのは分析の反映で、ユーザーへの応答ではない。"
+
+  - q: "現在の実装で、メタデータとログ本文の保存先の組み合わせとして正しいものはどれか。"
+    choices:
+      - "メタデータは R2、ログ本文は Durable Objects"
+      - "メタデータは KV、ログ本文は D1"
+      - "メタデータは Durable Objects、ログ本文は R2"
+      - "メタデータもログ本文も Workers KV"
+    answer: 2
+    explanation: "Wikiの「トラフィックの分類方法」を参照。既存の AI Gateway のログ構成に従い、メタデータを Durable Objects、ログ本文を R2 に置く。ダッシュボードは派生カテゴリと集計を見せ、生のプロンプトを閲覧する画面にはならない。"
+
+  - q: "自作アプリで User Insights の分析を使うために、リクエストに含める必要があると記事が述べているものはどれか。"
+    code: |
+      POST https://gateway.ai.cloudflare.com/v1/$ACCOUNT_ID/$GATEWAY_ID/openai/chat/completions
+
+      Content-Type: application/json
+
+      Authorization: Bearer $OPENAI_API_KEY
+
+      cf-aig-metadata: { user_id: "user-123", session_id: "session-456", idp_group: "engineering", application: "code-review" }
+    codeLang: http
+    choices:
+      - "安定した user_id と session_id の両方"
+      - "idp_group のみ"
+      - "application のみ"
+      - "Authorization ヘッダーに含めたユーザー名"
+    answer: 0
+    explanation: "Wikiの「ユーザー・チーム・ツールとの結びつけ」と「コード例」を参照。user_id と session_id の両方が必要で、ID 情報はプロンプトではなくメタデータに入れる。idp_group と application は例として付けられた属性。"
+
+  - q: "ターン分析について、記事の考え方として正しいものはどれか。"
+    choices:
+      - "長い会話は常に問題なので、1 ターンに短縮すべき"
+      - "長い会話は複雑な仕事なら自然だが、単純なタスクが何ターンも続くならプロンプト・モデル・ワークフローを見直す価値がある"
+      - "ターン数はコストと無関係である"
+      - "最初のリクエストのコストだけを見ればよい"
+    answer: 1
+    explanation: "Wikiの「ターン分析（タスクの総コスト）」を参照。最初のリクエストはコストの一部にすぎず、完了までの時間・トークン・金額も見る必要がある。"
+
+  - q: "Auto Router について、記事の説明として正しいものはどれか。"
+    choices:
+      - "常に最も安いモデルへ振り分ける"
+      - "タスク種別・複雑さ・モデル適合などのシグナルを使い、コストを考慮して適切なモデルへ自動でルーティングする"
+      - "ユーザーが毎回モデルを手動で選ぶための画面"
+      - "キャッシュを無効化する機能"
+    answer: 1
+    explanation: "Wikiの「Auto Router への接続」を参照。ワークロードごとにルールを書かずに済むが、常に最安を選ぶわけではなく、複雑なコーディングや調査は高性能モデルのままになりうる。提供段階（public beta / closed beta）は原文に食い違いがある。"

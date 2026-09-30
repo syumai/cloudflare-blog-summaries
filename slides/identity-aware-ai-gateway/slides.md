@@ -333,7 +333,7 @@ class: text-center
 
 - 原文: [ID情報に基づく分析で、不正なAIの利用を検出](https://blog.cloudflare.com/ja-jp/identity-aware-ai-gateway/)
 - 英語版: [Detect rogue AI usage with identity-aware analysis](https://blog.cloudflare.com/identity-aware-ai-gateway/)
-- 関連解説スライド: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](../cloudflare-os/)
+- 関連解説スライド: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](../cloudflare-os/) / [User Insights で AI モデルの「過剰利用」を見つける](../ai-model-overuse-user-insights/)
 - [AI Gateway](https://developers.cloudflare.com/ai-gateway/)
 - [Cloudflare Access（AI Gatewayとの連携）](https://developers.cloudflare.com/ai-gateway/configuration/cloudflare-access)
 - [利用料金の上限設定](https://developers.cloudflare.com/ai-gateway/features/spend-limits/)
