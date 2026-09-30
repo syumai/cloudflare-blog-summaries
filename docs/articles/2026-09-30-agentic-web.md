@@ -5,7 +5,7 @@
 - 公開日: 2026-09-30
 - 著者: Matthew Conroy
 - 位置づけ: Birthday Week 2026 の記事。エージェントが「第二の読者」として増えたウェブで、サイト運営者が「見る・条件を決める・対価を得る・コストを下げる」ために Cloudflare が用意するものを総論としてまとめた記事
-- 関連: [読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md)（本記事が「読める・見つかる・呼べる・支払える」の最後の「payable」を実現する続編として言及している記事）、[WebMCP](./2026-08-06-webmcp.md)（本記事で「サイトがアクションを直接公開する」手段として紹介）、[AEO](./2026-08-06-aeo.md)（回答エンジン時代のコンテンツ発見）、[Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（the-agentic-internet を含む週まとめ）、[Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（Birthday Week 2026 の初回記事）
+- 関連: [Monetization Gateway ベータ](./2026-09-30-monetization-gateway-beta.md)（本記事の「対価を得る」柱の一つの詳細）、[読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md)（本記事が「読める・見つかる・呼べる・支払える」の最後の「payable」を実現する続編として言及している記事）、[WebMCP](./2026-08-06-webmcp.md)（本記事で「サイトがアクションを直接公開する」手段として紹介）、[AEO](./2026-08-06-aeo.md)（回答エンジン時代のコンテンツ発見）、[Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（the-agentic-internet を含む週まとめ）、[Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（Birthday Week 2026 の初回記事）
 - GitHub: [docs/articles/2026-09-30-agentic-web.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-agentic-web.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3Q3ZZ59Z3P49M2FX7R7F4WQ.png)
@@ -111,7 +111,7 @@ Cloudflare は昨年、新規ドメインで AI 学習クローラーをブロ�
 - Disallow AI Training（混在用途クローラー）: https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/
 - Cloudflare Radar の AI ボット透明性: https://radar.cloudflare.com/ai-insights#ai-bot-transparency
 - Pay Per Use: http://blog.cloudflare.com/pay-per-use（本リポジトリの解説: [Pay Per Use](./2026-09-30-pay-per-use.md)）
-- Monetization Gateway（ベータ）: https://blog.cloudflare.com/monetization-gateway-beta
+- Monetization Gateway（ベータ）: https://blog.cloudflare.com/monetization-gateway-beta（本リポジトリの解説: [Monetization Gateway ベータ](./2026-09-30-monetization-gateway-beta.md)）
 - OpenAI との共同研究パイロット（プレスリリース）: https://www.cloudflare.com/press/press-releases/2026/cloudflare-announces-research-pilot-with-openai/
 - Markdown for Agents: https://blog.cloudflare.com/markdown-for-agents/
 - WebMCP: https://blog.cloudflare.com/webmcp/

@@ -1,0 +1,101 @@
+title: "Monetization Gateway ベータ: HTTP 402 で AI エージェントに従量課金する"
+slug: monetization-gateway-beta
+sourceUrl: https://blog.cloudflare.com/monetization-gateway-beta/
+wiki: ../docs/articles/2026-09-30-monetization-gateway-beta.md
+questions:
+  - q: "Monetization Gateway が、エージェントからの支払いを受け取るために使う HTTP ステータスコードはどれか。"
+    choices:
+      - "301 Moved Permanently"
+      - "402 Payment Required"
+      - "429 Too Many Requests"
+      - "451 Unavailable For Legal Reasons"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」の「HTTP 402 の流れ」を参照。リソースを要求するリクエストと同じ流れの中で 402 を返し、チェックアウトへのリダイレクトも別の決済 API も使わない。"
+
+  - q: "記事が、既存の決済手段がエージェントに向かないと考える理由として、合うものはどれか。"
+    choices:
+      - "買い手が高レイテンシを許容し、大きな金額のみを扱い、売り手に素性が知られていることを前提にしているから"
+      - "クレジットカードはブラウザでしか使えないから"
+      - "エージェントは支払いを一切行えないから"
+      - "決済手数料が常に無料だから"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。エージェントは、安く・速く・信頼でき・人手をほぼ介さずに拡張できる決済を求める。記事は、現時点ではステーブルコインとその基盤のブロックチェーンがその要件を満たせると述べる。"
+
+  - q: "記事によれば、現時点で Monetization Gateway の決済はどのように行われるか。"
+    choices:
+      - "クレジットカードで、Stripe 経由で行われる"
+      - "銀行振込で、月次の請求書払いになる"
+      - "Coinbase の x402 Facilitator が検証・精算し、Base ブロックチェーン上の USDC で決済される"
+      - "Cloudflare のクレジット残高からのみ引き落とされる"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「売り手向けの機能」を参照。USDC は米ドル連動のステーブルコイン。他の決済手段への対応は今後の予定として書かれている。"
+
+  - q: "Monetization Gateway と Pay Per Use の使い分けとして、記事の説明に合うものはどれか。"
+    choices:
+      - "API・ツール・データのようにリクエストごとが使用になるものは Monetization Gateway、高価値コンテンツの使用への課金は Pay Per Use"
+      - "Monetization Gateway は出版社専用、Pay Per Use は API 専用"
+      - "両者は同じ製品の別名で、違いはない"
+      - "Monetization Gateway は無料のコンテンツ専用で、Pay Per Use は有料専用"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「Monetization Gateway の位置づけ」を参照。ページのように 1 回クロールされ 1,000 回使われうるコンテンツは、使用を報告して払う検証済みの買い手のネットワークである Pay Per Use が担う。"
+
+  - q: "流れの図（基本の流れ）で、買い手が最初のリクエストで 402 を受け取った後にすることはどれか。"
+    choices:
+      - "何もせずに一定時間待って、同じリクエストを再送する"
+      - "支払いペイロードに署名し、PAYMENT-SIGNATURE ヘッダー付きで同じリクエストを再送する"
+      - "売り手のオリジンに直接アクセスして、Gateway を回避する"
+      - "Cloudflare のダッシュボードで手動で支払いを承認する"
+    answer: 1
+    explanation: "Wikiの「HTTP 402 の流れ」の図と「図の読み方のポイント」を参照。その後 Gateway が支払いを検証し、売り手に PAYMENT-CONTEXT ヘッダー付きで転送する。"
+
+  - q: "次のコマンドで、買い手が AI Gateway に対して「クレジット残高ではなく、リクエスト時の x402 決済」を選んでいることを示しているのはどの部分か。"
+    code: |
+      curl -iX POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/ai/run" \
+        --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+        --header "Payment-Method: x402" \
+        --header "Content-Type: application/json" \
+        --data '{"model": "z-ai/glm-4.7-flash", "input": {"max_tokens": 9001, "messages": [{"role": "user", "content": "What is Cloudflare?"}]}}'
+    codeLang: bash
+    choices:
+      - "Authorization: Bearer ... のヘッダー"
+      - "Payment-Method: x402 のヘッダー"
+      - "max_tokens: 9001 のフィールド"
+      - "モデル名 z-ai/glm-4.7-flash"
+    answer: 1
+    explanation: "Wikiの「コード例」の 1 を参照。Payment-Method: x402 がリクエスト時の x402 決済を選ぶ指定。Authorization は API トークンによる認証で、決済方法の指定ではない。"
+
+  - q: "AI Gateway が「オリジン管理の価格」を使う利点として、記事の説明に合うものはどれか。"
+    choices:
+      - "価格がすべて無料になる"
+      - "Monetization Gateway が売り手（AI Gateway）に価格を直接問い合わせるので、AI Gateway は既存の価格モジュールを使え、ルールの一覧を Monetization Gateway 側に持たずに済む"
+      - "買い手の署名が不要になる"
+      - "Base 以外のブロックチェーンが使えるようになる"
+    answer: 1
+    explanation: "Wikiの「事例 1: Cloudflare AI Gateway」を参照。AI Gateway はトークンごとの課金を扱う複雑な価格エンジンを持つため、共同設計された。"
+
+  - q: "Ceramic.ai が、エージェントによる支払いと特に相性が良いと説明している検索の性質はどれか。"
+    choices:
+      - "検索はいつも 1 クエリで済むこと"
+      - "検索は最も伸縮しやすい購入で、簡単な質問は 1 クエリ、複雑な調査は数百クエリになること"
+      - "検索結果は人間にしか読めないこと"
+      - "検索は月額固定の契約でしか買えないこと"
+    answer: 1
+    explanation: "Wikiの「事例 2: Ceramic.ai」を参照。エージェントが自分で払えれば、あらかじめ決められた予算に合わせてクエリを抑える必要がなく、状況に応じて検索の深さを決められる。固定価格の課金方式を使い、API キーなしで検索を実行できる。"
+
+  - q: "API2PDF が可変価格を使い、実際の消費分だけを精算する理由として、合うものはどれか。"
+    choices:
+      - "PDF 生成はどのリクエストでも同じコストになるから"
+      - "リクエストごとに計算・帯域のコストが変わるため、エージェントに 1 リクエストの最大価格を伝え、実際の消費分だけを精算するため"
+      - "エージェントに払わせないため"
+      - "Base 以外のブロックチェーンに対応するため"
+    answer: 1
+    explanation: "Wikiの「事例 4: API2PDF」を参照。以前はアカウント作成・API キー・クレジットカードが必要で、コンバージョンが 50% 超下がっていた。今は API キーなしのリクエストに 402 を返す。"
+
+  - q: "記事が「今後の予定」として挙げているもの、かつ現時点の機能ではないものはどれか。"
+    choices:
+      - "HTTP 402 でのリクエスト時の課金"
+      - "URL・ヘッダー・クエリパラメータに一致する価格ルール"
+      - "全取引のログの提供と、他の決済手段・ID のプリミティブへの対応"
+      - "Coinbase の x402 Facilitator による支払いの検証"
+    answer: 2
+    explanation: "Wikiの「売り手向けの機能」の「今後の予定」を参照。エージェントから発見されやすくすること、全取引のログ、追加の決済手段、ID のプリミティブが挙げられている。他の選択肢は現在の機能。"

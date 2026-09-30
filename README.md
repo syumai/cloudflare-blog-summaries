@@ -102,6 +102,7 @@ cloudflare-blog-summaries/
 | 2026-09-30 | Cloudflare Containers を作り直し、エージェントのサンドボックスをスケールさせる | [Wiki](docs/articles/2026-09-30-faster-agent-sandboxes.md) | [スライド](slides/faster-agent-sandboxes/slides.md) | [クイズ](quizzes/faster-agent-sandboxes.html) | [原文](https://blog.cloudflare.com/faster-agent-sandboxes/) |
 | 2026-09-30 | User Insights で AI モデルの「過剰利用」を見つける | [Wiki](docs/articles/2026-09-30-ai-model-overuse-user-insights.md) | [スライド](slides/ai-model-overuse-user-insights/slides.md) | [クイズ](quizzes/ai-model-overuse-user-insights.html) | [原文](https://blog.cloudflare.com/ai-model-overuse-user-insights/) |
 | 2026-09-30 | Pay Per Use: AI があなたの作品を使うなら、対価を受け取るべき | [Wiki](docs/articles/2026-09-30-pay-per-use.md) | [スライド](slides/pay-per-use/slides.md) | [クイズ](quizzes/pay-per-use.html) | [原文](https://blog.cloudflare.com/pay-per-use/) |
+| 2026-09-30 | Monetization Gateway ベータ: HTTP 402 で AI エージェントに従量課金する | [Wiki](docs/articles/2026-09-30-monetization-gateway-beta.md) | [スライド](slides/monetization-gateway-beta/slides.md) | [クイズ](quizzes/monetization-gateway-beta.html) | [原文](https://blog.cloudflare.com/monetization-gateway-beta/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

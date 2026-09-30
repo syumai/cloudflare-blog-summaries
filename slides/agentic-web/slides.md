@@ -240,6 +240,12 @@ Birthday Week 2026
 
 </div>
 
+<div class="pt-2 text-sm">
+
+▶ <a href="../monetization-gateway-beta/" target="_blank">Monetization Gateway ベータの解説スライド</a>
+
+</div>
+
 ---
 
 # 2 つの製品は同じ土台の上にある
@@ -348,7 +354,7 @@ Birthday Week 2026
 - Search / Agent / Training: https://blog.cloudflare.com/content-independence-day-ai-options/
 - Disallow AI Training: https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/
 - Pay Per Use: http://blog.cloudflare.com/pay-per-use
-- Monetization Gateway: https://blog.cloudflare.com/monetization-gateway-beta
+- Monetization Gateway: https://blog.cloudflare.com/monetization-gateway-beta（▶ <a href="../monetization-gateway-beta/" target="_blank">解説スライド</a>）
 - Markdown for Agents: https://blog.cloudflare.com/markdown-for-agents/
 - 関連スライド: [エージェンティックインターネット](../the-agentic-internet/)、[WebMCP](../webmcp/)、[Agents Week 2026 まとめ](../agents-week-review/)、[創業者レター](../cloudflares-2026-annual-founders-letter/)
 - Wiki: [docs/articles/2026-09-30-agentic-web.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-agentic-web.md)

@@ -366,7 +366,7 @@ Estimated earnings $1,125.76（+8.5%）、Reported uses 53,533。買い手別・
 - [Pay Per Crawl](https://blog.cloudflare.com/introducing-pay-per-crawl/)
 - [Verified bots](https://developers.cloudflare.com/bots/concepts/bot/verified-bots/)
 - [Business Insights](https://developers.cloudflare.com/bots/business-insights/)
-- [Monetization Gateway（ベータ）](https://blog.cloudflare.com/monetization-gateway-beta)
+- [Monetization Gateway（ベータ）](https://blog.cloudflare.com/monetization-gateway-beta)（▶ [解説スライド](../monetization-gateway-beta/)）
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-09-30-pay-per-use.md

@@ -326,6 +326,7 @@ Account Wallet + Virtual Wallet
 - 英語版: [Introducing Cloudflare Wallets](https://blog.cloudflare.com/wallets/)
 - [Cloudflare Walletハンドルの取得](https://cloudflare.pay)
 - [Monetization Gateway（発表記事）](https://blog.cloudflare.com/monetization-gateway/)
+- [Monetization Gateway ベータ ▶ 解説スライド](../monetization-gateway-beta/)
 - [x402プロトコル](https://www.x402.org/)
 - [x402互換のエンドポイント（開発者ドキュメント）](https://developers.cloudflare.com/agents/tools/payments/x402/)
 - [Web Bot Auth（開発者ドキュメント）](https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/)

@@ -5,7 +5,7 @@
 - 公開日: 2026-09-30
 - 著者: Rúben Teixeira, Jack Galilee, Kayte Johnston, Sam Else
 - 位置づけ: Birthday Week 2026 の記事。総論記事で「対価を得る」柱の中心として紹介された Pay Per Use の、ベータ公開の詳細
-- 関連: [インターネットには「第二の読者」がいる](2026-09-30-agentic-web.md)（Birthday Week 2026 の総論。Pay Per Use・Monetization Gateway を「対価を得る」柱として紹介）/ [読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](2026-08-06-the-agentic-internet.md)（「payable」の構想）/ [Cloudflare Walletsを発表](2026-08-04-wallets.md)（エージェント側の支払い手段）/ [ランク付けから推奨へ（AEO）](2026-08-06-aeo.md)（本記事が対にして紹介している Answer Engine Optimization ツール）
+- 関連: [Monetization Gateway ベータ](2026-09-30-monetization-gateway-beta.md)（同日の記事。リクエスト単位で HTTP 402 課金する側）/ [インターネットには「第二の読者」がいる](2026-09-30-agentic-web.md)（Birthday Week 2026 の総論。Pay Per Use・Monetization Gateway を「対価を得る」柱として紹介）/ [読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](2026-08-06-the-agentic-internet.md)（「payable」の構想）/ [Cloudflare Walletsを発表](2026-08-04-wallets.md)（エージェント側の支払い手段）/ [ランク付けから推奨へ（AEO）](2026-08-06-aeo.md)（本記事が対にして紹介している Answer Engine Optimization ツール）
 - GitHub: [docs/articles/2026-09-30-pay-per-use.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-pay-per-use.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3Q8WBK852SB7AAAY4NK4NYB.png)
@@ -106,7 +106,7 @@ EOF
 - 使用の定義は買い手が提案し、報告は自己申告。Cloudflare が行うのは、報告が登録済みの出版社に対応することの確認と精算の基盤の提供までで、使用の真正性そのものは、プログラムの条件に依拠する。ベータで「双方が続けたいか」を確かめる段階である点も、記事が明示している。
 - 価格の提案し返し（カウンター）、使い方ごとの価格差、新しい買い手の自己オンボードは「今後」の話で、ベータにはまだない。
 - 使用の文脈（キーワード・トピック・製品）の報告も、AI 企業と取り組み中の計画。個人データはやり取りしないとされる。
-- 総論記事 [インターネットには「第二の読者」がいる](2026-09-30-agentic-web.md) の「対価を得る」柱の詳細版。エージェント側の支払い手段は [Cloudflare Wallets](2026-08-04-wallets.md)、x402 でリクエスト単位に売る側は Monetization Gateway（別記事）という分担になる。
+- 総論記事 [インターネットには「第二の読者」がいる](2026-09-30-agentic-web.md) の「対価を得る」柱の詳細版。エージェント側の支払い手段は [Cloudflare Wallets](2026-08-04-wallets.md)、x402 でリクエスト単位に売る側は Monetization Gateway（[Monetization Gateway ベータ](2026-09-30-monetization-gateway-beta.md)）という分担になる。
 - 画像キャプションは、ダッシュボード画像のみ原文にある（`Pay Per Use dashboard: estimated earnings and reported uses over time, by buyer and domain.`）。ヘッダー画像と流れの図は原文にキャプションがなく、説明は筆者の推定・整理。
 - **サンプル対象外**: Pay Per Use はベータで、出版社・買い手とも Cloudflare との個別の参加手続きが必要なため、第三者が再現できる一般利用可能な Workers の機能ではない。中心も Cloudflare 側のダッシュボードと精算の仕組みで、100 行前後の Worker で要点を体験できるものではないため、`examples/` は作成していません。
 
@@ -119,5 +119,5 @@ EOF
   - [Verified bots のドキュメント](https://developers.cloudflare.com/bots/concepts/bot/verified-bots/)
   - [Business Insights のドキュメント](https://developers.cloudflare.com/bots/business-insights/)
   - [Answer Engine Optimization（AEO）の記事](https://blog.cloudflare.com/aeo/)
-  - [Monetization Gateway（ベータ）の記事](https://blog.cloudflare.com/monetization-gateway-beta)
+  - [Monetization Gateway（ベータ）の記事](https://blog.cloudflare.com/monetization-gateway-beta)（本リポジトリの解説: [Monetization Gateway ベータ](2026-09-30-monetization-gateway-beta.md)）
   - [総論記事（The Internet has a second audience）](https://blog.cloudflare.com/agentic-web/)
