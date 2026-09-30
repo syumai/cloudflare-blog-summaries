@@ -87,6 +87,7 @@ cloudflare-blog-summaries/
 | 2026-09-28 | Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン | [Wiki](docs/articles/2026-09-28-forge-open-source-generation-pipeline.md) | [スライド](slides/forge-open-source-generation-pipeline/slides.md) | [クイズ](quizzes/forge-open-source-generation-pipeline.html) | [原文](https://blog.cloudflare.com/forge-open-source-generation-pipeline/) |
 | 2026-09-28 | VoidZero が Cloudflare に加わって4か月: オープンソースのJavaScriptツールチェーンを人間にもエージェントにも速く | [Wiki](docs/articles/2026-09-28-voidzero-update.md) | [スライド](slides/voidzero-update/slides.md) | [クイズ](quizzes/voidzero-update.html) | [原文](https://blog.cloudflare.com/voidzero-update/) |
 | 2026-09-28 | Webはどれくらい速いのか: BEACON で数十億件の実ユーザー計測を探索する | [Wiki](docs/articles/2026-09-28-how-fast-is-the-web.md) | [スライド](slides/how-fast-is-the-web/slides.md) | [クイズ](quizzes/how-fast-is-the-web.html) | [原文](https://blog.cloudflare.com/how-fast-is-the-web/) |
+| 2026-09-28 | Vite で動く Next.js アプリケーション: Vinext 1.0 のご紹介 | [Wiki](docs/articles/2026-09-28-vinext-nextjs-on-vite.md) | [スライド](slides/vinext-nextjs-on-vite/slides.md) | [クイズ](quizzes/vinext-nextjs-on-vite.html) | [原文](https://blog.cloudflare.com/vinext-nextjs-on-vite/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

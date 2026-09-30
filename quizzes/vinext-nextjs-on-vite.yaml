@@ -1,0 +1,97 @@
+title: "Vite で動く Next.js アプリケーション: Vinext 1.0 のご紹介"
+slug: vinext-nextjs-on-vite
+sourceUrl: https://blog.cloudflare.com/vinext-nextjs-on-vite/
+wiki: ../docs/articles/2026-09-28-vinext-nextjs-on-vite.md
+questions:
+  - q: "Vinext とは何か。最も適切な説明はどれか。"
+    choices:
+      - "Next.js の公式ホスティングサービス"
+      - "Next.js の API 面を Vite 上で実装し、Next.js アプリを Workers などへ移植可能にするフレームワーク"
+      - "React の代替ライブラリ"
+      - "Next.js を Webpack に置き換えるプラグイン"
+    answer: 1
+    explanation: "Wikiの「TL;DR」を参照。Next.js アプリを Vite 上で動かし、Workers・Netlify・AWS Lambda などへ移植可能にする。"
+
+  - q: "Vinext の出発点として記事が述べているのはどれか。"
+    choices:
+      - "Cloudflare の全社プロジェクトとして1年かけて開発した"
+      - "Vercel との共同開発"
+      - "2月に、AI 駆動で1週間かけた実験として公開された"
+      - "コミュニティが作ったフォーク"
+    answer: 2
+    explanation: "Wikiの「TL;DR」と「背景・課題」を参照。1人のエンジニアとトークンの山による1週間の実験から始まった。"
+
+  - q: "既存の Next.js プロジェクトを Vinext へ移行するコマンドとして正しいものはどれか。"
+    choices:
+      - "npx vinext check && npx vinext init"
+      - "npm run eject"
+      - "npx next export"
+      - "npx vinext deploy --migrate"
+    answer: 0
+    explanation: "Wikiの「コード例」を参照。check で互換性を検証し、init で Vite とデプロイ設定を追加する（従来のプロジェクト構造は維持）。"
+
+  - q: "Vinext 1.0 が Pages Router にも対応した理由として、記事が挙げているのはどれか。"
+    choices:
+      - "Pages Router の方が高速だから"
+      - "App Router が廃止されたから"
+      - "Pages Router の大規模アプリを持つ顧客が多く、移行は一度にできないから"
+      - "Pages Router は実装が簡単だから"
+    answer: 2
+    explanation: "Wikiの「背景・課題」を参照。最新の App Router 機能だけに対応したツールでは役に立たないと述べている。"
+
+  - q: "互換性に関する記述として正しいものはどれか。"
+    choices:
+      - "全テストで100%の互換性を達成した"
+      - "重要な顧客要望機能での Next.js テスト互換性は99%超（キャッシュコンポーネントを除く）"
+      - "互換性は50%程度で、実験段階のままである"
+      - "App Router のテストは対象外である"
+    answer: 1
+    explanation: "Wikiの「1.0 への到達と互換性」を参照。キャッシュコンポーネントは除外されている。"
+
+  - q: "回帰を防ぐために Vinext が毎晩行っていることはどれか。"
+    choices:
+      - "Next.js の E2E テストスイートを Vinext に対して実行する"
+      - "全顧客のアプリを再デプロイする"
+      - "Next.js のソースコードを手作業で書き写す"
+      - "Vite を最新版に書き換える"
+    answer: 0
+    explanation: "Wikiの「1.0 への到達と互換性」を参照。互換性マトリクスを再生成し、マージによる回帰をすぐ検知する。"
+
+  - q: 'Vinext 1.0 における `"use cache"` ディレクティブ（Cache Components）の扱いはどれか。'
+    choices:
+      - "完全に対応済み"
+      - "一切対応しない方針"
+      - "Next.js 15 でのみ対応"
+      - "限定的な対応にとどめ、中核機能を優先している"
+    answer: 3
+    explanation: "Wikiの「1.0 に含まれるもの」を参照。多くの顧客が Cache Components を使っておらず、移行の前提でもなかったため。"
+
+  - q: "次のコマンドを実行したときの動作として、記事の説明に合うものはどれか。"
+    code: |
+      npx @vinext/cloudflare deploy --warm-cache
+    codeLang: bash
+    choices:
+      - "ビルド時に全ページをビルドマシンで順番にレンダリングする"
+      - "新しい Worker バージョンを本番トラフィック0%でアップロードし、ページをリクエストしてキャッシュを温めてから昇格する"
+      - "本番トラフィック100%で即座に切り替え、ユーザーのアクセスでキャッシュを作る"
+      - "ローカルでのみ動作確認を行い、デプロイはしない"
+    answer: 1
+    explanation: "Wikiの「プリレンダリングとキャッシュウォーミング」を参照。実ユーザーが新バージョンに触れる前にレンダリングとキャッシュ投入が行われる。"
+
+  - q: "記事が、ビルド時のプリレンダリングを Cloudflare のネットワーク側へ移すキャッシュウォーミングを導入した理由として、最も適切なものはどれか。"
+    choices:
+      - "ビルドマシンはロングテールのトラフィックを評価できず、アクセスの少ない大量のページに時間を取られて、重要なページに計算資源を集中できないから"
+      - "Cloudflare のネットワークでしかレンダリングできないから"
+      - "ISR を使わないようにするため"
+      - "ビルドを完全に不要にするため"
+    answer: 0
+    explanation: "Wikiの「プリレンダリングとキャッシュウォーミング」を参照。数万〜数十万 URL のサイトでは、逐次ビルドに数時間かかるという課題がある。"
+
+  - q: "Vinext が上流の Next.js に追従し続けるために導入している運用として正しいものはどれか。"
+    choices:
+      - "メンテナーが毎日すべての差分を手作業で読む"
+      - "Next.js の更新は四半期ごとにまとめて取り込む"
+      - "毎朝、エージェントが canary の変更を確認して追跡 issue を作り、毎晩テストを回して、ギャップを見つけたら再現・テスト移植・修正案の提案まで行う"
+      - "Next.js 側のメンテナーに Vinext 対応を依頼する"
+    answer: 2
+    explanation: "Wikiの「今後: オープンソースのソフトウェアファクトリー」を参照。メンテナーは Vite への対応づけが必要な課題に集中できる。"
