@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/rust-workers-emscripten-target/](https://blog.cloudflare.com/rust-workers-emscripten-target/)（公式の日本語版なし。英語版から日本語化）
 - 公開日: 2026-09-28
-- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（同じ Birthday Week 2026 の記事）、[Workers と Containers がインバウンド TCP 接続と gRPC をサポート](./2026-08-03-grpc-workers.md)（`connect(socket)` によるインバウンド TCP）
+- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（同じ Birthday Week 2026 の記事）、[Workers と Containers がインバウンド TCP 接続と gRPC をサポート](./2026-08-03-grpc-workers.md)（`connect(socket)` によるインバウンド TCP）、[EmDash 1.0](./2026-09-28-emdash-cms-plugin-registry.md)（同じ Birthday Week 2026 の記事）
 - GitHub: [docs/articles/2026-09-28-rust-workers-emscripten-target.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-rust-workers-emscripten-target.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3AJHGRFR0ZE6MB7TYYXX16K.01M3AJHKNFWTPGSZVRX4VC9KM0.png)

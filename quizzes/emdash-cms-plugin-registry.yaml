@@ -1,0 +1,97 @@
+title: "EmDash 1.0: 安全なプラグインレジストリを備えた安定版 CMS"
+slug: emdash-cms-plugin-registry
+sourceUrl: https://blog.cloudflare.com/emdash-cms-plugin-registry/
+wiki: ../docs/articles/2026-09-28-emdash-cms-plugin-registry.md
+questions:
+  - q: EmDash 1.0 の説明として正しいものはどれか。
+    choices:
+      - "Astro ベースのオープンソース CMS で、MIT ライセンスで提供される"
+      - "Cloudflare 専用のクローズドソース CMS"
+      - "WordPress のプラグインとして動作する拡張機能"
+      - "Rust 製の静的サイトジェネレーター"
+    answer: 0
+    explanation: "Wiki「TL;DR」「オープンな開発」のとおり、EmDash は Astro ベースのオープンソース CMS で MIT ライセンスである。"
+
+  - q: Cloudflare が自社ブログを EmDash に移行したことを、記事は何と呼んでいるか。
+    choices:
+      - "Customer Zero"
+      - "Project Think"
+      - "Dogfood Week"
+      - "Legacy Migration"
+    answer: 0
+    explanation: "Wiki「1.0 までの道のり」参照。Cloudflare 自身が 8 月にブログを移行し、多言語・メディア管理・最大 5,000 リクエスト/秒のスパイクへの対応が要件として見つかった。"
+
+  - q: プラグインレジストリが構築されているプロトコルはどれか。
+    choices:
+      - "ActivityPub"
+      - "AT Protocol"
+      - "RSS"
+      - "GraphQL Federation"
+    answer: 1
+    explanation: "Wiki「プラグインレジストリ: 分散された管理」参照。Bluesky を支える分散ネットワークである AT Protocol 上に構築され、作者は Atmosphere のポータブル ID を使う。"
+
+  - q: レジストリが分離する3つの機能の組み合わせとして正しいものはどれか。
+    choices:
+      - "ビルド・テスト・デプロイ"
+      - "発行者アカウント・パッケージ記録・発見用カタログ"
+      - "認証・課金・ログ"
+      - "フロントエンド・バックエンド・データベース"
+    answer: 1
+    explanation: "Wiki「プラグインレジストリ」参照。従来まとめられがちだったこの3つを分離することで、単一の運営元によるゲートキーパー化を防ぐ。"
+
+  - q: レジストリのモデレーションが影響する範囲はどれか。
+    choices:
+      - "公開されたパッケージ自体の削除"
+      - "公開者のアカウント"
+      - "カタログ上の表示のみで、公開物そのものには影響しない"
+      - "サイトにインストール済みのプラグインの停止"
+    answer: 2
+    explanation: "Wiki「プラグインレジストリ」の特徴に、モデレーションは発見用カタログの表示にのみ適用され、基になる公開物には及ばないとある。"
+
+  - q: EmDash のプラグインサンドボックスと WordPress の比較として正しいものはどれか。
+    choices:
+      - "EmDash のプラグインは DB に直接アクセスできる"
+      - "EmDash のプラグインはネットワーク宛先が無制限"
+      - "EmDash のプラグインはプライベートなストレージのみ使え、ネットワークは承認された宛先に限られる"
+      - "EmDash のプラグインは他のプラグインに全面的にアクセスできる"
+    answer: 2
+    explanation: "Wiki「明確な境界を持つプラグイン」の比較表参照。DB 直接アクセスなし、ファイルはプライベートストレージのみ、ネットワークは承認された宛先のみ、プラグイン間アクセスなし。"
+
+  - q: プラグインの実行方法として、デプロイ先ごとの組み合わせが正しいものはどれか。
+    choices:
+      - "Cloudflare は Dynamic Workers、Node.js は workerd を別プロセスで使用"
+      - "Cloudflare は Docker コンテナ、Node.js は VM"
+      - "どちらも同一プロセス内で直接実行"
+      - "Cloudflare は Pages Functions、Node.js は WebAssembly のみ"
+    answer: 0
+    explanation: "Wiki「明確な境界を持つプラグイン」参照。Cloudflare ではプラグインが Dynamic Workers として動き、Node.js ではオープンソースの workerd を別プロセスとして使う。"
+
+  - q: 記事にあるセットアップコマンドはどれか。
+    code: |
+      npm create emdash@latest
+    codeLang: sh
+    choices:
+      - "EmDash のプロジェクトを対話的に新規作成する"
+      - "EmDash を既存プロジェクトから削除する"
+      - "プラグインをレジストリへ公開する"
+      - "EmDash Build のサーバーを起動する"
+    answer: 0
+    explanation: "Wiki「コード例」参照。記事にあるコードはこのセットアップ1行のみで、プロジェクトを対話的に作成する。プラグイン開発は別途ガイドがある。"
+
+  - q: マルチテナントのサイト作成プラットフォームを EmDash で作る際、記事が挙げている組み合わせはどれか。
+    choices:
+      - "Workers for Platforms と、管理画面・API・CLI・組み込み MCP サーバーによるコンテンツ層"
+      - "Cloudflare Pages のみ"
+      - "R2 と Queues のみ"
+      - "Durable Objects 上の独自 CMS を新規実装"
+    answer: 0
+    explanation: "Wiki「単一サイトからプラットフォームへ」参照。サンドボックス化されたプラグインにより、マルチテナントでも安全に拡張できる点が利点。"
+
+  - q: EmDash Build で、サイトの変更履歴はどのように管理されるか。
+    choices:
+      - "Cloudflare Sandbox 内で git コミットとして記録される"
+      - "KV に差分として保存される"
+      - "履歴は保存されない"
+      - "WordPress のリビジョン機能に委ねられる"
+    answer: 0
+    explanation: "Wiki「EmDash Build: AI サイトビルダー（アルファ）」参照。変更は Cloudflare Sandbox 内で git コミットとして記録され、公開コンテンツは Workers for Platforms 上の本番 EmDash に移る。"

@@ -5,6 +5,7 @@
 - 公開日: 2026-09-27
 - 著者: Matthew Prince、Michelle Zatlyn
 - 位置づけ: Birthday Week 2026 の初回記事
+- 関連: [EmDash 1.0](./2026-09-28-emdash-cms-plugin-registry.md)（同じ Birthday Week 2026 の記事）
 - GitHub: [docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3G3F5ZSHVH0CSDBN2M4A43T.01M3G3F6KFD00H82BMWC8VN4TP.png)
