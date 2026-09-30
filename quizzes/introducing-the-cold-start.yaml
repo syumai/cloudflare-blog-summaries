@@ -1,0 +1,85 @@
+title: "The Cold Start: Cloudflareのスタートアップ・ピッチコンペ"
+slug: introducing-the-cold-start
+sourceUrl: https://blog.cloudflare.com/introducing-the-cold-start/
+wiki: ../docs/articles/2026-09-28-introducing-the-cold-start.md
+questions:
+  - q: "The Cold Start はどのようなイベントか。"
+    choices:
+      - "スタートアップ5社が各5分でピッチするコンペ"
+      - "開発者向けのハッカソン"
+      - "Workersの新機能発表会"
+      - "投資家向けのIPO説明会"
+    answer: 1
+    explanation: "Wikiの「TL;DR」「開催概要」にあるとおり、初期スタートアップ5社が各5分ピッチするコンペである。"
+
+  - q: "開催日と会場はどれか。"
+    choices:
+      - "2026年10月2日・ロンドン"
+      - "2026年10月19日・サンフランシスコ（Cloudflare Connect）"
+      - "2026年9月28日・ニューヨーク"
+      - "2026年11月1日・東京"
+    answer: 1
+    explanation: "Wikiの「開催概要」の表にあるとおり、2026年10月19日にサンフランシスコの Cloudflare Connect で開催される。"
+
+  - q: "応募資格として正しいものはどれか。"
+    choices:
+      - "世界中の全スタートアップ"
+      - "米国・カナダ拠点で調達額1,000万ドル未満の初期スタートアップ"
+      - "米国拠点で調達額1億ドル未満"
+      - "設立10年以上の企業"
+    answer: 1
+    explanation: "Wikiの「発表内容」の「応募資格」に、米国・カナダ拠点、調達額1,000万ドル未満、初期段階とある。"
+
+  - q: "応募締切はいつか。"
+    choices:
+      - "2026年9月28日"
+      - "2026年10月2日（金）"
+      - "2026年10月19日"
+      - "2026年12月31日"
+    answer: 1
+    explanation: "Wikiの「開催概要」にあるとおり、応募締切は2026年10月2日（金）である。"
+
+  - q: "優勝者に贈られる賞品の組み合わせとして正しいものはどれか。"
+    choices:
+      - "50万ドル分のクレジット、ビルボード掲出、VIPスピーカーズディナー招待"
+      - "現金100万ドル"
+      - "Cloudflareへの出資"
+      - "Cloudflare社員としての採用"
+    answer: 0
+    explanation: "Wikiの「賞品」にあるとおり、50万ドル分のCloudflareクレジット、サンフランシスコのビルボード掲出、VIPスピーカーズディナー招待である。"
+
+  - q: "1社あたりの持ち時間はどれか。"
+    choices:
+      - "ピッチ5分 + Q&A 3〜5分"
+      - "ピッチ30分 + Q&A 10分"
+      - "ピッチ1分のみ"
+      - "ピッチ10分 + Q&A 20分"
+    answer: 0
+    explanation: "Wikiの「開催概要」の表に、ピッチ5分とQ&A 3〜5分とある。"
+
+  - q: "審査員の組み合わせとして正しいものはどれか。"
+    choices:
+      - "Matthew Prince、Michelle Zatlyn、Dane Knecht"
+      - "Matthew Prince、Sundar Pichai、Dane Knecht"
+      - "Michelle Zatlyn のみ"
+      - "外部のベンチャーキャピタリスト3名"
+    answer: 0
+    explanation: "Wikiの「開催概要」にあるとおり、CEOの Matthew Prince、President の Michelle Zatlyn、CTO の Dane Knecht が審査する。"
+
+  - q: "記事が2010年のTechCrunch Disruptに触れる理由として最も適切なものはどれか。"
+    choices:
+      - "ライブピッチで100件以上のサインアップを得た経験から、適切なステージの力を示すため"
+      - "当時の競合を紹介するため"
+      - "過去の失敗を謝罪するため"
+      - "TechCrunchとの提携を発表するため"
+    answer: 0
+    explanation: "Wikiの「背景・課題」にあるとおり、2010年のライブピッチで100件以上のサインアップを得た経験が、適切なステージが持つ力の例として挙げられている。"
+
+  - q: "記事が求めているアイデアの説明として正しいものはどれか。"
+    choices:
+      - "一度誰かが作ると当たり前に見えるアイデアと、最初は少し無茶に聞こえる構想の両方"
+      - "既存サービスの模倣のみ"
+      - "すでに黒字化している事業のみ"
+      - "ハードウェア製品のみ"
+    answer: 0
+    explanation: "Wikiの「求めているもの」にあるとおり、当たり前に見えるアイデアと無茶に聞こえる構想の両方を求めている。"

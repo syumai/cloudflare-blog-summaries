@@ -82,6 +82,7 @@ cloudflare-blog-summaries/
 | 2026-09-27 | Cloudflare 2026年度創業者レター | [Wiki](docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md) | [スライド](slides/cloudflares-2026-annual-founders-letter/slides.md) | [クイズ](quizzes/cloudflares-2026-annual-founders-letter.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflares-2026-annual-founders-letter/) |
 | 2026-09-28 | Workers でネイティブ Rust を動かす: wasm-bindgen の新 Emscripten ターゲット | [Wiki](docs/articles/2026-09-28-rust-workers-emscripten-target.md) | [スライド](slides/rust-workers-emscripten-target/slides.md) | [クイズ](quizzes/rust-workers-emscripten-target.html) | [原文](https://blog.cloudflare.com/rust-workers-emscripten-target/) |
 | 2026-09-28 | EmDash 1.0: 安全なプラグインレジストリを備えた安定版 CMS | [Wiki](docs/articles/2026-09-28-emdash-cms-plugin-registry.md) | [スライド](slides/emdash-cms-plugin-registry/slides.md) | [クイズ](quizzes/emdash-cms-plugin-registry.html) | [原文](https://blog.cloudflare.com/emdash-cms-plugin-registry/) |
+| 2026-09-28 | The Cold Start: Cloudflareのスタートアップ・ピッチコンペ | [Wiki](docs/articles/2026-09-28-introducing-the-cold-start.md) | [スライド](slides/introducing-the-cold-start/slides.md) | [クイズ](quizzes/introducing-the-cold-start.html) | [原文](https://blog.cloudflare.com/introducing-the-cold-start/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
