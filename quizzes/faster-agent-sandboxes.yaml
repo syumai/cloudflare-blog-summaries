@@ -1,0 +1,101 @@
+title: "Cloudflare Containers を作り直し、エージェントのサンドボックスをスケールさせる"
+slug: faster-agent-sandboxes
+sourceUrl: https://blog.cloudflare.com/faster-agent-sandboxes/
+wiki: ../docs/articles/2026-09-30-faster-agent-sandboxes.md
+questions:
+  - q: "新しく導入された、サンドボックスのイメージとインスタンスタイプをコードから選べるようにするスケジューリングポリシーの名前はどれか。"
+    choices:
+      - "scheduling_policy: \"durable_object\""
+      - "scheduling_policy: \"global\""
+      - "scheduling_policy: \"rolling\""
+      - "scheduling_policy: \"static\""
+    answer: 0
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」の「1. イメージとインスタンスタイプをコードから選ぶ」を参照。`durable_object` ポリシーでは、イメージとインスタンスタイプが起動時に渡す引数になる。"
+
+  - q: "従来の Containers で、Node.js の小さなサンドボックスと Python の大きなサンドボックスを使い分けるのに必要だったものはどれか。"
+    choices:
+      - "1 つのアプリケーションと、Worker 内の if 文だけ"
+      - "組み合わせごとに別々の Containers アプリケーション・Durable Object 名前空間・デプロイと、Worker でのルーティング"
+      - "サンドボックスごとに別アカウントを作成すること"
+      - "ComputeSDK への事前登録"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「1. イメージとインスタンスタイプをコードから選ぶ」を参照。イメージ × インスタンスタイプの組み合わせごとに別アプリケーションが必要で、Worker 側にルーティングも要った。"
+
+  - q: "ComputeSDK の Burst TTI Benchmark（100 個を同時起動）での、起動時間の中央値の変化として正しいものはどれか。"
+    choices:
+      - "4.049 秒から 648 ミリ秒（6.2 倍高速）"
+      - "648 ミリ秒から 4.049 秒（6.2 倍低速）"
+      - "5.839 秒から 910 ミリ秒（6.4 倍高速）"
+      - "6.717 秒から 1129 ミリ秒（5.9 倍高速）"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「3. 最初のコマンドまでが速くなる」の表を参照。中央値は 4.049 秒から 648 ミリ秒。95 パーセンタイルは 5.839 秒から 910 ミリ秒、99 パーセンタイルは 6.717 秒から 1129 ミリ秒。"
+
+  - q: "記事が、新ポリシーで最初のコマンドまでの時間が短くなる理由として挙げていないものはどれか。"
+    choices:
+      - "同じマシン、次に同じロケーションの順に空き容量を探す"
+      - "イメージやスナップショットが既にローカルにあるホストを優先する"
+      - "まだ割り当てられていない準備済みの仮想マシンを復元する"
+      - "すべての Container を常時起動しておき、課金を停止する"
+    answer: 3
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「3. 最初のコマンドまでが速くなる」を参照。配置の改善（同一マシン→同一ロケーション、イメージ保有ホスト優先）とホスト上の処理の削減（準備済み VM の復元など）が挙げられている。常時起動の話は出てこない。"
+
+  - q: "次のコードで、ロールアウト戦略の説明として正しいものはどれか。"
+    code: |
+      const image =
+        (await this.ctx.storage.get("pinned-image")) ??
+        (isCanary(this.ctx.id)
+          ? this.ctx.container.images.nodeV2
+          : this.ctx.container.images.node);
+    codeLang: js
+    choices:
+      - "ピン留めされたイメージがあればそれを使い、なければ ID がカナリア対象のときだけ新しいイメージ（nodeV2）を使う"
+      - "常に nodeV2 が使われ、node は使われない"
+      - "ロールアウトの割合は wrangler の設定ファイルに書く必要がある"
+      - "ピン留めされたイメージがあっても、カナリア判定が優先される"
+    answer: 0
+    explanation: "Wikiの「コード例」の「ロールアウト戦略（カナリアとピン留め）」を参照。`??` により、ストレージのピン留めが優先され、なければ Durable Object の ID によるカナリア判定で nodeV2 か node を選ぶ。`isCanary` は利用者側で定義する関数。"
+
+  - q: "`cloudflare/debian-trixie` について正しい説明はどれか。"
+    choices:
+      - "利用前に自分で Dockerfile を書いてビルドし、Cloudflare へ push する必要がある"
+      - "Debian Trixie Slim と Node.js 24.20.0 LTS を含む、Cloudflare が管理する準備済みイメージで、起動後に `exec()` で環境を整えられる"
+      - "スナップショットの保存先として使う専用のストレージサービスである"
+      - "Python 専用のイメージである"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「4. 準備済みのシステムイメージ」を参照。Dockerfile の作成・ビルド・push が不要で、Cloudflare が対象ホストへ事前に配布・準備しておける。"
+
+  - q: "ファイルシステムのスナップショットについて、記事の説明と合致するものはどれか。"
+    choices:
+      - "スナップショットは可変で、1 つのスナップショットを同時に 1 つの Container しか使えない"
+      - "スナップショットは不変で再利用でき、複数の Container が同じ準備済み環境から独立に起動できる。パブリックベータである"
+      - "スナップショットは一般提供済みで、旧 Container クラスでのみ使える"
+      - "スナップショットはメモリ上のプロセスの状態を保存し、コマンドの実行途中から再開する"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「5. ファイルシステムのスナップショット」を参照。不変で再利用できるため、eval のように同じベースラインから多数の隔離環境を起動する用途に向く。保存されるのはファイルシステムで、パブリックベータとされている。"
+
+  - q: "記事が説明する「信頼されたアクセス」のパターンで、Durable Object が行うこととして正しいものはどれか。"
+    choices:
+      - "Container の Outbound Request Handler を更新し、許可された資格情報の注入、ポリシーの強制、アクティビティの記録を行う"
+      - "Container 内のすべてのプロセスの標準出力を直接書き換える"
+      - "Container のイメージを自動的に最新版へ入れ替える"
+      - "Container を常時起動して外部ネットワークを遮断する"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「6. エージェントサンドボックスにおける Durable Object の強み」を参照。ユーザーが許可したサービス・リポジトリ・操作を Durable Object が覚えておき、Outbound Request Handler を通じて反映する。Cloudflare OS の Gatekeeper パターンに似ていると記事は述べている。"
+
+  - q: "Container クラスと Sandbox SDK の扱いについて、記事の内容として正しいものはどれか。"
+    choices:
+      - "旧 `Container` / `Sandbox` クラスは即日廃止され、既存のデプロイも停止する"
+      - "新機能は旧クラスにも順次追加される"
+      - "旧クラスは 2026 年 12 月 31 日まで維持され、新機能は `ctx.container` のみ。Sandbox SDK 1.0 は基底クラスではなくユーティリティ集になる"
+      - "Sandbox SDK 1.0 は `Container` クラスを継承して使う"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「7. Container クラスと Sandbox SDK への影響」を参照。期限後も既存のデプロイは動き続けるが更新されない。移行は多くの場合 `extends Container` を `extends DurableObject` に変えて `this.ctx.container` を直接呼ぶ形になる。"
+
+  - q: "Container の起動・停止・入れ替えが起きてもエージェントを利用可能に保ち、アイドル時のコンピュート課金を避けられる構成として、記事が示しているのはどれか。"
+    choices:
+      - "エージェントを Container の中だけで動かし、Durable Object は使わない"
+      - "エージェントループを Durable Object で動かし、Linux 環境が必要なときだけ Container を起こして、待機中は止める"
+      - "エージェントごとに別アカウントの Container を常時起動しておく"
+      - "Container を廃止して Dynamic Workers だけを使う"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「6. エージェントサンドボックスにおける Durable Object の強み」の「エージェントセッション」を参照。Durable Object がセッション状態・WebSocket・モデル呼び出しを担い、シェルなどが要るときだけ Container を起こす。Anthropic の「brain と hands の分離」にも言及している。"

@@ -608,6 +608,7 @@ class: text-center
 - [Dynamic Workers（ブログ）](https://blog.cloudflare.com/dynamic-workers/)
 - [Think ドキュメント（GitHub）](https://github.com/cloudflare/agents/blob/main/docs/think/index.md)
 - 関連デッキ: <a href="../cloudflare-computer/" target="_blank">AIエージェントに必要なのはコンテナではなくコンピューター</a>
+- 関連デッキ（Birthday Week 2026 の続報）: <a href="../faster-agent-sandboxes/" target="_blank">▶ 解説スライド: Containers を作り直し、エージェントのサンドボックスをスケールさせる</a>
 - Workers サンプル: [examples/project-think/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/project-think)
 
 <div class="pt-8 text-sm opacity-50">

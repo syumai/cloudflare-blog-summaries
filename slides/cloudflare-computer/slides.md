@@ -637,6 +637,7 @@ npm install @cloudflare/computer
 - [just-bash](https://justbash.dev/)
 - Workers サンプル: [examples/cloudflare-computer/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/cloudflare-computer)
 - 関連デッキ: <a href="../project-think/" target="_blank">Project Think：Cloudflareで次世代のAIエージェント構築</a>
+- 関連デッキ（Birthday Week 2026 の続報）: <a href="../faster-agent-sandboxes/" target="_blank">▶ 解説スライド: Containers を作り直し、エージェントのサンドボックスをスケールさせる</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-03-cloudflare-computer.md

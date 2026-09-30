@@ -443,6 +443,8 @@ class: text-center
 - [cloudflare-os-starter（サンプルデプロイメント）](https://github.com/cloudflare/cloudflare-os-starter)
 - [Cap'n Web（GitHub）](https://github.com/cloudflare/capnweb)
 
+- 関連デッキ（Birthday Week 2026 の続報）: <a href="../faster-agent-sandboxes/" target="_blank">▶ 解説スライド: Containers を作り直し、エージェントのサンドボックスをスケールさせる</a>
+
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-05-cloudflare-os.md
 </div>

@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/project-think/](https://blog.cloudflare.com/ja-jp/project-think/)（英語版: [https://blog.cloudflare.com/project-think/](https://blog.cloudflare.com/project-think/)）
 - 公開日: 2026-04-15
-- 関連: [AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介](./2026-08-03-cloudflare-computer.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md) / [数百万のリポジトリのCI/CDを、あなたのプラットフォーム上でCloudflareが動かす](./2026-08-04-ci-workflows.md)
+- 関連: [AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介](./2026-08-03-cloudflare-computer.md) / [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md) / [数百万のリポジトリのCI/CDを、あなたのプラットフォーム上でCloudflareが動かす](./2026-08-04-ci-workflows.md) / [Cloudflare Containers を作り直し、エージェントのサンドボックスをスケールさせる](./2026-09-30-faster-agent-sandboxes.md)（Birthday Week 2026 の続報。Containers のスケジューリング・スナップショットの刷新）
 - GitHub: [docs/articles/2026-04-15-project-think.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-04-15-project-think.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KW477PMS3SA3XABZZ49GCCZ6.png)
