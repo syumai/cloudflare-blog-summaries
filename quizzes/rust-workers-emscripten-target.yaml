@@ -1,0 +1,107 @@
+title: "Workers でネイティブ Rust を動かす: wasm-bindgen の新 Emscripten ターゲット"
+slug: rust-workers-emscripten-target
+sourceUrl: https://blog.cloudflare.com/rust-workers-emscripten-target/
+wiki: ../docs/articles/2026-09-28-rust-workers-emscripten-target.md
+questions:
+  - q: 記事が発表した、wasm-bindgen と Rust Workers の新しいサポート対象はどれか。
+    choices:
+      - wasm32-unknown-emscripten ターゲット
+      - wasm32-wasi ターゲットのみ
+      - x86_64-unknown-linux-gnu ターゲット
+      - JavaScript から Rust へのトランスパイラ
+    answer: 0
+    explanation: 記事は wasm-bindgen と Cloudflare の Rust Workers における wasm32-unknown-emscripten ターゲットの実験的プレビューを発表している（Wiki「TL;DR」参照）。
+
+  - q: Google 社内で Emscripten と wasm-bindgen を併用できなかった根本的な理由はどれか。
+    choices:
+      - どちらも有償ライセンスが必要だったため
+      - どちらも自分が JS のロードと最終出力を管理する前提で作られていたため
+      - Rust が C++ とリンクできないため
+      - Wasm がブラウザで動かないため
+    answer: 1
+    explanation: 両ツールとも JavaScript の読み込みと最終的な JS/Wasm 出力を自分が管理する前提で、衝突していた（Wiki「背景・課題」「wasm-bindgen の wasm32-unknown-emscripten ターゲット」参照）。
+
+  - q: 両者を協調させるために決められた役割分担として正しいものはどれか。
+    choices:
+      - wasm-bindgen がビルドを主導し、Emscripten が Rust をコンパイルする
+      - Emscripten がビルドを主導し、wasm-bindgen は Emscripten のライブラリ機構に入る可搬版 JS バインディングを出力する
+      - 両者が別々の Wasm を出力し、実行時に結合する
+      - Cloudflare のサーバー側でバインディングを生成する
+    answer: 1
+    explanation: Emscripten がビルド・Wasm のロード・補助 JS を担当し、wasm-bindgen が軽量な JS バインディングを出力する。結果が -sWASM_BINDGEN 設定である（Wiki「wasm-bindgen の wasm32-unknown-emscripten ターゲット」参照）。
+
+  - q: 多くの Rust ライブラリが大きな変更なしに Emscripten ターゲットで動いた理由として、記事が挙げているものはどれか。
+    choices:
+      - すべてのクレートが書き直されたため
+      - Emscripten が Rust の target_family = unix を既にサポートしているため
+      - Workers が Linux カーネルを内蔵しているため
+      - Rust の標準ライブラリが Wasm 用に置き換わったため
+    answer: 1
+    explanation: Emscripten が target_family = unix をサポートしているため多くのライブラリがそのまま動き、libc・socket2・Mio は既存のプラットフォーム分岐に emscripten を加える程度のパッチで済んだ（Wiki「Rust ライブラリのサポート」参照）。
+
+  - q: Tokio をそのまま Workers で動かせない主な理由はどれか。
+    choices:
+      - Tokio が HTTP を扱えないため
+      - Workers は単一スレッドで JS イベントループ内にあり、Tokio はスレッドの park によるブロッキングを前提にしているため
+      - Tokio が 64bit 整数を扱えないため
+      - Workers が async/await をサポートしないため
+    answer: 1
+    explanation: "保留中のソケット読み取りや epoll wait は、共有される JS イベントループをブロックできない。そのため2つのアプローチが必要になった（Wiki「Tokio のサポート: 2つのアプローチ」参照）。"
+
+  - q: 次のコードで、通常の Tokio ランタイムと比べた LocalEventLoop の挙動として正しいものはどれか。
+    code: |
+      let el = Builder::new_current_thread()
+          .enable_all()
+          .build_local_event_loop(Default::default(), host_waker)?;
+
+      el.spawn_local(async {
+          let mut stream = TcpStream::connect(addr).await?;
+          let mut buf = [0u8; 1024];
+          // control flow returns to the host while waiting
+          let n = stream.read(&mut buf).await?;
+          Ok::<_, io::Error>(())
+      });
+    codeLang: rust
+    choices:
+      - spawn_local はタスク完了までスレッドを park して待つ
+      - spawn_local は即座に戻り、待機中はホストに制御が戻り、ホストが el.drive() でタスクを進める
+      - host_waker はタスクの実行を別スレッドに移す
+      - read が未着なら block_on が自動でリトライする
+    answer: 1
+    explanation: LocalEventLoop では待機が Waker による通知に置き換わり、ホストが drive() で ready なタスクを進める（Wiki「コード例」「Tokio のサポート」参照）。
+
+  - q: JSPI 方式で Tokio を動かす際に、スレッドローカルのコンテキストを入れ替える必要が生じる理由はどれか。
+    choices:
+      - Wasm がスレッドローカルをサポートしないため
+      - JSPI のスタック切替はスレッド切替ではなく、停止中と新しいスタックが同じランタイムコンテキストを共有してしまい、「既に enter 済み」で panic するため
+      - JSPI がメモリを自動で解放するため
+      - Tokio が JSPI を認識して自動的に切り替えるため
+    answer: 1
+    explanation: "Rust はスタックが入れ替わったことを知らないため、JSPI の enter・exit・suspend・resume ごとにコンテキストを入れ替える必要がある（Wiki「Tokio のサポート: 2つのアプローチ」の JSPI の項参照）。"
+
+  - q: LocalEventLoop の Waker について、記事の説明として正しいものはどれか。
+    choices:
+      - Waker はスレッドをまたいで使えないため、シングルスレッドに限定される
+      - Waker は Send + Sync で実行の意味を持たず、wake は作業を積むだけなので、別スレッドやホストのコールバックからでも安全に呼べる
+      - Waker が呼ばれると、ランタイムが即座に再入して実行される
+      - Waker は block_on の中でのみ使える
+    answer: 1
+    explanation: Waker は単なるホストへの通知であり、drive 中の wake でも再入せず作業を積むだけなので、契約が構造的に安全になる（Wiki「LocalEventLoop」参照）。
+
+  - q: Tokio の net 機能（TCP・UDP・Unix ソケット）を Workers で動かすために、Cloudflare が採った方法はどれか。
+    choices:
+      - Workers 専用の独自ソケット API を Emscripten に追加した
+      - Workers が実装する node:net を、Emscripten の -sNODERAWSOCKETS で橋渡しした
+      - ソケットをすべて WebSocket に変換した
+      - Tokio から net 機能を削除した
+    answer: 1
+    explanation: Workers の Node.js 互換レイヤーの node:net を利用し、40 本超の PR で Emscripten に -sNODERAWSOCKETS が導入された（Wiki「ソケットと epoll のサポート」参照）。
+
+  - q: Minecraft サーバー（Pumpkin）の Durable Object 上での実装に関する説明として正しいものはどれか。
+    choices:
+      - ワールドはすべてメモリ上に保持し、永続化しない
+      - std::fs の呼び出しが node:fs 互換レイヤー経由で worker-fs-mount に渡り、Durable Object の SQLite に保存される
+      - プレイヤー接続は fetch() ハンドラーの HTTP で受ける
+      - マルチスレッドのまま動かした
+    answer: 1
+    explanation: "tick やチャンクスケジューラは async タスク化され、ワールドは -sNODERAWFS と worker-fs-mount により SQLite の行として永続化され、接続は TCP ingress の connect() から届く（Wiki「実証: Durable Object で Minecraft サーバー」参照）。"

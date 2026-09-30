@@ -80,6 +80,7 @@ cloudflare-blog-summaries/
 | 2026-08-07 | Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合 | [Wiki](docs/articles/2026-08-07-workers-ai-gateway-unification.md) | [スライド](slides/workers-ai-gateway-unification/slides.md) | [クイズ](quizzes/workers-ai-gateway-unification.html) | [原文](https://blog.cloudflare.com/workers-ai-gateway-unification/) |
 | 2026-08-10 | Agents Week 2026で行った発表内容の全て | [Wiki](docs/articles/2026-08-10-agents-week-review.md) | [スライド](slides/agents-week-review/slides.md) | [クイズ](quizzes/agents-week-review.html) | [原文](https://blog.cloudflare.com/ja-jp/agents-week-review-august-2026/) |
 | 2026-09-27 | Cloudflare 2026年度創業者レター | [Wiki](docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md) | [スライド](slides/cloudflares-2026-annual-founders-letter/slides.md) | [クイズ](quizzes/cloudflares-2026-annual-founders-letter.html) | [原文](https://blog.cloudflare.com/ja-jp/cloudflares-2026-annual-founders-letter/) |
+| 2026-09-28 | Workers でネイティブ Rust を動かす: wasm-bindgen の新 Emscripten ターゲット | [Wiki](docs/articles/2026-09-28-rust-workers-emscripten-target.md) | [スライド](slides/rust-workers-emscripten-target/slides.md) | [クイズ](quizzes/rust-workers-emscripten-target.html) | [原文](https://blog.cloudflare.com/rust-workers-emscripten-target/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
