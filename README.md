@@ -94,6 +94,7 @@ cloudflare-blog-summaries/
 | 2026-09-29 | あなたのドメインはポスト量子暗号を使っているか: 自分で確認できるようになりました | [Wiki](docs/articles/2026-09-29-post-quantum-visibility.md) | [スライド](slides/post-quantum-visibility/slides.md) | [クイズ](quizzes/post-quantum-visibility.html) | [原文](https://blog.cloudflare.com/post-quantum-visibility/) |
 | 2026-09-29 | Threat Signals のご紹介: オープンソース脅威インテリジェンスのためのエージェント型スキル | [Wiki](docs/articles/2026-09-29-threat-signals.md) | [スライド](slides/threat-signals/slides.md) | [クイズ](quizzes/threat-signals.html) | [原文](https://blog.cloudflare.com/threat-signals/) |
 | 2026-09-29 | フロンティア AI モデルで自社の WAF をテストしてみた: 分かったこと | [Wiki](docs/articles/2026-09-29-adaptive-ai-waf-testing.md) | [スライド](slides/adaptive-ai-waf-testing/slides.md) | [クイズ](quizzes/adaptive-ai-waf-testing.html) | [原文](https://blog.cloudflare.com/adaptive-ai-waf-testing/) |
+| 2026-09-29 | Merkle Tree Certificates によるポスト量子認証局の構築 | [Wiki](docs/articles/2026-09-29-pq-ca-with-mtcs.md) | [スライド](slides/pq-ca-with-mtcs/slides.md) | [クイズ](quizzes/pq-ca-with-mtcs.html) | [原文](https://blog.cloudflare.com/pq-ca-with-mtcs/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

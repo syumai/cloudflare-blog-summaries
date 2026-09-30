@@ -1,0 +1,94 @@
+title: "Merkle Tree Certificates によるポスト量子認証局の構築"
+slug: pq-ca-with-mtcs
+sourceUrl: https://blog.cloudflare.com/pq-ca-with-mtcs/
+wiki: ../docs/articles/2026-09-29-pq-ca-with-mtcs.md
+questions:
+  - q: "記事が指摘する、証明書に PQ 署名をそのまま差し替えたときの主な問題はどれか。"
+    choices:
+      - "PQ 署名は古典的な署名より約 40 倍大きく、TLS ハンドシェイクや CT ログの負荷が許容できなくなる"
+      - "PQ 署名は古典的な署名より検証が常に失敗するため使えない"
+      - "PQ 署名は X.509 形式で表現できない"
+      - "PQ 署名は量子コンピュータに対して脆弱である"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。PQ 署名は約 40 倍大きく、典型的な TLS ハンドシェイクに署名 5 つと鍵 2 つが含まれることもあり、単純な差し替えは性能上許容できない。"
+
+  - q: "MTC（Merkle Tree Certificates）で CA が署名する対象はどれか。"
+    choices:
+      - "証明書1枚ごとの内容"
+      - "追記専用 Merkle ツリーのルート（チェックポイント）"
+      - "クライアントの公開鍵"
+      - "CT ログ運用者の証明書"
+    answer: 1
+    explanation: "Wikiの「MTC の基本アイデア」を参照。証明書を追記専用の Merkle ツリーにまとめ、CA は個々の証明書ではなくツリーのルートに署名する。クライアントは包含証明で検証する。"
+
+  - q: "記事が MTC の鍵となる考え方として挙げている言葉はどれか。"
+    choices:
+      - "Log everything, trust nothing"
+      - "Sign once, verify everywhere"
+      - "Don't log what you issue, issue by logging"
+      - "Issue first, log later"
+    answer: 2
+    explanation: "Wikiの「MTC の基本アイデア」を参照。発行とログ記録を一体にすることで、透明性が後付けではなく運用の必須条件になる。"
+
+  - q: "MTC の 2 つの形式（standalone と landmark-relative）の違いとして正しいものはどれか。"
+    choices:
+      - "standalone は包含証明のみ、landmark-relative は cosigned tree head を含む"
+      - "standalone は cosigned tree head と包含証明を含み、landmark-relative は軽量な包含証明のみで PQ 署名を含まない"
+      - "どちらも同じ内容で、名前が違うだけである"
+      - "standalone は X.509 形式にできない"
+    answer: 1
+    explanation: "Wikiの「MTC の 2 つの形式」を参照。landmark-relative は cosigned tree head をクライアントが帯域外で入手できる場合に使え、署名値には軽量な包含証明だけが入る。"
+
+  - q: "issuance の流れで、ミラーリング・コサイナーが行うこととして正しいものはどれか。"
+    choices:
+      - "ドメインの管理権限を確認する"
+      - "TLS ハンドシェイクを代行する"
+      - "CA の発行ログの写しを永続的に保存し、新しい状態が追記のみで整合・正しい形式であることを確認して署名する"
+      - "クライアントにブラウザの更新を配布する"
+    answer: 2
+    explanation: "Wikiの「standalone 証明書の発行フロー」を参照。コサイナーは写しの保存と整合性検証を行い、CA が別々の場所に異なる発行の見え方を示していないという確信を与える。ドメイン確認は CA の ACME サーバーが行う。"
+
+  - q: "Chrome の Quantum-resistant Root Program のドラフトポリシーが求める cosignature として、記事が述べているものはどれか。"
+    choices:
+      - "CA 自身のみの 1 つ"
+      - "別組織が運用する Chrome 認定のミラーリング・コサイナーと、発行する MTC CA 自身の少なくとも 2 つ"
+      - "ブラウザベンダー 3 社の署名"
+      - "cosignature は不要"
+    answer: 1
+    explanation: "Wikiの「standalone 証明書の発行フロー」のコサイナーの要件を参照。Cloudflare は他のパイロット CA のミラーも運用し、自社発行の証明書に独立した cosignature を 1 つ以上要求する。"
+
+  - q: "landmark-relative 証明書を使う場合でも、サーバーが standalone 証明書を保持しておく必要があるのはなぜか。"
+    choices:
+      - "landmark はセキュリティ上の欠陥があるため"
+      - "新規インストールやオフライン、landmark の更新が未適用のクライアントがありうるため"
+      - "standalone の方が常に高速だから"
+      - "Chrome 以外のブラウザは landmark を解釈できないと決まっているため"
+    answer: 1
+    explanation: "Wikiの「landmark 最適化」を参照。landmark は効率が良いが standalone を不要にしない。landmark を交渉できないクライアントに備えて、standalone をフォールバックとして保持する。"
+
+  - q: "Chrome との実験について、記事の内容として正しいものはどれか。"
+    choices:
+      - "全ユーザーに PQ 署名の MTC を配信し、従来より 9% 遅かった"
+      - "Chrome Beta 146 の 50% に配信し、数十億枚の MTC を提供。landmark MTC は中央値で約 9% 高速だった（主に中間証明書の省略による）"
+      - "実験は失敗したため、MTC の計画は中止された"
+      - "PQ 署名を使い、ハンドシェイクが 40 倍速くなった"
+    answer: 1
+    explanation: "Wikiの「Chrome との実験結果」を参照。実験は古典的な署名で行われ、約 9% の高速化の大半は中間証明書の省略による。PQ 署名ではさらに大きな差が出ると見込まれている。"
+
+  - q: "MTC が CT 側のスケーリング特性をどう変えるか、記事の説明として正しいものはどれか。"
+    choices:
+      - "ログはエントリごとに署名を持ち、保存量が増える"
+      - "ログは公開鍵のハッシュのみを保持し、エントリごとの署名はなく、ツリーヘッドの署名がログ全体を覆う。証明書の爆発を防げる"
+      - "CT ログが不要になり、監視も不要になる"
+      - "監視者はすべての CA のログを別々の形式でダウンロードする必要がある"
+    answer: 1
+    explanation: "Wikiの「Chrome との実験結果」を参照。CA の発行ログがすべての証明書の唯一の正となるため、ログの利用者は各証明書のコピーを 1 つ取得すれば足りる。"
+
+  - q: "記事が、実環境で答えを出す必要がある問いとして挙げているものはどれか。"
+    choices:
+      - "独立した監視者が MTC の発行ログを本番規模で取り込み検証できるか"
+      - "TLS 1.3 を無効にしてもよいか"
+      - "証明書の有効期限を無期限にできるか"
+      - "DNS レコードの TTL をどう設定するか"
+    answer: 0
+    explanation: "Wikiの「今後の課題とスケジュール」を参照。ほかに、複数の CA・コサイナーが現れるか、landmark による高速化とフォールバック経路をブラウザがどう両立するかが挙げられている。"
