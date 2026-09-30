@@ -5,7 +5,7 @@
 - 公開日: 2026-09-28
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Matt "TK" Taylor、Samuel Macleod
-- 関連: [人とエージェントのためにドメイン購入をシンプルに](./2026-09-30-simplifying-domains.md)（`cf registrar` でドメインの検索・購入・移管を行う例）、[Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン](./2026-09-28-forge-open-source-generation-pipeline.md)（cf のコマンドを OpenAPI スキーマから生成する基盤）、[VoidZero が Cloudflare に加わって4か月](./2026-09-28-voidzero-update.md)（Vite / Rolldown）、[Vite で動く Next.js アプリケーション: Vinext 1.0](./2026-09-28-vinext-nextjs-on-vite.md)（Vite 上の Workers 開発）
+- 関連: [本番の問題を検知してエージェントへ直接送る: Workers の Issues](./2026-09-30-real-time-issue-detection.md)（`cf observability issues` で Issues を調べる例）、[人とエージェントのためにドメイン購入をシンプルに](./2026-09-30-simplifying-domains.md)（`cf registrar` でドメインの検索・購入・移管を行う例）、[Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン](./2026-09-28-forge-open-source-generation-pipeline.md)（cf のコマンドを OpenAPI スキーマから生成する基盤）、[VoidZero が Cloudflare に加わって4か月](./2026-09-28-voidzero-update.md)（Vite / Rolldown）、[Vite で動く Next.js アプリケーション: Vinext 1.0](./2026-09-28-vinext-nextjs-on-vite.md)（Vite 上の Workers 開発）
 - GitHub: [docs/articles/2026-09-28-cloudflare-cf-cli-launch.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-cloudflare-cf-cli-launch.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3KR63G9MAXHAG81FC5HKYRY.01M3KR64BVBYV5MM3YBHRRRWGF.png)

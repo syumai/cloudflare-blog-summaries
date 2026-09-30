@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "real-time-issue-detection-example",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true
+    },
+    // 記事の「Get started」で示されている設定（Issues のオープンベータ）。
+    "issues": {
+      "enabled": true
+    }
+  }
+}

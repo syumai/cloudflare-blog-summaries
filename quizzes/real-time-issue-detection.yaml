@@ -1,0 +1,99 @@
+title: "本番の問題を検知してエージェントへ直接送る: Workers の Issues"
+slug: real-time-issue-detection
+sourceUrl: https://blog.cloudflare.com/real-time-issue-detection/
+wiki: ../docs/articles/2026-09-30-real-time-issue-detection.md
+questions:
+  - q: "Cloudflare Workers の Issues が、まとめて 1 つの issue にする対象として、記事に合うものはどれか。"
+    choices:
+      - "繰り返し起きる例外・5xx 応答・エラーログ"
+      - "すべての成功したリクエストの一覧"
+      - "DNS の設定変更の履歴"
+      - "課金に関するイベントだけ"
+    answer: 0
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」の「失敗を自動でつかまえる」を参照。未処理の例外・失敗した呼び出し・HTTP 5xx・console.log/console.error の出力・スタックトレースを含むログを記録し、同じ原因のものを 1 つにまとめる。"
+
+  - q: "Issues を有効にする方法として、記事に合うものはどれか。"
+    choices:
+      - "アプリ全体を専用のラッパー関数で包む"
+      - "SDK を npm でインストールして初期化する"
+      - "設定 1 行（observability.issues.enabled を true）で有効にでき、SDK は不要"
+      - "Cloudflare のサポートに申請して有効化してもらう"
+    answer: 2
+    explanation: "Wikiの「失敗を自動でつかまえる」と「コード例」を参照。Issues は Workers ランタイムに組み込まれているため、SDK もアプリのラッパーも要らない。Get started では wrangler.jsonc の observability.issues.enabled を true にする。"
+
+  - q: "Issues の機能の現在の提供状況として、記事に合うものはどれか。"
+    choices:
+      - "一般提供（GA）"
+      - "オープンベータ"
+      - "プライベートベータ（招待制）"
+      - "社内限定で、外部には未公開"
+    answer: 1
+    explanation: "Wikiの「TL;DR」を参照。記事は Issues を「now in open beta」と紹介している。"
+
+  - q: "記事のコード例で、issue にユーザー ID などの文脈を足すために使っている API はどれか。"
+    code: |
+      import { tracing } from "cloudflare:workers";
+
+      export default {
+        async fetch(request: Request): Promise<Response> {
+          const { userId, accountId, sessionId } = await getAuthDetails(request);
+          const span = tracing.getActiveSpan();
+          span?.setAttribute("user.id", userId);
+          span?.setAttribute("account.id", accountId);
+          span?.setAttribute("session.id", sessionId);
+          return handleRequest(request);
+        },
+      } satisfies ExportedHandler;
+    codeLang: ts
+    choices:
+      - "tracing.getActiveSpan() で現在のスパンを取り、setAttribute で属性を付ける"
+      - "console.error() にユーザー ID を文字列で連結して出力する"
+      - "Response ヘッダーに user.id を付けてクライアントに返す"
+      - "D1 にユーザー ID を書き込んでから Issues が読み取る"
+    answer: 0
+    explanation: "Wikiの「コード例」を参照。Worker ランタイム組み込みの OpenTelemetry API（cloudflare:workers の tracing）で、アクティブなスパンに user.id・account.id・session.id の属性を付ける。追加パッケージは不要で、各 occurrence の Context に表示される。"
+
+  - q: "Automations が issue をエージェントへ送るきっかけとして、記事に合うものはどれか。"
+    choices:
+      - "issue が 1 件でも作られた瞬間だけ"
+      - "毎日決まった時刻にだけ"
+      - "回数の閾値を超えたとき、またはしばらく静かだった後に再発したとき"
+      - "人がダッシュボードで「送信」を押したときだけ"
+    answer: 2
+    explanation: "Wikiの「検出した issue をエージェントへ送る」を参照。issue が occurrence の閾値を超えたとき、または静かな期間の後に戻ってきたときに、Automations が issue を送る。手動で送ることも図では示されているが、きっかけはこの 2 つである。"
+
+  - q: "記事で、Issues の組み込みの送り先として挙げられているコーディングエージェントの組み合わせはどれか。"
+    choices:
+      - "Claude Code・Cursor・Devin"
+      - "Claude Code・GitHub Copilot・Windsurf"
+      - "Cursor・Aider・Cline"
+      - "Devin・Codex・Gemini CLI"
+    answer: 0
+    explanation: "Wikiの「検出した issue をエージェントへ送る」を参照。Claude Code は routine ID とトークン、Cursor は Automation の Webhook URL、Devin は API トークンと組織 ID で接続する。ほかに汎用 Webhook とチャット・インシデント管理がある。"
+
+  - q: "エージェントが Cloudflare MCP に接続すると、Automation が送る内容に加えてできるようになることはどれか。"
+    choices:
+      - "本番のコードを、人の承認なしに自動デプロイする"
+      - "関連するログとトレースを自分で問い合わせ、コードとテストの変更案を作って PR を出す"
+      - "issue を自動的に「解決済み」にする"
+      - "他の Cloudflare アカウントの Worker のログを読む"
+    answer: 1
+    explanation: "Wikiの「検出した issue をエージェントへ送る」を参照。深い調査のためにエージェントを Cloudflare MCP に接続すると、関連するログとトレースを問い合わせ、変更案を作り、PR を出せる。PR のレビュー・デプロイ・issue の解決済みへの変更は人が行う。"
+
+  - q: "記事の 5 段階の流れ（図）で、人が担うとされている段階はどれか。"
+    choices:
+      - "本番 Worker で例外・5xx・エラーログが起きること"
+      - "関連する失敗を 1 つの issue にまとめること"
+      - "コーディングエージェントがコードとテストの変更を提案すること"
+      - "提案をレビューし、何を本番に出すかを決めること（Review and deploy）"
+    answer: 3
+    explanation: "Wikiの「全体の流れ」の図を参照。1〜3 は本番と Cloudflare の自動化、4 はエージェントの支援、5 の Review and deploy が HUMAN CONTROL（人の制御）とされている。"
+
+  - q: "Cloudflare が社内の Workflows で Issues を試した結果として、記事に合うものはどれか。"
+    choices:
+      - "有効にしても、問題は 1 件も見つからなかった"
+      - "1 日のうちに 2 件の不具合（マイグレーションの無限リトライと、削除処理の未完了）を見つけて修正した"
+      - "Workflows の課金の集計ミスだけが見つかった"
+      - "Issues が Workflows には対応しておらず、試せなかった"
+    answer: 1
+    explanation: "Wikiの「事例: 1 日で 2 件の Workflows の不具合を見つけた」を参照。SQLite の外部キーエラーで繰り返すマイグレーションと、サブリクエスト上限を超えて終わらない削除処理が見つかり、issue が Cloudflare OS に送られて修正案が出された。"
