@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事（Deep Dive）
 - 著者: Vikram Grover、Daniele Molteni、Kuber Nandwani
-- 関連: 同じ Birthday Week のセキュリティ系記事 [Cloudflare Application Profiles でポジティブセキュリティを実現する](./2026-09-29-application-profiles.md)（本記事の「顧客ができること」で、ポジティブセキュリティの例として言及されている）
+- 関連: 本記事を含む同日の発表を束ねる枠組み記事 [AI 時代の適応型アプリケーションセキュリティ](./2026-09-29-ai-era-framework.md)、同じ Birthday Week のセキュリティ系記事 [Cloudflare Application Profiles でポジティブセキュリティを実現する](./2026-09-29-application-profiles.md)（本記事の「顧客ができること」で、ポジティブセキュリティの例として言及されている）
 - GitHub: [docs/articles/2026-09-29-adaptive-ai-waf-testing.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-adaptive-ai-waf-testing.md)
 
 ![ヘッダー画像（装飾イラスト）](https://blog.cloudflare.com/_emdash/api/media/file/01M3MTAS2TXJ3YNP9MKFC831W3.01M3MTASYEWPJWSVRZFBTG2NGD.png)
@@ -188,3 +188,4 @@ OWASP Core Ruleset: Paranoia Level 3
 - WAF のはじめ方: https://developers.cloudflare.com/waf/get-started/
 - Attack Signature Detection: https://blog.cloudflare.com/attack-signature-detection/
 - 本リポジトリ内の関連記事: [Application Profiles](./2026-09-29-application-profiles.md)
+- 本リポジトリ内の枠組み記事: [AI 時代の適応型アプリケーションセキュリティ](./2026-09-29-ai-era-framework.md)

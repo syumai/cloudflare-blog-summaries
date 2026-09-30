@@ -311,3 +311,4 @@ cf.schema_validation.learned.query
 - Web Assets: https://developers.cloudflare.com/security/web-assets/
 - Workers サンプルは対象外（Enterprise 向け WAF / API Security 機能のため）
 - 関連スライド: [WAF を AI でテストしてみた](../adaptive-ai-waf-testing/)
+- 枠組み記事のスライド: [AI 時代の適応型アプリケーションセキュリティ](../ai-era-framework/)

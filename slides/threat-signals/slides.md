@@ -214,4 +214,5 @@ RSS フィード
 - Browser Run: https://developers.cloudflare.com/browser-run/
 - Threat Signals API: https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_signals/
 - 関連スライド: [Application Profiles](../application-profiles/)
+- 枠組み記事のスライド: [AI 時代の適応型アプリケーションセキュリティ](../ai-era-framework/)
 - Wiki: [docs/articles/2026-09-29-threat-signals.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-threat-signals.md)

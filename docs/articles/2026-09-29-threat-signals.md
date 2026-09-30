@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Emilia Yoffie、Victor Niño、Brian Seel、Jacob Crisp
-- 関連: 同じ Birthday Week のセキュリティ系記事として [Cloudflare Application Profiles でポジティブセキュリティを実現する](./2026-09-29-application-profiles.md)。エージェント向けスキルの文脈では [EmDash プラグインレジストリ](./2026-09-28-emdash-cms-plugin-registry.md)（EmDash Agent Skills に言及）も参照。
+- 関連: 本記事を含む同日の発表を束ねる枠組み記事 [AI 時代の適応型アプリケーションセキュリティ](./2026-09-29-ai-era-framework.md)、同じ Birthday Week のセキュリティ系記事として [Cloudflare Application Profiles でポジティブセキュリティを実現する](./2026-09-29-application-profiles.md)。エージェント向けスキルの文脈では [EmDash プラグインレジストリ](./2026-09-28-emdash-cms-plugin-registry.md)（EmDash Agent Skills に言及）も参照。
 - GitHub: [docs/articles/2026-09-29-threat-signals.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-threat-signals.md)
 
 ## TL;DR
@@ -109,3 +109,4 @@ RSS 以外にも、さまざまな形式・パイプラインの脅威情報を�
 - Threat Signals API ドキュメント: https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_signals/
 - Cloudforce One の脅威インテリジェンス調査: https://www.cloudflare.com/cloudforce-one/research/
 - 本リポジトリ内の関連記事: [Application Profiles](./2026-09-29-application-profiles.md) / [EmDash プラグインレジストリ](./2026-09-28-emdash-cms-plugin-registry.md)
+- 本リポジトリ内の枠組み記事: [AI 時代の適応型アプリケーションセキュリティ](./2026-09-29-ai-era-framework.md)

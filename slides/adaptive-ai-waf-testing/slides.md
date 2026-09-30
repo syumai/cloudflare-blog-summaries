@@ -252,4 +252,5 @@ Birthday Week 2026
 - WAF の変更履歴: https://developers.cloudflare.com/waf/change-log/changelog/
 - Attack Signature Detection: https://blog.cloudflare.com/attack-signature-detection/
 - 関連スライド: [Application Profiles](../application-profiles/)
+- 枠組み記事のスライド: [AI 時代の適応型アプリケーションセキュリティ](../ai-era-framework/)
 - Wiki: [docs/articles/2026-09-29-adaptive-ai-waf-testing.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-adaptive-ai-waf-testing.md)

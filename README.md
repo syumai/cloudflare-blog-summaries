@@ -95,6 +95,7 @@ cloudflare-blog-summaries/
 | 2026-09-29 | Threat Signals のご紹介: オープンソース脅威インテリジェンスのためのエージェント型スキル | [Wiki](docs/articles/2026-09-29-threat-signals.md) | [スライド](slides/threat-signals/slides.md) | [クイズ](quizzes/threat-signals.html) | [原文](https://blog.cloudflare.com/threat-signals/) |
 | 2026-09-29 | フロンティア AI モデルで自社の WAF をテストしてみた: 分かったこと | [Wiki](docs/articles/2026-09-29-adaptive-ai-waf-testing.md) | [スライド](slides/adaptive-ai-waf-testing/slides.md) | [クイズ](quizzes/adaptive-ai-waf-testing.html) | [原文](https://blog.cloudflare.com/adaptive-ai-waf-testing/) |
 | 2026-09-29 | Merkle Tree Certificates によるポスト量子認証局の構築 | [Wiki](docs/articles/2026-09-29-pq-ca-with-mtcs.md) | [スライド](slides/pq-ca-with-mtcs/slides.md) | [クイズ](quizzes/pq-ca-with-mtcs.html) | [原文](https://blog.cloudflare.com/pq-ca-with-mtcs/) |
+| 2026-09-29 | AI 時代の適応型アプリケーションセキュリティ: Cloudflare がコード・トラフィック・インテリジェンスをつなぎ、攻撃を止める方法 | [Wiki](docs/articles/2026-09-29-ai-era-framework.md) | [スライド](slides/ai-era-framework/slides.md) | [クイズ](quizzes/ai-era-framework.html) | [原文](https://blog.cloudflare.com/ai-era-framework/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
