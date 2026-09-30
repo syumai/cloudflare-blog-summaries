@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Christopher Patton、Amos Paul、Lina Baquero
-- 関連: 同じ Birthday Week 2026 の記事として [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い。ポスト量子（PQ）移行では、TLS 側の PQ 暗号化の利用状況を可視化する [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)、PQ 認証（証明書）側では [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md) が関連する
+- 関連: 同じ Birthday Week 2026 の記事として [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い。ポスト量子（PQ）移行では、TLS 側の PQ 暗号化の利用状況を可視化する [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)、PQ 認証（証明書）側では [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md) が関連する。また、自社コードの暗号利用を AI で洗い出す PQ 移行の進め方として [AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)
 - GitHub: [docs/articles/2026-09-29-ipsec-downgrade-protection.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-ipsec-downgrade-protection.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3PBXV6RMBDAPYBPS4CSKCS9.01M3PBXVX4E5746D4FX9F3R8V5.png)
@@ -149,3 +149,4 @@ IPSECME WG と開発した IKEv2 の拡張（近く RFC になる見込み）で
 - PQ の可視化機能: http://blog.cloudflare.com/post-quantum-visibility
 - 本リポジトリ内の関連記事（TLS 側の PQ 可視化）: [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)
 - 本リポジトリ内の関連記事（PQ 認証・認証局）: [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)
+- 本リポジトリ内の関連記事（社内の暗号利用の発見・PQ 移行の計画）: [AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)

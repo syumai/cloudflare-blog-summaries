@@ -225,4 +225,5 @@ Birthday Week 2026
 - CA/Browser Forum SC-081v3: https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/
 - 更新情報への登録: http://cloudflare.com/resource/certificate-authority
 - 関連スライド: [MTC によるポスト量子認証局](../pq-ca-with-mtcs/)、[PQ 暗号の可視化](../post-quantum-visibility/)
+- 関連スライド（暗号利用の発見・PQ 移行計画）: [▶ 解説スライド](../ai-driven-cryptography-discovery/)
 - Wiki: [docs/articles/2026-09-29-cloudflare-certificate-authority.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-cloudflare-certificate-authority.md)

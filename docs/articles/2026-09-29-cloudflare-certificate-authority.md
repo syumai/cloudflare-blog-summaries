@@ -4,7 +4,7 @@
 - 日本語版の出どころ: Cloudflare公式の日本語版（`https://blog.cloudflare.com/ja-jp/cloudflare-certificate-authority/`）は確認時点で存在しなかった（404）ため、英語版（en-us）から日本語化して要約している。公開日は英語原文の datePublished（2026-09-29）に従う。
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事（Cloudflare が公開認証局になる意向表明）
-- 関連: [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（本記事の「ポスト量子」章から参照されている技術詳細の記事。MTC の仕組みと Chrome との実験はそちら）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（同日の TLS の PQ 鍵交換の可視化。同記事でも本 CA の発表に言及している）
+- 関連: [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（本記事の「ポスト量子」章から参照されている技術詳細の記事。MTC の仕組みと Chrome との実験はそちら）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（同日の TLS の PQ 鍵交換の可視化。同記事でも本 CA の発表に言及している）。また、自社コードの暗号利用を AI で洗い出す PQ 移行の進め方として [AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)
 - GitHub: [docs/articles/2026-09-29-cloudflare-certificate-authority.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-cloudflare-certificate-authority.md)
 
 ## TL;DR
@@ -98,4 +98,4 @@ Cloudflare は Universal SSL の証明書パックの提供に加え、自社シ
 - IETF の MTC ドラフト: https://datatracker.ietf.org/doc/draft-ietf-plants-merkle-tree-certs/
 - Customer Zero: https://www.cloudflare.com/the-net/top-of-mind-security/customer-zero/
 - 更新情報への登録: http://cloudflare.com/resource/certificate-authority
-- 本リポジトリ内の関連記事: [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)
+- 本リポジトリ内の関連記事: [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)、[AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)（社内の暗号利用を AI で発見し、PQ 移行を計画する）

@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者・謝辞: Luke Valenta、Ollie Hsieh、Alex Krivit（記事末尾の謝辞より）
-- 関連: 同じポスト量子（PQ）移行の話題として [IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応とダウングレード対策。本記事は TLS 側の可視化）、および PQ 認証側の [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)
+- 関連: 同じポスト量子（PQ）移行の話題として [IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応とダウングレード対策。本記事は TLS 側の可視化）、および PQ 認証側の [Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)。また、自社コードの暗号利用を AI で洗い出す PQ 移行の進め方として [AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)
 - GitHub: [docs/articles/2026-09-29-post-quantum-visibility.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-post-quantum-visibility.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3N38FH3Y8R31B3T0EBK7WEH.01M3N38GADPYXX9327HCSMAVQM.png)
@@ -126,4 +126,4 @@ PQ 化のためのヒントとして、X25519MLKEM768 がまったく見えな�
 - NIST IR 8547（RSA / ECC の非推奨化）: https://nvlpubs.nist.gov/nistpubs/ir/2024/NIST.IR.8547.ipd.pdf
 - PQ 認証（オリジン向け ML-DSA-44）: https://blog.cloudflare.com/post-quantum-authentication-to-origins/
 - Merkle Tree Certificates 対応の認証局: http://blog.cloudflare.com/cloudflare-certificate-authority/（本リポジトリの解説: [Cloudflare が「インターネット全体のための認証局」を作る](./2026-09-29-cloudflare-certificate-authority.md)）
-- 本リポジトリ内の関連記事: [IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)、[Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（PQ 認証）
+- 本リポジトリ内の関連記事: [IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)、[Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（PQ 認証）、[AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見](./2026-09-29-ai-driven-cryptography-discovery.md)（社内の暗号利用を AI で発見し、PQ 移行を計画する）

@@ -256,4 +256,5 @@ layout: two-cols
 - オリジンへの PQ: https://developers.cloudflare.com/ssl/post-quantum-cryptography/pqc-to-origin/
 - 関連スライド: [IPsec 量子ダウングレード攻撃の防止](../ipsec-downgrade-protection/)
 - 関連スライド（PQ 認証・認証局）: [▶ 解説スライド](../pq-ca-with-mtcs/)、[CA 参入の発表](../cloudflare-certificate-authority/)
+- 関連スライド（暗号利用の発見・PQ 移行計画）: [▶ 解説スライド](../ai-driven-cryptography-discovery/)
 - Wiki: [docs/articles/2026-09-29-post-quantum-visibility.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-post-quantum-visibility.md)

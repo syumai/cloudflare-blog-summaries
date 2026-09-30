@@ -293,4 +293,5 @@ ACME 要求 -> ドメイン確認 -> 追記専用ログにエントリ追加
 - Azul: https://github.com/cloudflare/azul
 - c2sp tlog mirror: http://c2sp.org/tlog-mirror
 - 関連スライド: [CA 参入の発表](../cloudflare-certificate-authority/)、[IPsec 量子ダウングレード攻撃の防止](../ipsec-downgrade-protection/)、[PQ 暗号の可視化](../post-quantum-visibility/)
+- 関連スライド（暗号利用の発見・PQ 移行計画）: [▶ 解説スライド](../ai-driven-cryptography-discovery/)
 - Wiki: [docs/articles/2026-09-29-pq-ca-with-mtcs.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-pq-ca-with-mtcs.md)

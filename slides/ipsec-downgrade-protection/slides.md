@@ -255,6 +255,7 @@ backgroundSize: contain
 - 原文（en-us）: https://blog.cloudflare.com/ipsec-downgrade-protection/
 - 関連スライド（TLS 側の PQ 可視化）: [▶ 解説スライド](../post-quantum-visibility/)
 - 関連スライド（PQ 認証・認証局）: [▶ 解説スライド](../pq-ca-with-mtcs/)
+- 関連スライド（暗号利用の発見・PQ 移行計画）: [▶ 解説スライド](../ai-driven-cryptography-discovery/)
 - IETF ドラフト: https://datatracker.ietf.org/doc/draft-ietf-ipsecme-ikev2-downgrade-prevention/
 - RFC 7296（IKEv2）: https://datatracker.ietf.org/doc/rfc7296/
 - RFC 9242（中間交換）: https://datatracker.ietf.org/doc/rfc9242/

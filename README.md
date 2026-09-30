@@ -97,6 +97,7 @@ cloudflare-blog-summaries/
 | 2026-09-29 | Merkle Tree Certificates によるポスト量子認証局の構築 | [Wiki](docs/articles/2026-09-29-pq-ca-with-mtcs.md) | [スライド](slides/pq-ca-with-mtcs/slides.md) | [クイズ](quizzes/pq-ca-with-mtcs.html) | [原文](https://blog.cloudflare.com/pq-ca-with-mtcs/) |
 | 2026-09-29 | AI 時代の適応型アプリケーションセキュリティ: Cloudflare がコード・トラフィック・インテリジェンスをつなぎ、攻撃を止める方法 | [Wiki](docs/articles/2026-09-29-ai-era-framework.md) | [スライド](slides/ai-era-framework/slides.md) | [クイズ](quizzes/ai-era-framework.html) | [原文](https://blog.cloudflare.com/ai-era-framework/) |
 | 2026-09-29 | Cloudflare が「インターネット全体のための認証局」を作る | [Wiki](docs/articles/2026-09-29-cloudflare-certificate-authority.md) | [スライド](slides/cloudflare-certificate-authority/slides.md) | [クイズ](quizzes/cloudflare-certificate-authority.html) | [原文](https://blog.cloudflare.com/cloudflare-certificate-authority/) |
+| 2026-09-29 | AI でポスト量子移行の進路を描く: 社内ツール CryptoLabe による暗号利用の発見 | [Wiki](docs/articles/2026-09-29-ai-driven-cryptography-discovery.md) | [スライド](slides/ai-driven-cryptography-discovery/slides.md) | [クイズ](quizzes/ai-driven-cryptography-discovery.html) | [原文](https://blog.cloudflare.com/ai-driven-cryptography-discovery/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
