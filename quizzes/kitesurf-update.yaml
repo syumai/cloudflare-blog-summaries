@@ -1,0 +1,91 @@
+title: "エージェント向けブラウザへの道: Kitesurf アップデート"
+slug: kitesurf-update
+sourceUrl: https://blog.cloudflare.com/kitesurf-update/
+wiki: ../docs/articles/2026-09-28-kitesurf-update.md
+questions:
+  - q: "本記事で Kitesurf が新たに対応した、エージェントがサイトの公開する関数を直接呼べる仕組みはどれか。"
+    choices:
+      - "WebRTC"
+      - "WebMCP"
+      - "WebTransport"
+      - "WebGPU"
+    answer: 1
+    explanation: "Wikiの「WebMCP 対応」にあるとおり、searchFlights() のような関数を直接呼べる。"
+
+  - q: "Kitesurf が通過したWPTサブテスト数として記事が示しているのはどれか。"
+    choices:
+      - "約2万件"
+      - "約21万5,000件"
+      - "73万件超"
+      - "200万件超"
+    answer: 2
+    explanation: "Wikiの「新しいAPIとWPTカバレッジ」にあるとおり、730,000件超で、ローンチ時より50万件以上増えた。"
+
+  - q: "Kitesurf Playground のWebMCPデモで使われているサイトはどれか。"
+    choices:
+      - "Cloudflare Radar"
+      - "Cloudflare Dashboard"
+      - "Workers Playground"
+      - "Cloudflare Blog"
+    answer: 0
+    explanation: "Wikiの「WebMCP 対応」に、Cloudflare Radar を使ったデモと、navigate-to・set-location ツールの公開が書かれている。"
+
+  - q: "効率化の施策として記事に挙げられていないものはどれか。"
+    choices:
+      - "Boa JSエンジンとDOMの境界越えの削減"
+      - "フォント読み込みで必要な文字に限定して取得"
+      - "負荷の高いページのメモリ管理の改善"
+      - "レンダリングをChromiumに切り替える"
+    answer: 3
+    explanation: "Wikiの「効率化」を参照。KitesurfはChromiumを使わない独自実装であり、Chromiumへの切り替えは施策ではない。"
+
+  - q: "次のコードで、Quick Actions API をKitesurfで実行させている指定はどれか。"
+    code: |
+      return await env.BROWSER.quickAction("screenshot", {
+        url: "https://example.com",
+        browser: "kitesurf"
+      });
+    codeLang: ts
+    choices:
+      - "quickAction の第1引数 \"screenshot\""
+      - "url の指定"
+      - "browser: \"kitesurf\""
+      - "Env の BROWSER"
+    answer: 2
+    explanation: "Wikiの「コード例」2にあるとおり、browser: \"kitesurf\" でエンジンが切り替わる。"
+
+  - q: "ターミナルでKitesurfを動かす描画方式として正しい組み合わせはどれか。"
+    choices:
+      - "Kittyグラフィックスプロトコル、または純粋なANSIテキストモード"
+      - "SIXELのみ"
+      - "VNCのみ"
+      - "HTMLへの書き出しのみ"
+    answer: 0
+    explanation: "Wikiの「ターミナルでのレンダリング」に記載されている。インストールは brew install cloudflare/cloudflare/kitesurf。"
+
+  - q: "chrome-devtools-mcp の設定でWebMCPツールを有効にするために指定しているオプションはどれか。"
+    choices:
+      - "--headless"
+      - "--category-experimental-webmcp"
+      - "--enable-kitesurf"
+      - "--wsHeaders"
+    answer: 1
+    explanation: "Wikiの「コード例」1を参照。--wsHeaders は認証ヘッダー、browser=kitesurf がエンジン切り替えである。"
+
+  - q: "Browser Run API との統合について正しい記述はどれか。"
+    choices:
+      - "CDPのみ対応"
+      - "Playwrightのみ対応"
+      - "CDP・Playwright・Puppeteer・MCPを全面的にカバー"
+      - "MCPは非対応"
+    answer: 2
+    explanation: "Wikiの「Browser Run API との統合」にあるとおり、4つすべてをカバーする。"
+
+  - q: "記事が強調する、Kitesurf の変わらない設計方針はどれか。"
+    choices:
+      - "顧客アプリと同じ公開機能だけを使い、Workers上で動く"
+      - "専用の内部APIを使って高速化する"
+      - "Chromiumのフォークとして保守する"
+      - "エッジではなく専用サーバーで動かす"
+    answer: 0
+    explanation: "Wikiの「所感・ポイント」にあるとおり、Workers上で他の顧客アプリと同じ公開機能だけで動く設計を維持している。"

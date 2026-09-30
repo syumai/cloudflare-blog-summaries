@@ -490,6 +490,7 @@ class: text-center
 - [Boa JS（Rust製ECMAScriptエンジン）](https://boajs.dev/)
 - [Browser Run ドキュメント](https://developers.cloudflare.com/browser-run/)
 - [Dynamic Workers ドキュメント](https://developers.cloudflare.com/dynamic-workers/)
+- ▶ 続報: [Kitesurf アップデートの解説スライド](../kitesurf-update/)
 - Workers サンプル: [github.com/syumai/cloudflare-blog-summaries/tree/main/examples/kitesurf](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/kitesurf)
 
 <div class="pt-8 text-sm opacity-50">
