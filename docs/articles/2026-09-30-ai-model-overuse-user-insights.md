@@ -3,7 +3,7 @@
 - 原文: [https://blog.cloudflare.com/ai-model-overuse-user-insights/](https://blog.cloudflare.com/ai-model-overuse-user-insights/)（日本語版なし。ja-jp URL は 404 のため、en-us 版から日本語化した）
 - 公開日: 2026-09-30（Birthday Week 2026。英語原文の datePublished は 2026-09-30T13:00:00Z）
 - 著者: Ayush Kumar, Frank Meszaros
-- 関連: [ID情報に基づく分析で、不正なAIの利用を検出](2026-08-05-identity-aware-ai-gateway.md) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](2026-08-07-workers-ai-gateway-unification.md)
+- 関連: [AI Gateway の Auto Router で AI 支出を削減する](2026-09-30-auto-router.md) / [ID情報に基づく分析で、不正なAIの利用を検出](2026-08-05-identity-aware-ai-gateway.md) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](2026-08-07-workers-ai-gateway-unification.md)
 - GitHub: [docs/articles/2026-09-30-ai-model-overuse-user-insights.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-ai-model-overuse-user-insights.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7B4V2YNVJJXE8VE6E5ZK5E.png)
@@ -72,7 +72,7 @@ overkill のパターンをタスク・コスト・レイテンシ・ターン�
 
 Auto Router は、会話の軌跡・タスクカテゴリ・タスクの複雑さ・モデル適合のシグナルを使い、コストを考慮して適切なモデルへ自動でルーティングする。ワークロードごとのルールを書く代わりに、アプリケーションが使えるモデルの中から選ばせる。ただし常に最安モデルを選ぶわけではなく、複雑なコーディングや調査は高性能モデルのままになりうる。
 
-なお、Auto Router の提供段階について、記事内に食い違いがある。Model fit の節は「public beta で公開」、本節は「closed beta で利用可能」と書かれている（原文のまま転記。どちらが正しいかは、Auto Router の記事で確認する必要がある）。詳細は記事内からリンクされている Auto Router の記事（https://blog.cloudflare.com/auto-router/）を参照。
+なお、Auto Router の提供段階について、記事内に食い違いがある。Model fit の節は「public beta で公開」、本節は「closed beta で利用可能」と書かれている（原文のまま転記。どちらが正しいかは、Auto Router の記事で確認する必要がある）。詳細は記事内からリンクされている Auto Router の記事（[解説: AI Gateway の Auto Router で AI 支出を削減する](2026-09-30-auto-router.md)、原文 https://blog.cloudflare.com/auto-router/）を参照。その記事では public beta と書かれている。
 
 ### トラフィックの分類方法
 
@@ -139,10 +139,10 @@ cf-aig-metadata: { user_id: "user-123", session_id: "session-456", idp_group: "e
 ## 関連リンク
 
 - 原文（en-us）: [https://blog.cloudflare.com/ai-model-overuse-user-insights/](https://blog.cloudflare.com/ai-model-overuse-user-insights/)
-- 本リポジトリ内の関連記事: [ID情報に基づく分析で、不正なAIの利用を検出](2026-08-05-identity-aware-ai-gateway.md) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](2026-08-07-workers-ai-gateway-unification.md)
+- 本リポジトリ内の関連記事: [AI Gateway の Auto Router で AI 支出を削減する](2026-09-30-auto-router.md) / [ID情報に基づく分析で、不正なAIの利用を検出](2026-08-05-identity-aware-ai-gateway.md) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](2026-08-07-workers-ai-gateway-unification.md)
 - 記事内から張られているリンク:
   - [User Insights を公開した記事（Identity-aware AI Gateway）](https://blog.cloudflare.com/identity-aware-ai-gateway/#the-new-user-insights-tab)
   - [AI Gateway（製品ページ）](https://www.cloudflare.com/products/ai-gateway/)
-  - [Auto Router の記事](https://blog.cloudflare.com/auto-router/)
+  - [Auto Router の記事](https://blog.cloudflare.com/auto-router/)（本リポジトリの解説: [AI Gateway の Auto Router で AI 支出を削減する](2026-09-30-auto-router.md)）
   - [AI Gateway User Insights のドキュメント](https://developers.cloudflare.com/ai-gateway/observability/user-insights/)
   - [Cloudflare ダッシュボード（AI Gateway）](https://dash.cloudflare.com/?to=/:account/ai/ai-gateway)

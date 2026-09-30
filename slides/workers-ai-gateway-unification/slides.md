@@ -344,7 +344,7 @@ class: text-center
 
 - 原文（日本語）: [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](https://blog.cloudflare.com/ja-jp/workers-ai-gateway-unification/)
 - 英語版: [Unifying Workers AI and AI Gateway into a single AI control plane](https://blog.cloudflare.com/workers-ai-gateway-unification/)
-- 関連解説スライド: [User Insights で AI モデルの「過剰利用」を見つける](../ai-model-overuse-user-insights/)
+- 関連解説スライド: [AI Gateway の Auto Router で AI 支出を削減する](../auto-router/) / [User Insights で AI モデルの「過剰利用」を見つける](../ai-model-overuse-user-insights/)
 - [Set up your first gateway](https://developers.cloudflare.com/ai-gateway/get-started/)
 - [Workers AI model catalog](https://developers.cloudflare.com/workers-ai/models/)
 - [Unified billing developer docs](https://developers.cloudflare.com/changelog/post/2026-08-07-workers-ai-unified-billing/)

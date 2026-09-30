@@ -1,0 +1,105 @@
+title: "AI Gateway の Auto Router で AI 支出を削減する"
+slug: auto-router
+sourceUrl: https://blog.cloudflare.com/auto-router/
+wiki: ../docs/articles/2026-09-30-auto-router.md
+questions:
+  - q: "Auto Router を使うために、モデルに指定する値はどれか。"
+    choices:
+      - "cloudflare/auto"
+      - "cloudflare/cheapest"
+      - "auto/gateway"
+      - "workers-ai/router"
+    answer: 0
+    explanation: "Wikiの「TL;DR」を参照。モデルに cloudflare/auto を指定すると、Auto Router がリクエストごとに、タスクに十分な能力のモデルへ自動でルーティングする。"
+
+  - q: "Auto Router の提供状況として、記事に合うものはどれか。"
+    choices:
+      - "一般提供（GA）で、有料のみ"
+      - "パブリックベータで、ベータ期間中は無料"
+      - "招待制のクローズドベータ"
+      - "社内限定で未公開"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「所感・ポイント」を参照。記事は public beta で公開したと述べ、ベータ期間中は無料としている。"
+
+  - q: "記事で、社内の OpenCode での利用について述べられているコスト削減の効果はどれか。"
+    choices:
+      - "最大 3%"
+      - "最大 10%"
+      - "最大 30%"
+      - "最大 90%"
+    answer: 2
+    explanation: "Wikiの「TL;DR」を参照。OpenAI Sol や Anthropic Claude Opus のようなフロンティアモデルだけを使う場合と比べ、最大 30% のコスト削減が見られたとしている。"
+
+  - q: "Auto Router が、メッセージの分類のために使う仕組みはどれか。"
+    choices:
+      - "ユーザーが毎回入力するタスク種別のラベル"
+      - "Workers AI 上で動く多ヘッドの分類モデル"
+      - "プロンプト中のキーワードの正規表現マッチのみ"
+      - "人間のレビュー担当者による手動の振り分け"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「仕組み」を参照。分類モデルは Workers AI 上で動き、エッジネットワークの GPU にデプロイされている。14 のタスクカテゴリへの確率と、4 つの難易度指標を出す。"
+
+  - q: "分類器が 1〜5 で評価する 4 つの次元として、記事に合うものはどれか。"
+    choices:
+      - "latency・throughput・region・price"
+      - "complexity・ambiguity・stakes・前の文脈への依存度"
+      - "accuracy・recall・precision・F1"
+      - "input 長・output 長・言語・ツール数"
+    answer: 1
+    explanation: "Wikiの「仕組み」を参照。分類器は 14 のタスクカテゴリへの確率に加え、complexity（複雑さ）・ambiguity（曖昧さ）・stakes（重大性）・前の文脈への依存度を 1〜5 で評価する。"
+
+  - q: "内部ベンチマーク（97 タスク、各 3 回）の結果として、記事に合うものはどれか。"
+    choices:
+      - "cloudflare/auto は Claude Opus 5.5 より成功率が高く、コストも低い"
+      - "cloudflare/auto の総コストは Sol の約 80%、Opus の約 35% で、成功率は Opus 5.5 の方が高い"
+      - "cloudflare/auto の成功率は 3 モデルの中で最も低い"
+      - "3 モデルの総コストはほぼ同じだった"
+    answer: 1
+    explanation: "Wikiの「結果: 内部ベンチマーク」を参照。cloudflare/auto は成功率 86.6%・総コスト $2.10、GPT-6 Sol は 84.2%・$2.64、Claude Opus 5.5 は 96.6%・$5.91 で、Opus 5.5 の成功率が最も高い。"
+
+  - q: "ドキュメントにある次の呼び出し例で、Auto Router を使う指定はどの部分か。"
+    code: |
+      curl -i -X POST "https://gateway.ai.cloudflare.com/v1/$CLOUDFLARE_ACCOUNT_ID/$CLOUDFLARE_GATEWAY_ID/compat/chat/completions" \
+        --header "cf-aig-authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+        --header "Content-Type: application/json" \
+        --data '{
+          "model": "cloudflare/auto",
+          "messages": [
+            { "role": "user", "content": "hello" }
+          ]
+        }'
+    codeLang: bash
+    choices:
+      - "エンドポイント URL 中の compat"
+      - "cf-aig-authorization ヘッダー"
+      - "リクエストボディの \"model\": \"cloudflare/auto\""
+      - "messages の role"
+    answer: 2
+    explanation: "Wikiの「コード例」を参照。プロバイダー固有のモデル名の代わりに model に cloudflare/auto を指定する。選ばれたモデルは応答ヘッダー cf-aig-routed-model で分かる。なお、この例は記事本文ではなく、記事がリンクするドキュメントの記載。"
+
+  - q: "記事が述べる、Auto Router が最小化を目指すものとして合うものはどれか。"
+    choices:
+      - "100 万トークンあたりの単価だけ"
+      - "予測される軌跡（trajectory）全体のコスト"
+      - "モデルの切り替え回数そのもの"
+      - "リクエストの応答時間のみ"
+    answer: 1
+    explanation: "Wikiの「結果: 内部ベンチマーク」を参照。紙の上で安いモデルが桁違いに多くのトークンを使うことがあるため、単価での負荷分散ではなく、予測される軌跡のコストを最小化すべきだとしている。"
+
+  - q: "長いエージェントセッションで、Auto Router がモデルの切り替えをどう扱うか、記事に合うものはどれか。"
+    choices:
+      - "切り替えを一切禁止している"
+      - "毎リクエストで必ず最安モデルへ切り替える"
+      - "ターン内は同じモデルを保ち、ターン間はコンテキストのトークン数に応じた切り替えペナルティを適用する"
+      - "キャッシュは考慮せず、ベンチマークの品質だけで選ぶ"
+    answer: 2
+    explanation: "Wikiの「長いエージェントセッションとキャッシュ」を参照。モデルを切り替えるとキャッシュが捨てられ、コンテキスト全体を書き直す必要がある。ターン内ではキャッシュが温まっているため切り替えが得になりにくく、ターン間ではペナルティを課す。生きたキャッシュを持つモデルは安い読み取り価格で評価される。"
+
+  - q: "記事が挙げる、2 段構成（分類器 → スコアリング行列）の利点として合うものはどれか。"
+    choices:
+      - "新モデルの追加時に、分類器の再学習が毎回必要になる"
+      - "新モデルが出ても再学習は不要で、ベンチマーク由来の重みをスコアリング行列に加えればよい"
+      - "ルーティングの判断理由を確認できなくなる"
+      - "常に最高品質のモデルだけが選ばれる"
+    answer: 1
+    explanation: "Wikiの「設計上の利点」を参照。判断を説明しやすく、新しいモデルの対応は再学習なしで済む。同じ分類器で cloudflare/auto-best のような別のプロファイルも支えられる（将来リリース予定）。"

@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "auto-router-example",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "vars": {
+    // ダッシュボードの AI Gateway で作成したゲートウェイの ID とアカウント ID に置き換える。
+    "CLOUDFLARE_ACCOUNT_ID": "your-account-id",
+    "CLOUDFLARE_GATEWAY_ID": "your-gateway-id"
+  }
+  // CLOUDFLARE_API_TOKEN は `npx wrangler secret put CLOUDFLARE_API_TOKEN` で登録する。
+}

@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/workers-ai-gateway-unification/](https://blog.cloudflare.com/workers-ai-gateway-unification/)（日本語版なし）
 - 公開日: 2026-08-07
-- 関連: [User Insights で AI モデルの「過剰利用」を見つける](2026-09-30-ai-model-overuse-user-insights.md)（スマートルーティングの下地になるタスク分類のシグナル）
+- 関連: [AI Gateway の Auto Router で AI 支出を削減する](2026-09-30-auto-router.md)（スマートルーティングの実現形） / [User Insights で AI モデルの「過剰利用」を見つける](2026-09-30-ai-model-overuse-user-insights.md)（スマートルーティングの下地になるタスク分類のシグナル）
 - GitHub: [docs/articles/2026-08-07-workers-ai-gateway-unification.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-workers-ai-gateway-unification.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZA5VCX2R70YMT8M56D89B37.png)

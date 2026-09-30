@@ -531,7 +531,7 @@ cf-aig-metadata: { user_id: "user-123", session_id: "session-456", idp_group: "e
 </div>
 
 - 原文: [Identify AI model overuse with User Insights](https://blog.cloudflare.com/ai-model-overuse-user-insights/)（日本語版なし）
-- 関連解説スライド: [ID情報に基づく分析で、不正なAIの利用を検出](../identity-aware-ai-gateway/) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](../workers-ai-gateway-unification/)
+- 関連解説スライド: [AI Gateway の Auto Router で AI 支出を削減する](../auto-router/) / [ID情報に基づく分析で、不正なAIの利用を検出](../identity-aware-ai-gateway/) / [Workers AIとAI Gatewayを単一のAIコントロールプレーンへ統合](../workers-ai-gateway-unification/)
 - [User Insights のドキュメント](https://developers.cloudflare.com/ai-gateway/observability/user-insights/)
 - [AI Gateway](https://www.cloudflare.com/products/ai-gateway/)
 - [Auto Router の記事](https://blog.cloudflare.com/auto-router/)
