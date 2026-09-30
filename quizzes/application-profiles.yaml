@@ -1,0 +1,97 @@
+title: "Cloudflare Application Profiles でポジティブセキュリティを実現する"
+slug: application-profiles
+sourceUrl: https://blog.cloudflare.com/application-profiles/
+wiki: ../docs/articles/2026-09-29-application-profiles.md
+questions:
+  - q: "ポジティブセキュリティの説明として最も適切なものはどれか。"
+    choices:
+      - "既知の攻撃シグネチャに一致するリクエストだけをブロックする"
+      - "期待される正常なリクエストの構造・形式だけを通し、そこから外れるものを検知する"
+      - "すべてのリクエストを暗号化する"
+      - "ボットだけを検出する"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。攻撃らしいものを探す代わりに、期待どおりのリクエストだけを通す発想。"
+
+  - q: "Application Profiles が学習の対象にするものとして正しいものはどれか。"
+    choices:
+      - "パス変数・クエリ・ヘッダー・Cookie・JSON / フォームボディ"
+      - "サーバーのソースコード"
+      - "TLS 証明書の内容のみ"
+      - "DNS レコードのみ"
+    answer: 0
+    explanation: "Wikiの「期待される構造の学習」を参照。各フィールドの型と制約（範囲・長さ・文字クラス）を学習する。"
+
+  - q: "学習済みプロファイルに基づく常時オンの検証は、リクエストに対して何をするか。"
+    choices:
+      - "非準拠のリクエストを自動で必ずブロックする"
+      - "準拠 / 非準拠の結果をメタデータとして付与するだけで、ブロックは Security Rules で顧客が作る"
+      - "非準拠のリクエストを削除して顧客に通知する"
+      - "プロファイルのないオペレーションも自動で分類する"
+    answer: 1
+    explanation: "Wikiの「学習と検証の流れ」を参照。信号自体はアクションを取らず、プロファイルのないオペレーションは分類されない。"
+
+  - q: "学習に必要なトラフィック量と頻度の組み合わせとして正しいものはどれか。"
+    choices:
+      - "毎時、100 件の 2xx で学習し、境界は 1,000 件"
+      - "ゾーンごとに週 1 回、過去 7 日で 2xx が 1,000 件以上（フィールド）、10,000 件以上（データ境界）"
+      - "月 1 回、全リクエストが対象"
+      - "手動実行のみで、件数の条件はない"
+    answer: 1
+    explanation: "Wikiの「期待される構造の学習」を参照。自動学習は週 1 回。オンデマンド学習はロードマップ上の項目。"
+
+  - q: "記事の具体例で、パスに UUID を、product_id に整数を期待すると学習した場合、product_id に文字列が入るとどうなるか。"
+    choices:
+      - "学習が初期化される"
+      - "違反として検知され、強制を有効にすればブロックできる"
+      - "自動的に整数へ変換される"
+      - "何も起きない"
+    answer: 1
+    explanation: "Wikiの「具体例」を参照。シグネチャなしで SQL インジェクションなどの典型的な経路を絞れる。"
+
+  - q: "次の Security Rules のフィールド式の意味として正しいものはどれか。"
+    code: |
+      cf.schema_validation.learned.query.undeclared_parameters = ["adminMode", "utm"]
+    codeLang: txt
+    choices:
+      - "クエリに、プロファイルにない（未宣言の）パラメータ adminMode と utm が含まれている"
+      - "クエリの adminMode と utm が型違反である"
+      - "ヘッダーに adminMode と utm が含まれている"
+      - "adminMode と utm が必須パラメータとして欠落している"
+    answer: 0
+    explanation: "Wikiの「Security Rules による強制」の表を参照。undeclared_parameters は未宣言パラメータの検出用で、location は query。違反位置を示すのは violated_parameters。"
+
+  - q: "観測モードから始めることが推奨される理由として最も適切なものはどれか。"
+    choices:
+      - "非準拠は必ずしも悪意を意味せず、リリースや新クライアントでも差が出るため"
+      - "観測モードでないと学習が進まないため"
+      - "ブロックを有効にするには料金が必要なため"
+      - "ログが保存されないため"
+    answer: 0
+    explanation: "Wikiの「学習と検証の流れ」を参照。強制の前に Profile Analysis などでプロファイルの影響を確認する。"
+
+  - q: "Security Analytics の Profile Analysis で、違反はいくつの理由に分類されるか。"
+    choices:
+      - "2 種類"
+      - "5 種類"
+      - "10 種類"
+      - "100 種類"
+    answer: 2
+    explanation: "Wikiの「ブロック前に確認する: Profile Analysis」を参照。型の不一致・学習範囲外の値・不正な形式などに分類される。"
+
+  - q: "現時点で Application Profiles が対応していないもの（制限）はどれか。"
+    choices:
+      - "JSON ボディ"
+      - "Cookie"
+      - "multipart フォーム・GraphQL・XML、および必須パラメータの強制"
+      - "UUID の検証"
+    answer: 2
+    explanation: "Wikiの「提供状況」を参照。パラメータの一意性、必須パラメータ、新パラメータだけでのブロックも行わない。"
+
+  - q: "今後予定されている Critical Field Analysis の狙いとして正しいものはどれか。"
+    choices:
+      - "LLM で学習済みプロファイルに文脈を与え、保護すべき重要なオペレーション・フィールドの優先順位付けを支援する"
+      - "すべてのフィールドを自動で暗号化する"
+      - "プロファイルの学習をやめる"
+      - "Workers のコードを自動生成する"
+    answer: 0
+    explanation: "Wikiの「今後: Critical Field Analysis」を参照。clientId と account_number の関連や OTP の依存を識別した試験が紹介されている。"
