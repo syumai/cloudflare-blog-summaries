@@ -4,7 +4,7 @@
 - 日本語版の出どころ: Cloudflare公式の日本語版（ja-jp）は確認時点で存在しなかった（404）ため、英語版（en-us）から日本語化して要約している。公開日は英語原文の datePublished に従う。
 - 公開日: 2026-09-28
 - 位置づけ: Birthday Week 2026 の記事
-- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（2010年のTechCrunch Disruptへの言及、「50万社」構想）、[EmDash 1.0](./2026-09-28-emdash-cms-plugin-registry.md)（同じ Birthday Week 2026 の記事）
+- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（2010年のTechCrunch Disruptへの言及、「50万社」構想）、[EmDash 1.0](./2026-09-28-emdash-cms-plugin-registry.md)（同じ Birthday Week 2026 の記事）、[Cloudflare Impact が寄付1億ドルに到達](./2026-09-30-100-million-donations.md)（Impact プログラム。同じ Birthday Week 2026 の記事）
 - GitHub: [docs/articles/2026-09-28-introducing-the-cold-start.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-introducing-the-cold-start.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3KPTYC36CJQF99DE2AHZXMV.01M3KPTZVQS15TZPV93V8FNAS2.png)

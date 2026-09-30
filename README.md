@@ -106,6 +106,7 @@ cloudflare-blog-summaries/
 | 2026-09-30 | 人とエージェントのためにドメイン購入をシンプルに: 新しいドメイン検索と Registrar | [Wiki](docs/articles/2026-09-30-simplifying-domains.md) | [スライド](slides/simplifying-domains/slides.md) | [クイズ](quizzes/simplifying-domains.html) | [原文](https://blog.cloudflare.com/simplifying-domains/) |
 | 2026-09-30 | 本番の問題を検知してエージェントへ直接送る: Workers の Issues | [Wiki](docs/articles/2026-09-30-real-time-issue-detection.md) | [スライド](slides/real-time-issue-detection/slides.md) | [クイズ](quizzes/real-time-issue-detection.html) | [原文](https://blog.cloudflare.com/real-time-issue-detection/) |
 | 2026-09-30 | AI Gateway の Auto Router で AI 支出を削減する | [Wiki](docs/articles/2026-09-30-auto-router.md) | [スライド](slides/auto-router/slides.md) | [クイズ](quizzes/auto-router.html) | [原文](https://blog.cloudflare.com/auto-router/) |
+| 2026-09-30 | Cloudflare Impact が寄付（提供サービス）1億ドルに到達 | [Wiki](docs/articles/2026-09-30-100-million-donations.md) | [スライド](slides/100-million-donations/slides.md) | [クイズ](quizzes/100-million-donations.html) | [原文](https://blog.cloudflare.com/100-million-donations/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
