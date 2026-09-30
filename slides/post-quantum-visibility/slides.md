@@ -255,5 +255,5 @@ layout: two-cols
 - RFC 10024: https://www.rfc-editor.org/rfc/rfc10024.html
 - オリジンへの PQ: https://developers.cloudflare.com/ssl/post-quantum-cryptography/pqc-to-origin/
 - 関連スライド: [IPsec 量子ダウングレード攻撃の防止](../ipsec-downgrade-protection/)
-- 関連スライド（PQ 認証・認証局）: [▶ 解説スライド](../pq-ca-with-mtcs/)
+- 関連スライド（PQ 認証・認証局）: [▶ 解説スライド](../pq-ca-with-mtcs/)、[CA 参入の発表](../cloudflare-certificate-authority/)
 - Wiki: [docs/articles/2026-09-29-post-quantum-visibility.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-post-quantum-visibility.md)

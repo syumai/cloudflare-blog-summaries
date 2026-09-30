@@ -279,7 +279,7 @@ ACME 要求 -> ドメイン確認 -> 追記専用ログにエントリ追加
 - PQ 署名を小さくするのではなく、<strong>署名の数を減らす</strong>（ツリーのルートだけに署名）ことで PQ のスケーリング問題を解く設計
 - 発行とログの一体化で、CT が後付けではなくなる。ただし独立したコサイナーに信頼が依存する
 - 「約 9% 高速」は中間証明書の省略が大きく、PQ 署名での数値ではない点に注意
-- 関連: TLS の PQ 鍵交換の可視化 [▶ 解説スライド](../post-quantum-visibility/)、IPsec の PQ 対応 [▶ 解説スライド](../ipsec-downgrade-protection/)
+- 関連: CA 参入の発表 [▶ 解説スライド](../cloudflare-certificate-authority/)、TLS の PQ 鍵交換の可視化 [▶ 解説スライド](../post-quantum-visibility/)、IPsec の PQ 対応 [▶ 解説スライド](../ipsec-downgrade-protection/)
 - デプロイ可能なサンプルは対象外（認証局の構築と仕様解説が中心で、一般利用可能な機能ではないため）
 
 ---
@@ -292,5 +292,5 @@ ACME 要求 -> ドメイン確認 -> 追記専用ログにエントリ追加
 - Chrome Root Program: https://googlechrome.github.io/chromerootprogram/index.html
 - Azul: https://github.com/cloudflare/azul
 - c2sp tlog mirror: http://c2sp.org/tlog-mirror
-- 関連スライド: [IPsec 量子ダウングレード攻撃の防止](../ipsec-downgrade-protection/)、[PQ 暗号の可視化](../post-quantum-visibility/)
+- 関連スライド: [CA 参入の発表](../cloudflare-certificate-authority/)、[IPsec 量子ダウングレード攻撃の防止](../ipsec-downgrade-protection/)、[PQ 暗号の可視化](../post-quantum-visibility/)
 - Wiki: [docs/articles/2026-09-29-pq-ca-with-mtcs.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-pq-ca-with-mtcs.md)

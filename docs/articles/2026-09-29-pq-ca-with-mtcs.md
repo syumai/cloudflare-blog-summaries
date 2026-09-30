@@ -4,7 +4,7 @@
 - 日本語版の出どころ: Cloudflare公式の日本語版（`https://blog.cloudflare.com/ja-jp/pq-ca-with-mtcs/`）は確認時点で存在しなかった（404）ため、英語版（en-us）から日本語化して要約している。公開日は英語原文の datePublished（2026-09-29）に従う。
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
-- 関連: 同じポスト量子（PQ）移行の話題として、[IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応とダウングレード対策）と [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（TLS の PQ 鍵交換の可視化。本記事は PQ「認証」側で、同記事の末尾でも将来の可視化対象として言及されている）
+- 関連: この記事が技術詳細を担う、CA 参入の発表 [Cloudflare が「インターネット全体のための認証局」を作る](./2026-09-29-cloudflare-certificate-authority.md)（CA の方針・ルートプログラム・ACME/ARI・2027 年第 1 四半期の MTC 発行計画）。同じポスト量子（PQ）移行の話題として、[IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応とダウングレード対策）と [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（TLS の PQ 鍵交換の可視化。本記事は PQ「認証」側で、同記事の末尾でも将来の可視化対象として言及されている）
 - GitHub: [docs/articles/2026-09-29-pq-ca-with-mtcs.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-pq-ca-with-mtcs.md)
 
 ![ヘッダー画像（OGP 画像）](https://blog.cloudflare.com/_emdash/api/media/file/01M3P82XV6Q7JZSJTM9RG8N1YH.01M3P82YSA93VNX0A7361ZGKTX.png)
@@ -152,4 +152,4 @@ ACME 要求 -> ドメイン確認 -> 追記専用ログにエントリ追加
 - Radar の Certificate Transparency ページ: https://radar.cloudflare.com/certificate-transparency
 - ポスト量子暗号は無料であるべき: https://blog.cloudflare.com/post-quantum-crypto-should-be-free/
 - ポスト量子ロードマップ: https://blog.cloudflare.com/post-quantum-roadmap/
-- 本リポジトリ内の関連記事: [IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)
+- 本リポジトリ内の関連記事: [Cloudflare が「インターネット全体のための認証局」を作る](./2026-09-29-cloudflare-certificate-authority.md)、[IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)
