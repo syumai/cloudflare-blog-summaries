@@ -5,7 +5,7 @@
 - 公開日: 2026-09-28
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Dimitri Mitropoulos、Matt "TK" Taylor、Samuel Macleod
-- 関連: [コードモード: エージェントに1,000トークンのAPI全体を提供](./2026-02-20-code-mode-mcp.md)（OpenAPI仕様の扱い）、[CI Workflows](./2026-08-04-ci-workflows.md)（CI上の処理基盤）
+- 関連: [コードモード: エージェントに1,000トークンのAPI全体を提供](./2026-02-20-code-mode-mcp.md)（OpenAPI仕様の扱い）、[CI Workflows](./2026-08-04-ci-workflows.md)（CI上の処理基盤）、[cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md)（Forge で生成された CLI）
 - GitHub: [docs/articles/2026-09-28-forge-open-source-generation-pipeline.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-forge-open-source-generation-pipeline.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3J4EWN0BM1HFWCRCV3ND3H8.png)
@@ -109,6 +109,7 @@ let [me, myFriends] = await Promise.all([profile, friends]);
 - [コードモード: エージェントに1,000トークンのAPI全体を提供（本リポジトリ）](./2026-02-20-code-mode-mcp.md)
 - [CI Workflows（本リポジトリ）](./2026-08-04-ci-workflows.md)
 - Forge（GitHub）: https://github.com/cloudflare/forge
+- [cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI（本リポジトリ）](./2026-09-28-cloudflare-cf-cli-launch.md)
 - cf CLI の記事: https://blog.cloudflare.com/cloudflare-cf-cli-launch/
 - Workers Previews: https://blog.cloudflare.com/worker-previews/
 - Cap'n Web: https://capnweb.com/

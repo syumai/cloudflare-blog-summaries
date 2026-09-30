@@ -189,5 +189,5 @@ let [me, myFriends] = await Promise.all([profile, friends]);
 - Forge: https://github.com/cloudflare/forge
 - Cap'n Web: https://capnweb.com/
 - Workers Previews: https://blog.cloudflare.com/worker-previews/
-- 関連スライド: [コードモード（OpenAPI仕様の扱い）](../code-mode-mcp/) / [CI Workflows](../ci-workflows/)
+- 関連スライド: [コードモード（OpenAPI仕様の扱い）](../code-mode-mcp/) / [CI Workflows](../ci-workflows/) / [cf CLI（Forge で生成）](../cloudflare-cf-cli-launch/)
 - Wiki: [docs/articles/2026-09-28-forge-open-source-generation-pipeline.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-forge-open-source-generation-pipeline.md)

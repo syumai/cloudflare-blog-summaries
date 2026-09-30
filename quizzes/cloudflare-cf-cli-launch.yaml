@@ -1,0 +1,109 @@
+title: "cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI"
+slug: cloudflare-cf-cli-launch
+sourceUrl: https://blog.cloudflare.com/cloudflare-cf-cli-launch/
+wiki: ../docs/articles/2026-09-28-cloudflare-cf-cli-launch.md
+questions:
+  - q: "cf の位置づけとして最も適切なものはどれか。"
+    choices:
+      - "Wrangler の名前を変えただけのリリース"
+      - "エージェントの利用を前提に設計された、Cloudflare API 全体を扱える新 CLI（オープンベータ）"
+      - "Workers 専用のテストランナー"
+      - "Cloudflare ダッシュボードの代替 Web UI"
+    answer: 1
+    explanation: "Wikiの「TL;DR」を参照。cf は npm i -g cf でインストールできるオープンベータの CLI で、エージェント向けに設計されている。"
+
+  - q: "記事が示した、Wrangler の利用におけるエージェントの割合の変化はどれか。"
+    choices:
+      - "2026年3月に4分の1、直近で 48%"
+      - "2026年3月に 48%、直近で 4分の1"
+      - "2026年3月に 10%、直近で 25%"
+      - "常に半数以上"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。2026年3月に Wrangler 利用の4分の1がエージェントで、先週には 48% に達した。"
+
+  - q: "Wrangler が約 280 のコマンド経路にとどまっていた一方、cf がカバーするオペレーション数はどれか。"
+    choices:
+      - "約 300"
+      - "約 1,000"
+      - "3,000 超"
+      - "約 100,000"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「Forge で API 全体を CLI にする」を参照。Cloudflare API 全体の 3,000 超のオペレーションをカバーする。"
+
+  - q: "cf の多数のコマンドを実現する仕組みとして、記事が述べているものはどれか。"
+    choices:
+      - "各プロダクトチームが手作業でコマンドを追加する"
+      - "Forge が、注釈を足した OpenAPI スキーマから CLI のコマンドを生成する"
+      - "LLM が実行時にコマンドを自動作成する"
+      - "ダッシュボードの操作を録画して変換する"
+    answer: 1
+    explanation: "Wikiの「Forge で API 全体を CLI にする」を参照。すべての機能に OpenAPI スキーマがあり、少し注釈を足せば Forge が CLI の元データにできる。"
+
+  - q: "cf が出力の既定を JSON にした理由として、記事の説明に最も近いものはどれか。"
+    choices:
+      - "人間が表を読みやすいから"
+      - "Wrangler では --json 非対応のコマンドが表を返し、エージェントの時間とトークンを余計に消費したから"
+      - "JSON のほうが通信量が少ないから"
+      - "Cloudflare API が JSON しか返さないから"
+    answer: 1
+    explanation: "Wikiの「「cf を見たことがないエージェント」のための設計」を参照。エージェントには JSON で十分という立場で、人間向けは整形、エージェント向けは圧縮表示になる。"
+
+  - q: "3,000 の経路からエージェントが目的のコマンドを探すために用意されているものはどれか。"
+    choices:
+      - "cf cli search（自然言語で質問すると検索インデックスがコマンド候補を返す）"
+      - "cf list --all の全件表示"
+      - "公式ドキュメントの PDF"
+      - "コマンド名の完全一致のみ受け付ける補完"
+    answer: 0
+    explanation: "Wikiの「「cf を見たことがないエージェント」のための設計」を参照。初めて --help を実行したときにエージェントへ自動で案内される。"
+
+  - q: "次の設定ファイルについて、記述が正しいものはどれか。"
+    code: |
+      import { defineConfig, triggers } from "cf/config";
+
+      export default defineConfig({
+        worker: {
+          // ...
+          triggers: [
+            triggers.fetch({ pattern: "example.com/*" }),
+            triggers.scheduled({ schedule: "0 * * * *" }),
+            triggers.queue({ name: "jobs", maxBatchSize: 10 }),
+            triggers.email({ addresses: ["support@example.com"] }),
+          ],
+        },
+      });
+    codeLang: typescript
+    choices:
+      - "ルート・スケジュール・Queue・メールの起動条件を1つの triggers ブロックにまとめている"
+      - "環境変数とシークレットを定義している"
+      - "KV や D1 のバインディングを定義している"
+      - "Vite のプラグインを登録している"
+    answer: 0
+    explanation: "Wikiの「コード例」の「triggers ヘルパー」を参照。Worker を起動するきっかけを1つのブロックに集約する。バインディングは bindings ヘルパー側で定義する。"
+
+  - q: "設定形式を TOML や JSONC ではなく TypeScript にしたことの利点として、記事が述べているものはどれか。"
+    choices:
+      - "ファイルサイズが必ず小さくなる"
+      - "LSP を使うエージェントが型情報から設定を解釈でき、提案の精度が上がる。また環境ごとの設定をプログラムで生成できる"
+      - "設定ファイルを人間が編集できなくなる"
+      - "Wrangler の設定をそのまま貼り付けられる"
+    answer: 1
+    explanation: "Wikiの「型で守られる設定: cloudflare.config.ts」を参照。TOML にはアクセスしやすいスキーマがなく、JSONC はスキーマをエージェントがほぼ使わなかった、という対比が示されている。"
+
+  - q: "cf の開発環境と Wrangler との関係について、正しい説明はどれか。"
+    choices:
+      - "cf は esbuild を既定にし、Vite は使わない"
+      - "cf は Vite が既定だが、esbuild が必要な JavaScript Worker や Rust・Python Worker の dev とデプロイは Wrangler に委譲する"
+      - "cf は Wrangler をすべて置き換え、委譲は一切しない"
+      - "Vite が使えるのは Python Worker のみ"
+    answer: 1
+    explanation: "Wikiの「開発体験: Vite が既定」を参照。Vite には HMR 付きの開発サーバーと Rolldown によるツリーシェイキングがあり、Cloudflare Vite Plugin が推奨される。"
+
+  - q: "cf の移行計画について、記事の内容と一致するものはどれか。"
+    choices:
+      - "ベータ終了と同時に Wrangler は即時に提供終了となる"
+      - "cf migrate で移行でき、ベータ終了後に Wrangler の最終メジャーを出し、その後 18 か月は保守される"
+      - "移行は手作業のみで、コマンドは用意されていない"
+      - "Wrangler の保守期間は6か月である"
+    answer: 1
+    explanation: "Wikiの「Wrangler からの移行」を参照。Vite でビルドしている Worker は cf migrate で cloudflare.config.ts に変換される。"
