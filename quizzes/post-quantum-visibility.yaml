@@ -1,0 +1,102 @@
+title: "あなたのドメインはポスト量子暗号を使っているか: 自分で確認できるようになりました"
+slug: post-quantum-visibility
+sourceUrl: https://blog.cloudflare.com/post-quantum-visibility/
+wiki: ../docs/articles/2026-09-29-post-quantum-visibility.md
+questions:
+  - q: "harvest-now-decrypt-later 攻撃の説明として正しいものはどれか。"
+    choices:
+      - "通信を改ざんして、弱い暗号へ切り替えさせる攻撃"
+      - "今は暗号化されたデータを収集しておき、将来の量子コンピュータで解読する攻撃"
+      - "サーバーに大量のリクエストを送ってサービスを停止させる攻撃"
+      - "証明書を偽造してサーバーになりすます攻撃"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。PQ 暗号化は、データを今のうちに収集して将来解読する攻撃を防ぐために今すぐ必要とされる。弱い暗号へ切り替えさせるのはダウングレード攻撃で別の脅威。"
+
+  - q: "今回の発表前に、ドメイン単位では確認できなかった情報はどれか。"
+    choices:
+      - "使用されている TLS のバージョン（TLS 1.3 / 1.2 など）"
+      - "そのドメインへの通信のうち、PQ 鍵交換が使われている割合"
+      - "リクエストのステータスコード"
+      - "訪問者の国別のリクエスト数"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。TLS バージョンは以前からドメイン単位で見えたが、その上で使われた暗号アルゴリズムは見えなかったため、PQ の割合という問いに答えられなかった。"
+
+  - q: "TLS 1.3 で PQ 暗号化に推奨される鍵交換グループとして、記事が挙げているものはどれか。"
+    choices:
+      - "X25519"
+      - "P-256"
+      - "X25519MLKEM768"
+      - "X25519Kyber768Draft00"
+    answer: 2
+    explanation: "Wikiの「TLS におけるポスト量子暗号の整理」を参照。X25519MLKEM768 が唯一の推奨グループ。X25519 と P-256 は古典的な ECDHE、X25519Kyber768Draft00 は標準化前の旧アルゴリズム。"
+
+  - q: "X25519MLKEM768 が「ベルトとサスペンダー」の安全性を持つと言われる理由はどれか。"
+    choices:
+      - "X25519 と ML-KEM の両方を実行して共有秘密を組み合わせるため、どちらか一方が安全なら全体も安全だから"
+      - "TLS 1.2 と TLS 1.3 の両方で同時に暗号化するから"
+      - "証明書を 2 枚使って認証するから"
+      - "通信を 2 回に分けて送るから"
+    answer: 0
+    explanation: "Wikiの「TLS におけるポスト量子暗号の整理」を参照。X25519 の ECDHE と ML-KEM の 2 つの共有秘密を TLS が組み合わせる。一方が破られても、もう一方が安全なら結果の共有秘密も安全である。"
+
+  - q: "ダッシュボードの TLS Key Exchange カードで「None」と表示される通信に当たるものはどれか。"
+    choices:
+      - "X25519MLKEM768 を使った TLS 1.3 の通信"
+      - "P-256 を使った TLS 1.3 の通信"
+      - "RSA 鍵共有（TLS 1.2 以下）を使った通信、または TLS を使っていない通信"
+      - "X25519Kyber768Draft00 を使った通信"
+    answer: 2
+    explanation: "Wikiの「訪問者から Cloudflare への接続の可視化」を参照。None は RSA 鍵共有（TLS 1.2 以下）か、TLS なしの通信を指す。"
+
+  - q: "自分のドメインで X25519MLKEM768 がまったく見えないとき、最初に確認すべきことはどれか。"
+    choices:
+      - "専用の「ポスト量子」スイッチを On にする"
+      - "TLS 1.3 が有効になっているか"
+      - "Logpush のジョブを削除する"
+      - "オリジンの証明書を ML-DSA に入れ替える"
+    answer: 1
+    explanation: "Wikiの「訪問者から Cloudflare への接続の可視化」を参照。PQ 専用の設定はなく、TLS 1.3 が有効で訪問者が X25519MLKEM768 に対応していれば Cloudflare が自動で交渉する。SSL/TLS > Edge Certificates の TLS 1.3 を確認する。"
+
+  - q: "次の Logpush のログについて正しい説明はどれか。"
+    code: |
+      {
+        "EdgeResponseStatus":200,
+        "EdgeStartTimestamp":"2026-09-20T00:08:24Z",
+        "RayID":"...",
+        "ClientTLSKeyExchangeGroup":"X25519MLKEM768"
+      }
+    codeLang: json
+    choices:
+      - "Cloudflare からオリジンへの接続が PQ 暗号化されていたことを示している"
+      - "訪問者から Cloudflare への接続が PQ 暗号化（X25519MLKEM768）されていたことを示している"
+      - "このリクエストは TLS を使っていなかったことを示している"
+      - "オリジンの証明書が ML-DSA であることを示している"
+    answer: 1
+    explanation: "Wikiの「コード例」を参照。ClientTLSKeyExchangeGroup は訪問者と Cloudflare の間の鍵交換グループを表す。オリジン側は OriginTLSKeyExchangeGroup、TLS なしは NONE で示される。"
+
+  - q: "OriginTLSKeyExchangeGroup が HTTP Traffic Analytics ダッシュボードに表示されない理由はどれか。"
+    choices:
+      - "オリジンの情報は Log Explorer でしか扱えないから"
+      - "同じドメインへのどの訪問者接続でも同じ値になり、ダッシュボードで内訳を見る意味が薄いから"
+      - "Cloudflare からオリジンへの接続は常に暗号化されていないから"
+      - "まだ提供が始まっていないから"
+    answer: 1
+    explanation: "Wikiの「オリジンへの接続とその先」を参照。このグループは同じドメインへのすべての訪問者接続で同じになるため、ダッシュボードには表示されず、Logpush のフィールドとして提供される。"
+
+  - q: "PQ 暗号化に対応しにくい古いオリジンサーバーに対して、記事が提案している方法はどれか。"
+    choices:
+      - "オリジンサーバーを全面的に作り直す"
+      - "Cloudflare Tunnel の背後にオリジンを置き、オリジンを更新せずに TLS 1.3 と X25519MLKEM768 でトンネルする"
+      - "TLS 1.2 に戻して RSA 鍵共有を使う"
+      - "Radar に登録して自動で PQ 化してもらう"
+    answer: 1
+    explanation: "Wikiの「オリジンへの接続とその先」を参照。Cloudflare Tunnel を使えば、オリジン自体をアップグレードせずに、オリジンから Cloudflare までの通信を PQ 暗号化できる。"
+
+  - q: "記事が「今後可視化する予定」としているのはどれか。"
+    choices:
+      - "TLS 1.3 の有効・無効の状態"
+      - "PQ 認証（証明書や署名のアルゴリズム。Merkle Tree Certificates を含む）"
+      - "訪問者の IP アドレス"
+      - "オリジンの CPU 使用率"
+    answer: 1
+    explanation: "Wikiの「オリジンへの接続とその先」を参照。今回の対象は鍵交換（暗号化）で、PQ 認証は広範な展開が進んだ段階で可視化する予定とされている。"

@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Christopher Patton、Amos Paul、Lina Baquero
-- 関連: 同じ Birthday Week 2026 の記事として [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い（本リポジトリ内にポスト量子暗号・IPsec を扱う既存記事は現時点でない）
+- 関連: 同じ Birthday Week 2026 の記事として [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) などがあるが、内容上の直接の関連は薄い。ポスト量子（PQ）移行では、TLS 側の PQ 暗号化の利用状況を可視化する [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md) が関連する
 - GitHub: [docs/articles/2026-09-29-ipsec-downgrade-protection.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-ipsec-downgrade-protection.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3PBXV6RMBDAPYBPS4CSKCS9.01M3PBXVX4E5746D4FX9F3R8V5.png)
@@ -147,3 +147,4 @@ IPSECME WG と開発した IKEv2 の拡張（近く RFC になる見込み）で
 - IPsec の PQ 鍵共有: https://blog.cloudflare.com/post-quantum-ipsec/
 - 暗号の棚卸しツール: http://blog.cloudflare.com/ai-driven-cryptography-discovery
 - PQ の可視化機能: http://blog.cloudflare.com/post-quantum-visibility
+- 本リポジトリ内の関連記事（TLS 側の PQ 可視化）: [あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)
