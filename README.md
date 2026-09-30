@@ -92,6 +92,7 @@ cloudflare-blog-summaries/
 | 2026-09-29 | IPsec に対する量子ダウングレード攻撃の防止 | [Wiki](docs/articles/2026-09-29-ipsec-downgrade-protection.md) | [スライド](slides/ipsec-downgrade-protection/slides.md) | [クイズ](quizzes/ipsec-downgrade-protection.html) | [原文](https://blog.cloudflare.com/ipsec-downgrade-protection/) |
 | 2026-09-29 | Cloudflare Application Profiles でポジティブセキュリティを実現する | [Wiki](docs/articles/2026-09-29-application-profiles.md) | [スライド](slides/application-profiles/slides.md) | [クイズ](quizzes/application-profiles.html) | [原文](https://blog.cloudflare.com/application-profiles/) |
 | 2026-09-29 | あなたのドメインはポスト量子暗号を使っているか: 自分で確認できるようになりました | [Wiki](docs/articles/2026-09-29-post-quantum-visibility.md) | [スライド](slides/post-quantum-visibility/slides.md) | [クイズ](quizzes/post-quantum-visibility.html) | [原文](https://blog.cloudflare.com/post-quantum-visibility/) |
+| 2026-09-29 | Threat Signals のご紹介: オープンソース脅威インテリジェンスのためのエージェント型スキル | [Wiki](docs/articles/2026-09-29-threat-signals.md) | [スライド](slides/threat-signals/slides.md) | [クイズ](quizzes/threat-signals.html) | [原文](https://blog.cloudflare.com/threat-signals/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
