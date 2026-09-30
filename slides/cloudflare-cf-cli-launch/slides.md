@@ -93,7 +93,7 @@ Birthday Week 2026
 
 - Wrangler: エージェントは毎回 <code>--json</code> + <code>jq</code>。非対応コマンドは Unicode の表で、時間とトークンを消費
 - cf: <strong>エージェントには JSON</strong> を既定に。人間向けは整形、エージェント向けは圧縮表示（文脈節約）
-- 人間の入力が要る操作（ドメイン購入など）は、検証付きの<strong>フォーム</strong>で進められる
+- 人間の入力が要る操作（ドメイン購入など）は、検証付きの<strong>フォーム</strong>で進められる（▶ <a href="../simplifying-domains/" target="_blank">ドメインの解説スライド</a>）
 - もちろん、エージェントに頼んでもよい
 
 ---

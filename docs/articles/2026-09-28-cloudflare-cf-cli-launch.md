@@ -5,7 +5,7 @@
 - 公開日: 2026-09-28
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Matt "TK" Taylor、Samuel Macleod
-- 関連: [Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン](./2026-09-28-forge-open-source-generation-pipeline.md)（cf のコマンドを OpenAPI スキーマから生成する基盤）、[VoidZero が Cloudflare に加わって4か月](./2026-09-28-voidzero-update.md)（Vite / Rolldown）、[Vite で動く Next.js アプリケーション: Vinext 1.0](./2026-09-28-vinext-nextjs-on-vite.md)（Vite 上の Workers 開発）
+- 関連: [人とエージェントのためにドメイン購入をシンプルに](./2026-09-30-simplifying-domains.md)（`cf registrar` でドメインの検索・購入・移管を行う例）、[Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン](./2026-09-28-forge-open-source-generation-pipeline.md)（cf のコマンドを OpenAPI スキーマから生成する基盤）、[VoidZero が Cloudflare に加わって4か月](./2026-09-28-voidzero-update.md)（Vite / Rolldown）、[Vite で動く Next.js アプリケーション: Vinext 1.0](./2026-09-28-vinext-nextjs-on-vite.md)（Vite 上の Workers 開発）
 - GitHub: [docs/articles/2026-09-28-cloudflare-cf-cli-launch.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-cloudflare-cf-cli-launch.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3KR63G9MAXHAG81FC5HKYRY.01M3KR64BVBYV5MM3YBHRRRWGF.png)
@@ -157,7 +157,7 @@ cf cli search   # 自然言語でコマンドを検索
 
 ## ユースケース
 
-- **エージェントへの Cloudflare 運用の一括委任**: Worker の作成・デプロイ・監視、Access での保護、ドメイン購入、WAF の設定までを1つの CLI でエージェントが実行する。
+- **エージェントへの Cloudflare 運用の一括委任**: Worker の作成・デプロイ・監視、Access での保護、ドメイン購入、WAF の設定までを1つの CLI でエージェントが実行する（ドメインは `cf registrar registrations check / create / transfer-in`。詳細は [人とエージェントのためにドメイン購入をシンプルに](./2026-09-30-simplifying-domains.md)）。
 - **既存 Worker の型付き設定への移行**: Vite でビルドしている Worker を `cf migrate` で `cloudflare.config.ts` へ変換する。
 - **多環境の設定を一箇所で生成**: `mode` に応じて本番・ステージングのバインディングを切り替え、Wrangler のような `env` ブロックの重複をなくす。
 - **コマンド探索**: 3,000 の操作からエージェントが `cf cli search` で目的のコマンドを自然言語で見つける。
