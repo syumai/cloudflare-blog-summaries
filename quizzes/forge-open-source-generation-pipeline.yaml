@@ -1,0 +1,101 @@
+title: "Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン"
+slug: forge-open-source-generation-pipeline
+sourceUrl: https://blog.cloudflare.com/forge-open-source-generation-pipeline/
+wiki: ../docs/articles/2026-09-28-forge-open-source-generation-pipeline.md
+questions:
+  - q: "Forge とは何か。"
+    choices:
+      - "SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン"
+      - "Workers 上で動くデータベース"
+      - "AI エージェント向けのブラウザ"
+      - "DNS の管理ツール"
+    answer: 0
+    explanation: "Wikiの「TL;DR」にあるとおり、Apache 2.0 で公開された生成パイプライン。"
+
+  - q: "Forge が動作する場所として記事が説明しているのはどれか。"
+    choices:
+      - "各チームのAPIリポジトリの CI 上"
+      - "ブラウザ拡張機能の中"
+      - "エンドユーザーのスマートフォン"
+      - "Cloudflare のエッジ上のみ"
+    answer: 0
+    explanation: "Wikiの「CI 上で動く生成とプレビュー」を参照。AIコードレビューやテストと同じく CI で動く。"
+
+  - q: "Cloudflare の API について記事が挙げている規模はどれか。"
+    choices:
+      - "約 35 オペレーション"
+      - "約 350 オペレーション"
+      - "3,500 超のオペレーション"
+      - "35,000 超のオペレーション"
+    answer: 2
+    explanation: "Wikiの「背景・課題」に、3,500 を超えるオペレーションと数百のサービスがあると書かれている。"
+
+  - q: "Forge の「プレビュービルド」の考え方と同じだと記事が述べているものはどれか。"
+    choices:
+      - "Workers Previews"
+      - "Durable Objects"
+      - "R2 の署名付きURL"
+      - "Cache Reserve"
+    answer: 0
+    explanation: "Wikiの「CI 上で動く生成とプレビュー」にあるとおり、変更ごとに完全なプレビューを作る Workers Previews と同じ前提。"
+
+  - q: "Forge が OpenAPI から直接生成できると述べられている、TypeScript からリモート API をローカルメソッドのように呼べる Cloudflare の RPC システムはどれか。"
+    choices:
+      - "gRPC"
+      - "Cap'n Web"
+      - "JSON-RPC"
+      - "tRPC"
+    answer: 1
+    explanation: "Wikiの「あらゆるものを生成できる transformer」を参照。Cap'n Web を生成でき、Workers のバインディング生成にもつながる。"
+
+  - q: "次のコードの説明として正しいものはどれか。"
+    code: |
+      let authed = api.authenticate(apiToken);
+      let profile = api.getUserProfile(authed.getUserId());
+      let friends = authed.getFriendIds().map(id => api.getUserProfile(id));
+
+      let [me, myFriends] = await Promise.all([profile, friends]);
+    codeLang: ts
+    choices:
+      - "各呼び出しのたびに await するため、往復は 4 回以上になる"
+      - "結果が届く前の値を次の呼び出しに渡し、全体を 1 回のリクエストにまとめられる"
+      - "Forge の設定ファイルの書き方を示している"
+      - "認証を省略するための記述である"
+    answer: 1
+    explanation: "Wikiの「コード例」のとおり、await は最後の Promise.all だけで、Cap'n Web のパイプライン化により単一リクエストで完結する。"
+
+  - q: "transformer をチェーンできることで実現できる例として、記事に挙げられているものはどれか。"
+    choices:
+      - "OpenAPI から TypeScript SDK を作り、そこから cf CLI と Cap'n Web の仕様を生成する"
+      - "CLI から OpenAPI を逆生成して SDK を廃止する"
+      - "ドキュメントを手動でだけ更新する"
+      - "Terraform を使わずにインフラを管理する"
+    answer: 0
+    explanation: "Wikiの「チェーン可能な transformer」の図にある流れ。出力を別の生成器の入力にできる。"
+
+  - q: "cf CLI の \"cf dev\" や \"cf build\" のようなコマンドが、OpenAPI だけから CLI とドキュメントを生成する方式で問題になる理由はどれか。"
+    choices:
+      - "TypeScript で書けないから"
+      - "API 呼び出しに対応しない手書きのローカル専用コマンドで、ドキュメントに反映されないから"
+      - "Terraform でしか実行できないから"
+      - "ライセンスが異なるから"
+    answer: 1
+    explanation: "Wikiの「チェーン可能な transformer」にあるとおり、手書きコマンドをドキュメントにも載せる仕組みが既存ツールになく、Forge に組み込んでいる。"
+
+  - q: "API バージョニングについて、記事が示している方針として正しいものはどれか。"
+    choices:
+      - "v4 を廃止し、全顧客を一斉に v5 へ移行する"
+      - "旧クライアントや SDK を壊さずに新しいメジャーバージョンを出せる方式を検討している"
+      - "バージョンを今後一切増やさない"
+      - "beta 識別子のみを追加し続ける"
+    answer: 1
+    explanation: "Wikiの「ユーザーを壊さずに API を変更する」を参照。大きな v5 は顧客を置き去りにするため、旧クライアントを壊さない方式を検討している。"
+
+  - q: "記事が Forge のライセンスと提供方針について述べていることはどれか。"
+    choices:
+      - "Cloudflare の顧客のみ利用可能な商用ライセンス"
+      - "Apache 2.0 で公開され、非公開環境での独自改変も無料で可能"
+      - "ソースは非公開でホスト型のみ提供"
+      - "研究目的に限り利用可能"
+    answer: 1
+    explanation: "Wikiの「重要なツールは誰にでも開かれているべき」を参照。SaaS に依存せず、自由に改変・運用できる。"

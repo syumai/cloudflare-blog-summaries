@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/code-mode-mcp/](https://blog.cloudflare.com/ja-jp/code-mode-mcp/)（英語版: [https://blog.cloudflare.com/code-mode-mcp/](https://blog.cloudflare.com/code-mode-mcp/)）
 - 公開日: 2026-02-20
-- 関連: [Code Mode: MCPをもっとうまく使う方法](2025-09-26-code-mode.md)、[次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol](2026-08-06-mcp-v2.md)、[あらゆるWebサイトにWebMCPインターフェースを付与する](2026-08-06-webmcp.md)、[WriteGuard: MCPサーバーのためのきめ細かな制御機能](2026-08-05-mcp-portal-writeguard-private-beta.md)
+- 関連: [Code Mode: MCPをもっとうまく使う方法](2025-09-26-code-mode.md)、[次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol](2026-08-06-mcp-v2.md)、[あらゆるWebサイトにWebMCPインターフェースを付与する](2026-08-06-webmcp.md)、[WriteGuard: MCPサーバーのためのきめ細かな制御機能](2026-08-05-mcp-portal-writeguard-private-beta.md)、[Forge のご紹介](2026-09-28-forge-open-source-generation-pipeline.md)（OpenAPI から SDK・CLI・MCP サーバー等を生成）
 - GitHub: [docs/articles/2026-02-20-code-mode-mcp.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-02-20-code-mode-mcp.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KW487D5XYR4AZJYHJN5AX56Q.png)
