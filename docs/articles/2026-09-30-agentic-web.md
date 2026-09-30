@@ -110,7 +110,7 @@ Cloudflare は昨年、新規ドメインで AI 学習クローラーをブロ�
 - Search / Agent / Training の個別制御（7 月）: https://blog.cloudflare.com/content-independence-day-ai-options/
 - Disallow AI Training（混在用途クローラー）: https://blog.cloudflare.com/accountable-mixed-use-ai-crawlers/
 - Cloudflare Radar の AI ボット透明性: https://radar.cloudflare.com/ai-insights#ai-bot-transparency
-- Pay Per Use: http://blog.cloudflare.com/pay-per-use
+- Pay Per Use: http://blog.cloudflare.com/pay-per-use（本リポジトリの解説: [Pay Per Use](./2026-09-30-pay-per-use.md)）
 - Monetization Gateway（ベータ）: https://blog.cloudflare.com/monetization-gateway-beta
 - OpenAI との共同研究パイロット（プレスリリース）: https://www.cloudflare.com/press/press-releases/2026/cloudflare-announces-research-pilot-with-openai/
 - Markdown for Agents: https://blog.cloudflare.com/markdown-for-agents/

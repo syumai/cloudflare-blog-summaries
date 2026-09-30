@@ -210,6 +210,7 @@ Birthday Week 2026
 
 <div class="pt-4 text-sm">
 
+- 詳細: <a href="../pay-per-use/" target="_blank">▶ 解説スライド</a>
 - 出版社は、何がいつ使われ、いくら稼いだか、（報告があれば）どんな質問で使われたかが見える → 何を書き・更新するかのフィードバックループ
 
 </div>

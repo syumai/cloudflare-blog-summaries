@@ -1,0 +1,102 @@
+title: "Pay Per Use: AI があなたの作品を使うなら、対価を受け取るべき"
+slug: pay-per-use
+sourceUrl: https://blog.cloudflare.com/pay-per-use/
+wiki: ../docs/articles/2026-09-30-pay-per-use.md
+questions:
+  - q: "Pay Per Use が課金の単位にしているものはどれか。"
+    choices:
+      - "ページへのクロール（取得）1 回ごと"
+      - "買い手（AI 企業）が報告した、コンテンツの「使用」"
+      - "出版社サイトへの月間訪問者数"
+      - "AI モデルの学習に使ったトークン数"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」の「使用に払う」を参照。Pay Per Crawl が「アクセス」に課金するのに対し、Pay Per Use は「その後に起きたこと（使用）」に対価を払う。"
+
+  - q: "記事が、クロールごとの課金より使用への課金のほうがよいと考える理由として、合うものはどれか。"
+    choices:
+      - "クロールは技術的に計測できないから"
+      - "AI 製品は使う量よりずっと多くを取得するため、クロール課金だと買い手は必要かどうか分からないうちに払うことになり、多くは払わないから"
+      - "出版社がクロールを一切許可しないから"
+      - "使用に課金すると Cloudflare の手数料が不要になるから"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。検索エンジンが表示しないページもインデックスする例のように、取得量と使用量は異なる。使用への課金は、価格を買い手が得る価値に結びつける。"
+
+  - q: "Pay Per Use で、有償とする「使用」の定義と価格を決めるのは誰か。"
+    choices:
+      - "Cloudflare が全買い手に共通で決める"
+      - "買い手（AI 企業）が提案し、出版社が承諾するかを選ぶ"
+      - "出版社が決め、買い手は従うだけ"
+      - "エンドユーザー（読者）が決める"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」のステップ 1 と 2 を参照。使用の定義は買い手が提案し、Cloudflare は報告と支払いの基盤を提供する。出版社はオファーを見て承諾するかを決める。"
+
+  - q: "出版社が Pay Per Use のオファーを確認して承諾する場所はどれか。"
+    choices:
+      - "Workers の wrangler.jsonc"
+      - "ダッシュボードの Monetize → Pay Per Use"
+      - "robots.txt の専用ディレクティブ"
+      - "オリジンサーバーの管理画面"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」のステップ 2 を参照。AI 企業・払う対象の使用・提示価格が表示される。オリジンの変更や AI 企業ごとの技術統合は要らない。"
+
+  - q: "次のコマンドについて、正しい説明はどれか。"
+    code: |
+      curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/pay-per-use/usage-reports" \
+       -H "Authorization: Bearer $API_TOKEN" \
+       -H "Content-Type: application/jsonl" \
+       --data-binary @- <<'EOF'
+      {"used_at":"2026-09-15T13:42:04Z","url":"https://example.com/article/1","id":"request-001"}
+      EOF
+    codeLang: bash
+    choices:
+      - "出版社が自サイトのコンテンツ価格を設定するコマンド"
+      - "買い手が、コンテンツが使われた時刻・元の URL・イベント ID を、1 行の JSON で報告するコマンド"
+      - "Cloudflare が出版社へ月次の支払いを実行するコマンド"
+      - "クローラーを Web Bot Auth に登録するコマンド"
+    answer: 1
+    explanation: "Wikiの「コード例」を参照。usage-reports への POST で、Content-Type は application/jsonl。1 行が 1 件の使用で、used_at・url・id の 3 つのフィールドを持つ。"
+
+  - q: "使用の報告の検証について、記事の説明に合うものはどれか。"
+    choices:
+      - "すべての使用を Cloudflare が独自に観測して確定する"
+      - "使用は自己申告で、プログラムの条件が完全な報告を求め、Cloudflare は報告された使用が登録済みの出版社に対応するかを確認する"
+      - "出版社が使用を 1 件ずつ手動で承認する"
+      - "報告は任意で、検証は行われない"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」のステップ 3 と「所感・ポイント」を参照。自己申告であり、使用の真正性はプログラムの条件に依拠する点が、ベータで確かめる部分にもつながる。"
+
+  - q: "買い手への請求と出版社への支払いについて、記事の内容に合うものはどれか。"
+    choices:
+      - "買い手が出版社へ直接支払い、Cloudflare は関与しない"
+      - "Cloudflare が報告された使用を集計して買い手に請求し、出版社に月次で接続済みの支払いアカウントへ支払う"
+      - "出版社がクロールのたびに即時に支払いを受ける"
+      - "支払いは年 1 回のライセンス料として一括で行う"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」のステップ 4 を参照。買い手は統合が 1 つ、出版社は確認する場所が 1 つで済む。"
+
+  - q: "Pay Per Use と Monetization Gateway の使い分けとして、記事の説明に合うものはどれか。"
+    choices:
+      - "どちらも同じ用途で、名前が違うだけ"
+      - "高価値のコンテンツは Pay Per Use、リクエストごとが使用になる API・ツール・データは Monetization Gateway（x402）"
+      - "Pay Per Use は API 向け、Monetization Gateway は画像ファイル向け"
+      - "Monetization Gateway は出版社向けで、Pay Per Use は買い手向けの別名"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「エージェント型ウェブの経済レイヤー」を参照。2 つは ID・計測・価格設定・分析という同じ基盤で動く。"
+
+  - q: "記事が「ベータではまだ実現しておらず、今後の方向」として挙げているものはどれか。"
+    choices:
+      - "出版社が買い手のオファーを承諾すること"
+      - "買い手が使用を API で報告すること"
+      - "出版社が価格を提案し返したり、使い方ごとに価格を変えたりできること"
+      - "ダッシュボードで収益を確認すること"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「これから」と「所感・ポイント」を参照。カウンター価格、使い方ごとの価格設定、新しい買い手の自己オンボードは今後の話で、ベータで実用的な形を探る段階。"
+
+  - q: "AEO ツールと Pay Per Use を合わせて見ることで、記事が得られると述べているものはどれか。"
+    choices:
+      - "クローラーの IP アドレスの一覧"
+      - "コンテンツがどう見つかり、どう使われ、いくら払われるかのつながり"
+      - "TLS 証明書の有効期限"
+      - "AI モデルの学習データの全文"
+    answer: 1
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「支払いは製品の半分にすぎない」を参照。AEO は作品についての回答のされ方、Pay Per Use は買い手が報告した使用とその収益を示し、商業・編集の判断に使える。"
