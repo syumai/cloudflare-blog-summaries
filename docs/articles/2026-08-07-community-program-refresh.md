@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/community-program-refresh/](https://blog.cloudflare.com/community-program-refresh/)（日本語版なし）
 - 公開日: 2026-08-07
-- 関連: [Agents Week 2026 まとめ記事](./2026-08-10-agents-week-review.md)（金曜日「実装と現実」の発表の1つとして本記事が紹介されている）
+- 関連: [Agents Week 2026 まとめ記事](./2026-08-10-agents-week-review.md)（金曜日「実装と現実」の発表の1つとして本記事が紹介されている）、[VoidZero が Cloudflare に加わって4か月](./2026-09-28-voidzero-update.md)（追加の100万ドルの投資に言及）
 - GitHub: [docs/articles/2026-08-07-community-program-refresh.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-07-community-program-refresh.md)
 
 ![Cloudflare Ambassadors / Community Engineers 発表バナー](https://blog.cloudflare.com/_emdash/api/media/file/01KZCB5TGPAH6A73FHJ2QHFR7T.png)

@@ -1,0 +1,104 @@
+title: "VoidZero が Cloudflare に加わって4か月: オープンソースのJavaScriptツールチェーンを人間にもエージェントにも速く"
+slug: voidzero-update
+sourceUrl: https://blog.cloudflare.com/voidzero-update/
+wiki: ../docs/articles/2026-09-28-voidzero-update.md
+questions:
+  - q: "VoidZero が Cloudflare への参画時に約束した内容として正しいものはどれか。"
+    choices:
+      - "Vite などのプロジェクトは OSS・ベンダー中立・コミュニティ主導のまま維持する"
+      - "すべてのツールを Cloudflare 専用にする"
+      - "Vite+ を有料化する"
+      - "Vite の開発を終了する"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。OSS、ベンダー中立、コミュニティ主導を維持すると約束した。"
+
+  - q: "参画から4か月の実績として記事が挙げているのはどれか。"
+    choices:
+      - "8回のリリースと120件の issue クローズ"
+      - "800回超のリリース"
+      - "80回超のリリースと1,200件超の issue クローズ"
+      - "リリースなし"
+    answer: 2
+    explanation: "Wikiの「TL;DR」を参照。80回超のリリース、1,200件超の issue クローズ。"
+
+  - q: "記事が最適化の対象として人間に加えて挙げているのは誰か。"
+    choices:
+      - "エンドユーザーのブラウザのみ"
+      - "エージェント（AI エージェント）"
+      - "データセンターの運用者"
+      - "デザイナー"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。推論が速くなると型チェック・lint・ビルドの待ち時間がエージェントのボトルネックになる。"
+
+  - q: "Vitest 5 の高速化の手法として記事に挙がっているものはどれか。"
+    choices:
+      - "テストを半分に減らす"
+      - "テストを Rust で書き直す"
+      - "テストの並列実行を禁止する"
+      - "変換済みファイルの共有、ディスク上のモジュールキャッシュ、プロセス間通信の削減"
+    answer: 3
+    explanation: "Wikiの「Vitest 5: 最大50%高速」を参照。"
+
+  - q: "tsgolint について正しい記述はどれか。"
+    choices:
+      - "全ルールに未対応でアルファ版のまま"
+      - "typescript-eslint の61個の型認識ルールのうち59個に対応し、ESLint 比で12〜18倍高速"
+      - "ESLint より遅いが正確"
+      - "JavaScript 専用で TypeScript に対応しない"
+    answer: 1
+    explanation: "Wikiの「tsgolint: 安定版、最大18倍高速」を参照。"
+
+  - q: "次の設定は何を有効にするものか。"
+    code: |
+      import { defineConfig } from "oxlint";
+
+      export default defineConfig({
+        options: {
+          typeAware: true,
+          typeCheck: true,
+        },
+      });
+    codeLang: ts
+    choices:
+      - "Prettier 互換のフォーマット"
+      - "React Compiler"
+      - "型認識 lint と TypeScript 診断（1つの TypeScript プログラムを共有）"
+      - "Bundled Dev"
+    answer: 2
+    explanation: "Wikiの「コード例」を参照。typeAware が型認識ルール、typeCheck が TypeScript の診断に対応する。"
+
+  - q: "Oxfmt について正しいものはどれか。"
+    choices:
+      - "JavaScript のみを扱い、Prettier と互換性がない"
+      - "Prettier より遅いが多機能"
+      - "Python で実装されている"
+      - "JSON・CSS・SCSS・Less・GraphQL・YAML のフォーマッターを Rust 化し、Prettier 比で7倍高速"
+    answer: 3
+    explanation: "Wikiの「Oxfmt」を参照。`oxfmt --migrate prettier` による移行も用意されている。"
+
+  - q: "Bundled Dev の説明として正しいものはどれか。"
+    choices:
+      - "開発中にも Vite の本番用バンドラーを使うモード（旧称 Full Bundle Mode）"
+      - "開発中は一切バンドルしない"
+      - "本番ビルド専用のモード"
+      - "Webpack への互換モード"
+    answer: 0
+    explanation: "Wikiの「Bundled Dev」を参照。Cloudflare のダッシュボードが社内開発者向けに使用している。"
+
+  - q: "VoidZero のツールのレイヤー構造がもたらす利点として記事が述べているのはどれか。"
+    choices:
+      - "各ツールが互いに独立しているため、個別に交換しやすい"
+      - "下位レイヤーの最適化が、その上に載るツールへ自動的に効く"
+      - "上位ツールの最適化が下位ツールを遅くする"
+      - "ツール間の依存がないためメンテナンスが不要"
+    answer: 1
+    explanation: "Wikiの「レイヤー構造の利点」を参照。コンパイラ（Oxc）→ バンドラー（Rolldown）→ Vite の積み上げ構造。"
+
+  - q: "記事が今後の予定として挙げていないものはどれか。"
+    choices:
+      - "Oxc パーサーの改善（最大3倍の高速化の可能性）"
+      - "Rolldown のチャンク分割アルゴリズムの再設計"
+      - "Vite の開発終了"
+      - "Void の OSS・セルフホスト版"
+    answer: 2
+    explanation: "Wikiの「今後の予定」を参照。Vite の開発終了は予定にない。"

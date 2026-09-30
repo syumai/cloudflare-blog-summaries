@@ -85,6 +85,7 @@ cloudflare-blog-summaries/
 | 2026-09-28 | The Cold Start: Cloudflareのスタートアップ・ピッチコンペ | [Wiki](docs/articles/2026-09-28-introducing-the-cold-start.md) | [スライド](slides/introducing-the-cold-start/slides.md) | [クイズ](quizzes/introducing-the-cold-start.html) | [原文](https://blog.cloudflare.com/introducing-the-cold-start/) |
 | 2026-09-28 | エージェント向けブラウザへの道: Kitesurf アップデート | [Wiki](docs/articles/2026-09-28-kitesurf-update.md) | [スライド](slides/kitesurf-update/slides.md) | [クイズ](quizzes/kitesurf-update.html) | [原文](https://blog.cloudflare.com/kitesurf-update/) |
 | 2026-09-28 | Forge のご紹介: SDK・CLI・ドキュメントなどを生成するオープンソースのパイプライン | [Wiki](docs/articles/2026-09-28-forge-open-source-generation-pipeline.md) | [スライド](slides/forge-open-source-generation-pipeline/slides.md) | [クイズ](quizzes/forge-open-source-generation-pipeline.html) | [原文](https://blog.cloudflare.com/forge-open-source-generation-pipeline/) |
+| 2026-09-28 | VoidZero が Cloudflare に加わって4か月: オープンソースのJavaScriptツールチェーンを人間にもエージェントにも速く | [Wiki](docs/articles/2026-09-28-voidzero-update.md) | [スライド](slides/voidzero-update/slides.md) | [クイズ](quizzes/voidzero-update.html) | [原文](https://blog.cloudflare.com/voidzero-update/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
