@@ -430,6 +430,7 @@ class: text-center
 - [Wallets（Cloudflare Blog）](https://blog.cloudflare.com/wallets/)
 - [Monetization Gateway（Cloudflare Blog）](https://blog.cloudflare.com/monetization-gateway/)
 - [x402](https://x402.org/)
+- 関連スライド（Birthday Week 2026 の続編・総論）: [▶ 解説スライド](../agentic-web/)
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-06-the-agentic-internet.md
