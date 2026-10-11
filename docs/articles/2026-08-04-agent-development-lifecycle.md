@@ -189,7 +189,7 @@ export class NightlyReview extends WorkflowEntrypoint {
 - [Cloudflare AgentsとAgent Tracesの紹介](http://blog.cloudflare.com/agents-on-cloudflare)（本リポジトリの[Wiki](./2026-08-04-agents-on-cloudflare.md)）
 - [AIを活用してCloudflareがエンジニアリング標準を適用する方法](http://blog.cloudflare.com/engineering-standards-enforcement)
 - [AstroのGitHub Issueをゼロ件にするソフトウェアファクトリーの構築方法](https://blog.cloudflare.com/astro-issue-triage/)
-- [Artifacts（Git for Agents）](https://blog.cloudflare.com/artifacts-git-for-agents-beta/)
+- [Artifacts（Git for Agents）](https://blog.cloudflare.com/artifacts-git-for-agents-beta/)（続報の Wiki: [次の Git プラットフォームを Cloudflare 上で作ってほしい](./2026-10-01-next-git-platform-on-cloudflare.md)）
 - [Flagship（フィーチャーフラグ）](https://blog.cloudflare.com/flagship/)
 - [Dynamic Workers](https://blog.cloudflare.com/dynamic-workers/)
 - [Cloudflare Workflows（開発者ドキュメント）](https://developers.cloudflare.com/workflows/)

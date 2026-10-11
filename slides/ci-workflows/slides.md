@@ -445,6 +445,7 @@ class: text-center
 </div>
 
 - 原文: [Run CI/CD for millions of repos — on your platform, on Cloudflare](https://blog.cloudflare.com/ci-workflows/)
+- ▶ 続報の解説スライド: <a href="../next-git-platform-on-cloudflare/">次の Git プラットフォームを Cloudflare 上で作ってほしい</a>
 - [Artifacts ドキュメント](https://developers.cloudflare.com/artifacts/)
 - [CI SDK リポジトリ（GitHub）](https://github.com/cloudflare/ci)
 - [Cloudflare Workflows ドキュメント](https://developers.cloudflare.com/workflows/)

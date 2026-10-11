@@ -405,6 +405,7 @@ class: text-center
 - 原文: [Cloudflareにエージェント開発ライフサイクルの時代が到来](https://blog.cloudflare.com/ja-jp/agent-development-lifecycle/)
 - 英語版: [Welcome to the agent development lifecycle](https://blog.cloudflare.com/agent-development-lifecycle/)
 - [@cloudflare/ci](https://blog.cloudflare.com/ci-workflows)
+- Artifacts ▶ 解説スライド: <a href="../next-git-platform-on-cloudflare/">次の Git プラットフォームを Cloudflare 上で作ってほしい</a>
 - [ローカルOpenTelemetryトレース ▶ 解説スライド](../local-tracing/)
 - [Cloudflare Agents / Agent Traces ▶ 解説スライド](../agents-on-cloudflare/)
 - [AstroのGitHub Issueをゼロ件にする方法](https://blog.cloudflare.com/astro-issue-triage/)

@@ -1,0 +1,117 @@
+title: "次の Git プラットフォームを Cloudflare 上で作ってほしい: Artifacts のオープンベータと開発コンペ"
+slug: next-git-platform-on-cloudflare
+sourceUrl: https://blog.cloudflare.com/next-git-platform-on-cloudflare/
+wiki: ../docs/articles/2026-10-01-next-git-platform-on-cloudflare.md
+questions:
+  - q: "Artifacts を説明したものとして、記事に最も近いものはどれか。"
+    choices:
+      - "Git を話す、バージョン管理付きのファイルシステム"
+      - "Workers 専用のキーバリューストア"
+      - "コンテナイメージのレジストリ"
+      - "メールのアーカイブ基盤"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「Artifacts という土台」を参照。Artifacts は Git を話すバージョン管理付きファイルシステムで、数百万リポジトリまでスケールできる。"
+
+  - q: "今回のコンペの最低条件はどれか。"
+    choices:
+      - "既存の GitHub の完全な互換実装であること"
+      - "複数のエージェントが変更を同時並行で進めていること"
+      - "Containers を必ず使うこと"
+      - "Rust で書かれていること"
+    answer: 1
+    explanation: "Wikiの「コンペの概要」を参照。記事は「今日の GitHub にエージェントを足したものを求めていない」と明言し、最低条件として複数のエージェントが同時に変更を進めることを挙げている。"
+
+  - q: "コンペの締め切りと Artifacts の課金開始日の組み合わせとして正しいものはどれか。"
+    choices:
+      - "締め切り 2026-10-14、課金開始 2026-10-15"
+      - "締め切り 2026-10-15、課金開始 2026-10-14"
+      - "締め切り 2026-11-01、課金開始 2026-10-15"
+      - "締め切り 2026-10-14、課金開始 2026-11-01"
+    answer: 0
+    explanation: "Wikiの「TL;DR」と「コンペの概要」を参照。応募は 2026-10-14 まで、Artifacts の課金は 2026-10-15 に開始される。"
+
+  - q: "Artifacts リポジトリを Workers Builds 経由で Worker に接続した場合、本番ブランチ以外のブランチへ push するとどうなるか。"
+    choices:
+      - "push は拒否される"
+      - "本番の Worker がそのまま更新される"
+      - "Workers Previews が作成または更新される"
+      - "何も起こらない"
+    answer: 2
+    explanation: "Wikiの「オープンベータで追加された機能」の 1 を参照。本番ブランチは Worker を更新し、それ以外のブランチへの push は Workers Previews を作成・更新して、公開前に試せるようにする。"
+
+  - q: "Artifacts バインディングで Worker から行える操作として、記事に挙げられていないものはどれか。"
+    choices:
+      - "リポジトリの作成やフォーク"
+      - "ファイルやコミットの参照"
+      - "リポジトリ単位の Git トークンの発行"
+      - "Cloudflare アカウントの請求先の変更"
+    answer: 3
+    explanation: "Wikiの「オープンベータで追加された機能」の 2 を参照。バインディングでは、リポジトリの作成・フォーク、ファイルやコミットの参照、リポジトリ単位の Git トークンの発行ができる。"
+
+  - q: "次のコードの実行結果として、agentTask に含まれるものはどれか。"
+    code: |
+      using project = await env.ARTIFACTS.get("my-project");
+      const { defaultBranch } = await project.info();
+      const workspace = await project.fork(`task-${crypto.randomUUID()}`);
+
+      using repo = await env.ARTIFACTS.get(workspace.name);
+      const instructions = await repo.readFile({
+        ref: defaultBranch,
+        path: "AGENTS.md",
+      });
+
+      const agentTask = {
+        remote: workspace.remote,
+        token: workspace.token,
+        instructions: instructions ? await instructions.text() : null,
+      };
+    codeLang: ts
+    choices:
+      - "元の my-project の remote とトークン、および README の内容"
+      - "フォークした作業用リポジトリの remote とトークン、および AGENTS.md の内容（無ければ null）"
+      - "全ブランチのコミット履歴の一覧"
+      - "フォークの削除結果"
+    answer: 1
+    explanation: "Wikiの「コード例」の「Worker からプロジェクトをフォークして AGENTS.md を読む」を参照。タスクごとにフォーク（task-<UUID>）を作り、そのデフォルトブランチの AGENTS.md を読んで、フォークの remote・token・指示文をまとめている。ファイルが無い場合は instructions が null になる。"
+
+  - q: "次のコードで、キューのメッセージのうち Workflow を起動するのはどれか。"
+    code: |
+      for (const message of batch.messages) {
+        const event = message.body;
+        if (event.type !== "cf.artifacts.repo.pushed") continue;
+
+        await env.REVIEW_WORKFLOW.create({
+          params: {
+            namespace: event.source.namespace,
+            repo: event.source.repoName,
+            ref: event.payload.ref,
+            commit: event.payload.after,
+          },
+        });
+      }
+    codeLang: ts
+    choices:
+      - "すべてのイベント"
+      - "リポジトリが push されたイベントだけ"
+      - "リポジトリが clone されたイベントだけ"
+      - "リポジトリが削除されたイベントだけ"
+    answer: 1
+    explanation: "Wikiの「コード例」の「push イベントでレビュー Workflow を起動する」を参照。type が cf.artifacts.repo.pushed 以外のイベントは continue で読み飛ばされ、push イベントだけが Workflow に渡される。"
+
+  - q: "データジュリスディクションの設定について正しいものはどれか。"
+    choices:
+      - "リポジトリごとに個別に設定する必要がある"
+      - "名前空間の作成時に U.S. または EU を指定すると、その名前空間のすべてのリポジトリに適用される"
+      - "設定すると push イベントが発行されなくなる"
+      - "設定できるのは Enterprise プランだけである"
+    answer: 1
+    explanation: "Wikiの「オープンベータで追加された機能」の 4 を参照。名前空間の作成時にジュリスディクションを指定すると、その名前空間に作られるすべてのリポジトリが自動的に同じ制限に従う。"
+
+  - q: "Cloudflare が Artifacts を「プログラム可能なプリミティブ」として設計した狙いとして、記事の趣旨に最も合うものはどれか。"
+    choices:
+      - "開発者が、エージェントの協調・レビュー・マージといった上位の層を自分で作れるようにするため"
+      - "Git 以外の操作を禁止してセキュリティを高めるため"
+      - "リポジトリを 1 つの組織につき 1 つに限定するため"
+      - "エージェントではなく人間だけが利用できるようにするため"
+    answer: 0
+    explanation: "Wikiの「背景・課題」と「Artifacts という土台」を参照。Artifacts はリポジトリの作成・フォーク、versioned ストレージ、Git 操作という土台を提供し、その上の層（協調・レビュー・マージ・開発者体験）を開発者に作ってほしい、というのが記事の趣旨である。"

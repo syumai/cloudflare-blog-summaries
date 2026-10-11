@@ -4,6 +4,7 @@
 - 公開日: 2026-08-04
 - 著者: André Venceslau, Mia Malden, Tomáš Hobza
 - 関連: [Cloudflareにエージェント開発ライフサイクルの時代が到来](2026-08-04-agent-development-lifecycle.md) / [Project Think：Cloudflareで次世代のAIエージェント構築](2026-04-15-project-think.md) / [Forge のご紹介](2026-09-28-forge-open-source-generation-pipeline.md)（API リポジトリの CI 上で動く生成パイプライン）
+- 関連（続報）: [次の Git プラットフォームを Cloudflare 上で作ってほしい](./2026-10-01-next-git-platform-on-cloudflare.md)（Artifacts のオープンベータとイベント購読・Workers バインディング）
 - GitHub: [docs/articles/2026-08-04-ci-workflows.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-04-ci-workflows.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ4Z776V82BHE7244CN1VVD7.png)
@@ -253,6 +254,7 @@ Think + Workers AIによるhealingエージェントを組み込み、ビルド�
 
 ## 関連リンク
 
+- [次の Git プラットフォームを Cloudflare 上で作ってほしい（本リポジトリ）](./2026-10-01-next-git-platform-on-cloudflare.md)
 - [Artifacts ドキュメント](https://developers.cloudflare.com/artifacts/)
 - [CI SDK リポジトリ（GitHub）](https://github.com/cloudflare/ci)
 - [Cloudflare Workflows ドキュメント](https://developers.cloudflare.com/workflows/)
