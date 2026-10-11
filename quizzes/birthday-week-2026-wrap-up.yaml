@@ -1,0 +1,85 @@
+title: "Birthday Week 2026 で行った発表内容の全て"
+slug: birthday-week-2026-wrap-up
+sourceUrl: https://blog.cloudflare.com/birthday-week-2026-wrap-up/
+wiki: ../docs/articles/2026-10-05-birthday-week-2026-wrap-up.md
+questions:
+  - q: "Birthday Week 2026 の期間と、記事が示す発表数の組み合わせとして正しいものはどれか。"
+    choices:
+      - "2026年8月3日〜7日、約26件"
+      - "2026年9月28日〜10月2日、46件"
+      - "2026年9月27日〜10月5日、48件"
+      - "2026年10月1日〜2日、20件"
+    answer: 1
+    explanation: "Wiki の「TL;DR」にあるとおり、16 周年にあたる 2026 年 9 月 28 日〜10 月 2 日の 5 日間で 46 件の発表が行われました。8 月 3 日〜7 日は Agents Week、9/27 の創業者レターと 10/5 のインターン記事は週の前後の記事で、46 件には含まれません。"
+  - q: "月曜日（9月28日）のテーマとして正しいものはどれか。"
+    choices:
+      - "オープンソースへのコミットメント"
+      - "エージェント経済"
+      - "アプリケーションセキュリティとポスト量子移行"
+      - "より速く、シンプルで、誰にとっても使いやすいインターネット"
+    answer: 0
+    explanation: "Wiki の「発表内容 / 全体の位置づけ」の日別表のとおり、月曜は cf CLI・Forge・EmDash・VoidZero・Vinext・Kitesurf・BEACON・Rust・The Cold Start といった、オープンソースへのコミットメントの日です。エージェント経済は水曜、セキュリティとポスト量子は火曜、速く・簡単には金曜のテーマです。"
+  - q: "記事の導入で、今年のインターネットに起きた大きな変化として挙げられているものはどれか。"
+    choices:
+      - "IPv6 のトラフィックが IPv4 を上回った"
+      - "自動化されたトラフィックが、初めて人間の活動を上回った"
+      - "ポスト量子暗号が全ブラウザで必須になった"
+      - "公開 DNS リゾルバーの利用者が 10 億人に達した"
+    answer: 1
+    explanation: "Wiki の「背景・課題」にあるとおり、記事は創業者レターを引いて、初めて自動化されたトラフィックが人間の活動を上回ったと述べています。さらに AI により作る人が増え、エージェントの推薦が消費者の選択に影響することから、新しいビジネスの余地を作る仕組みが必要だとしています。"
+  - q: "水曜日（9月30日）に発表された、HTTP 402 を使って AI エージェントから支払いを受け取る仕組みはどれか。"
+    choices:
+      - "Forge"
+      - "Application Profiles"
+      - "Monetization Gateway ベータ"
+      - "Workers KV Instant"
+    answer: 2
+    explanation: "Wiki の水曜の表のとおり、Monetization Gateway ベータは、Cloudflare 配下のリソースに価格を付け、HTTP 402 と x402 でエージェントから支払いを受け取る仕組みです。同じ日の Pay Per Use は、パブリッシャーが利用レポート・請求・支払いを受け取る側の発表です。"
+  - q: "火曜日（9月29日）に発表された、IKEv2 のやり取り全体を認証して IPsec のダウングレードを防ぐ取り組みはどれか。"
+    choices:
+      - "Merkle Tree Certificates によるポスト量子 CA"
+      - "IETF 拡張による IPsec の量子ダウングレード攻撃対策"
+      - "HTTP Analytics でのポスト量子鍵交換の可視化"
+      - "CryptoLabe による暗号利用の発見"
+    answer: 1
+    explanation: "火曜の表にある「IPsec に対する量子ダウングレード攻撃の防止」は、Cloudflare が開発に関わった IETF 拡張で IKEv2 のトランスクリプト全体を認証し、ポスト量子 IPsec トンネルの格下げを防ぎます。MTC は証明書、可視化は Analytics、CryptoLabe は社内の暗号利用の発見を扱う別の発表です。"
+  - q: "木曜日（10月1日）の発表のうち、本リポジトリに Wiki がなく、外部リンクのみとして扱われているものはどれか。"
+    choices:
+      - "Cloudflare Basin の一般提供"
+      - "Workers の ML-KEM / ML-DSA 対応（最新の暗号アルゴリズム）"
+      - "Cloudflare K2"
+      - "Clef"
+    answer: 1
+    explanation: "Wiki の「本リポジトリ未収録の発表」にあるとおり、Workers での ML-KEM と ML-DSA の Web Crypto 対応のみが未収録で、外部リンクとして扱っています。ほかの 45 件には Wiki があります。"
+  - q: "金曜日（10月2日）の発表のうち、「拡張した実ユーザー計測の手法で、上位 1,000 ネットワークの 74% で最速になった」とされるものはどれか。"
+    choices:
+      - "Cloudflare Traces"
+      - "Streamline"
+      - "ネットワーク性能アップデート（2026 Birthday Week）"
+      - "Protected Quick Tunnels"
+    answer: 2
+    explanation: "金曜の表にある「2026 Birthday Week: ネットワーク性能アップデート」の概要です。Traces はリクエスト単位の可視化、Streamline は動画パイプライン、Protected Quick Tunnels はメール認証によるアカウント不要の共有を扱います。"
+  - q: "Birthday Week の後に公開されたフォローアップ記事で、EmDash・CryptoLabe・Protected Quick Tunnels などにインターンが直接貢献したと述べられているのは何の振り返りか。"
+    choices:
+      - "ソブリン AI の取り組み"
+      - "1,111 人のインターン採用目標の 1 年後"
+      - "Enterprise for All の誓約"
+      - "Cloudflare Impact の 1 億ドル達成"
+    answer: 1
+    explanation: "Wiki の「TL;DR」と「週の前後の記事」にあるとおり、記事は 1,111 人のインターン採用目標から 1 年後の振り返りを紹介し、EmDash・ポスト量子の可視化・CryptoLabe・Protected Quick Tunnels にインターンが関わったと述べています。"
+  - q: "記事の結びで、今週の発表に共通する「一貫したテーマ」として挙げられている内容として正しいものはどれか。"
+    choices:
+      - "モデル性能の競争に勝つこと"
+      - "開発者が形を変えられるオープンなツール、新しい脅威に追いつくセキュリティ、エージェントと作り手の公正な交換、エージェント向けインフラ"
+      - "既存の CDN 事業の売上を最大化すること"
+      - "IPv4 から IPv6 への完全移行"
+    answer: 1
+    explanation: "Wiki の「結び: 次の章を一緒に」にあるとおり、記事は、開発者が形を変えられるオープンなツール、新しい脅威に追いつくセキュリティ、エージェントとその成果を利用される人々との公正な交換、エージェント時代のインフラの 4 点を共通のテーマとしています。"
+  - q: "本記事（週まとめ）の位置づけについて、Wiki の記述として正しいものはどれか。"
+    choices:
+      - "新機能の実装手順を示すチュートリアルで、多数のコード例を含む"
+      - "週の発表を日別の表で一覧する目次記事で、コード例は含まれず、詳細は各発表の記事を参照する構成"
+      - "1 つの製品の詳細な性能評価レポート"
+      - "Agents Week 2026 の発表のみをまとめた記事"
+    answer: 1
+    explanation: "Wiki の「コード例」セクションのとおり、本記事は日別の表で 46 件を整理した目次記事で、コード例は含まれません。各発表の実装レベルの詳細は、表から個別の Wiki をたどります。"

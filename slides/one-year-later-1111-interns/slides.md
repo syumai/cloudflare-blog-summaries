@@ -272,6 +272,7 @@ AI は「スタートラインを前に動かした」。全体像の把握は�
 
 # 参考リンク
 
+- Birthday Week 2026 の週まとめ記事: ▶ <a href="../birthday-week-2026-wrap-up/" target="_blank">解説スライド</a>
 - 原文: https://blog.cloudflare.com/one-year-later-1111-interns/
 - 昨年の発表: https://blog.cloudflare.com/cloudflare-1111-intern-program/
 - Cache Transcoding: https://blog.cloudflare.com/cache-transcoding/
