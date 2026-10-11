@@ -113,6 +113,7 @@ cloudflare-blog-summaries/
 | 2026-10-01 | Cloudflare K2 のご紹介: サーバーレスなイベントストリーム | [Wiki](docs/articles/2026-10-01-cloudflare-k2-streams.md) | [スライド](slides/cloudflare-k2-streams/slides.md) | [クイズ](quizzes/cloudflare-k2-streams.html) | [原文](https://blog.cloudflare.com/cloudflare-k2-streams/) |
 | 2026-10-01 | Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供 | [Wiki](docs/articles/2026-10-01-managed-cloudflare-os.md) | [スライド](slides/managed-cloudflare-os/slides.md) | [クイズ](quizzes/managed-cloudflare-os.html) | [原文](https://blog.cloudflare.com/managed-cloudflare-os/) |
 | 2026-10-01 | Workers KV Instant のご紹介: Quicksilver で動く、即時反映・低レイテンシの KV モード | [Wiki](docs/articles/2026-10-01-workers-kv-instant.md) | [スライド](slides/workers-kv-instant/slides.md) | [クイズ](quizzes/workers-kv-instant.html) | [原文](https://blog.cloudflare.com/workers-kv-instant/) |
+| 2026-10-01 | 1年後のソブリンAIと「選択」をめぐる戦い: 欧州の2つのオープンモデルを Workers AI に、AI防御ワークショップも開始 | [Wiki](docs/articles/2026-10-01-sovereign-ai-choice-one-year-later.md) | [スライド](slides/sovereign-ai-choice-one-year-later/slides.md) | [クイズ](quizzes/sovereign-ai-choice-one-year-later.html) | [原文](https://blog.cloudflare.com/sovereign-ai-choice-one-year-later/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
