@@ -266,7 +266,7 @@ Media Party ハッカソン（BIT Habitat、2026-09-09）。出典: Cloudflare B
 </div>
 
 - 原文: [Cloudflare Impact reaches $100 million in donations](https://blog.cloudflare.com/100-million-donations/)（日本語版なし）
-- 関連解説スライド: [Cloudflare 2026年度創業者レター](../cloudflares-2026-annual-founders-letter/) / [The Cold Start](../introducing-the-cold-start/) / [Cloudflare Ambassadors、Community Engineers](../community-program-refresh/)
+- 関連解説スライド: [社会のために作る（市民社会の自動化事例）](../civil-society-automation/) / [Cloudflare 2026年度創業者レター](../cloudflares-2026-annual-founders-letter/) / [The Cold Start](../introducing-the-cold-start/) / [Cloudflare Ambassadors、Community Engineers](../community-program-refresh/)
 - [Protecting Local News from AI Crawlers](https://blog.cloudflare.com/ai-crawl-control-for-project-galileo/) / [非営利向けスタートアッププログラム](https://blog.cloudflare.com/expanding-startups-for-nonprofits/)
 - Workers サンプル: 技術発表ではないため対象外
 

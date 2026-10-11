@@ -116,6 +116,7 @@ cloudflare-blog-summaries/
 | 2026-10-01 | 1年後のソブリンAIと「選択」をめぐる戦い: 欧州の2つのオープンモデルを Workers AI に、AI防御ワークショップも開始 | [Wiki](docs/articles/2026-10-01-sovereign-ai-choice-one-year-later.md) | [スライド](slides/sovereign-ai-choice-one-year-later/slides.md) | [クイズ](quizzes/sovereign-ai-choice-one-year-later.html) | [原文](https://blog.cloudflare.com/sovereign-ai-choice-one-year-later/) |
 | 2026-10-01 | Clef のご紹介: オープンソースの decision model と、新しい RL ファインチューニング基盤 | [Wiki](docs/articles/2026-10-01-clef-decision-models.md) | [スライド](slides/clef-decision-models/slides.md) | [クイズ](quizzes/clef-decision-models.html) | [原文](https://blog.cloudflare.com/clef-decision-models/) |
 | 2026-10-02 | 2026 Birthday Week: ネットワーク性能アップデート | [Wiki](docs/articles/2026-10-02-network-performance-birthday-week-2026.md) | [スライド](slides/network-performance-birthday-week-2026/slides.md) | [クイズ](quizzes/network-performance-birthday-week-2026.html) | [原文](https://blog.cloudflare.com/network-performance-birthday-week-2026/) |
+| 2026-10-02 | 社会のために作る: 市民社会組織は Cloudflare で何を自動化しているか | [Wiki](docs/articles/2026-10-02-civil-society-automation.md) | [スライド](slides/civil-society-automation/slides.md) | [クイズ](quizzes/civil-society-automation.html) | [原文](https://blog.cloudflare.com/civil-society-automation/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

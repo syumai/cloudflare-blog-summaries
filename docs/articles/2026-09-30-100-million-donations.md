@@ -3,7 +3,7 @@
 - 原文: [https://blog.cloudflare.com/100-million-donations/](https://blog.cloudflare.com/100-million-donations/)（日本語版なし。ja-jp URL は 404 のため、en-us 版から日本語化した）
 - 公開日: 2026-09-30（Birthday Week 2026。英語原文の datePublished は 2026-09-30T13:01:55Z）
 - 位置づけ: Birthday Week 2026 の記事。タグは Birthday Week / Impact / Project Galileo
-- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（同じ Birthday Week 2026 の総論）、[The Cold Start](./2026-09-28-introducing-the-cold-start.md)（同じ週のスタートアップ向け企画）、[Cloudflare Ambassadors、Community Engineers を発表](./2026-08-07-community-program-refresh.md)（コミュニティ・オープンソースへの投資）
+- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)（同じ Birthday Week 2026 の総論）、[The Cold Start](./2026-09-28-introducing-the-cold-start.md)（同じ週のスタートアップ向け企画）、[Cloudflare Ambassadors、Community Engineers を発表](./2026-08-07-community-program-refresh.md)（コミュニティ・オープンソースへの投資）、[社会のために作る: 市民社会組織は Cloudflare で何を自動化しているか](./2026-10-02-civil-society-automation.md)（本記事で予告した非営利スタートアップと人権団体向け自動化ツールの詳細）
 - GitHub: [docs/articles/2026-09-30-100-million-donations.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-100-million-donations.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3RZ3WTX78RCB7KKEB1T8J44.01M3RZ3XRZSENAMJGQMGNWZDHZ.png)
