@@ -1,0 +1,105 @@
+title: "「全員が使える」誓約のアップデート: Enterprise 専用だった機能は今どこまで開放されたか"
+slug: enterprise-for-all-update
+sourceUrl: https://blog.cloudflare.com/enterprise-for-all-update/
+wiki: ../docs/articles/2026-10-02-enterprise-for-all-update.md
+questions:
+  - q: "記事が示す、プラン間の違いに関する基本方針として正しいものはどれか。"
+    choices:
+      - "Enterprise でしか使えない機能は今後も増やしていく"
+      - "プランの違いは「何を使えるか」ではなく「どれだけ使えるか」に置く"
+      - "無料プランでは GA 前の機能しか使えない"
+      - "Pay-as-you-go では Enterprise の機能を一切使えない"
+    answer: 1
+    explanation: "Wikiの「方針: 違いは『使える量』であって『使える機能』ではない」を参照。今週ローンチした GA 機能で Enterprise にあるものは Pay-as-you-go でも使え、多くは無料枠でも使える。違いは使用量にある。"
+
+  - q: "今回、Enterprise 専用から Free / Pro / Business にもセルフサービス・従量課金で提供されるようになったと説明されている機能はどれか。"
+    choices:
+      - "Logpush"
+      - "Cloudflare for Government"
+      - "Organizations（無料アカウント向け）"
+      - "ハードな支出上限"
+    answer: 0
+    explanation: "Wikiの「Logpush と Transformers、Custom Dashboards」を参照。Logpush は Free / Pro / Business にセルフサービス・従量課金で提供される。Organizations の無料アカウント向けは2027年初頭、ハードな支出上限は試作中である。"
+
+  - q: "Logpush Transformers の説明として正しいものはどれか。"
+    choices:
+      - "SQL で、配信前にレコードの絞り込み・伏字化・付加情報追加・整形ができる"
+      - "ログを自動で Workers に変換して実行する"
+      - "Enterprise 顧客だけが使える Logpush の上位プランである"
+      - "Terraform の state をログとして出力する"
+    answer: 0
+    explanation: "Wikiの「Logpush と Transformers、Custom Dashboards」を参照。別途 ETL パイプラインを運用せずに SQL で変換でき、全顧客向けに GA となった。"
+
+  - q: "New Account ボタンで作成されるアカウントについて、記事の説明に合うものはどれか。"
+    choices:
+      - "既存アカウントの請求に合算される"
+      - "Enterprise 顧客専用で、無料ユーザーは使えない"
+      - "新しい無料の Cloudflare アカウントで、各アカウントは独立して請求される"
+      - "作成数に月1回の制限がある"
+    answer: 2
+    explanation: "Wikiの「大規模運用のための新しい道具」の「複数アカウント」を参照。新しい無料アカウントが作られ、各アカウントが独立して請求されるため、コストセンターごとに支出を分けられる。"
+
+  - q: "Organizations の提供状況として、記事の記述に合うものはどれか。"
+    choices:
+      - "全プランで既に GA している"
+      - "Enterprise でベータ、10月に GA、無料アカウントへは2027年初頭"
+      - "無料アカウントのみで先行提供している"
+      - "提供予定は未定である"
+    answer: 1
+    explanation: "Wikiの「Organizations」を参照。Enterprise 向けにベータ中で、10月に GA、無料アカウントへは2027年初頭に展開される予定。"
+
+  - q: "Enterprise 顧客の Organization について、記事の記述として正しいものはどれか。"
+    choices:
+      - "アカウントごとに別々の Organization を作らなければならない"
+      - "Enterprise はちょうど1つの Organization を持てる"
+      - "Organization は5アカウントまでしか束ねられない"
+      - "Organization は Terraform からしか作成できない"
+    answer: 1
+    explanation: "Wikiの「Organizations」を参照。会社の資産を1か所で見渡せるよう、Enterprise は1つの Organization に限定される。CISO や CTO などに統合された可視性を与える狙いがある。"
+
+  - q: "記事が「新しい Enterprise 専用機能は導入しない」という約束に結び付けている取り組みはどれか。"
+    choices:
+      - "Project Galileo"
+      - "Code Orange: Fail Small（新コードをトラフィックのコホート単位で、無料顧客から順に展開する）"
+      - "Cloudflare Connect"
+      - "Billable Usage API"
+    answer: 1
+    explanation: "Wikiの「無料から始める: Code Orange: Fail Small」を参照。無料顧客から順に展開する方針の結果として、新たな Enterprise 専用機能は導入しないと約束している。Cloudflare for Government のような本質的に Enterprise 向けのものは例外。"
+
+  - q: "記事掲載の provider.tf の書き起こしを読んだとき、この設定が行うことはどれか。"
+    code: |
+      terraform {
+        required_providers {
+          cloudflare = {
+            source  = "cloudflare/cloudflare"
+            version = "5.25.0"
+          }
+        }
+        required_version = ">= 1.5"
+      }
+    codeLang: hcl
+    choices:
+      - "Cloudflare provider をバージョン 5.25.0 に固定し、Terraform 本体は 1.5 以上を要求する"
+      - "Cloudflare provider を常に最新版に自動更新する"
+      - "Terraform 本体を 1.5 未満に制限する"
+      - "Cloudflare のアカウントを自動的に作成する"
+    answer: 0
+    explanation: "Wikiの「コード例」を参照。required_providers で cloudflare/cloudflare を 5.25.0 に固定し、required_version で Terraform 本体の下限を 1.5 にしている。"
+
+  - q: "Cloudflare 社内でアカウントを細かく分けても運用が回る理由として、記事が挙げているものはどれか。"
+    choices:
+      - "すべての変更を中央の管理者が承認しているため"
+      - "各アカウントの範囲が狭いので、担当エンジニアに広い権限を与えても影響範囲を抑えられ、Terraform でピアレビュー可能な変更経路を持てるため"
+      - "アカウントごとに別の Terraform provider を使っているため"
+      - "Organization を使わずに独立運用しているため"
+    answer: 1
+    explanation: "Wikiの「Cloudflare 社内での使い方」を参照。アカウントの範囲を狭くして blast radius を抑え、Terraform で監査可能な変更経路を作る。すべてのアカウントは Cloudflare の Organization に属し、セキュリティチームが統制する。"
+
+  - q: "ハードな支出上限と Enterprise 向け Billable Usage について、記事の記述に合うものはどれか。"
+    choices:
+      - "どちらも既に全顧客で GA している"
+      - "ハードな支出上限は2026年第4四半期に早期提供予定、Enterprise 向けの体験は2027年に発表を見込む"
+      - "ハードな支出上限は Enterprise のみに提供される"
+      - "どちらも提供予定はない"
+    answer: 1
+    explanation: "Wikiの「Billable Usage ダッシュボードと API」を参照。ハードな支出上限は試作中で2026年第4四半期に早期提供予定。Enterprise は契約条件の差が大きいため未提供で、2027年に発表を見込んでいる。"
