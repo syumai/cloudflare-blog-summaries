@@ -5,7 +5,7 @@
 - 公開日: 2026-09-28
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Ryan Townsend、Nic Jansma
-- 関連: [Radar Researcher の紹介](./2026-08-07-introducing-radar-researcher.md)（同じ Cloudflare Radar の公開データ基盤に関する記事）
+- 関連: [Radar Researcher の紹介](./2026-08-07-introducing-radar-researcher.md)（同じ Cloudflare Radar の公開データ基盤に関する記事） / [2026 Birthday Week: ネットワーク性能アップデート](./2026-10-02-network-performance-birthday-week-2026.md)（接続時間に基づくネットワーク性能の比較）
 - GitHub: [docs/articles/2026-09-28-how-fast-is-the-web.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-how-fast-is-the-web.md)
 
 ![WebKit（Safari）の利用率が高い国々の地図](https://blog.cloudflare.com/_emdash/api/media/file/01M3CW03Y63NTVT66FJ88HX38K.png)
