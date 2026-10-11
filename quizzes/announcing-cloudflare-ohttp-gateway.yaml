@@ -1,0 +1,104 @@
+title: "Cloudflare OHTTP Gateway の発表: Cloudflare のプライバシー保護インフラを利用しやすく"
+slug: announcing-cloudflare-ohttp-gateway
+sourceUrl: https://blog.cloudflare.com/announcing-cloudflare-ohttp-gateway/
+wiki: ../docs/articles/2026-10-02-announcing-cloudflare-ohttp-gateway.md
+questions:
+  - q: "OHTTP（Oblivious HTTP）が主に実現することはどれか。"
+    choices:
+      - "アプリのバックエンドがユーザーの IP アドレスを見ずに HTTP リクエストを受け取れるようにする"
+      - "HTTP のレスポンスを自動的に圧縮する"
+      - "TLS の証明書を自動更新する"
+      - "DNS の応答を高速化する"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。OHTTP は RFC 9458 の IETF 標準で、アプリのバックエンドにユーザーの IP アドレスを見せずに HTTP リクエストを届けるためのもの。"
+
+  - q: "OHTTP における relay と gateway の役割の組み合わせとして正しいものはどれか。"
+    choices:
+      - "relay は暗号処理を行い、gateway は識別子を隠して転送する"
+      - "relay は暗号化されたリクエストを転送してクライアント識別子を隠し、gateway は復号とレスポンスの暗号化を行う"
+      - "relay と gateway はどちらも同じ主体が運用するのが前提である"
+      - "relay はアプリサーバーの鍵を保管し、gateway は DNS を解決する"
+    answer: 1
+    explanation: "Wikiの「OHTTP の2つの役割」を参照。relay は暗号文を盲目的に転送し、gateway が暗号処理を担当してアプリサーバーが通常の HTTP を扱えるようにする。信頼の分離のため、両者は独立して運用される。"
+
+  - q: "OHTTP が「二重盲検（double-blind）」のモデルと呼ばれる理由として正しいものはどれか。"
+    choices:
+      - "リクエストを2回暗号化するから"
+      - "ユーザーとアプリの双方が相手を認証するから"
+      - "relay はクライアント識別子だけを、gateway とアプリサーバーはリクエスト内容だけを見ることができ、どの主体も両方を同時には見ないから"
+      - "relay を2つ連続して通すから"
+    answer: 2
+    explanation: "Wikiの「OHTTP の基本」を参照。HPKE でカプセル化されるため relay には暗号文しか見えず、gateway とアプリサーバーはクライアントの識別子を見ない。"
+
+  - q: "記事のコード例にあるメタデータ一覧を読んだとき、relay 経由でアプリサーバーに見える情報はどれか。"
+    code: |
+      # relay 経由でアプリサーバーに見える情報
+      ipAddress: 128.62.37.13   # the relay's IP address & fingerprint
+      ASN: 18
+      tlsCipher: AEAD-AES-128-GCM-SHA256
+      tlsVersion: TLSv1.3
+      Country: US
+      Region: Texas             # the relay's location
+      City: Austin
+    codeLang: txt
+    choices:
+      - "エンドユーザーの IP アドレスと所在地"
+      - "relay の IP アドレス・TLS 特性・所在地だけで、エンドユーザーの情報は含まれない"
+      - "エンドユーザーと relay の両方の IP アドレス"
+      - "リクエストボディの暗号文"
+    answer: 1
+    explanation: "Wikiの「コード例」を参照。relay 経由では relay の情報だけが見えるため、アプリサーバーはユーザーの位置や TLS フィンガープリントを知れず、複数のリクエストを同じユーザーに結び付けにくくなる。"
+
+  - q: "今回の発表で、2022年の Privacy Gateway はどうなったか。"
+    choices:
+      - "提供が終了した"
+      - "Cloudflare OHTTP Gateway に統合された"
+      - "「Cloudflare OHTTP Relay」に改称された"
+      - "Workers 専用の機能になった"
+    answer: 2
+    explanation: "Wikiの「OHTTP 製品群の拡張」を参照。2つの製品を区別しやすくするため、Privacy Gateway は Cloudflare OHTTP Relay に改称され、新たに自己サーブ型の Cloudflare OHTTP Gateway が加わった。"
+
+  - q: "アプリサーバーがすでに Cloudflare の CDN や Workers の背後にある顧客が、Cloudflare の OHTTP Relay ではなく Gateway を選ぶ理由はどれか。"
+    choices:
+      - "Relay は Cloudflare の背後のサーバーには技術的に接続できないから"
+      - "Cloudflare が relay を運用すると、クライアントのメタデータと復号後の内容の両方を見てしまい、OHTTP のプライバシーモデルに反するから"
+      - "Gateway のほうが常に料金が安いから"
+      - "Gateway は HPKE を使わないから"
+    answer: 1
+    explanation: "Wikiの「なぜ Gateway を作ったか」を参照。OHTTP は relay とアプリサーバーが互いに共謀しない別の主体であることを求めるため、Cloudflare 背後のサーバーに Cloudflare の relay を組み合わせるとモデルが崩れる。"
+
+  - q: "Gateway が relay を認証するために使う仕組みはどれか。"
+    choices:
+      - "復号の前に Cloudflare Access を実行し、mutual TLS や静的なサービス資格情報などの標準ポリシーを使える"
+      - "リクエストボディに含まれるユーザー名を検証する"
+      - "relay の IP アドレスを Cloudflare が自動的に許可リストに登録する"
+      - "クライアントの TLS フィンガープリントを照合する"
+    answer: 0
+    explanation: "Wikiの「Gateway の作りと設計上の配慮」の3つ目を参照。Gateway はクライアントについてほとんど知らないため、復号の前に Access で relay を認証する。"
+
+  - q: "Gateway が、Cloudflare Workers や Cloudflare 上のプロキシされたホストから送られたリクエストの復号を拒否する理由はどれか。"
+    choices:
+      - "Workers は HTTP を扱えないから"
+      - "relay と gateway の両方を Cloudflare 上に置く誤設定で、Cloudflare がクライアントの身元と復号後の内容の両方を見てしまうのを防ぐため"
+      - "チャンク化 OHTTP に対応していないから"
+      - "鍵管理を顧客に任せるため"
+    answer: 1
+    explanation: "Wikiの「Gateway の作りと設計上の配慮」の4つ目を参照。信頼の分離を守り、Cloudflare が両方を見ることがないようにするための設計。"
+
+  - q: "OHTTP を使う際にクライアント実装者が注意すべき点として、記事が挙げているものはどれか。"
+    choices:
+      - "OHTTP は内側のリクエストボディも自動的に匿名化してくれるので注意は不要"
+      - "OHTTP は IP などネットワークレベルのプライバシーを守るだけなので、ボディにメールアドレスやユーザー名などの識別情報を入れないのは開発者の責任"
+      - "OHTTP では必ず Cloudflare の relay を使わなければならない"
+      - "OHTTP では GET リクエストしか送れない"
+    answer: 1
+    explanation: "Wikiの「はじめ方」を参照。OHTTP はネットワークレベルのプライバシーを提供し、内側のリクエストボディには手を加えない。"
+
+  - q: "記事の提供状況の説明として正しいものはどれか。"
+    choices:
+      - "全ユーザーに一般提供（GA）されており、無料で使える"
+      - "Workers の無料プランに自動的に含まれる"
+      - "自己サーブのクローズドベータで、ゾーンの有料アドオンとして提供予定。waitlist への登録で通知を受けられる"
+      - "Enterprise 契約者だけがすでに利用している"
+    answer: 2
+    explanation: "Wikiの「TL;DR」「所感・ポイント」を参照。記事は closed beta、paid add-on、waitlist、提供は「this fall」と述べている。"

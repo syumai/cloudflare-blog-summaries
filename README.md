@@ -119,6 +119,7 @@ cloudflare-blog-summaries/
 | 2026-10-02 | 社会のために作る: 市民社会組織は Cloudflare で何を自動化しているか | [Wiki](docs/articles/2026-10-02-civil-society-automation.md) | [スライド](slides/civil-society-automation/slides.md) | [クイズ](quizzes/civil-society-automation.html) | [原文](https://blog.cloudflare.com/civil-society-automation/) |
 | 2026-10-02 | Protected Quick Tunnels: アカウント不要で、次の開発プロジェクトにシンプルな認証を | [Wiki](docs/articles/2026-10-02-protected-quick-tunnels.md) | [スライド](slides/protected-quick-tunnels/slides.md) | [クイズ](quizzes/protected-quick-tunnels.html) | [原文](https://blog.cloudflare.com/protected-quick-tunnels/) |
 | 2026-10-02 | 糸をたどる: アカウント不正を調査するための新しいダッシュボード | [Wiki](docs/articles/2026-10-02-account-abuse-protection-dashboard.md) | [スライド](slides/account-abuse-protection-dashboard/slides.md) | [クイズ](quizzes/account-abuse-protection-dashboard.html) | [原文](https://blog.cloudflare.com/account-abuse-protection-dashboard/) |
+| 2026-10-02 | Cloudflare OHTTP Gateway の発表: Cloudflare のプライバシー保護インフラを利用しやすく | [Wiki](docs/articles/2026-10-02-announcing-cloudflare-ohttp-gateway.md) | [スライド](slides/announcing-cloudflare-ohttp-gateway/slides.md) | [クイズ](quizzes/announcing-cloudflare-ohttp-gateway.html) | [原文](https://blog.cloudflare.com/announcing-cloudflare-ohttp-gateway/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
