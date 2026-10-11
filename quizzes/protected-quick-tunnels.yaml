@@ -1,0 +1,90 @@
+title: "Protected Quick Tunnels: アカウント不要で、次の開発プロジェクトにシンプルな認証を"
+slug: protected-quick-tunnels
+sourceUrl: https://blog.cloudflare.com/protected-quick-tunnels/
+wiki: ../docs/articles/2026-10-02-protected-quick-tunnels.md
+questions:
+  - q: "記事によると、Quick Tunnels が従来から抱えていた課題はどれか。"
+    choices:
+      - "利用にドメインの取得が必須である"
+      - "リンクを知っていれば誰でも開ける"
+      - "有料プランでしか使えない"
+      - "同時に1つのトンネルしか作れない"
+    answer: 1
+    explanation: "Wikiの「背景・課題」を参照。Quick Tunnels はアカウント・ドメイン・費用が不要で、その代わりに『リンクを知っていれば誰でも開ける』点が昔からの課題だった。"
+
+  - q: "訪問者のメールアドレスを制限するために cloudflared に追加するフラグはどれか。"
+    choices:
+      - "--allowed-mail"
+      - "--access-policy"
+      - "--auth-email"
+      - "--private"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「--allowed-mail による制限」を参照。cloudflared 2026.9.3 以降で利用できる。"
+
+  - q: "次のコマンドを実行したとき、トンネルに入れる訪問者として正しいものはどれか。"
+    code: |
+      cloudflared tunnel --url http://localhost:8080 \
+        --allowed-mail alice@example.com \
+        --allowed-mail '*@example.com'
+    codeLang: sh
+    choices:
+      - "alice@example.com だけ"
+      - "誰でも入れる（フラグは無視される）"
+      - "alice@example.com と、example.com ドメインの全員"
+      - "Cloudflare アカウントにログインしたユーザーだけ"
+    answer: 2
+    explanation: "Wikiの「コード例」を参照。フラグは繰り返し指定でき、'*@example.com' はドメイン全体を許可する指定。個別アドレスとドメイン全体を併用できる。"
+
+  - q: "保護付き Quick Tunnel で、メールアドレスの所有確認（認証）を行うのはどれか。"
+    choices:
+      - "手元の cloudflared"
+      - "Cloudflare Access のワンタイム PIN"
+      - "Workers 上の認証ブローカーが保持するユーザーDB"
+      - "訪問者のブラウザの Cookie"
+    answer: 1
+    explanation: "Wikiの「認証と認可を分ける設計」を参照。メールの所有確認は Cloudflare Access が行う。ブローカーは Access の ID を署名付き assertion に変換するだけで、ID レコードを保存しない。"
+
+  - q: "許可リストとの照合（認可）はどこで行われるか。"
+    choices:
+      - "Cloudflare の中央ポリシーサービス"
+      - "ブローカーが保持するトンネルごとのポリシー"
+      - "Cloudflare Access のアプリケーション"
+      - "手元の cloudflared がメモリ上で行う"
+    answer: 3
+    explanation: "Wikiの「認証と認可を分ける設計」を参照。招待者リストはマシンの外に出ず、Cloudflare は『このトンネルはメール認証を要求する』ことしか知らない。"
+
+  - q: "全 Quick Tunnel ホスト名の前に Cloudflare Access アプリケーションを置く案が採用されなかった主な理由はどれか。"
+    choices:
+      - "Access がメール認証に対応していないため"
+      - "数十万の短命なトンネルごとにアプリとポリシーが要り、所有するアカウントもないため"
+      - "遅延が大きすぎるため"
+      - "cloudflared が Access と通信できないため"
+    answer: 1
+    explanation: "Wikiの「認証と認可を分ける設計」の表（案1）を参照。同時に数十万のトンネルが動き、数分で消えるものも多いため、新しい名前空間と動的ルーティングが必要になる。"
+
+  - q: "訪問者が認証を通過した後、cloudflared が作るセッションの扱いとして正しいものはどれか。"
+    choices:
+      - "リクエストごとに中央のポリシーサービスへ問い合わせる"
+      - "最長4時間（Access のサインインが先に切れればそれまで）、または cloudflared を止めるまで有効で、中央の参照はない"
+      - "セッション Cookie に訪問者のメールアドレスを保存する"
+      - "ブローカーがセッションを保存し、24時間有効にする"
+    answer: 1
+    explanation: "Wikiの「リクエストの流れ」を参照。Cookie にはランダム値と有効期限だけが入り、誰かは含まれない。以降のリクエストでは中央の参照もポリシーサービスもない。"
+
+  - q: "署名付き assertion がブラウザから cloudflared へ渡される方法として、記事が説明しているものはどれか。"
+    choices:
+      - "URL のクエリ文字列"
+      - "form POST（URL・履歴・ログに残らない）"
+      - "HTTP の Referer ヘッダー"
+      - "DNS の TXT レコード"
+    answer: 1
+    explanation: "Wikiの「リクエストの流れ」を参照。form POST で渡すため、URL・ブラウザ履歴・ログに残らない。assertion はトンネルのホスト名と state に紐づく。"
+
+  - q: "保護付き Quick Tunnel の作成時、サービスが認証モードを確認できなかった場合の cloudflared の挙動はどれか。"
+    choices:
+      - "公開 URL にフォールバックして起動する"
+      - "起動を拒否する（誤って公開 URL を渡さない）"
+      - "警告を出して、ルールをサービスに送って再試行する"
+      - "ローカルでのみ待ち受ける"
+    answer: 1
+    explanation: "Wikiの「リクエストの流れ」と「所感・ポイント」を参照。保護付きトンネルは公開モードにフォールバックしない。また、cloudflared が送るのは認証モードのみで、ルールは送らない。"
