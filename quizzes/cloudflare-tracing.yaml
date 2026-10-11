@@ -1,0 +1,94 @@
+title: "Cloudflare Traces の紹介: プラットフォーム全体でリクエストを追跡する"
+slug: cloudflare-tracing
+sourceUrl: https://blog.cloudflare.com/cloudflare-tracing/
+wiki: ../docs/articles/2026-10-02-cloudflare-tracing.md
+questions:
+  - q: "Cloudflare Traces が、従来の Workers Tracing から広げた対象はどれか。"
+    choices:
+      - "Workers ランタイム内の fetch だけ"
+      - "セキュリティルール・変換・キャッシュ・ルーティング・Worker・オリジンを含む HTTP リクエスト経路全体"
+      - "Cloudflare のダッシュボード操作の監査ログ"
+      - "ローカル開発サーバーの呼び出しだけ"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「背景・課題」を参照。Workers Tracing は Worker の呼び出しの中を見せる機能で、Cloudflare Traces はそれをリクエスト経路全体に広げる。"
+
+  - q: "記事によると、Cloudflare Traces の span を生成するために必要な作業はどれか。"
+    choices:
+      - "アプリケーションに OpenTelemetry SDK を組み込む"
+      - "オリジンにエージェントをインストールする"
+      - "特別な計装・設定・プラグインは不要で、ドメインでトレーシングを有効にする"
+      - "すべてのルールに個別のトレース用フラグを付ける"
+    answer: 2
+    explanation: "Wikiの「トレースの設定」を参照。ドメインで有効化すれば、Cloudflare が対応する span を自動で生成する。"
+
+  - q: "リクエストがキャッシュミスでオリジンまで行き、遅くなったかを確認するときに見る span はどれか。"
+    choices:
+      - "入れ子になった cache・upstream・origin の span"
+      - "http_request_snippets の span だけ"
+      - "http_config_settings の span だけ"
+      - "http_response_compression の span だけ"
+    answer: 0
+    explanation: "Wikiの「1 つのリクエストを端から端まで追う」の問い 4 を参照。記事の例では 539ms のうち 527ms をオリジンのレスポンス取得に使っていた。"
+
+  - q: "どのセキュリティルールがリクエストをブロック・チャレンジしたかを特定する手がかりとして、記事が挙げているものはどれか。"
+    choices:
+      - "span の event"
+      - "DNS のレコード"
+      - "オリジンのアクセスログのみ"
+      - "Worker のコンソール出力のみ"
+    answer: 0
+    explanation: "Wikiの「1 つのリクエストを端から端まで追う」の問い 1 を参照。ブロックやチャレンジの原因ルールは、span の event から特定できる。"
+
+  - q: "通常は 1% のリクエストだけをトレースしつつ、問題を報告した顧客のトラフィックだけ 100% 取りたい。使う機能はどれか。"
+    choices:
+      - "基準のサンプリング率を 100% に上げる"
+      - "Trace Rules で一致するリクエストのサンプリングを上書きする"
+      - "Logpush のジョブを追加する"
+      - "traceparent ヘッダーを削除する"
+    answer: 1
+    explanation: "Wikiの「トレースの設定」を参照。Trace Rules は Cloudflare の Rules 言語で、ホスト名・送信元 IP・ヘッダーなどに一致するリクエストだけ基準を上書きする。ドメイン全体のトレースを増やさずに問題を再現できる。"
+
+  - q: "Cloudflare の span を、自社サービスやオリジンのアプリの span と 1 つのトレースにつなげるために使う、W3C 標準のヘッダーはどれか。"
+    choices:
+      - "X-Forwarded-For"
+      - "CF-Ray"
+      - "traceparent"
+      - "Authorization"
+    answer: 2
+    explanation: "Wikiの「トレースコンテキストの受け入れと伝播」を参照。Cloudflare は受信した traceparent を受け入れ、新しい traceparent をオリジンへ転送できる。"
+
+  - q: "Cloudflare Traces の span を外部のオブザーバビリティ基盤へ送るために使うプロトコルはどれか。"
+    choices:
+      - "Syslog"
+      - "OTLP（OpenTelemetry Protocol）"
+      - "SNMP"
+      - "SMTP"
+    answer: 1
+    explanation: "Wikiの「OpenTelemetry でのエクスポート」を参照。アカウント単位の宛先を設定し、どのドメインが送るかを選ぶ。Cloudflare はリクエストの動きを OpenTelemetry の span として表現し、OTLP で配信する。"
+
+  - q: "2026年12月1日から適用される Cloudflare Tracing（と Workers Tracing）の料金モデルの説明として、正しいものはどれか。"
+    choices:
+      - "span の数に応じて課金する"
+      - "リクエスト数に応じて課金する"
+      - "取り込んだオブザーバビリティデータの量と保持期間に基づく"
+      - "ドメイン数に応じた月額固定料金のみ"
+    answer: 2
+    explanation: "Wikiの「料金」を参照。統一された Observability の料金モデルで、span やイベントの数ではなく、取り込み量と保持期間で課金する。Paid / Enterprise の超過は $0.25 / GB 取り込み、$0.10 / GB-month 保存。"
+
+  - q: "Free プランに含まれる Cloudflare Traces の利用条件として、記事の表にあるものはどれか。"
+    choices:
+      - "1 日 0.5 GB の取り込み、保持 7 日、追加利用は不可"
+      - "1 日 50 GB の取り込み、保持 1 年"
+      - "無制限の取り込み、保持 30 日"
+      - "有料プランへの移行が必須で利用できない"
+    answer: 0
+    explanation: "Wikiの「料金」の表を参照。Free は 1 日 0.5 GB の取り込みと 7 日保持で、追加利用はできない。"
+
+  - q: "記事の「今後の予定」で、すべての受信リクエストからコンテキストを受け入れずに、信頼できる呼び出し元だけがトレースを続けられるようにする機能はどれか。"
+    choices:
+      - "アドホックなトレース"
+      - "認証付きのコンテキスト伝播（Authenticated context propagation）"
+      - "より長い保持期間"
+      - "Workers での OpenTelemetry API 対応"
+    answer: 1
+    explanation: "Wikiの「今後の予定」を参照。現状は incoming propagation policy で受け入れるかどうかを決める形で、認証付きの伝播はその次の段階として挙げられている。"

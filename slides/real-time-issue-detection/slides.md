@@ -388,4 +388,5 @@ Automation で issue が Cloudflare OS に送られ、エラーから Workflows 
 - エージェント開発ライフサイクル: ▶ <a href="../agent-development-lifecycle/" target="_blank">解説スライド</a>
 - cf CLI: ▶ <a href="../cloudflare-cf-cli-launch/" target="_blank">解説スライド</a>
 - Cloudflare OS: ▶ <a href="../cloudflare-os/" target="_blank">解説スライド</a>
+- Cloudflare Traces: ▶ <a href="../cloudflare-tracing/" target="_blank">解説スライド</a>
 - Workers サンプル: <code>examples/real-time-issue-detection/</code>（有効化の設定と、例外を起こして Context を付ける最小 Worker。<code>wrangler deploy --dry-run</code> で確認済み）

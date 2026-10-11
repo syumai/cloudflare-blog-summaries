@@ -290,6 +290,7 @@ class: text-center
 - [workerd（OSSリポジトリ）](https://github.com/cloudflare/workerd)
 - [エージェント開発ライフサイクル ▶ 解説スライド](../agent-development-lifecycle/)
 - [Cloudflare Agentsの紹介 ▶ 解説スライド](../agents-on-cloudflare/)
+- [Cloudflare Traces の紹介 ▶ 解説スライド](../cloudflare-tracing/)
 - [Workers サンプル（examples/local-tracing/）](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/local-tracing)
 
 <div class="pt-8 text-sm opacity-50">

@@ -5,7 +5,7 @@
 - 公開日: 2026-09-30
 - 著者: Thomas Ankcorn, Maksym Makuch, Nevi Shah
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 5 分）。Cloudflare Workers の組み込みエラー監視機能 **Issues**（オープンベータ）の発表
-- 関連: [エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（同じ組み込み OpenTelemetry 計測。本記事のカスタム属性はこのトレースの仕組みを使う）/ [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md)（エージェントが本番の問題まで扱う流れの総論）/ [cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（`cf observability issues` で Issues を調べられる CLI）/ [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](./2026-08-05-cloudflare-os.md)（Workflows の 2 件の不具合に修正案を出した側）/ [インターネットには「第二の読者」がいる](./2026-09-30-agentic-web.md)（Birthday Week 2026 の総論）
+- 関連: [エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（同じ組み込み OpenTelemetry 計測。本記事のカスタム属性はこのトレースの仕組みを使う）/ [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md)（エージェントが本番の問題まで扱う流れの総論）/ [cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（`cf observability issues` で Issues を調べられる CLI）/ [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](./2026-08-05-cloudflare-os.md)（Workflows の 2 件の不具合に修正案を出した側）/ [インターネットには「第二の読者」がいる](./2026-09-30-agentic-web.md)（Birthday Week 2026 の総論） / [Cloudflare Traces の紹介: プラットフォーム全体でリクエストを追跡する](./2026-10-02-cloudflare-tracing.md)（トレース側の拡張。同じ OpenTelemetry 計装の基盤）
 - GitHub: [docs/articles/2026-09-30-real-time-issue-detection.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-real-time-issue-detection.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3QYSQZS2E3XN2KS33WWKWGT.png)
@@ -157,5 +157,5 @@ If no issues exist, report that. Otherwise, diagnose from the details, fix local
 - [Cloudflare Workflows](https://developers.cloudflare.com/workflows/)
 - [workerd](https://github.com/cloudflare/workerd)
 - 連携先: [Claude Code の routine（API トリガー）](https://code.claude.com/docs/en/routines#add-an-api-trigger) / [Cursor の Automations（Webhook トリガー）](https://cursor.com/docs/cloud-agent/automations#webhook-triggers) / [Devin の API 認証](https://docs.devin.ai/api-reference/authentication)
-- 関連記事: [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) / [Cloudflare OS](./2026-08-05-cloudflare-os.md) / [ローカルトレース](./2026-08-04-local-tracing.md) / [エージェント開発ライフサイクル](./2026-08-04-agent-development-lifecycle.md)
+- 関連記事: [cf のご紹介](./2026-09-28-cloudflare-cf-cli-launch.md) / [Cloudflare OS](./2026-08-05-cloudflare-os.md) / [ローカルトレース](./2026-08-04-local-tracing.md) / [エージェント開発ライフサイクル](./2026-08-04-agent-development-lifecycle.md) / [Cloudflare Traces の紹介](./2026-10-02-cloudflare-tracing.md)
 - Workers サンプル: [examples/real-time-issue-detection/](../../examples/real-time-issue-detection/)
