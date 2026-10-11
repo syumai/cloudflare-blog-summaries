@@ -111,6 +111,7 @@ cloudflare-blog-summaries/
 | 2026-10-01 | AI Search が一般提供（GA）に: マルチモーダル埋め込み・大容量ファイル・OCR・課金開始 | [Wiki](docs/articles/2026-10-01-ai-search-ga.md) | [スライド](slides/ai-search-ga/slides.md) | [クイズ](quizzes/ai-search-ga.html) | [原文](https://blog.cloudflare.com/ai-search-ga/) |
 | 2026-10-01 | 次の Git プラットフォームを Cloudflare 上で作ってほしい: Artifacts のオープンベータと開発コンペ | [Wiki](docs/articles/2026-10-01-next-git-platform-on-cloudflare.md) | [スライド](slides/next-git-platform-on-cloudflare/slides.md) | [クイズ](quizzes/next-git-platform-on-cloudflare.html) | [原文](https://blog.cloudflare.com/next-git-platform-on-cloudflare/) |
 | 2026-10-01 | Cloudflare K2 のご紹介: サーバーレスなイベントストリーム | [Wiki](docs/articles/2026-10-01-cloudflare-k2-streams.md) | [スライド](slides/cloudflare-k2-streams/slides.md) | [クイズ](quizzes/cloudflare-k2-streams.html) | [原文](https://blog.cloudflare.com/cloudflare-k2-streams/) |
+| 2026-10-01 | Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供 | [Wiki](docs/articles/2026-10-01-managed-cloudflare-os.md) | [スライド](slides/managed-cloudflare-os/slides.md) | [クイズ](quizzes/managed-cloudflare-os.html) | [原文](https://blog.cloudflare.com/managed-cloudflare-os/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

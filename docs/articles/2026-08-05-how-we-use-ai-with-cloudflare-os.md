@@ -3,7 +3,7 @@
 - 原文: [https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/)（日本語版なし）
 - 著者: Sam Rhea（Cloudflare チーフインフォメーションオフィサー）
 - 公開日: 2026-08-05
-- 関連: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](2026-08-05-cloudflare-os.md)
+- 関連: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](2026-08-05-cloudflare-os.md)、[Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供](./2026-10-01-managed-cloudflare-os.md)（続報: フルマネージド版）
 - GitHub: [docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-how-we-use-ai-with-cloudflare-os.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7KNNANPJDHWFZFBPEFG96H.png)

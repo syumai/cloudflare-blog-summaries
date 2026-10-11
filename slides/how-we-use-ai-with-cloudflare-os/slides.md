@@ -368,6 +368,7 @@ Sam Rhea氏自身の事例
 
 - 原文: [How we're rethinking work at Cloudflare with Cloudflare OS](https://blog.cloudflare.com/how-we-use-ai-with-cloudflare-os/)
 - 関連解説スライド: [Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](../cloudflare-os/)
+- 続報の解説スライド: [Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供](../managed-cloudflare-os/)
 - [Cloudflare OS製品紹介記事](http://blog.cloudflare.com/cloudflare-os)
 - [Engineering Codexとコードレビュー自動化について](http://blog.cloudflare.com/engineering-standards-enforcement)
 - [AI Gatewayの利用上限設定（spend limits）](https://blog.cloudflare.com/ai-gateway-spend-limits/)

@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ja-jp/cloudflare-os/](https://blog.cloudflare.com/ja-jp/cloudflare-os/)（英語版: [https://blog.cloudflare.com/cloudflare-os/](https://blog.cloudflare.com/cloudflare-os/)）
 - 公開日: 2026-08-05
-- 関連: [Cloudflare OSで、Cloudflareの働き方を再構築する（CIO Sam Rhea視点）](2026-08-05-how-we-use-ai-with-cloudflare-os.md)、[WriteGuard: MCPサーバーのためのきめ細かな制御機能](2026-08-05-mcp-portal-writeguard-private-beta.md) / [Cloudflare Containers を作り直し、エージェントのサンドボックスをスケールさせる](./2026-09-30-faster-agent-sandboxes.md)（Gatekeeper パターンを Container の Outbound Request Handler に適用する例として言及）
+- 関連: [Cloudflare OSで、Cloudflareの働き方を再構築する（CIO Sam Rhea視点）](2026-08-05-how-we-use-ai-with-cloudflare-os.md)、[Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供](./2026-10-01-managed-cloudflare-os.md)（フルマネージド版のウェイトリストと1か月の機能追加）、[WriteGuard: MCPサーバーのためのきめ細かな制御機能](2026-08-05-mcp-portal-writeguard-private-beta.md) / [Cloudflare Containers を作り直し、エージェントのサンドボックスをスケールさせる](./2026-09-30-faster-agent-sandboxes.md)（Gatekeeper パターンを Container の Outbound Request Handler に適用する例として言及）
 - GitHub: [docs/articles/2026-08-05-cloudflare-os.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-05-cloudflare-os.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ7PDXE4XKZZQV409JNYTS85.png)
@@ -184,6 +184,7 @@ const issues = await app.listIssues({
 
 - [Cloudflare OS（ホーム）](https://os.cloudflare.app/)
 - [Cloudflare OSで、Cloudflareの働き方を再構築する（CIO Sam Rhea視点の記事）](2026-08-05-how-we-use-ai-with-cloudflare-os.md)
+- [Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供（続報: フルマネージド版）](./2026-10-01-managed-cloudflare-os.md)
 - [Model Context Protocol（MCP）公式](https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro)
 - [MCP Server Portal](https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/)
 - [Cloudflare Access](https://developers.cloudflare.com/cloudflare-one/access-controls/)

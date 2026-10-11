@@ -343,6 +343,7 @@ AliceとBobを両方相手にするエージェント。Aliceは収益データ�
 </div>
 
 - 原文: [The Agent Access Model](https://blog.cloudflare.com/the-agent-access-model/)
+- 関連解説スライド: [Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供](../managed-cloudflare-os/)
 - [OAuth 2.0 Token Exchange（RFC 8693）](https://www.rfc-editor.org/rfc/rfc8693)
 - [OAuth 2.0 DPoP（RFC 9449）](https://www.rfc-editor.org/rfc/rfc9449)
 - [Model Context Protocol](https://modelcontextprotocol.io/)

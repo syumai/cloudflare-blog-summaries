@@ -439,6 +439,7 @@ class: text-center
 - 英語版: [Cloudflare OS](https://blog.cloudflare.com/cloudflare-os/)
 - 関連解説スライド: [Cloudflare OSで、Cloudflareの働き方を再構築する](../how-we-use-ai-with-cloudflare-os/)
 - 関連解説スライド: [WriteGuard: MCPサーバーのためのきめ細かな制御機能](../mcp-portal-writeguard-private-beta/)
+- 続報の解説スライド: [Cloudflare OS: 会社のエージェントワークスペースを、マネージドで提供](../managed-cloudflare-os/)
 - [cloudflare-os（GitHub、コア）](https://github.com/cloudflare/cloudflare-os)
 - [cloudflare-os-starter（サンプルデプロイメント）](https://github.com/cloudflare/cloudflare-os-starter)
 - [Cap'n Web（GitHub）](https://github.com/cloudflare/capnweb)
