@@ -1,0 +1,97 @@
+title: "糸をたどる: アカウント不正を調査するための新しいダッシュボード"
+slug: account-abuse-protection-dashboard
+sourceUrl: https://blog.cloudflare.com/account-abuse-protection-dashboard/
+wiki: ../docs/articles/2026-10-02-account-abuse-protection-dashboard.md
+questions:
+  - q: "記事が従来の本人確認（パスワード、生体認証、liveness チェックなど）について指摘している限界はどれか。"
+    choices:
+      - "一時点の確認にすぎず、通過してもアカウント自体が信頼できるとは限らない"
+      - "処理が遅く、ログインのたびに数分かかる"
+      - "ログイン以外の場面では使えない"
+      - "Cloudflare のネットワーク経由でしか実行できない"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。AI で ID の偽造・模倣が容易になり、一時点の確認だけでは足りないため、アカウントの履歴と照らすステートフルな信頼モデルが必要だと述べている。"
+
+  - q: "AAP でアカウントを表し、その活動の軸になる値はどれか。"
+    choices:
+      - "平文のメールアドレス"
+      - "Ray ID"
+      - "識別子を暗号学的にハッシュ化した、ドメインごとの Hashed User ID"
+      - "デバイスの User-Agent"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「Account Abuse Protection の仕組み」を参照。メール・ユーザー名・電話番号などの識別子をハッシュ化したドメインごとの値がアカウントの代理になる。"
+
+  - q: "ダッシュボードの設計思想として記事が述べているものはどれか。"
+    choices:
+      - "すべてのアカウントを個別に審査する一覧画面"
+      - "母集団の概観から個別アカウントの調査まで辿れる「調査の漏斗」"
+      - "WAF ログだけを表示する簡易ビュー"
+      - "ボットスコアのみを表示するレポート"
+    answer: 1
+    explanation: "Wikiの「ダッシュボードの概観: 母集団から個別アカウントへ」を参照。概観で疑わしいパターンの規模と形を把握し、そこから個別アカウントに進む。"
+
+  - q: "記事の例で、約 2.4K のイベントが漏えいしたユーザー名またはパスワードの結果だったことの位置づけとして、正しいものはどれか。"
+    choices:
+      - "該当するすべてのアカウントが侵害されたことの確認である"
+      - "Cloudflare 全体の攻撃件数を示す統計である"
+      - "調査の手がかりであり、全アカウントの侵害の確認ではない"
+      - "自動的に全アカウントがブロックされた件数である"
+    answer: 2
+    explanation: "Wikiの「AAP の実践」の調査1を参照。記事は、この結果は investigative lead であり、影響を受けた全アカウントの侵害を確認するものではないと明記している。"
+
+  - q: "記事の例で、調査対象を絞り込むために設定されたフィルタ条件はどれか。"
+    choices:
+      - "失敗ログイン 3 回以上、漏えい認証情報イベント 3 件以上、ユニーク IP 5 件以上"
+      - "ログイン成功率 95% 以上、ユニーク IP 1 件、ボットスコア 99"
+      - "サインアップ 10 件以上、国が US のみ"
+      - "Managed Challenge を 3 回以上通過したアカウント"
+    answer: 0
+    explanation: "Wikiの「AAP の実践」の調査2を参照。3つの条件を AND で結合して絞り込んでいる。"
+
+  - q: "Security Events で関連情報を引くために、ダッシュボードの各イベントに含まれる識別子はどれか。"
+    choices:
+      - "Ray ID"
+      - "Account ID"
+      - "Zone ID"
+      - "Tunnel ID"
+    answer: 0
+    explanation: "Wikiの「AAP の実践」の調査3および「個別アカウントの詳細ビュー」を参照。Ray ID は Cloudflare を通るすべてのリクエストに付く識別子で、Security Events で関連情報を引ける。"
+
+  - q: "次の式（WAF ルール画面から読み取ったもの）で、アクションに Managed Challenge を選んだとき、何が起きるか。"
+    code: |
+      upper(cf.fraud.user_profile.id) in {"9F1A2B7C4D1E5068A1B2C3D4E5F60711" "9F3A2B7C4D1E5068A1B2C3D4E5F60712"}
+    codeLang: txt
+    choices:
+      - "全ユーザーのリクエストが Managed Challenge の対象になる"
+      - "リストの Hashed User ID を持つユーザーからのリクエストに対して Managed Challenge が実行される"
+      - "リストの ID のアカウントが自動的に削除される"
+      - "リストの ID を持つユーザーが調査対象から除外される"
+    answer: 1
+    explanation: "Wikiの「コード例」を参照。式は cf.fraud.user_profile.id（Hashed User ID）が集合に含まれるリクエストに一致し、選んだアクションが適用される。"
+
+  - q: "今回追加された2つの新ロールのうち、追加のアカウントレベルの PII（例: メールアドレス）へのアクセスを制御するものはどれか。"
+    choices:
+      - "Account Abuse Protection"
+      - "Account Abuse Protection PII"
+      - "Bot Management Admin"
+      - "Fraud Analyst"
+    answer: 1
+    explanation: "Wikiの「不要なデータ露出を抑える設計」を参照。Account Abuse Protection ロールはダッシュボード、PII ロールは追加の PII と、PII を含む Logpush ジョブの作成・更新を制御する。"
+
+  - q: "Hashed User ID を軸にした設計と権限分離（ロール・Logpush の権限）が目指している方向として、記事から読み取れるものはどれか。"
+    choices:
+      - "調査に必要な文脈を保ちつつ、PII の露出を最小限・最小権限にとどめる"
+      - "すべての担当者がメールアドレスを自由に閲覧できるようにする"
+      - "アカウント情報を顧客ではなく Cloudflare だけが管理する"
+      - "Logpush を無効にしてデータを出力しない"
+    answer: 0
+    explanation: "Wikiの「不要なデータ露出を抑える設計」を参照。ハッシュ化した ID を使い、ダッシュボードとデータエクスポートの両方で need-to-know・最小権限を適用できる。"
+
+  - q: "記事におけるダッシュボードの提供状況として正しいものはどれか。"
+    choices:
+      - "全 Cloudflare アカウントで無料の一般提供"
+      - "Account Abuse Protection の Early Access 顧客に先行提供"
+      - "Free プランのみ"
+      - "Workers の有料プランの契約者のみ"
+    answer: 1
+    explanation: "Wikiの「提供状況」を参照。まず Early Access 顧客に提供され、Bot Management Enterprise の顧客はサインアップできる。"

@@ -118,6 +118,7 @@ cloudflare-blog-summaries/
 | 2026-10-02 | 2026 Birthday Week: ネットワーク性能アップデート | [Wiki](docs/articles/2026-10-02-network-performance-birthday-week-2026.md) | [スライド](slides/network-performance-birthday-week-2026/slides.md) | [クイズ](quizzes/network-performance-birthday-week-2026.html) | [原文](https://blog.cloudflare.com/network-performance-birthday-week-2026/) |
 | 2026-10-02 | 社会のために作る: 市民社会組織は Cloudflare で何を自動化しているか | [Wiki](docs/articles/2026-10-02-civil-society-automation.md) | [スライド](slides/civil-society-automation/slides.md) | [クイズ](quizzes/civil-society-automation.html) | [原文](https://blog.cloudflare.com/civil-society-automation/) |
 | 2026-10-02 | Protected Quick Tunnels: アカウント不要で、次の開発プロジェクトにシンプルな認証を | [Wiki](docs/articles/2026-10-02-protected-quick-tunnels.md) | [スライド](slides/protected-quick-tunnels/slides.md) | [クイズ](quizzes/protected-quick-tunnels.html) | [原文](https://blog.cloudflare.com/protected-quick-tunnels/) |
+| 2026-10-02 | 糸をたどる: アカウント不正を調査するための新しいダッシュボード | [Wiki](docs/articles/2026-10-02-account-abuse-protection-dashboard.md) | [スライド](slides/account-abuse-protection-dashboard/slides.md) | [クイズ](quizzes/account-abuse-protection-dashboard.html) | [原文](https://blog.cloudflare.com/account-abuse-protection-dashboard/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 
