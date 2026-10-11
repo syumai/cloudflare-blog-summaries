@@ -5,7 +5,7 @@
 - 公開日: 2026-09-30
 - 著者: Ankit Shah, Carlos Armada
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 8 分）。Cloudflare Registrar の新しいドメイン検索と、エージェント向け Registrar API・MCP・cf CLI の拡充、価格の見せ方の変更を扱う
-- 関連: [cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（本記事で `cf registrar` コマンドを使う CLI。記事中で「newly launched cf CLI」として紹介）/ [Forge のご紹介](./2026-09-28-forge-open-source-generation-pipeline.md)（本記事の謝辞に Forge チームが出てくる。cf の元になる生成基盤）/ [インターネットには「第二の読者」がいる](./2026-09-30-agentic-web.md)（Birthday Week 2026 の総論。エージェントが人に代わって動くインターネット）/ [Cloudflare Walletsを発表](./2026-08-04-wallets.md)（エージェントの支払い手段。ドメイン購入の支払いについて本記事は触れていないため、同じ「エージェントによる購入」という文脈での筆者の関連づけ）/ [読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md)
+- 関連: [cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（本記事で `cf registrar` コマンドを使う CLI。記事中で「newly launched cf CLI」として紹介）/ [Forge のご紹介](./2026-09-28-forge-open-source-generation-pipeline.md)（本記事の謝辞に Forge チームが出てくる。cf の元になる生成基盤）/ [インターネットには「第二の読者」がいる](./2026-09-30-agentic-web.md)（Birthday Week 2026 の総論。エージェントが人に代わって動くインターネット）/ [Cloudflare Walletsを発表](./2026-08-04-wallets.md)（エージェントの支払い手段。ドメイン購入の支払いについて本記事は触れていないため、同じ「エージェントによる購入」という文脈での筆者の関連づけ）/ [読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md)、[Workers KV Instant のご紹介](./2026-10-01-workers-kv-instant.md)（Workers KV の新しい Instant モード。本記事で KV を使う用途と関連）
 - GitHub: [docs/articles/2026-09-30-simplifying-domains.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-simplifying-domains.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3QWWAQS5RKCSF1JT6MBMQG6.01M3QWWBPVJCX08X6W7V85Z8JA.png)

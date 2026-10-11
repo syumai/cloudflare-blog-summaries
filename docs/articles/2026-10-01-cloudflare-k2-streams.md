@@ -5,7 +5,7 @@
 - 公開日: 2026-10-01
 - 著者: Micah Wylde, Marc Selwan
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 7 分）。Developer Platform 上の永続的なイベントストリーミングのプリミティブ「Cloudflare K2」のパブリックベータを扱う
-- 関連: [Cloudflare Basin のご紹介: オープンなサーバーレスデータプラットフォームが一般提供に](./2026-10-01-cloudflare-basin.md)（K2 は Basin Pipelines の取り込み層として作られた。Pipelines と K2 の使い分けも本記事で説明される）、[cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（ストリーム作成に `cf k2 streams create` を使う）
+- 関連: [Cloudflare Basin のご紹介: オープンなサーバーレスデータプラットフォームが一般提供に](./2026-10-01-cloudflare-basin.md)（K2 は Basin Pipelines の取り込み層として作られた。Pipelines と K2 の使い分けも本記事で説明される）、[cf のご紹介: Cloudflare API 全体を扱えるエージェント向け CLI](./2026-09-28-cloudflare-cf-cli-launch.md)（ストリーム作成に `cf k2 streams create` を使う）、[Workers KV Instant のご紹介](./2026-10-01-workers-kv-instant.md)（同日発表の KV の新モード。Quicksilver を使った即時反映の設定データ向けストア）
 - GitHub: [docs/articles/2026-10-01-cloudflare-k2-streams.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-01-cloudflare-k2-streams.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3SXWMA7TC0H6D9G217A3327.png)

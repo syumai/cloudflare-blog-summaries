@@ -1,0 +1,100 @@
+title: "Workers KV Instant のご紹介: Quicksilver で動く、即時反映・低レイテンシの KV モード"
+slug: workers-kv-instant
+sourceUrl: https://blog.cloudflare.com/workers-kv-instant/
+wiki: ../docs/articles/2026-10-01-workers-kv-instant.md
+questions:
+  - q: "Workers KV Instant の裏側で使われている、Cloudflare 社内のキーバリューストアはどれか。"
+    choices:
+      - "Quicksilver"
+      - "Durable Objects"
+      - "D1"
+      - "R2"
+    answer: 0
+    explanation: "Wikiの「TL;DR」と「背景・課題」を参照。KV Instant は Workers KV と同じ API を、社内で長く使われてきた Quicksilver（v2）で動かすモードである。"
+
+  - q: "Workers KV Instant の提供状況として正しいものはどれか。"
+    choices:
+      - "一般提供（GA）"
+      - "パブリックベータ"
+      - "プライベートベータ"
+      - "社内利用のみで、申し込み窓口もない"
+    answer: 2
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「提供状況」を参照。プライベートベータとして提供開始され、記事内でサインアップが案内されている。"
+
+  - q: "記事が示す KV Instant の読み取り性能として正しいものはどれか。"
+    choices:
+      - "p99 で約 160 ms"
+      - "p99 で 1.62 ms（classic の 100 倍以上高速）"
+      - "p99 で約 1 秒"
+      - "classic と同等で、書き込みだけが速い"
+    answer: 1
+    explanation: "Wikiの「読み取りは 100 倍以上速く、書き込みは約 250 ms で複製」の表を参照。Instant の p99 読み取り（全体）は 1.62 ms で、classic は 287 ms（キャッシュ済みで 160 ms）。"
+
+  - q: "KV Instant で、書き込みが全エッジロケーションに複製されるまでの時間（p99）として、記事の表に記載されているものはどれか。"
+    choices:
+      - "256 ms"
+      - "4.38 s"
+      - "107 ms"
+      - "1 分以上"
+    answer: 0
+    explanation: "Wikiの「読み取りは 100 倍以上速く、書き込みは約 250 ms で複製」の表を参照。Instant の複製時間は中央値 107 ms、p95 181 ms、p99 256 ms。4.38 s は classic の p99。"
+
+  - q: "classic の Workers KV と比べた KV Instant の API 上の差異として、正しいものはどれか。"
+    choices:
+      - "get が使えず、list のみ使える"
+      - "namespace 作成時のモード指定が必要で、メタデータは非対応、list はページネーションなしで全件を返す"
+      - "メタデータが使えるようになり、list は 1000 件ずつ返す"
+      - "put が非同期になり、結果を返さない"
+    answer: 1
+    explanation: "Wikiの「API: これまでと同じ get / put / list / delete」を参照。差異は、モード指定（\"mode\": \"instant\"）、メタデータ非対応（getWithMetadata は常に null）、list の全件返却の 3 点。"
+
+  - q: "次のコードで、課金される Class B 操作の数として正しいものはどれか。"
+    code: |
+      let routeAPAC = await APP_CONFIG.get("route_APAC");
+      let routes = await APP_CONFIG.get([
+        "route_APAC", "route_EUR", "route_NAMER",
+      ]);
+    codeLang: js
+    choices:
+      - "2 操作（get の呼び出し回数）"
+      - "4 操作（要求したキーごとに 1 操作）"
+      - "1 操作（配列の get は無料）"
+      - "3 操作（配列の get だけが数えられる）"
+    answer: 1
+    explanation: "Wikiの「コード例」の「2. 複数キーの取得と Class B 操作」を参照。Class B は要求したキー 1 つにつき 1 操作と数える。1 回目の get が 1 操作、2 回目が 3 キーで 3 操作、合計 4 操作になる。"
+
+  - q: "KV Instant の制限として、記事の説明に合うものはどれか。"
+    choices:
+      - "1 namespace あたり最大 100 万キーまで、書き込み頻度の制限はない"
+      - "1 namespace は合計 1 MB・最大 1 万キーまでで、書き込みは 1 namespace あたり 1 秒に 1 回まで"
+      - "1 キーあたり 1 秒に 1 回の書き込みで、namespace の容量は無制限"
+      - "値は 300 バイトまでで、キー数に制限はない"
+    answer: 1
+    explanation: "Wikiの「料金: 読み取りは classic より 60% 安い」の Storage・書き込み頻度の制限の項を参照。キーは最大 300 バイト、namespace 合計は 1 MB まで、最大 1 万ペア。書き込みは単一のシステムオブレコードを通るため 1 namespace あたり 1 秒に 1 回。"
+
+  - q: "料金に関する説明として、記事の内容に合うものはどれか。"
+    choices:
+      - "読み取り、storage、Class A のすべてが classic より安い"
+      - "読み取りは classic より 60% 安いが、storage と Class A 操作は classic よりかなり高い"
+      - "読み取りは classic より高く、storage と Class A は安い"
+      - "ベータ期間中はすべて無料で、料金表は示されていない"
+    answer: 1
+    explanation: "Wikiの「料金: 読み取りは classic より 60% 安い」を参照。Instant の読み取りは $0.20 / 100 万、storage は $100 / MB / 月、Class A は $0.10 / 操作で、読み取りだけが安い。"
+
+  - q: "記事の考え方として、KV Instant を選ぶより classic の Workers KV が適しているのはどのようなデータか。"
+    choices:
+      - "リクエストごとに読むフィーチャーフラグ"
+      - "全世界で即時に反映したい、小さなローンチフラグ"
+      - "大量に保存する、または頻繁に更新するデータ"
+      - "更新が少なく、読み取りが非常に多い設定データ"
+    answer: 2
+    explanation: "Wikiの「料金: 読み取りは classic より 60% 安い」の説明を参照。storage と Class A 操作が高く容量にも制限があるため、大量のデータや頻繁な更新には Workers KV が引き続き適するとされている。"
+
+  - q: "KV Instant で書き込みを「1 namespace あたり 1 秒に 1 回」に制限している理由として、記事が挙げているものはどれか。"
+    choices:
+      - "課金を単純にするため"
+      - "すべての書き込みが単一のシステムオブレコードを通るため、更新順序を考えやすくする目的もある"
+      - "エッジロケーションの数が少ないため"
+      - "メタデータを保存する領域を確保するため"
+    answer: 1
+    explanation: "Wikiの「料金: 読み取りは classic より 60% 安い」の「書き込み頻度の制限」を参照。書き込みが単一のシステムオブレコードを通るため制限され、classic の「1 キーあたり 1 秒に 1 回」と似た制限が、更新順序を考えやすくするとされている。"
