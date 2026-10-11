@@ -1,0 +1,109 @@
+title: "Clef のご紹介: オープンソースの decision model と、新しい RL ファインチューニング基盤"
+slug: clef-decision-models
+sourceUrl: https://blog.cloudflare.com/clef-decision-models/
+wiki: ../docs/articles/2026-10-01-clef-decision-models.md
+questions:
+  - q: "記事でいう「decision model」の説明として最も適切なものはどれか。"
+    choices:
+      - "状態と型付きの質問を受け取り、各選択肢の確率つきで境界のある構造化出力を返すモデル"
+      - "長い文章を自由記述で生成する汎用 LLM"
+      - "画像から新しい画像を生成する拡散モデル"
+      - "ベクトル検索のためのエンベディングモデル"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「decision model とは」を参照。LLM のようにテキストを生成せず、確率つきの型付きの答えを返す。"
+
+  - q: "Cloudflare が今回公開した 2 つのモデルの組み合わせとして正しいものはどれか。"
+    choices:
+      - "Clef（精度重視）と Clef-flash（低レイテンシ重視）"
+      - "Jev と Kev"
+      - "Clef と Laya"
+      - "Clef-pro と Clef-lite"
+    answer: 0
+    explanation: "Wikiの「TL;DR」と「Clef の特徴」を参照。大きい Clef は精度重視、Clef-flash はレイテンシ重視の判断向けで、どちらも Workers AI でホストされる。"
+
+  - q: "記事が述べる、Clef が Jev と異なる点として正しいものはどれか。"
+    choices:
+      - "画像を入力できる vision encoder を持ち、コンテキストが 64k である"
+      - "テキストのみに対応し、コンテキストは 8k である"
+      - "Jev API とは互換性がない"
+      - "ウェイトが非公開である"
+    answer: 0
+    explanation: "Wikiの「Clef の特徴」を参照。Jev は現状テキスト分類のみで 32k コンテキスト。Clef は Jev API 互換で、ウェイトは Apache 2.0 で Hugging Face に公開されている。"
+
+  - q: "Threat Intelligence チームでのドメイン分類の社内テストについて、記事の内容に合っているものはどれか。"
+    choices:
+      - "Clef は 2.2 秒で、gpt-oss-120b は 4.7 秒で、後者は 2 つの分類しか返せなかった"
+      - "Clef は 4.7 秒で、gpt-oss-120b は 2.2 秒だった"
+      - "両者とも 2.2 秒で、結果も同じだった"
+      - "gpt-oss-120b は分類を 10 個返した"
+    answer: 0
+    explanation: "Wikiの「decision model とは」を参照。Browser Run で取得・レンダリング・分類まで Clef が 2.2 秒で、最速の汎用 LLM の gpt-oss-120b は 4.7 秒だった。"
+
+  - q: "次のリクエストで、質問 \"severity\" に指定されている型と、返ってくる答えの性質の組み合わせとして正しいものはどれか。"
+    code: |
+      "questions": {
+        "urgent": { "type": "noul", "instructions": "Is this support request urgent?" },
+        "team": {
+          "type": "choice",
+          "instructions": "Which team should handle this request?",
+          "criteria": { "billing": "...", "technical": "...", "sales": "..." }
+        },
+        "severity": {
+          "type": "score",
+          "instructions": "How severe is the customer impact?",
+          "criteria": ["No impact", "Minor", "Major", "Critical"]
+        }
+      }
+    codeLang: json
+    choices:
+      - "score 型で、順序つきの段階に対する確率加重のスコア"
+      - "choice 型で、billing / technical / sales のいずれか"
+      - "noul 型で、緊急である確率"
+      - "自由記述の文章"
+    answer: 0
+    explanation: "Wikiの「コード例」を参照。severity は score 型で criteria に順序つきの段階を渡す。team は choice 型、urgent は noul 型で緊急かどうかの確率を返す。"
+
+  - q: "Clef の推論方式について、記事の説明として正しいものはどれか。"
+    choices:
+      - "Qwen で prefill-only の 1 パスを行い、スキーマ上の有効な選択肢を並列にスコアリングする。中間テキストは生成しない"
+      - "回答文をトークンごとに自己回帰で生成し、後から確率に変換する"
+      - "複数の LLM に投票させて多数決で決める"
+      - "ルールベースの正規表現で分類する"
+    answer: 0
+    explanation: "Wikiの「どう学習したか」を参照。決定ステップは非自己回帰で、中間テキストを生成しないため、自己回帰型の LLM より大幅に速い。"
+
+  - q: "確率の較正（calibration）を改善するために、Clef の学習で用いられている損失として正しいものはどれか。"
+    choices:
+      - "Brier loss"
+      - "Hinge loss のみ"
+      - "Contrastive loss のみ"
+      - "損失は使わず、ルールで調整している"
+    answer: 0
+    explanation: "Wikiの「どう学習したか」を参照。有効なスキーマ出力に対する label-smoothed cross-entropy と、確率較正のための Brier loss を組み合わせている。"
+
+  - q: "RL ファインチューニング基盤の構成要素と役割の組み合わせとして、記事に合っているものはどれか。"
+    choices:
+      - "AI Gateway がリクエストをデータセット化し、Containers が RL サンドボックス、Trainer が重みを更新する"
+      - "AI Gateway が重みを更新し、Trainer がリクエストを蓄積する"
+      - "Containers が推論結果を課金し、Workers AI がデータを保存する"
+      - "KV が重みを更新し、R2 がスコアを計算する"
+    answer: 0
+    explanation: "Wikiの「ファインチューニングと RL サービス」の表を参照。Workers AI がロールアウトを生成し、Workers AI + BYO Model で再デプロイする。Trainer は新規コンポーネント。"
+
+  - q: "RL サービスの提供形態について、記事の内容として最も適切なものはどれか。"
+    choices:
+      - "まず FDE チームによるハンズオンで提供し、そこでの経験からセルフサーブ基盤を作る計画"
+      - "最初からセルフサーブで全顧客に一般提供されている"
+      - "社内専用で、顧客には提供されない"
+      - "Hugging Face 上でのみ提供される"
+    answer: 0
+    explanation: "Wikiの「ファインチューニングと RL サービス」と「所感・ポイント」を参照。セルフサーブ基盤は今後構築する段階である。"
+
+  - q: "記事のベンチマークの読み方として、Wiki の所感に合っているものはどれか。"
+    choices:
+      - "多くは Cloudflare 自身の報告値で、When2Call や BRIGHT のように Clef が首位でない項目もある"
+      - "全項目で Clef が他モデルを大きく上回っている"
+      - "第三者機関が検証済みで、自己報告の値は含まれない"
+      - "精度のみで、レイテンシは計測されていない"
+    answer: 0
+    explanation: "Wikiの「所感・ポイント」を参照。図の凡例にも Cloudflare (self-reported) とあり、モデル選択では自分のタスクでの評価が前提になる。"
