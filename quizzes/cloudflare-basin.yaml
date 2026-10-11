@@ -1,0 +1,104 @@
+title: "Cloudflare Basin のご紹介: オープンなサーバーレスデータプラットフォームが一般提供に"
+slug: cloudflare-basin
+sourceUrl: https://blog.cloudflare.com/cloudflare-basin/
+wiki: ../docs/articles/2026-10-01-cloudflare-basin.md
+questions:
+  - q: "Cloudflare Basin は、もともとどの名前で発表されたプラットフォームの GA と改名か。"
+    choices:
+      - "Cloudflare Data Platform"
+      - "Cloudflare Analytics Engine"
+      - "Cloudflare Log Explorer"
+      - "Cloudflare D1 Warehouse"
+    answer: 0
+    explanation: "Wikiの「TL;DR」を参照。Birthday Week 2025 に発表した Cloudflare Data Platform が一般提供（GA）になり、Cloudflare Basin に改名された。"
+
+  - q: "Basin Pipelines・Basin Catalog・Basin SQL の旧名称の組み合わせとして正しいものはどれか。"
+    choices:
+      - "Cloudflare Pipelines・R2 Data Catalog・R2 SQL"
+      - "Cloudflare Streams・R2 Catalog・D1 SQL"
+      - "Logpush・Iceberg Gateway・Workers SQL"
+      - "Queues・R2 Data Catalog・Analytics SQL"
+    answer: 0
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「全体像とリブランド」の表を参照。Basin Pipelines は旧 Cloudflare Pipelines、Basin Catalog は旧 R2 Data Catalog、Basin SQL は旧 R2 SQL。"
+
+  - q: "Basin の土台になっているオープンなテーブル形式とオブジェクトストレージの組み合わせはどれか。"
+    choices:
+      - "Delta Lake と Workers KV"
+      - "Apache Iceberg と R2 Object Storage"
+      - "Apache Hudi と D1"
+      - "Parquet のみで R2 は使わない"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「背景・課題」を参照。Basin は Apache Iceberg と R2 Object Storage の上に作られたサーバーレスのデータ分析プラットフォームである。"
+
+  - q: "Basin のデータの可搬性（任意の Iceberg 互換エンジンから使えること）が成り立つ前提として、記事が挙げているものはどれか。"
+    choices:
+      - "専用の独自クライアントライブラリ"
+      - "R2 のエグレス無料"
+      - "Cloudflare 内のエンジンのみを許可する設定"
+      - "クエリごとの固定料金"
+    answer: 1
+    explanation: "Wikiの「3 つの改善軸」のオープン性を参照。リージョンやクラウドを問わず、さまざまなツールからデータにアクセスできるのは、エグレス無料があるためとされている。"
+
+  - q: "記事が述べる、Basin の課金の考え方として合うものはどれか。"
+    choices:
+      - "クラスタの稼働時間に応じた時間課金"
+      - "月額固定のライセンス料"
+      - "データを取り込み・処理・クエリしたときだけの使用量ベース課金で、時間課金はない"
+      - "ストレージ容量のみを課金し、クエリは無料"
+    answer: 2
+    explanation: "Wikiの「3 つの改善軸」のコスト効率を参照。サーバーレスなので、Basin がデータを取り込み・処理・クエリしたときだけ課金され、時間課金や別のインフラ費用はない。"
+
+  - q: "記事によると、Basin Pipelines が 1 ストリームあたりで対応する取り込みの上限はどれか。"
+    choices:
+      - "約 30MB/s"
+      - "約 300MB/s"
+      - "最大 3GB/s"
+      - "最大 30GB/s"
+    answer: 2
+    explanation: "Wikiの「Basin Pipelines」を参照。ベータ以降にスケーラビリティを拡張し、1 ストリームあたり最大 3GB/s の取り込みに対応した。"
+
+  - q: "次の SQL を Basin Pipelines で実行したとき、起きることとして正しいものはどれか。"
+    code: |
+      INSERT INTO http_logs_sink
+      SELECT
+        EdgeResponseStatus,
+        to_timestamp_micros(EdgeStartTimestamp) AS event_time,
+        upper(ClientRequestMethod) AS method,
+        sha256(ClientIP) AS hashed_ip
+      FROM http_logs_stream
+      WHERE EdgeResponseStatus >= 400;
+    codeLang: sql
+    choices:
+      - "すべてのリクエストが、クライアント IP をそのまま付けて保存される"
+      - "ステータスが 400 以上のログだけが、IP をハッシュ化したうえで保存される"
+      - "ステータスが 400 未満のログだけが保存される"
+      - "ログは保存されず、集計結果だけが返る"
+    answer: 1
+    explanation: "Wikiの「コード例」の 1 を参照。WHERE で 400 以上のログに絞り、sha256(ClientIP) で IP をハッシュ化して書き込む。取り込み時の変換により、保存量の削減や機密値の書き込み防止につながる。"
+
+  - q: "Basin Catalog が、スナップショットの期限切れ後に行うメンテナンスとして述べられているものはどれか。"
+    choices:
+      - "参照されなくなったデータファイルの削除（別の Spark メンテナンスジョブは不要）"
+      - "すべてのスナップショットの即時削除"
+      - "テーブルの自動的な別リージョンへの複製"
+      - "クエリ結果のキャッシュの全削除"
+    answer: 0
+    explanation: "Wikiの「Basin Catalog」を参照。スナップショットの期限切れで解放できる領域を、別の Spark メンテナンスジョブなしで回収する。直近のスナップショットは最小数だけ保持される。"
+
+  - q: "Basin SQL が、データ量が増えてもクエリを速く保つために使う仕組みとして、記事に合うものはどれか。"
+    choices:
+      - "Basin Catalog が生成した統計でクエリを小さなタスクに分割し、Workers に分散する"
+      - "常時稼働の専用クラスタを自動で増設する"
+      - "クエリ結果をすべて事前計算して保存する"
+      - "データを毎回 Pipelines に再投入する"
+    answer: 0
+    explanation: "Wikiの「3 つの改善軸」の速度を参照。Catalog がコンパクションとクエリ計画用の統計の生成を行い、Basin SQL がその統計でタスクに分割して Workers に分散する。クラスタのプロビジョニングは不要。"
+
+  - q: "既存の Cloudflare Pipelines・R2 Data Catalog・R2 SQL を使っている場合について、記事が述べていることはどれか。"
+    choices:
+      - "すべて新しい Basin の設定へ作り直す必要がある"
+      - "既存の設定は引き続き動作する"
+      - "R2 SQL だけが即日停止される"
+      - "Iceberg テーブルは新しい形式へ自動変換される"
+    answer: 1
+    explanation: "Wikiの「始め方」を参照。既存の Cloudflare Pipelines・R2 Data Catalog・R2 SQL の設定は引き続き動作すると述べられている。"

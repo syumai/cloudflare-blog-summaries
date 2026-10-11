@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cloudflare-basin-example",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "pipelines": [
+    {
+      // `npx wrangler pipelines setup` などで作成したストリームの ID に置き換える。
+      "binding": "EVENTS",
+      "stream": "your-stream-id"
+    }
+  ]
+}
