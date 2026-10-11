@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "example-introducing-web-search-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-02",
+  "ai": {
+    "binding": "AI"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // Cloudflare Access で保護する（ https://developers.cloudflare.com/workers/configuration/cloudflare-access/ ）。
+  // ここは `wrangler dev` 用のローカルシミュレーションのみで、本番の Access
+  // アプリケーション（許可ポリシー）は Zero Trust ダッシュボードで別途作成する
+  // 必要がある。手順は README.md の「Cloudflare Access 設定」を参照。
+  "access": {
+    "dev": {
+      "aud": "example-introducing-web-search-api-dev",
+      "identity": { "email": "syumai@gmail.com" }
+    }
+  }
+}

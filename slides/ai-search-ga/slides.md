@@ -305,6 +305,7 @@ backgroundSize: contain
 - [対応する埋め込みモデル](https://developers.cloudflare.com/ai-search/configuration/models/supported-models/#embedding)
 - [画像と OCR の設定](https://developers.cloudflare.com/ai-search/configuration/data-source/#images-and-optical-character-recognition)
 - [料金と制限](https://developers.cloudflare.com/ai-search/platform/limits-pricing/)
+- 関連解説スライド（Web 検索）: [AI Gateway 経由の Web Search API の紹介](../introducing-web-search-api/)
 - [Matryoshka Representation Learning](https://arxiv.org/abs/2205.13147)
 - [Qwen3-VL-Embedding](https://github.com/QwenLM/Qwen3-VL-Embedding)
 - Workers サンプル（前身記事）: [github.com/syumai/cloudflare-blog-summaries/tree/main/examples/ai-search-easier](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/ai-search-easier)

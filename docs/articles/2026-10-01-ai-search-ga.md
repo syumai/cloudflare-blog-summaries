@@ -6,6 +6,7 @@
 - 著者: Gabriel Massadas, Nelson Duarte, Ashish Vinodkumar
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 6 分）。8月の Agents Week で発表された AI Search の大型アップデートとプレビュー価格の続報にあたり、GA と課金開始日（2026-11-01）を扱う
 - 関連: [Cloudflare AI Search: エージェントにあなたのデータのための検索エンジンを](./2026-08-06-ai-search-easier.md)（前身の記事。Discover クロール・公開エンドポイント・プレビュー価格を扱う）／ [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（Agents Week での AI Search の位置づけ）／ [Workers サンプル（前身記事の最小実装）](../../examples/ai-search-easier/)
+- 関連（Web 検索）: [AI Gateway 経由の Web Search API の紹介](./2026-10-02-introducing-web-search-api.md)（自分のデータではなく Web 全体を AI Gateway 経由で検索する側）
 - GitHub: [docs/articles/2026-10-01-ai-search-ga.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-01-ai-search-ga.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3SPF381A5ZFP5JJT0DGXF1T.png)

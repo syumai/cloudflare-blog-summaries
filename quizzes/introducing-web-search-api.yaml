@@ -1,0 +1,95 @@
+title: "AI Gateway 経由の Web Search API の紹介"
+slug: introducing-web-search-api
+sourceUrl: https://blog.cloudflare.com/introducing-web-search-api/
+wiki: ../docs/articles/2026-10-02-introducing-web-search-api.md
+questions:
+  - q: "記事が冒頭で指摘する、エージェントが Web ページを取得するときの典型的な問題はどれか。"
+    choices:
+      - "ページの URL を推測して curl するため、外れると 404 Not Found になる"
+      - "検索エンジンの利用が禁止されている"
+      - "HTML を JSON に変換できない"
+      - "Workers から外部への fetch ができない"
+    answer: 0
+    explanation: "Wikiの「背景・課題」を参照。エージェントは URL を推測してツール呼び出しをしがちで、外れると 404 になる。検索から始めるのが Web 検索の位置づけ。"
+
+  - q: "記事が最初のパートナーとして挙げている検索プロバイダーの組み合わせはどれか。"
+    choices:
+      - "Google、Bing、DuckDuckGo"
+      - "Ceramic.ai、Exa、Linkup"
+      - "Perplexity、Brave、Kagi"
+      - "Algolia、Elastic、Meilisearch"
+    answer: 1
+    explanation: "Wikiの「TL;DR」を参照。この発表は Ceramic.ai、Exa、Linkup の 3 パートナーで始まる。"
+
+  - q: "検索プロバイダーが Cloudflare のボットクローリング基準として満たすことをコミットした内容はどれか。"
+    choices:
+      - "すべてのコンテンツを無制限にクロールする"
+      - "クローラーを Verified bots の要件に従わせ、検索レスポンスにクロール元へのリンクを含める"
+      - "クロール結果を Cloudflare だけに独占提供する"
+      - "robots.txt を無視して検索品質を優先する"
+    answer: 1
+    explanation: "Wikiの「業界標準を引き上げる: パートナーに課す基準」を参照。Verified bots の公開要件に従うことと、レスポンスに出典リンクを含めることの 2 点。"
+
+  - q: "Web Search API を AI Gateway 経由で使う利点として、記事が述べていないものはどれか。"
+    choices:
+      - "AI Gateway のクレジットで検索を課金できる"
+      - "通常の AI Gateway のログで検索呼び出しを確認できる"
+      - "誰がどの検索プロバイダーを使えるかを制御できる"
+      - "検索結果を Cloudflare が必ず要約して返す"
+    answer: 3
+    explanation: "Wikiの「AI Gateway 経由で使う」の表を参照。課金・ログ・アクセス制御・ZDR の識別・BYOK が挙げられており、結果の自動要約は述べられていない。"
+
+  - q: "価格に関する記事の説明として正しいものはどれか。"
+    choices:
+      - "Cloudflare が一律の固定料金を設定している"
+      - "パートナーの定価 API 料金のまま、上乗せなしで提供している"
+      - "Free プランでは無制限に無料で使える"
+      - "AI Gateway のクレジットは使えず、別契約が必要"
+    answer: 1
+    explanation: "Wikiの「AI Gateway 経由で使う」を参照。検索は AI Gateway のクレジットから引き落とされ、パートナーの定価 API 料金に上乗せはない。BYOK にも対応する。"
+
+  - q: "Workers から Web 検索を呼ぶ次のコードで、使う検索プロバイダーを指定している引数はどれか。"
+    code: |
+      const response = await env.AI.websearch({
+        gatewayId: "default",
+        query: "What are some fun things to do in Salt Lake City as fall approaches?",
+        provider: "exa",
+        limit: 5,
+      })
+
+      const results = await response.json()
+    codeLang: ts
+    choices:
+      - "gatewayId"
+      - "query"
+      - "provider"
+      - "limit"
+    answer: 2
+    explanation: "Wikiの「コード例」の Workers バインディングを参照。provider で検索プロバイダー（この例では exa）を指定する。gatewayId は AI Gateway の ID、limit は件数。"
+
+  - q: "直接 REST API で、利用する AI Gateway を指定するペイロードのフィールドはどれか。"
+    choices:
+      - "provider"
+      - "limit"
+      - "options.gateway.id"
+      - "query"
+    answer: 2
+    explanation: "Wikiの「コード例」の直接 REST API を参照。options.gateway.id にゲートウェイの ID（例: default）を指定する。認証は Authorization ヘッダーの API トークンで行う。"
+
+  - q: "記事のサーバーツールの例で、モデルが web_search を呼んだ後の処理の流れとして正しいものはどれか。"
+    choices:
+      - "tool_calls の query で env.AI.websearch() を実行し、結果を role: tool のメッセージとして渡して再度 run する"
+      - "モデルが自動的に検索を実行するため、Worker は何もしない"
+      - "検索結果を KV に保存して終了する"
+      - "検索結果をそのままレスポンスとして返し、モデルには渡さない"
+    answer: 0
+    explanation: "Wikiの「コード例」の「Web 検索をサーバーツールとして自分で組み立てる」を参照。ツール呼び出しの引数で検索し、結果を tool ロールのメッセージで渡して最終回答を得る。"
+
+  - q: "記事が「Coming soon」として予告している Server Tools の狙いとして適切なものはどれか。"
+    choices:
+      - "モデルの学習データを増やす"
+      - "ツールを自分で定義せずに済むよう、AI Gateway の制御面に組み込み、Web 検索を最初のツールの一つにする"
+      - "検索プロバイダーを 1 社に絞る"
+      - "AI Gateway のログを無効にする"
+    answer: 1
+    explanation: "Wikiの「Coming soon: Server Tools」を参照。ツールが制御面に組み込まれ、ハーネスのオーケストレーションではなく開発に時間を使えるようになる。Web 検索は最初のツールの一つ。"

@@ -357,4 +357,5 @@ Birthday Week 2026
 - Monetization Gateway: https://blog.cloudflare.com/monetization-gateway-beta（▶ <a href="../monetization-gateway-beta/" target="_blank">解説スライド</a>）
 - Markdown for Agents: https://blog.cloudflare.com/markdown-for-agents/
 - 関連スライド: [エージェンティックインターネット](../the-agentic-internet/)、[WebMCP](../webmcp/)、[Agents Week 2026 まとめ](../agents-week-review/)、[創業者レター](../cloudflares-2026-annual-founders-letter/)
+- 関連解説スライド（Web 検索）: [AI Gateway 経由の Web Search API の紹介](../introducing-web-search-api/)
 - Wiki: [docs/articles/2026-09-30-agentic-web.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-agentic-web.md)
