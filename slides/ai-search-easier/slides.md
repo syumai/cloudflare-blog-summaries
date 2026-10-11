@@ -511,6 +511,7 @@ class: text-center
 - [EmDash AI Search統合のドキュメント](https://docs.emdashcms.com/deployment/cloudflare/#cloudflare-ai-search)
 - [AI Playground](https://playground.ai.cloudflare.com)
 - [Cloudflare MCP Server（GitHubリポジトリ）](https://github.com/cloudflare/mcp-server-cloudflare)
+- ▶ 続報の解説スライド: [AI Search が一般提供（GA）に](../ai-search-ga/)
 - Workers サンプル: [github.com/syumai/cloudflare-blog-summaries/tree/main/examples/ai-search-easier](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/ai-search-easier)
 
 <div class="pt-8 text-sm opacity-50">

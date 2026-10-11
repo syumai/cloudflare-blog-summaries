@@ -80,3 +80,4 @@ Cloudflare アカウントへのログイン (`npx wrangler login`) が必要で
 - [Wiki: ai-search-easier](../../docs/articles/2026-08-06-ai-search-easier.md)
 - [Cloudflare AI Search ドキュメント](https://developers.cloudflare.com/ai-search/)
 - [AI Playground](https://playground.ai.cloudflare.com)
+- [続報 Wiki: ai-search-ga（GA・マルチモーダル・OCR・課金開始）](../../docs/articles/2026-10-01-ai-search-ga.md)

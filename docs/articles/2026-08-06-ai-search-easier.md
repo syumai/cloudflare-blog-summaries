@@ -2,6 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/ai-search-easier/](https://blog.cloudflare.com/ai-search-easier/)（日本語版なし）
 - 公開日: 2026-08-06
+- 関連: [AI Search が一般提供（GA）に: マルチモーダル埋め込み・大容量ファイル・OCR・課金開始](./2026-10-01-ai-search-ga.md)（本記事の続報。GA・課金開始日・無料枠の変更）
 - GitHub: [docs/articles/2026-08-06-ai-search-easier.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-06-ai-search-easier.md)
 
 ## TL;DR
@@ -174,6 +175,7 @@ npx wrangler ai-search create my-search \
 
 ## 関連リンク
 
+- [続報: AI Search が一般提供（GA）に（2026-10-01）](./2026-10-01-ai-search-ga.md)
 - [Cloudflare AI Search ドキュメント](https://developers.cloudflare.com/ai-search/)
 - [EmDash（OSSのヘッドレスCMS）](https://github.com/emdash-cms/emdash)
 - [EmDash AI Search統合のドキュメント](https://docs.emdashcms.com/deployment/cloudflare/#cloudflare-ai-search)
