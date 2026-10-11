@@ -462,4 +462,5 @@ Linux 環境 = Container／ID・状態・ポリシー・ライフサイクル = 
 - 移行ガイド: https://developers.cloudflare.com/containers/guides/migrate-to-durable-object-container-api/
 - デモ: https://github.com/cloudflare/containers-demos/tree/main/sandbox
 - 関連スライド: [@cloudflare/computer](../cloudflare-computer/)、[Project Think](../project-think/)、[Cloudflare Agents](../agents-on-cloudflare/)、[Cloudflare OS](../cloudflare-os/)
+- 関連解説スライド（Containers の応用例）: [Streamline: カスタム動画パイプライン](../streamline/)
 - Wiki: [docs/articles/2026-09-30-faster-agent-sandboxes.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-faster-agent-sandboxes.md)

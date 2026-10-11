@@ -1,0 +1,119 @@
+title: "Streamline: Cloudflare Stream と Workers でつくるカスタム動画パイプライン"
+slug: streamline
+sourceUrl: https://blog.cloudflare.com/streamline/
+wiki: ../docs/articles/2026-10-02-streamline.md
+questions:
+  - q: "Streamline の位置づけとして、記事の説明に最も近いものはどれか。"
+    choices:
+      - "Cloudflare Stream の既存機能を置き換える、新しい動画エンコード製品"
+      - "動画を加工してそのまま Live 配信や新しいホスト動画にする仕組みを Cloudflare 上で組むための開発者向けプレイグラウンド（OSS と公開デモ付き）"
+      - "動画の再生だけを担う、ブラウザ向けのプレーヤー SDK"
+      - "Workers の中で FFmpeg を直接実行するためのランタイム拡張"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「発表内容 / アーキテクチャ」を参照。Streamline は新しいデベロッパープレイグラウンドで、Stream と低レベルのプリミティブを組み合わせてカスタムパイプラインを作る方法を示す。media engine は将来、専用のエンコード製品に置き換えられるよう設計されている。"
+
+  - q: "Streamline の構成に関する説明として正しいものはどれか。"
+    choices:
+      - "Media Engine（Container 内の Controller と Processor）と、それを制御する Application（Workers と Durable Object）の 2 つからなる"
+      - "Worker 内で動画を処理し、Container はプレビューの配信だけを担う"
+      - "Durable Object が FFmpeg を実行し、Worker は UI だけを持つ"
+      - "Stream の内部にエンコード用のプラグインを追加する構成である"
+    answer: 0
+    explanation: "Wikiの「2 つのコンポーネント」を参照。メディアの入出力と加工は Container の Media Engine（Go 製の Controller と FFmpeg を使う Processor）、セッション・Container のライフサイクル・プレビューのリレーの調整は Durable Object で実装した Orchestrator が担う。"
+
+  - q: "メディア処理の実行環境に Workers のリクエスト内ではなく Container を使う主な理由として、記事の記述に合うものはどれか。"
+    choices:
+      - "Container の方が常に Worker より安価だから"
+      - "Workers は WebSocket を扱えないから"
+      - "動画ストリームは数分〜数時間続くため、開始したリクエストから独立したライフサイクルを持ち、専用のコンパイル済みコードを予測可能な CPU とメモリで動かせる環境が必要だから"
+      - "Stream が Container からの入力しか受け付けないから"
+    answer: 2
+    explanation: "Wikiの「背景・課題」を参照。長時間動く耐久的な環境、予測可能な CPU とメモリ、リクエストと独立したライフサイクルが条件として挙げられ、Containers がメディア処理、Durable Objects がオーケストレーション、Workers が制御・監視に割り当てられている。"
+
+  - q: "パイプライン実行中に制御アプリが切断されても Container が処理を続けられるようにするため、記事が示している実装はどれか。"
+    code: |
+      async onActivityExpired() {
+        await this.withControlLock(async () => {
+          const session = await this.getRelaySessionLocked()
+          if (session?.expiresAt) {
+            this.renewActivityTimeout()
+            return
+          }
+          await this.destroy()
+        })
+      }
+    codeLang: ts
+    choices:
+      - "Container の活動期限切れのコールバックで、セッションの有効期限が設定されていれば活動期限を更新し、無ければ Container を破棄する"
+      - "活動期限切れのたびに、Container を即座に破棄して再作成する"
+      - "活動期限切れのコールバックで、常に期限を更新して Container を無期限に生かす"
+      - "Worker から定期的に空のリクエストを送り続けることでスリープを防ぐ"
+    answer: 0
+    explanation: "Wikiの「コード例」（onActivityExpired）と「Container のライフサイクルとセッション管理」を参照。期限（expiresAt）に達していなければ活動期限を更新して生かし、期限に達したら destroy する。最大継続時間があるため、外部の制御がなくても処理は必ず終了する。"
+
+  - q: "`session.start()` に渡す設定オブジェクトの構成と、操作（`pipeline`）の扱いとして正しいものはどれか。"
+    choices:
+      - "Input / Operations / Output の JSON。操作は filter・overlay・subtitle・encode の 4 種類で、配列に書いた順序どおりに適用される"
+      - "Input / Operations / Output の JSON。操作は filter・overlay・subtitle・encode の 4 種類で、適用順はエンジン側で固定され、配列の順序は意味を持たない"
+      - "FFmpeg のコマンドライン引数の文字列をそのまま渡す"
+      - "Input と Output のみを指定し、操作は Stream 側で自動的に決まる"
+    answer: 1
+    explanation: "Wikiの「パイプラインの定義と実行」と「現在サポートされている操作」を参照。設定は Input / Operations / Output からなる JSON で、操作の順序はエンジンが固定している。FFmpeg は内部の実装詳細で、利用者向け API の一部ではない。"
+
+  - q: "ホスト動画に字幕を焼き込んで配信するコード例で、入力と出力に使われている方式の組み合わせはどれか。"
+    code: |
+      await session.start({
+        input: {
+          type: 'hls',
+          url: `https://videodelivery.net/${streamVideoId}/manifest/video.m3u8`,
+        },
+        pipeline: [
+          { op: 'subtitle', params: { source: 'auto' } },
+          { op: 'encode', params: { codec: 'h264', preset: 'fast', bitrate: '1500k', resolution: '1280x720', fps: 30 } },
+        ],
+        output: { mode: 'rtmp', profile: 'default' },
+      })
+    codeLang: ts
+    choices:
+      - "入力は WebSocket、出力は HLS"
+      - "入力は RTMP、出力は WebSocket のプレビュー"
+      - "入力は webcam、出力は HLS"
+      - "入力は Stream のホスト動画の HLS、出力は RTMP（Stream Live Input などへ）"
+    answer: 3
+    explanation: "Wikiの「ホスト動画（HLS）から字幕を焼き込む」を参照。Stream のホスト動画を HLS マニフェスト経由で取り込み、埋め込みクローズドキャプションを subtitle 操作で描画し、RTMP で Live Input へ出力する。"
+
+  - q: "プレビュー映像を WebSocket で受け取る際の注意点として、記事が述べているものはどれか。"
+    choices:
+      - "`session.start()` を呼んだ後に、リレーへ接続する"
+      - "`session.start()` の前にリレー（`/relay/view`）へ接続しておく。さもないとリレーが発行側を拒否する"
+      - "プレビューは HTTP のポーリングでのみ取得できる"
+      - "プレビューには Access のサービストークンをブラウザに渡す必要がある"
+    answer: 1
+    explanation: "Wikiの「プレビュー映像の受信」とコード例のコメントを参照。「Connect before session.start(), or the relay rejects the publisher.」とある。Container が fMP4 フラグメントを Durable Object に発行し、アプリは /relay/view の WebSocket で受け取る。"
+
+  - q: "Streamline のセキュリティ設計の説明として、正しいものはどれか。"
+    choices:
+      - "Stream の RTMPS キーは、利便性のため制御アプリへそのまま返し、ブラウザのストレージに保存する"
+      - "プレビューの発行には、Access のサービストークンのみを使い、セッションごとの capability は使わない"
+      - "キーは Worker のシークレットなどに保存して名前付きプロファイルで間接参照し、サービストークンは Container のアウトバウンド Worker が注入して Container のメモリには入れない"
+      - "オーナーのデプロイは、そのまま公開のマルチユーザーサービスのセキュリティモデルとして使える"
+    answer: 2
+    explanation: "Wikiの「セキュリティ」を参照。キーは設定 API の返り値にもブラウザのストレージにも含まれない。プレビューには Access のサービストークンとセッションごとのランダムな capability の 2 つがある。オーナーのデプロイは意図的に非公開・シングルトンで、公開のマルチユーザーサービス向けではないと明記されている。"
+
+  - q: "記事が述べている現状の制約と、今後の方向性の組み合わせとして正しいものはどれか。"
+    choices:
+      - "GPU でエンコードしているため高コストで、今後は CPU 処理に移行する"
+      - "Container の CPU でメディア処理をするため高画質・高フレームレートがボトルネックになる。今後はコンピュータービジョン、ハードウェアアクセラレーション、WebRTC・MoQ、Workers ネイティブのエンコード/デコードなどを挙げている"
+      - "ライブ入力は未対応で、ホスト動画の加工のみ可能。今後ライブに対応する"
+      - "同時に 1 セッションしか動かせないため、今後は常に複数セッションを許可する"
+    answer: 1
+    explanation: "Wikiの「これから」を参照。現状は Container CPU を使うため高品質・高フレームレートで制約がある。同時セッション数の制限は、オーナーのデプロイやプレイグラウンドのセキュリティ上の設計（ユーザーごとに 1 セッション）であり、制約と将来の拡張とは別の話。"
+
+  - q: "Streamline のサンプルが `examples/` に作成されていない理由として、Wiki が示しているものはどれか。"
+    choices:
+      - "Containers がまだ一般提供されていないから"
+      - "Workers 上で動かないから"
+      - "Stream の Live Input の設定と FFmpeg を含む Container イメージのビルドが必要で、100 行前後の最小実装では要点を再現できず、公式のオープンソースリポジトリが実装そのものとして提供されているから"
+      - "記事にコード例がないから"
+    answer: 2
+    explanation: "Wikiの「所感・ポイント」の「サンプル対象外の理由」を参照。記事にはコード例が多数あるが、RTMPS の入出力・FFmpeg 入りの Container イメージ・Access による保護を伴うため、最小のサンプルでは再現しにくい。"

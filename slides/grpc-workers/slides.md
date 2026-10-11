@@ -480,6 +480,7 @@ class: text-center
 - [Connect RPC](https://connectrpc.com/)
 - [gRPC-web ドキュメント](https://grpc.io/docs/platforms/web/)
 - [プライベートベータ サインアップフォーム](https://forms.gle/Q2SoJLUKjBFGxBgW6)
+- 関連解説スライド（Containers の応用例）: [Streamline: カスタム動画パイプライン](../streamline/)
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-03-grpc-workers.md

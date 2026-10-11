@@ -123,6 +123,7 @@ cloudflare-blog-summaries/
 | 2026-10-02 | 「全員が使える」誓約のアップデート: Enterprise 専用だった機能は今どこまで開放されたか | [Wiki](docs/articles/2026-10-02-enterprise-for-all-update.md) | [スライド](slides/enterprise-for-all-update/slides.md) | [クイズ](quizzes/enterprise-for-all-update.html) | [原文](https://blog.cloudflare.com/enterprise-for-all-update/) |
 | 2026-10-02 | Cloudflare Traces の紹介: プラットフォーム全体でリクエストを追跡する | [Wiki](docs/articles/2026-10-02-cloudflare-tracing.md) | [スライド](slides/cloudflare-tracing/slides.md) | [クイズ](quizzes/cloudflare-tracing.html) | [原文](https://blog.cloudflare.com/cloudflare-tracing/) |
 | 2026-10-02 | AI Gateway 経由の Web Search API の紹介: エージェントに最新の Web 情報を、行儀の良いクローラーから | [Wiki](docs/articles/2026-10-02-introducing-web-search-api.md) | [スライド](slides/introducing-web-search-api/slides.md) | [クイズ](quizzes/introducing-web-search-api.html) | [原文](https://blog.cloudflare.com/introducing-web-search-api/) |
+| 2026-10-02 | Streamline: Cloudflare Stream と Workers でつくるカスタム動画パイプライン | [Wiki](docs/articles/2026-10-02-streamline.md) | [スライド](slides/streamline/slides.md) | [クイズ](quizzes/streamline.html) | [原文](https://blog.cloudflare.com/streamline/) |
 
 記事一覧の全体は [docs/index.md](docs/index.md) にもまとめています。
 

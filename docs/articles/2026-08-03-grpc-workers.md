@@ -3,6 +3,7 @@
 - 原文: [https://blog.cloudflare.com/grpc-workers/](https://blog.cloudflare.com/grpc-workers/)（日本語版なし）
 - 公開日: 2026-08-03
 - 関連: [Agents Week 2026 まとめ](./2026-08-10-agents-week-review.md)（月曜日: 実行環境とインフラ）
+- 関連（Containers の応用例）: [Streamline: Cloudflare Stream と Workers でつくるカスタム動画パイプライン](./2026-10-02-streamline.md)（Container 内の media engine を Durable Object と Worker で制御する長時間処理の例）
 - GitHub: [docs/articles/2026-08-03-grpc-workers.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-08-03-grpc-workers.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KZ21KXM2RY4NVVZ0GX7EFB2N.png)

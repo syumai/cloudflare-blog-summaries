@@ -6,6 +6,7 @@
 - 著者: Thomas Gauvin、Rushil Mehra、Gabi Villalonga Simón、Thomas Lefebvre
 - 位置づけ: Birthday Week 2026 の開発者プラットフォーム系の記事。エージェントが「タスクごとにサンドボックスを作る」使い方に合わせて Containers の設定・スケジューリング・保存の仕組みを作り直した発表
 - 関連: [AIエージェントに必要なのはコンテナではなくコンピューター —「@cloudflare/computer」のご紹介](./2026-08-03-cloudflare-computer.md)（本記事が冒頭で「エージェントにはコンピューターが必要」と参照している記事。`@cloudflare/computer` は本記事でも Dynamic Workers と Containers を組み合わせる高レベル環境として言及）、[Project Think：Cloudflareで次世代のAIエージェント構築](./2026-04-15-project-think.md)（Durable Object 上でエージェントを動かす基盤）、[Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md)、[Cloudflare OS：エージェント、アプリ、作業のためのオープンプラットフォーム](./2026-08-05-cloudflare-os.md)（本記事が Outbound Request Handler の使い方の比喩として Gatekeeper パターンを参照）、[数百万のリポジトリのCI/CDを、あなたのプラットフォーム上でCloudflareが動かす](./2026-08-04-ci-workflows.md)
+- 関連（Containers の応用例）: [Streamline: Cloudflare Stream と Workers でつくるカスタム動画パイプライン](./2026-10-02-streamline.md)（Container 内の media engine を Durable Object と Worker で制御する長時間処理の例）
 - GitHub: [docs/articles/2026-09-30-faster-agent-sandboxes.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-30-faster-agent-sandboxes.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01KW46H9N3ZPBVM99CMTJZRPF3.png)
