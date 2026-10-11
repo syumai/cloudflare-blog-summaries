@@ -5,7 +5,7 @@
 - 公開日: 2026-10-02
 - 著者: Mar Witek、Dan Lapid、Nevi Shah、Daniel Walsh
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 7 分）。Cloudflare Traces（ドメイン単位の自動トレーシング）のオープンベータ発表
-- 関連: [エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（Workers の組み込み OpenTelemetry 計測をローカルで使う記事。本記事は同じ計測を HTTP リクエスト経路全体に広げる位置づけ）/ [本番の問題を検知してエージェントへ直接送る: Workers の Issues](./2026-09-30-real-time-issue-detection.md)（同じ `cloudflare:workers` の `tracing` API でトレースにアプリ固有の属性を足す記事。Issues は本記事のトレースを材料にする）/ [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md)（エージェントのトレーシング基盤）/ [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md)（エージェントが本番テレメトリを扱う流れの総論）
+- 関連: [エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（Workers の組み込み OpenTelemetry 計測をローカルで使う記事。本記事は同じ計測を HTTP リクエスト経路全体に広げる位置づけ）/ [本番の問題を検知してエージェントへ直接送る: Workers の Issues](./2026-09-30-real-time-issue-detection.md)（同じ `cloudflare:workers` の `tracing` API でトレースにアプリ固有の属性を足す記事。Issues は本記事のトレースを材料にする）/ [Cloudflare Agentsの紹介](./2026-08-04-agents-on-cloudflare.md)（エージェントのトレーシング基盤）/ [Cloudflareにエージェント開発ライフサイクルの時代が到来](./2026-08-04-agent-development-lifecycle.md)（エージェントが本番テレメトリを扱う流れの総論） / [Cloudflare Observability の 8 つの大型アップデート](./2026-10-02-one-observability-platform.md)（Birthday Week 2026 のオブザーバビリティ統合の総覧記事）
 - GitHub: [docs/articles/2026-10-02-cloudflare-tracing.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-02-cloudflare-tracing.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3XE9TZRDPWVKPPQNAVJDCYT.01M3XE9W5HREEF8Q70M7G034M2.png)

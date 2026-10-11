@@ -5,7 +5,7 @@
 - 公開日: 2026-10-01
 - 著者: Marc Selwan, Micah Wylde
 - 位置づけ: Birthday Week 2026 の記事（読了目安は原文表記で 11 分）。昨年の Birthday Week 2025 で発表した Cloudflare Data Platform の一般提供（GA）と、「Cloudflare Basin」への改名を扱う
-- 関連: [ポスト量子暗号の利用状況を可視化](./2026-09-29-post-quantum-visibility.md)（Logpush でログを取得する側の記事。本記事の Pipelines は Logpush のログを SQL で変換して保存できる）、[Cloudflare K2 のご紹介: サーバーレスなイベントストリーム](./2026-10-01-cloudflare-k2-streams.md)（Pipelines の取り込み層として作られた永続イベントストリーム。Pipelines との使い分けも説明されている）
+- 関連: [ポスト量子暗号の利用状況を可視化](./2026-09-29-post-quantum-visibility.md)（Logpush でログを取得する側の記事。本記事の Pipelines は Logpush のログを SQL で変換して保存できる）、[Cloudflare K2 のご紹介: サーバーレスなイベントストリーム](./2026-10-01-cloudflare-k2-streams.md)（Pipelines の取り込み層として作られた永続イベントストリーム。Pipelines との使い分けも説明されている） / [Cloudflare Observability の 8 つの大型アップデート](./2026-10-02-one-observability-platform.md)（Birthday Week 2026 のオブザーバビリティ統合の総覧記事）
 - GitHub: [docs/articles/2026-10-01-cloudflare-basin.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-01-cloudflare-basin.md)
 
 ![記事ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3TBHN0F85Z2NSDVC4T3HF05.png)

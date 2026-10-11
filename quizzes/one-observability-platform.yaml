@@ -1,0 +1,85 @@
+title: "Cloudflare Observability の 8 つの大型アップデート: ログ・トレース・分析・アラートを 1 つのプラットフォームへ"
+slug: one-observability-platform
+sourceUrl: https://blog.cloudflare.com/one-observability-platform/
+wiki: ../docs/articles/2026-10-02-one-observability-platform.md
+questions:
+  - q: "記事が示す、今回の 8 件の更新全体の方向性として最も近いものはどれか。"
+    choices:
+      - "Workers 専用の新しいログ保存サービスを追加する"
+      - "ログ・トレース・分析・アラート・ダッシュボード・エクスポートを 1 つのオブザーバビリティ基盤にまとめ、料金や体験を揃えていく"
+      - "オブザーバビリティ機能を Enterprise 専用に集約する"
+      - "外部のオブザーバビリティ製品を Cloudflare に置き換えるための移行ツールを提供する"
+    answer: 1
+    explanation: "Wikiの「TL;DR」と「背景・課題」を参照。原因調査は複数の製品のデータを要するため、プラットフォーム全体の能力としてオブザーバビリティを統合し、今後数か月でより多くの製品・データセットを加えていく、と述べられている。"
+
+  - q: "新しい Logs ホームが統合している 2 つの既存機能の組み合わせはどれか。"
+    choices:
+      - "Workers Observability と Log Explorer"
+      - "Logpush と Analytics Engine"
+      - "Cloudflare Traces と Notifications"
+      - "AI Gateway と Radar"
+    answer: 0
+    explanation: "Wikiの「1. すべてのログを 1 か所で調べる」を参照。Workers アプリのデバッグ用の Workers Observability と、セキュリティログを検索する Log Explorer を 1 つにまとめ、HTTP events・firewall events・Workers・Containers・R2・AI Gateway などを同じ調査機能で扱える。"
+
+  - q: "統一 SQL API（ベータ）が解決しようとしている課題として、記事の説明に合うものはどれか。"
+    choices:
+      - "SQL を使えない利用者のために、ログを自動で CSV に変換すること"
+      - "データを Cloudflare の外へ出すときの暗号化を強制すること"
+      - "Workers ログ・Containers のセキュリティイベント・HTTP リクエストログ・分析データを、製品ごとに別々に連携せずに、1 つの SQL 方言・認証モデル・API で問い合わせられるようにすること"
+      - "Workers のコードを SQL に自動変換すること"
+    answer: 2
+    explanation: "Wikiの「3. エージェントが 1 つの SQL API でオブザーバビリティデータを問い合わせる」を参照。人もエージェントも、1 つの SQL 方言・認証モデル・API で横断的に調べられる。エージェントは `cf` CLI や Observability MCP サーバーから使える。"
+
+  - q: "Worker から統一 SQL インターフェースを使う方法として、記事が説明しているものはどれか。"
+    choices:
+      - "Worker から外部の REST API クライアントを設定し、API トークンを環境変数で渡す"
+      - "SQL を Worker のビルド時にだけ実行する"
+      - "Workers のネイティブバインディングとして提供され、別の API クライアントを設定せずに Analytics Engine のデータなどを問い合わせられる"
+      - "Durable Objects の中でのみ利用できる"
+    answer: 2
+    explanation: "Wikiの「3. ...」の「ネイティブバインディング」の項を参照。用途として、顧客利用量の計測と課金、顧客向け分析ダッシュボード、ヘルスレポート生成、インシデント調査の自動化が挙げられている。"
+
+  - q: "2026年12月1日から適用される新しい Observability 料金の説明として正しいものはどれか。"
+    choices:
+      - "イベント（ログ行・span）の数に応じた従量課金で、Free プランも超過分を購入できる"
+      - "取り込み・保存するデータ量に基づく。Free は 1 日 0.5 GB・7 日保持で超過分は利用不可。Paid / Enterprise は 50 GB 取り込みと 10 GB-month 保存を含み、超過は $0.25 / GB 取り込み・$0.10 / GB-month 保存"
+      - "全プラン共通で月額固定料金となり、取り込み量の上限はない"
+      - "Enterprise だけが対象で、Free と Paid は対象外"
+    answer: 1
+    explanation: "Wikiの「4. ログ・トレースの新料金」を参照。ログやトレースはサイズの幅が大きいため、イベント数ではなくデータ量に基づく。全プランに適用され（Enterprise は更新時）、Workers・Containers・AI Gateway の既存ログとすべてのトレースが対象になる。"
+
+  - q: "カスタムアラートに関する説明として、記事の内容に合うものはどれか。"
+    choices:
+      - "通知先は Email に限られ、Webhook は Enterprise のみ"
+      - "条件はしきい値のみで、異常検知や SLO は指定できない"
+      - "Workers のログだけが対象で、トレースやセキュリティイベントは対象外"
+      - "統一 SQL API が扱うデータ（HTTP リクエストログ、Workers イベント、Analytics Engine、分析、トレース、セキュリティイベントなど）に対して、しきい値・異常検知・SLO で条件を定義でき、Webhook は全プランで使える"
+    answer: 3
+    explanation: "Wikiの「5. オブザーバビリティデータにカスタムアラートを設定する」を参照。ダッシュボードでデータセットを選ぶかカスタム SQL で条件を定義し、評価ウィンドウと通知先を設定する。Webhook が全プランで使えるため、エージェントへ直接送って調査を始めさせることもできる。"
+
+  - q: "ドメイン分析に関する今回の変更として正しいものはどれか。"
+    choices:
+      - "トラフィック・パフォーマンス・セキュリティ・キャッシュ・オリジン・DNS のデータを集約し、すべてのプランで 30 日分を利用できる"
+      - "Enterprise のみ 30 日、他のプランは 24 時間のまま"
+      - "DNS のデータは対象外で、保持期間は 7 日"
+      - "分析は Logpush で外部に送ったデータだけで確認する"
+    answer: 0
+    explanation: "Wikiの「6. ドメイン分析を 1 か所に集約し、30 日間保持する」を参照。30 日の履歴により、発生後の調査、数週間前の同じ曜日との比較、一時的なスパイクと長期傾向の見分けがしやすくなる。"
+
+  - q: "Logpush と Transformers について、記事の内容に合うものはどれか。"
+    choices:
+      - "Logpush は引き続き Enterprise 専用で、Transformers だけが全プランに開放された"
+      - "Logpush は全セルフサーブプランに開放され、Transformers は GA になった。どちらも従量課金（毎月の無料枠あり）で、外部宛先へのエクスポートは Cloudflare の宛先より単価が高い"
+      - "両方とも無料になり、無料枠を超えても課金されない"
+      - "Transformers は JavaScript でしか書けず、SQL は使えない"
+    answer: 1
+    explanation: "Wikiの「8. Logpush が全セルフサーブプランで利用可能に」を参照。Cloudflare の宛先へのエクスポートは 25 GB 無料・$0.03 / GB、外部宛先は 25 GB 無料・$0.10 / GB、Transformers は 1 GB 無料・$0.04 / GB。Transformers は任意の SQL 変換を別の ETL なしで適用できる。"
+
+  - q: "記事が「近日提供」または今後の予定として挙げているものとして、正しい組み合わせはどれか。"
+    choices:
+      - "ログの保存の廃止、トレースのサンプリング固定化、Logpush の Enterprise 専用化"
+      - "新しい CLI の提供、Analytics Engine の廃止、Alerts の有料化"
+      - "ドメイン分析の保持期間の短縮、Traces の GA 終了、Webhook の廃止"
+      - "ログ・トレースの最長 1 年保持、複数データセットをまたぐ問い合わせ、Workers での OpenTelemetry API 対応、OpenTelemetry によるメトリクスのエクスポート"
+    answer: 3
+    explanation: "Wikiの「発表内容 / アーキテクチャ」の「今後の予定」と「1. すべてのログを 1 か所で調べる」を参照。保持期間の延長（最長 1 年）、既存 span への属性追加やトレースコンテキストの取得、メトリクスの OpenTelemetry エクスポートが予定され、複数データセットの横断問い合わせは近日提供とされている。"

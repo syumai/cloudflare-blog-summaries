@@ -387,5 +387,6 @@ terraform {
 - Resource Tagging: https://developers.cloudflare.com/changelog/product/resource-tagging/
 - Cloudflare Connect: https://www.cloudflare.com/connect/
 - 関連解説スライド: [Billable Usage API](../billable-usage-api/) / [ポスト量子の可視化](../post-quantum-visibility/) / [Account Abuse Protection ダッシュボード](../account-abuse-protection-dashboard/)
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
 
 </div>

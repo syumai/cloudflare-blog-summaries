@@ -292,6 +292,7 @@ class: text-center
 - [Cloudflare Agentsの紹介 ▶ 解説スライド](../agents-on-cloudflare/)
 - [Cloudflare Traces の紹介 ▶ 解説スライド](../cloudflare-tracing/)
 - [Workers サンプル（examples/local-tracing/）](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/local-tracing)
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-04-local-tracing.md

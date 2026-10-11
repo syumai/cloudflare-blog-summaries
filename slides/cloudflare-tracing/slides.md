@@ -384,6 +384,7 @@ span やイベントの数ではなく、<strong>取り込んだデータ量と�
 - Workers Tracing オープンベータ: https://blog.cloudflare.com/workers-tracing-now-in-open-beta/
 - ローカルトレース: ▶ <a href="../local-tracing/" target="_blank">解説スライド</a>（<code>examples/local-tracing/</code>）
 - Workers の Issues: ▶ <a href="../real-time-issue-detection/" target="_blank">解説スライド</a>（<code>examples/real-time-issue-detection/</code>）
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-10-02-cloudflare-tracing.md

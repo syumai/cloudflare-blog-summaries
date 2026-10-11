@@ -390,3 +390,4 @@ Automation で issue が Cloudflare OS に送られ、エラーから Workflows 
 - Cloudflare OS: ▶ <a href="../cloudflare-os/" target="_blank">解説スライド</a>
 - Cloudflare Traces: ▶ <a href="../cloudflare-tracing/" target="_blank">解説スライド</a>
 - Workers サンプル: <code>examples/real-time-issue-detection/</code>（有効化の設定と、例外を起こして Context を付ける最小 Worker。<code>wrangler deploy --dry-run</code> で確認済み）
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>

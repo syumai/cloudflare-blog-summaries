@@ -357,6 +357,7 @@ CTE で 2 テーブルを JOIN して集計 → プランごとにランク付�
 - [Cloudflare Data Platform の発表（2025）](https://blog.cloudflare.com/cloudflare-data-platform/)
 - 関連解説スライド: [ポスト量子暗号の利用状況を可視化](../post-quantum-visibility/)
 - Workers サンプル: [examples/cloudflare-basin/](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/cloudflare-basin)
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-10-01-cloudflare-basin.md

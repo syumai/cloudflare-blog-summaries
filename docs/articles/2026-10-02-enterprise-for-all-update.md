@@ -5,7 +5,7 @@
 - 公開日: 2026-10-02
 - 位置づけ: Birthday Week 2026 の記事（Birthday Week / Developers / Product News / Terraform タグ）
 - 著者: Oliver Roup、Justin Hutchings、Chase Catelli
-- 関連: [Billable Usage API](./2026-08-03-billable-usage-api.md)（本記事の「Billable Usage ダッシュボードと API」の詳細）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（Logpush に追加されたデータセットの1つ「ゾーン単位のポスト量子可視性」）、[糸をたどる: アカウント不正を調査するための新しいダッシュボード](./2026-10-02-account-abuse-protection-dashboard.md)（Logpush の権限設計に触れる同日公開の記事）。前年の発表「enterprise-grade-features-for-all」（2025-09-25）はこのリポジトリには未収録のため、外部リンクのみ（[原文](https://blog.cloudflare.com/enterprise-grade-features-for-all/)）
+- 関連: [Billable Usage API](./2026-08-03-billable-usage-api.md)（本記事の「Billable Usage ダッシュボードと API」の詳細）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（Logpush に追加されたデータセットの1つ「ゾーン単位のポスト量子可視性」）、[糸をたどる: アカウント不正を調査するための新しいダッシュボード](./2026-10-02-account-abuse-protection-dashboard.md)（Logpush の権限設計に触れる同日公開の記事）。前年の発表「enterprise-grade-features-for-all」（2025-09-25）はこのリポジトリには未収録のため、外部リンクのみ（[原文](https://blog.cloudflare.com/enterprise-grade-features-for-all/)） / [Cloudflare Observability の 8 つの大型アップデート](./2026-10-02-one-observability-platform.md)（Birthday Week 2026 のオブザーバビリティ統合の総覧記事）
 - GitHub: [docs/articles/2026-10-02-enterprise-for-all-update.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-02-enterprise-for-all-update.md)
 
 ![ヘッダー画像（開いた箱から光が差し込む等角図）](https://blog.cloudflare.com/_emdash/api/media/file/01M3XD0DHYHB54G3RT6GBMY2W5.png)

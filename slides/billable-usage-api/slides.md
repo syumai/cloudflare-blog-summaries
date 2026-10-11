@@ -301,6 +301,7 @@ class: text-center
 - [Vantage コンソール](https://console.vantage.sh/)
 - [Cloudflare ダッシュボード](https://dash.cloudflare.com)
 - [Workers サンプル](https://github.com/syumai/cloudflare-blog-summaries/tree/main/examples/billable-usage-api)
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
 
 <div class="pt-8 text-sm opacity-50">
 Wiki: docs/articles/2026-08-03-billable-usage-api.md

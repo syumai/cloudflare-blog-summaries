@@ -281,3 +281,4 @@ cf deploy    # 静的サイトは設定ファイルなしでデプロイ
 - Vite: https://vite.dev/
 - 関連スライド: <a href="../forge-open-source-generation-pipeline/">Forge</a> / <a href="../voidzero-update/">VoidZero</a> / <a href="../vinext-nextjs-on-vite/">Vinext</a>
 - Wiki: [docs/articles/2026-09-28-cloudflare-cf-cli-launch.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-cloudflare-cf-cli-launch.md)
+- オブザーバビリティ 8 件の更新: ▶ <a href="../one-observability-platform/" target="_blank">解説スライド</a>
