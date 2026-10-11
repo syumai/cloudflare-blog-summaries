@@ -5,7 +5,7 @@
 - 公開日: 2026-10-02
 - 位置づけ: Birthday Week 2026 の記事（Cloudflare Tunnel / Cloudflare Access / インターン企画）
 - 著者: Nikita Cano、Hugo Vicente、Alessandro Frigerio
-- 関連: [エージェントアクセスモデル（The Agent Access Model）](./2026-08-05-the-agent-access-model.md)（エージェントに与える権限を小さくする、というアクセス制御の考え方）、[次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol](./2026-08-06-mcp-v2.md)（記事が挙げる「ノートPC上の MCP サーバーを公開する」場面の背景）、[エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（コーディングエージェントがローカル開発環境で動く流れ）、[読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md)
+- 関連: [エージェントアクセスモデル（The Agent Access Model）](./2026-08-05-the-agent-access-model.md)（エージェントに与える権限を小さくする、というアクセス制御の考え方）、[次世代のMCP — ステートレスなプロトコルへ生まれ変わったModel Context Protocol](./2026-08-06-mcp-v2.md)（記事が挙げる「ノートPC上の MCP サーバーを公開する」場面の背景）、[エージェントがローカルトレースでWorkersをデバッグ可能に](./2026-08-04-local-tracing.md)（コーディングエージェントがローカル開発環境で動く流れ）、[読み取り、発見、呼び出し、決済が可能なオープンなエージェンティックインターネットの構築](./2026-08-06-the-agentic-internet.md) / [1年後の振り返り: 1.1.1.1 人のインターンが生んだ力](./2026-10-05-one-year-later-1111-interns.md)（インターンプログラムの 1 年後の振り返り記事）
 - GitHub: [docs/articles/2026-10-02-protected-quick-tunnels.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-10-02-protected-quick-tunnels.md)
 
 ![4ステップのフロー図](https://blog.cloudflare.com/_emdash/api/media/file/01M3WEQPPSBFQSKRNK84673MEC.png)

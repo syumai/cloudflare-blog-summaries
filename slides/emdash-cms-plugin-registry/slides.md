@@ -191,6 +191,7 @@ npm create emdash@latest
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文（en-us、日本語版なし）: https://blog.cloudflare.com/emdash-cms-plugin-registry/
 - リポジトリ: https://github.com/emdash-cms/emdash
 - Playground: https://try.emdashcms.com/

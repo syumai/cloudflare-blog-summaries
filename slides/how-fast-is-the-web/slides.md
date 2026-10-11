@@ -299,6 +299,7 @@ WHERE table_name = '<テーブル名>';
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文: https://blog.cloudflare.com/how-fast-is-the-web/
 - BigQuery: `cf-open-web-performance.rumarchive`
 - RUM Archive: https://rumarchive.com/

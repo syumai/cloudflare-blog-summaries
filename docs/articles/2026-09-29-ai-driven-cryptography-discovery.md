@@ -5,7 +5,7 @@
 - 公開日: 2026-09-29
 - 位置づけ: Birthday Week 2026 の記事
 - 著者: Sharon Goldberg、Tiago Silva
-- 関連: 同じポスト量子（PQ）移行の話題として、[IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（TLS の PQ 鍵交換の可視化。本記事でも「新しい PQ 可視化機能」として紹介されている）、[Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（PQ 認証の側。本記事では「PQ 認証の導入はまだ初期」と位置づけられ、同記事にリンクしている）、[Cloudflare が「インターネット全体のための認証局」を作る](./2026-09-29-cloudflare-certificate-authority.md)（CA 参入の発表）
+- 関連: 同じポスト量子（PQ）移行の話題として、[IPsec に対する量子ダウングレード攻撃の防止](./2026-09-29-ipsec-downgrade-protection.md)（IPsec 側の PQ 対応）、[あなたのドメインはポスト量子暗号を使っているか](./2026-09-29-post-quantum-visibility.md)（TLS の PQ 鍵交換の可視化。本記事でも「新しい PQ 可視化機能」として紹介されている）、[Merkle Tree Certificates によるポスト量子認証局の構築](./2026-09-29-pq-ca-with-mtcs.md)（PQ 認証の側。本記事では「PQ 認証の導入はまだ初期」と位置づけられ、同記事にリンクしている）、[Cloudflare が「インターネット全体のための認証局」を作る](./2026-09-29-cloudflare-certificate-authority.md)（CA 参入の発表） / [1年後の振り返り: 1.1.1.1 人のインターンが生んだ力](./2026-10-05-one-year-later-1111-interns.md)（CryptoLabe の構築に関わったインターンを紹介する振り返り記事）
 - GitHub: [docs/articles/2026-09-29-ai-driven-cryptography-discovery.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-29-ai-driven-cryptography-discovery.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3NF5CE1NWTNNCSR9EKXSF87.01M3NF5CZVBP4EQSN6G4FQQC3S.png)

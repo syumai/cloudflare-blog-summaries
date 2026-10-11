@@ -336,6 +336,7 @@ npx wrangler tunnel quick-start http://localhost:8080 --allowed-mail alice@examp
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 <div class="text-left text-sm pt-2">
 
 - 原文: https://blog.cloudflare.com/protected-quick-tunnels/

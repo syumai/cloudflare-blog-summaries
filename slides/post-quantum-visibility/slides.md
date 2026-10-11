@@ -248,6 +248,7 @@ layout: two-cols
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文（en-us）: https://blog.cloudflare.com/post-quantum-visibility/
 - Logpush: https://developers.cloudflare.com/logs/logpush/
 - HTTP Requests データセット: https://developers.cloudflare.com/logs/logpush/logpush-job/datasets/zone/http_requests/

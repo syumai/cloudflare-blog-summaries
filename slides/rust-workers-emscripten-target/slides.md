@@ -257,6 +257,7 @@ Dan Lapid 氏が Rust 製 Pumpkin を週末で Durable Object 上に載せた
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文（en-us、日本語版なし）: https://blog.cloudflare.com/rust-workers-emscripten-target/
 - Building Emscripten Rust Workers: https://github.com/cloudflare/workers-rs/tree/main/examples/emscripten
 - Tokio in a Worker: https://github.com/cloudflare/workers-rs/tree/main/examples/emscripten-tokio

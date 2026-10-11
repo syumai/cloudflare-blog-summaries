@@ -197,6 +197,7 @@ Birthday Week 2026 ／ 16周年に寄せて
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文（ja-jp、Cloudflare公式日本語版）: https://blog.cloudflare.com/ja-jp/cloudflares-2026-annual-founders-letter/
 - 原文（en-us）: https://blog.cloudflare.com/cloudflares-2026-annual-founders-letter/
 - Wiki: [docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-27-cloudflares-2026-annual-founders-letter.md)

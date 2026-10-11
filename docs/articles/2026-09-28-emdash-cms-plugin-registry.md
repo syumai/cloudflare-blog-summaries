@@ -2,7 +2,7 @@
 
 - 原文: [https://blog.cloudflare.com/emdash-cms-plugin-registry/](https://blog.cloudflare.com/emdash-cms-plugin-registry/)（公式の日本語版なし。英語版から日本語化）
 - 公開日: 2026-09-28
-- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)・[Workers でネイティブ Rust を動かす](./2026-09-28-rust-workers-emscripten-target.md)（いずれも Birthday Week 2026 の記事）、[Cloudflare OS](./2026-08-05-cloudflare-os.md)・[Project Think](./2026-04-15-project-think.md)（Dynamic Workers の関連記事）、[Cloudflare Computer](./2026-08-03-cloudflare-computer.md)（サンドボックス実行の関連記事）
+- 関連: [Cloudflare 2026年度創業者レター](./2026-09-27-cloudflares-2026-annual-founders-letter.md)・[Workers でネイティブ Rust を動かす](./2026-09-28-rust-workers-emscripten-target.md)（いずれも Birthday Week 2026 の記事）、[Cloudflare OS](./2026-08-05-cloudflare-os.md)・[Project Think](./2026-04-15-project-think.md)（Dynamic Workers の関連記事）、[Cloudflare Computer](./2026-08-03-cloudflare-computer.md)（サンドボックス実行の関連記事） / [1年後の振り返り: 1.1.1.1 人のインターンが生んだ力](./2026-10-05-one-year-later-1111-interns.md)（インターンの Noah が 2 人目のメンテナになった経緯を扱う振り返り記事）
 - GitHub: [docs/articles/2026-09-28-emdash-cms-plugin-registry.md](https://github.com/syumai/cloudflare-blog-summaries/blob/main/docs/articles/2026-09-28-emdash-cms-plugin-registry.md)
 
 ![ヘッダー画像](https://blog.cloudflare.com/_emdash/api/media/file/01M3D0T7XHPBZM8YB0PX5W78EQ.png)

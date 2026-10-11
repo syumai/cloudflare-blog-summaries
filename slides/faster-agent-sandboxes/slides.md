@@ -456,6 +456,7 @@ Linux 環境 = Container／ID・状態・ポリシー・ライフサイクル = 
 
 # 参考リンク
 
+- インターンプログラムの 1 年後の振り返り: ▶ <a href="../one-year-later-1111-interns/" target="_blank">解説スライド</a>
 - 原文（en-us）: https://blog.cloudflare.com/faster-agent-sandboxes/
 - スケジューリングポリシー API: https://developers.cloudflare.com/containers/api/durable-object-container/
 - スナップショットのガイド: https://developers.cloudflare.com/containers/guides/snapshots/
